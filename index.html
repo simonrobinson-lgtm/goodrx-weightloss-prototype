@@ -406,6 +406,18 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jmore:hover .i{transform:translate(2px,-2px)}
 .jdisc{padding:24px 20px 0;font-size:13px;line-height:1.5;color:var(--ink-60)}
 
+
+/* ---------- sunlight shimmer on bronze tiles ---------- */
+.sun{position:absolute;inset:0;overflow:hidden;pointer-events:none;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(130% 95% at 88% 22%,#000 18%,rgba(0,0,0,.35) 55%,transparent 80%);mask-image:radial-gradient(130% 95% at 88% 22%,#000 18%,rgba(0,0,0,.35) 55%,transparent 80%);transition:opacity .8s}
+.sun::before{content:"";position:absolute;inset:-45%;background:repeating-linear-gradient(118deg,rgba(255,224,186,0) 0 34px,rgba(255,224,186,.26) 56px,rgba(255,224,186,0) 80px,rgba(255,224,186,0) 150px);filter:blur(7px);animation:sunBeams 16s ease-in-out infinite alternate,sunBreathe 7s ease-in-out infinite}
+.sun::after{content:"";position:absolute;inset:-10%;background:radial-gradient(28% 22% at 72% 30%,rgba(255,238,214,.42),transparent 70%),radial-gradient(18% 16% at 86% 58%,rgba(255,232,204,.3),transparent 70%),radial-gradient(22% 18% at 58% 14%,rgba(255,240,220,.28),transparent 70%);animation:sunDapple 9s ease-in-out infinite alternate}
+@keyframes sunBeams{0%{transform:translate3d(-26px,12px,0) rotate(-.6deg)}100%{transform:translate3d(30px,-16px,0) rotate(1.2deg)}}
+@keyframes sunBreathe{0%,100%{opacity:.75}45%{opacity:1}70%{opacity:.6}}
+@keyframes sunDapple{0%{opacity:.35;transform:translate3d(0,0,0) scale(1)}35%{opacity:.75}60%{opacity:.45;transform:translate3d(-10px,6px,0) scale(1.06)}100%{opacity:.8;transform:translate3d(8px,-4px,0) scale(.98)}}
+.jc .sun{opacity:0}
+.jc.on .sun{opacity:1}
+.jy-card .sun{z-index:0}
+
 /* ---------- CARE CENTER ---------- */
 .care{background:var(--red-700)}
 .care .bgimg{position:absolute;left:-220px;top:-4px;width:843px;height:584px;border-radius:16px;overflow:hidden;pointer-events:none}
@@ -1298,6 +1310,9 @@ app.insertBefore(fab,$('#ov'));
 
 /* ---------- status bar backing on scroll ---------- */
 $$('.scr').forEach(sc=>sc.addEventListener('scroll',()=>{ if(sc.id===cur() && !ov.classList.contains('on')) sb.classList.toggle('solid',sc.scrollTop>30) },{passive:true}));
+
+/* ---------- sunlight layer on the bronze journey tiles ---------- */
+$$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.querySelector('.mixl'); const sun=document.createElement('span'); sun.className='sun'; if(m) m.after(sun); else el.appendChild(sun) });
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
