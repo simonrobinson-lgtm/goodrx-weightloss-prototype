@@ -186,6 +186,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .link .i{width:20px;height:20px;transition:transform .2s var(--ease)}
 .link:not(.static):hover .i{transform:translateX(3px)}
 .link.static{cursor:default;user-select:none}
+.btn.static{cursor:default;pointer-events:none;user-select:none}
 .actions{position:absolute;left:0;right:0;top:280px;z-index:2}
 .actions .lbl{font-size:13px;line-height:20px;color:var(--ink-60);padding:0 20px 8px}
 .actions .car{gap:8px;padding:0 12px 40px;scroll-padding:0 12px;margin-bottom:-40px}
@@ -747,7 +748,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                 <div class="ct cap">due tue, nov 23</div>
                 <div class="in">
                   <div class="row"><div class="icon-box"><svg class="i" style="width:24px;height:24px"><use href="#i-clipboard"/></svg></div><div><div class="t1">Book your follow-up</div><div class="t2">Required to authorize your next refill</div></div></div>
-                  <button class="btn s48 pri-dark" data-go="session">Check-in to book</button>
+                  <span class="btn s48 pri-dark static" aria-disabled="true">Check-in to book</span>
                 </div>
               </div>
               <div class="acard">
