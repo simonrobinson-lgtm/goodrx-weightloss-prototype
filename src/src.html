@@ -192,7 +192,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .acard .row img{width:48px;height:48px;border-radius:8px}
 .acard .t1{font-size:16px;line-height:1.4;color:var(--ink-90)}
 .acard .t2{font-size:14px;line-height:1.5;color:var(--ink-60);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:268px}
-.sheet{position:relative;margin-top:-12px;background:linear-gradient(180deg,#fff 28%,var(--neutral-100));border-radius:12px 12px 0 0;padding:16px 0 56px;display:flex;flex-direction:column;gap:8px;z-index:1}
+.sheet{position:relative;margin-top:-12px;background:linear-gradient(180deg,#fff 28%,var(--neutral-100));border-radius:12px 12px 0 0;padding:16px 0 56px;display:flex;flex-direction:column;gap:8px;z-index:3}
 .sec{padding:8px 12px}
 .sec .hd{padding:0 8px;margin-bottom:16px}
 .team{padding:16px;display:flex;flex-direction:column;gap:16px}
@@ -463,9 +463,9 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .bs .grab i{width:85px;height:6px;border-radius:100px;background:var(--neutral-300)}
 .bs .hl{padding:0 20px 24px}
 .bs h2{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:var(--ink-90)}
-.bs .ci{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);line-height:1}
+.bs .ci{display:flex;align-items:center;gap:10px;padding:12px 0 0;margin:12px 0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);line-height:1}
 .bs .ds{font-size:16px;line-height:1.4;color:var(--ink-60)}
-.bs .mg{padding:0 12px 32px}
+.bs .mg{padding:0 12px 32px;border-bottom:1px solid var(--ink-10)}
 .bs .mg .t{padding:0 8px;font-size:16px;line-height:1.2;color:var(--ink-90);margin:0 0 16px;padding-top:0}
 .tips{display:flex;flex-direction:column;gap:8px}
 .tipc{display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:12px;background:var(--neutral-0);box-shadow:inset 0 0 0 1px var(--neutral-200);font-size:14px;line-height:1.5;color:var(--ink-60);text-align:left;transition:box-shadow .25s,background .25s}
@@ -483,7 +483,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .needsup .t{font-size:20px;line-height:1.2;padding-right:32px}
 .needsup .d{font-size:14px;line-height:1.5;opacity:.8;margin-top:8px;padding-right:50px}
 .needsup .btn{margin-top:16px;display:inline-flex}
-.needsup svg.heart{position:absolute;right:-12px;top:60px;width:96px;height:96px}
+.needsup svg.heart{position:absolute;right:-14px;top:14px;width:92px;height:92px}
 .needsup svg.heart path{stroke-dasharray:260;stroke-dashoffset:260}
 .ov.on .needsup svg.heart path{animation:drawH 2.2s .5s var(--ease) forwards}
 @keyframes drawH{to{stroke-dashoffset:0}}
@@ -515,6 +515,10 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 <symbol id="i-gear" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M5.2 3.36L4.7 3.24C4.29 3.15 3.86 3.27 3.57 3.57C3.27 3.86 3.15 4.29 3.24 4.7L3.36 5.2C3.48 5.74 3.26 6.3 2.8 6.61L2.19 7.02C1.86 7.23 1.67 7.6 1.67 8C1.67 8.4 1.86 8.77 2.19 8.98L2.8 9.39C3.26 9.7 3.48 10.26 3.36 10.8L3.24 11.3C3.15 11.71 3.27 12.14 3.57 12.43C3.86 12.73 4.29 12.85 4.7 12.76L5.2 12.64C5.74 12.52 6.3 12.74 6.61 13.2L7.01 13.81C7.23 14.14 7.6 14.33 8 14.33C8.4 14.33 8.76 14.14 8.98 13.81L9.39 13.2C9.7 12.74 10.26 12.52 10.8 12.64L11.3 12.76C11.71 12.85 12.14 12.73 12.43 12.43C12.73 12.14 12.85 11.71 12.76 11.3L12.64 10.8C12.52 10.26 12.74 9.7 13.2 9.39L13.81 8.98C14.13 8.77 14.33 8.4 14.33 8C14.33 7.6 14.13 7.23 13.81 7.02L13.2 6.61C12.74 6.3 12.52 5.74 12.64 5.2L12.76 4.7C12.85 4.29 12.73 3.86 12.43 3.57C12.14 3.27 11.71 3.15 11.3 3.24L10.8 3.36C10.26 3.48 9.7 3.26 9.39 2.8L8.98 2.19C8.76 1.86 8.4 1.67 8 1.67C7.6 1.67 7.23 1.86 7.01 2.19L6.61 2.8C6.3 3.26 5.74 3.48 5.2 3.36Z"/><path d="M10 8C10 9.1 9.1 10 8 10C6.89 10 6 9.1 6 8C6 6.9 6.89 6 8 6C9.1 6 10 6.9 10 8Z"/></g></symbol>
 <symbol id="i-nausea" viewBox="0 0 20 20"><path d="M2.5 14.17C3.77 14.17 5.01 12.5 6.25 12.5C7.5 12.5 8.75 14.17 10 14.17C11.24 14.17 12.49 12.5 13.75 12.5C14.98 12.5 16.23 14.17 17.5 14.17M2.5 7.5C3.77 7.5 5.01 5.83 6.25 5.83C7.5 5.83 8.75 7.5 10 7.5C11.24 7.5 12.49 5.83 13.75 5.83C14.98 5.83 16.23 7.5 17.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round"/></symbol>
 <filter id="fx-mix" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".5252 .5252 .5252 0 0 .4210 .4210 .4210 0 0 .3487 .3487 .3487 0 0 0 0 0 1 0"/></filter>
+<symbol id="i-cutlery" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M13.75 10.21V17.08"/><path d="M6.25 10.63V17.08"/><path d="M5.42 2.92V8.33"/><path d="M7.08 2.92V8.33"/><path d="M16.46 6.57C16.46 8.64 15.25 10.21 13.75 10.21C12.25 10.21 11.04 8.64 11.04 6.57C11.04 4.5 12.25 2.71 13.75 2.71C15.25 2.71 16.46 4.5 16.46 6.57Z" stroke-linejoin="round"/><path d="M3.75 2.92V7.92C3.75 9.3 4.87 10.42 6.25 10.42C7.63 10.42 8.75 9.3 8.75 7.92V2.92"/></g></symbol>
+<symbol id="i-clock" viewBox="0 0 20 20"><path d="M10 6.25V10L12.5 12.5M1.67 4.38L4.17 1.88M18.33 4.38L15.83 1.88M17.92 10C17.92 14.37 14.37 17.92 10 17.92C5.63 17.92 2.08 14.37 2.08 10C2.08 5.63 5.63 2.08 10 2.08C14.37 2.08 17.92 5.63 17.92 10Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-inject" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M14.79 2.29L17.71 5.21"/><path d="M16.25 3.75L14.17 5.83"/><path d="M10.63 3.13L16.88 9.38"/><path d="M11.95 4.58L5.55 10.98C4.9 11.64 4.9 12.69 5.55 13.34L6.66 14.45C7.31 15.1 8.36 15.1 9.01 14.45L15.42 8.04" stroke-linejoin="round"/><path d="M2.5 17.5L6.06 13.94"/></g></symbol>
+<symbol id="i-bubbles" viewBox="0 0 8 8"><path d="M5.83 4.83H6.33C6.79 4.83 7.17 4.46 7.17 4V2C7.17 1.54 6.79 1.17 6.33 1.17H3.08C2.62 1.17 2.25 1.54 2.25 2V2.5M5 2.5H1.67C1.21 2.5 0.83 2.87 0.83 3.33V5.33C0.83 5.79 1.21 6.17 1.67 6.17H2V7L3.5 6.17H5C5.46 6.17 5.83 5.79 5.83 5.33V3.33C5.83 2.87 5.46 2.5 5 2.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 2.5v15M2.5 10h15" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/></symbol>
 <symbol id="i-check" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-chev-r2" viewBox="0 0 20 20"><path d="M8.5 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -812,7 +816,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="needsup">
             <div class="t">Need additional support?</div>
             <div class="d" id="s-sup">Talk to your provider about nausea that lasts longer than a week.</div>
-            <button class="btn s24 sec-light" data-go="session"><svg class="i"><use href="#i-plus"/></svg>Start a session</button>
+            <button class="btn s24 sec-light" data-go="session"><svg class="i" style="width:8px;height:8px"><use href="#i-bubbles"/></svg>Start a session</button>
             <svg class="heart" viewBox="0 0 96 96" fill="none"><path d="M48 84 C30 68 8 52 8 32 C8 18 18 10 29 10 C38 10 44 15 48 22 C52 15 58 10 67 10 C78 10 88 18 88 32 C88 52 66 68 48 84Z" stroke="#fff6bf" stroke-width="1" stroke-linejoin="round" opacity=".85"/></svg>
           </div>
         </div>
@@ -1008,14 +1012,14 @@ const _go=go; go=function(id,o){ if(id==='session') resetSession(); return _go(i
 /* ---------- symptom sheet ---------- */
 const SYM={
   nausea:{title:'Mild Nausea',desc:'Slower digestion can cause mild nausea. It usually eases as your body adjusts.',sup:'Talk to your provider about nausea that lasts longer than a week.',
-    tips:['Eat smaller meals spread out throughout the day','Have your last meal 3 hours before bedtime','Try injecting on your leg instead of your stomach']},
+    tips:[['cutlery','Eat smaller meals spread out throughout the day'],['clock','Have your last meal 3 hours before bedtime'],['inject','Try injecting on your leg instead of your stomach']]},
   headache:{title:'Light Headaches',desc:'Eating less and shifts in hydration can bring on light headaches early in treatment. They tend to fade with time.',sup:'Talk to your provider about headaches that are severe or last longer than a week.',
-    tips:['Sip water steadily through the day','Try not to skip meals, even small ones','Rest somewhere quiet and dim when one starts']}
+    tips:[['clock','Sip water steadily through the day'],['cutlery','Try not to skip meals, even small ones'],['plus','Rest somewhere quiet and dim when one starts']]}
 };
 const ov=$('#ov'), bs=$('#bs');
 function openSheet(k){
   const s=SYM[k]; $('#s-title').textContent=s.title; $('#s-desc').textContent=s.desc; $('#s-sup').textContent=s.sup;
-  $('#s-tips').innerHTML=s.tips.map(t=>`<button class="tipc"><span class="icon-box"><svg class="i pl"><use href="#i-plus"/></svg><svg class="i ck"><use href="#i-check"/></svg></span><span class="tx"><small>Added to your plan</small>${t}</span></button>`).join('');
+  $('#s-tips').innerHTML=s.tips.map(([ic,t])=>`<button class="tipc"><span class="icon-box"><svg class="i pl"><use href="#i-${ic}"/></svg><svg class="i ck"><use href="#i-check"/></svg></span><span class="tx"><small>Added to your plan</small>${t}</span></button>`).join('');
   $$('.tipc',bs).forEach(b=>b.onclick=()=>{ b.classList.toggle('on'); if(b.classList.contains('on')) toast('Added to your plan') });
   bs.scrollTop=0; bs.style.transform=''; ov.classList.add('on');
   const p=$('#progress'); p.style.transition='transform .55s cubic-bezier(.22,.8,.24,1),border-radius .55s'; p.style.transform='scale(.94)'; p.style.borderRadius='24px'; $('.fab')&&$('.fab').classList.add('hide');
