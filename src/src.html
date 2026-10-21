@@ -184,7 +184,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .drug .meta{font-size:16px;line-height:1.4;color:var(--ink-60)}
 .link{display:inline-flex;align-items:center;gap:4px;font-weight:500;font-size:14px;letter-spacing:.01em;color:var(--green-700);line-height:1;height:20px}
 .link .i{width:20px;height:20px;transition:transform .2s var(--ease)}
-.link:hover .i{transform:translateX(3px)}
+.link:not(.static):hover .i{transform:translateX(3px)}
+.link.static{cursor:default;user-select:none}
 .actions{position:absolute;left:0;right:0;top:280px;z-index:2}
 .actions .lbl{font-size:13px;line-height:20px;color:var(--ink-60);padding:0 20px 8px}
 .actions .car{gap:8px;padding:0 12px 40px;scroll-padding:0 12px;margin-bottom:-40px}
@@ -737,7 +738,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="drug">
             <h1 class="rv" style="--d:0">Wegovy®</h1>
             <div class="meta rv" style="--d:1">Pen · Semaglutide · 0.5mg</div>
-            <button class="link rv" style="--d:2" data-go="progress">Treatment plan details <svg class="i"><use href="#i-chev-r2"/></svg></button>
+            <span class="link static rv" style="--d:2">Treatment plan details <svg class="i"><use href="#i-chev-r2"/></svg></span>
           </div>
           <div class="actions">
             <div class="lbl rv" style="--d:3">2 action items</div>
