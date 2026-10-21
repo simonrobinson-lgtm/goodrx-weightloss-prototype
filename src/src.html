@@ -1381,11 +1381,13 @@ function heroTick(){
   at(E.h1,H.h1,118+o); E.h1.style.scale=lerp(1,16/28,p).toFixed(4);
   at(E.meta,H.meta,124+o); E.meta.style.scale=lerp(1,.7,p).toFixed(4); E.meta.style.filter=`opacity(${(1-sstep(0,.45,p)).toFixed(3)})`;
   at(E.link,H.link,143+o); E.link.style.scale=lerp(1,12/14,p).toFixed(4);
-  const a=sstep(0,.75,p);                        // action cards shrink up into the pill
-  E.act.style.translate=`0px ${(lerp(H.act,177+o-6,a)-H.act+yy).toFixed(2)}px`;
-  E.act.style.scale=lerp(1,.55,a).toFixed(4); E.act.style.filter=`opacity(${(1-sstep(.05,.6,p)).toFixed(3)}) blur(${(sstep(.2,.7,p)*2).toFixed(2)}px)`;
-  E.pill.style.translate=`0px ${(lerp(177+o+26,177+o,sstep(.45,1,p))+yy).toFixed(2)}px`; E.pill.style.scale=lerp(.92,1,sstep(.45,1,p)).toFixed(4);
-  E.pill.style.opacity=sstep(.5,.95,p).toFixed(3); E.pill.classList.toggle('go',p>.9); E.pill.tabIndex=p>.9?0:-1;
+  // action cards stay put while the white sheet rises over them, fading as it passes
+  E.act.style.translate=`0px ${yy.toFixed(2)}px`; E.act.style.scale='';
+  E.act.style.filter=`opacity(${(1-sstep(.1,.72,p)).toFixed(3)})`;
+  // then the summary pill fades in
+  const q=sstep(.72,1,p);
+  E.pill.style.translate=`0px ${(lerp(177+o+10,177+o,q)+yy).toFixed(2)}px`; E.pill.style.scale=lerp(.97,1,q).toFixed(4);
+  E.pill.style.opacity=q.toFixed(3); E.pill.classList.toggle('go',p>.9); E.pill.tabIndex=p>.9?0:-1;
   E.act.style.pointerEvents=p>.5?'none':'';
 }
 let hTick, hIdle, hDown=false; const homeEl=$('#home');
