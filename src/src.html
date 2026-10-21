@@ -148,6 +148,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .icon-btn{width:40px;height:40px;border-radius:8px;background:var(--neutral-0);box-shadow:inset 0 0 0 1px var(--green-700);color:var(--green-700);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
 .icon-btn:hover{background:var(--green-700);color:var(--yellow-100)}
 .icon-btn .i{width:16px;height:16px}
+.icon-btn.hair{box-shadow:inset 0 0 0 .5px var(--green-700)}
 
 .card{background:var(--neutral-0);box-shadow:inset 0 0 0 1px var(--neutral-200);border-radius:16px}
 
@@ -212,11 +213,11 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .pcard .top .i{width:12px;height:12px;transition:transform .2s var(--ease)}
 .pcard:hover .top .i{transform:translateX(3px)}
 .pcard .mid{display:flex;justify-content:space-between;align-items:flex-start;padding:0 12px;height:40px}
-.pcard .mid svg{margin-top:9px}
+.pcard .mid svg{margin-top:8px}
 .big{display:flex;align-items:flex-end;gap:4px;color:var(--green-700)}
 .big .num{font-size:40px;line-height:1}
 .big .u{font-size:14px;line-height:1.5}
-.pcard .boxes{display:flex;flex-direction:column;gap:2px;border-radius:12px;overflow:hidden}
+.pcard .boxes{margin-top:-8px;display:flex;flex-direction:column;gap:2px;border-radius:12px;overflow:hidden}
 .pcard .boxes>div{background:var(--neutral-100);padding:12px;display:flex;flex-direction:column;gap:4px}
 .pcard .boxes .k{font-size:13px;line-height:1.5;color:var(--ink-60)}
 .pcard .boxes .v{font-size:14px;line-height:1.5;color:var(--ink);display:flex;align-items:center;gap:4px}
@@ -227,6 +228,11 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .fcard{width:254px;height:292px;display:flex;flex-direction:column;overflow:hidden;text-align:left}
 .fcard .ph{margin:8px 8px 12px;height:156px;border-radius:8px;overflow:hidden;background:var(--neutral-100)}
 .fcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.fcard .ph{position:relative}
+.fcard .ph img{object-position:50% 0}
+.fcard .ph.grain::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.2);pointer-events:none}
+.fcard .ph.illo{background:var(--neutral-0);display:flex;align-items:flex-start;justify-content:flex-start}
+.fcard .ph.illo svg{width:100px;height:100px;color:var(--green-700)}
 .fcard:hover .ph img{transform:scale(1.04)}
 .fcard .bd{padding:8px 16px 12px;display:flex;flex-direction:column;gap:12px;flex:1}
 .fcard .bd .t{display:flex;justify-content:space-between;align-items:center;color:var(--green-700)}
@@ -238,7 +244,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 /* journey carousel */
 .journey{padding:16px 0}
 .journey .hd{padding:0 20px;margin-bottom:20px}
-.jcar{gap:8px;padding:0 33.5px;align-items:center;height:396px;scroll-padding:0 33.5px}
+.jcar{gap:8px;padding:0 33.5px;align-items:center;height:396px;margin:-10px 0;scroll-padding:0 33.5px}
 .jcar>*{scroll-snap-align:center}
 .jc{position:relative;width:326px;height:325px;border-radius:12px;overflow:hidden;background:var(--neutral-400);box-shadow:inset 0 0 0 1px var(--neutral-200);transition:height .5s var(--ease),box-shadow .5s,transform .5s var(--ease);text-align:left;color:var(--yellow-100)}
 .jc.on{height:381px;box-shadow:var(--elev)}
@@ -246,7 +252,15 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jc.on .art{opacity:1}
 .jc .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.2s var(--ease)}
 .jc.on .art img{transform:scale(1)}
+.jc .mixl img{transform:scaleX(-1) scale(1.08)}
+.jc.on .mixl img{transform:scaleX(-1)}
 .jc .art::after{content:"";position:absolute;inset:0;background:linear-gradient(176deg,#c23ba0 30%,#581447 75%);opacity:.7}
+.mixl{position:absolute;left:-9px;top:-163px;width:457px;height:817px;filter:url(#fx-mix)}
+.mixl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.mixl::after{content:"";position:absolute;inset:0;background:linear-gradient(181.65deg,rgba(194,59,160,.7) 33.6%,rgba(88,20,71,.7) 71.2%)}
+.jc[data-tone=mix] .art::after{display:none}
+.pj .mixl{left:-8px;top:-24px;width:457px;height:266px}
+.pj .art:has(.mixl)::after{display:none}
 .jc[data-tone=green] .art::after{background:linear-gradient(176deg,#436f58 30%,#11322f 75%);opacity:.78}
 .jc[data-tone=plum] .art::after{background:linear-gradient(176deg,#7c4f62 30%,#3b1f2d 75%);opacity:.8}
 .jc .head{position:absolute;left:4px;right:4px;top:4px;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 0 0 16px}
@@ -280,7 +294,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .chart .ylab .goal{box-shadow:inset 0 0 0 1px var(--green-700);color:var(--green-700);gap:4px;width:39px;margin-left:-3px}
 .chart .ylab .goal i{width:8px;height:8px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--green-700);position:relative}
 .chart .ylab .goal i::after{content:"";position:absolute;left:3px;top:3px;width:2px;height:2px;border-radius:2px;background:var(--green-700)}
-.chart .months{position:absolute;left:0;bottom:16px;width:378px;display:flex;padding:0 40px 0 20px;justify-content:space-between;font-size:10px;line-height:1.3;color:var(--ink-40)}
+.chart .months{position:absolute;left:0;bottom:30px;width:378px;display:flex;padding:0 40px 0 20px;justify-content:space-between;font-size:10px;line-height:1.3;color:var(--ink-40)}
 .tip{position:absolute;top:-30px;height:28px;min-width:42px;padding:4px 8px;border-radius:8px;background:var(--yellow-400);box-shadow:inset 0 0 0 1px rgba(255,239,138,.5);font-family:"Moon";font-size:20px;line-height:20px;color:var(--green-700);text-align:center;transform:translateX(-50%);pointer-events:none;white-space:nowrap}
 .tip small{display:block;position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:"Bolton";font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-50);opacity:0;transition:opacity .2s}
 .chart.scrubbing .tip small{opacity:1}
@@ -288,13 +302,16 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .hint b{width:14px;height:14px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--ink-20);display:inline-block;position:relative}
 .hint b::after{content:"";position:absolute;left:4px;top:4px;width:6px;height:6px;border-radius:6px;background:var(--yellow-400);animation:nudge 1.6s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
-.stats{gap:8px;padding:0 16px 16px 12px;margin-top:8px}
-.stats>div{width:140px;padding:0 16px;display:flex;flex-direction:column;gap:8px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 8px 12px;margin-top:8px}
+.stats>div{display:flex;flex-direction:column;gap:12px;border-radius:12px;min-width:0}
+.stats .top{padding:16px 16px 0;display:flex;flex-direction:column;gap:8px}
+.stats .ft{border-top:.5px solid var(--ink-10);padding:12px 16px;font-size:13px;line-height:1.5;color:var(--ink-60)}
 .stats .k{font-size:13px;line-height:1.5;color:var(--ink);white-space:nowrap}
 .stats .big .u{font-size:10px;line-height:1;margin-bottom:6px}
-.summary{margin:8px 12px 20px;border-radius:12px;background:var(--green-100);padding:16px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px}
-.summary::before{content:"";position:absolute;left:0;top:-68px;width:264px;height:126px;border-radius:50%;background:linear-gradient(180deg,var(--yellow-300),var(--green-700) 80%);filter:blur(50px);opacity:.55;animation:breathe 7s ease-in-out infinite alternate}
-@keyframes breathe{from{transform:translateX(-30px) scale(.95)}to{transform:translateX(40px) scale(1.08)}}
+.summary{margin:8px 12px 28px;border-radius:12px;background:var(--green-100);padding:16px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px}
+.summary{isolation:isolate}
+.summary::before{content:"";position:absolute;left:-82px;top:7px;width:264px;height:126px;border-radius:50%;background:linear-gradient(180deg,var(--yellow-300),var(--green-700) 80%);filter:blur(50px);mix-blend-mode:overlay;transform:rotate(44.92deg);animation:breathe 8s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:rotate(44.92deg) translateX(-10px)}to{transform:rotate(44.92deg) translateX(24px)}}
 .summary>*{position:relative}
 .summary .t{font-size:16px;line-height:1.2;color:var(--green-700)}
 .summary .d{font-size:14px;line-height:1.5;color:var(--ink-60)}
@@ -310,7 +327,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .reported .lbl{padding:0 8px;font-size:14px;line-height:1.5;color:var(--ink-60)}
 .srow{border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:space-between}
 .srow .l{display:flex;align-items:center;gap:12px;font-size:16px;line-height:1.2;color:var(--green-700)}
-.srow .icon-box{width:40px;height:40px;background:var(--neutral-200);box-shadow:inset 0 0 0 1px var(--neutral-300);color:var(--green-700)}
+.srow .icon-box{width:40px;height:40px;background:var(--neutral-200);box-shadow:inset 0 0 0 .5px var(--neutral-300);color:var(--green-700)}
 .srow .icon-box .i{width:16px;height:16px}
 .pjourney{padding:16px 0}
 .pjourney .hd{padding:0 20px;margin-bottom:16px;font-size:20px}
@@ -492,6 +509,12 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 {{SPRITE}}
+<symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M15.5 4.5H16.5C18.1569 4.5 19.5 5.84315 19.5 7.5V18.5C19.5 20.1569 18.1569 21.5 16.5 21.5H7.5C5.84315 21.5 4.5 20.1569 4.5 18.5V7.5C4.5 5.84315 5.84315 4.5 7.5 4.5H8.5M9.5 6.5H14.5C15.0523 6.5 15.5 6.05228 15.5 5.5C15.5 3.84315 14.1569 2.5 12.5 2.5H11.5C9.84315 2.5 8.5 3.84315 8.5 5.5C8.5 6.05228 8.94772 6.5 9.5 6.5Z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
+<symbol id="i-chev-r12" viewBox="0 0 12 12"><path d="M4.5 2L7.43934 4.93933C8.02513 5.52512 8.02513 6.47486 7.43934 7.06065L4.5 10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-link" viewBox="0 0 12 12"><path d="M4.75 1.75H4.15C3.31 1.75 2.89 1.75 2.57 1.91C2.29 2.06 2.06 2.29 1.91 2.57C1.75 2.89 1.75 3.31 1.75 4.15V7.85C1.75 8.69 1.75 9.11 1.91 9.43C2.06 9.71 2.29 9.94 2.57 10.09C2.89 10.25 3.31 10.25 4.15 10.25H7.85C8.69 10.25 9.11 10.25 9.43 10.09C9.71 9.94 9.94 9.71 10.09 9.43C10.25 9.11 10.25 8.69 10.25 7.85V7.25M10.25 4.75V1.75H7.25M10.25 1.75L5.75 6.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-gear" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M5.2 3.36L4.7 3.24C4.29 3.15 3.86 3.27 3.57 3.57C3.27 3.86 3.15 4.29 3.24 4.7L3.36 5.2C3.48 5.74 3.26 6.3 2.8 6.61L2.19 7.02C1.86 7.23 1.67 7.6 1.67 8C1.67 8.4 1.86 8.77 2.19 8.98L2.8 9.39C3.26 9.7 3.48 10.26 3.36 10.8L3.24 11.3C3.15 11.71 3.27 12.14 3.57 12.43C3.86 12.73 4.29 12.85 4.7 12.76L5.2 12.64C5.74 12.52 6.3 12.74 6.61 13.2L7.01 13.81C7.23 14.14 7.6 14.33 8 14.33C8.4 14.33 8.76 14.14 8.98 13.81L9.39 13.2C9.7 12.74 10.26 12.52 10.8 12.64L11.3 12.76C11.71 12.85 12.14 12.73 12.43 12.43C12.73 12.14 12.85 11.71 12.76 11.3L12.64 10.8C12.52 10.26 12.74 9.7 13.2 9.39L13.81 8.98C14.13 8.77 14.33 8.4 14.33 8C14.33 7.6 14.13 7.23 13.81 7.02L13.2 6.61C12.74 6.3 12.52 5.74 12.64 5.2L12.76 4.7C12.85 4.29 12.73 3.86 12.43 3.57C12.14 3.27 11.71 3.15 11.3 3.24L10.8 3.36C10.26 3.48 9.7 3.26 9.39 2.8L8.98 2.19C8.76 1.86 8.4 1.67 8 1.67C7.6 1.67 7.23 1.86 7.01 2.19L6.61 2.8C6.3 3.26 5.74 3.48 5.2 3.36Z"/><path d="M10 8C10 9.1 9.1 10 8 10C6.89 10 6 9.1 6 8C6 6.9 6.89 6 8 6C9.1 6 10 6.9 10 8Z"/></g></symbol>
+<symbol id="i-nausea" viewBox="0 0 20 20"><path d="M2.5 14.17C3.77 14.17 5.01 12.5 6.25 12.5C7.5 12.5 8.75 14.17 10 14.17C11.24 14.17 12.49 12.5 13.75 12.5C14.98 12.5 16.23 14.17 17.5 14.17M2.5 7.5C3.77 7.5 5.01 5.83 6.25 5.83C7.5 5.83 8.75 7.5 10 7.5C11.24 7.5 12.49 5.83 13.75 5.83C14.98 5.83 16.23 7.5 17.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round"/></symbol>
+<filter id="fx-mix" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".5252 .5252 .5252 0 0 .4210 .4210 .4210 0 0 .3487 .3487 .3487 0 0 0 0 0 1 0"/></filter>
 <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 2.5v15M2.5 10h15" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/></symbol>
 <symbol id="i-check" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-chev-r2" viewBox="0 0 20 20"><path d="M8.5 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -545,7 +568,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               <div class="acard">
                 <div class="ct cap">due tue, nov 23</div>
                 <div class="in">
-                  <div class="row"><div class="icon-box"><svg class="i"><use href="#i-plus"/></svg></div><div><div class="t1">Book your follow-up</div><div class="t2">Required to authorize your next refill</div></div></div>
+                  <div class="row"><div class="icon-box"><svg class="i" style="width:24px;height:24px"><use href="#i-clipboard"/></svg></div><div><div class="t1">Book your follow-up</div><div class="t2">Required to authorize your next refill</div></div></div>
                   <button class="btn s48 pri-dark" data-go="session">Check-in to book</button>
                 </div>
               </div>
@@ -564,18 +587,18 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="hd h-sec">Your care team</div>
             <div class="card team">
               <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="who"><img src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s"><span class="live"></span>Active session</div></div></div>
+                <div class="who"><img src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s">Active session</div></div></div>
                 <button class="btn s24 sec-plum" data-go="care">Chat</button>
               </div>
-              <button class="btn s32 pri-plum" data-go="care">Go to Care Center <svg class="i"><use href="#i-plus"/></svg></button>
+              <button class="btn s32 pri-plum" data-go="care">Go to Care Center <svg class="i"><use href="#i-chev-r12"/></svg></button>
             </div>
           </div>
           <div class="prog-sec rv" style="--d:6">
-            <div class="hd"><div><div class="h-sec">Your progress</div><div class="sub" style="margin-top:4px">Last log: 10d ago</div></div><button class="icon-btn" data-toast="Log added · nice work" aria-label="Add log"><svg class="i"><use href="#i-plus"/></svg></button></div>
+            <div class="hd"><div><div class="h-sec">Your progress</div><div class="sub" style="margin-top:4px">Last log: 10d ago</div></div><button class="icon-btn hair" data-toast="Log added · nice work" aria-label="Add log"><svg class="i"><use href="#i-plus"/></svg></button></div>
             <button class="card pcard tap" data-go="progress">
               <div class="top"><div class="l"><span class="chip av"><img src="img/av-phase.webp" alt="">Phase 2</span><span class="cap">steady weight loss</span></div><svg class="i"><use href="#i-chev-right"/></svg></div>
               <div class="mid">
-                <svg width="89" height="22" viewBox="0 0 249 37" preserveAspectRatio="none" style="overflow:visible"><defs><linearGradient id="spk" x1="0" x2="1"><stop offset=".2" stop-color="#1c534e" stop-opacity=".35"/><stop offset="1" stop-color="#1c534e"/></linearGradient></defs><path class="draw" d="M0 0.03 C1.76 0.41 35.36 -1.31 71 3.03 C109.4 10.64 152.58 34.23 156.48 35.47 C162.4 37.35 220.5 37.03 249 37.03" fill="none" stroke="url(#spk)" stroke-width="4.2" vector-effect="non-scaling-stroke" style="stroke-width:1.5px"/></svg>
+                <svg width="90" height="24" viewBox="0 0 90 24" style="overflow:visible"><path class="draw" d="M0 0.75C0.59 0.75 16.98 0.75 28.69 1.2C43.91 7.83 55.89 12.63 55.89 12.63C55.89 12.63 78.85 19.77 89 22.75" fill="none" stroke="#1c534e" stroke-width="1.5"/></svg>
                 <div class="big"><span class="num" data-count="-12" data-from="0">-12</span><span class="u">lbs</span></div>
               </div>
               <div class="boxes">
@@ -587,9 +610,9 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="foryou rv" style="--d:7">
             <div class="hd h-sm">For how you are feeling</div>
             <div class="car" data-car>
-              <button class="card fcard" data-go="symptom"><div class="ph"><img src="img/photo-stomach.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
-              <button class="card fcard" data-toast="Article view coming soon"><div class="ph"><img src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
-              <button class="card fcard" data-toast="Article view coming soon"><div class="ph"><img src="img/photo-pen.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
+              <button class="card fcard" data-go="symptom"><div class="ph"><img src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
+              <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
+              <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
             </div>
           </div>
           <div class="journey rv" style="--d:8">
@@ -600,8 +623,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                 <div class="head"><span class="chip r8">Completed</span><span class="nbox num">1</span></div>
                 <div class="body"><div><h3>Adjusting to treatment</h3><p>Your body gets used to the medication. Appetite shifts, digestion slows, and you start to learn what works for you.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
-              <button class="jc" data-i="1">
-                <div class="art"><img src="img/journey-bg.jpg" alt=""></div>
+              <button class="jc" data-i="1" data-tone="mix">
+                <div class="art"><div class="mixl"><img src="img/journey-bg.jpg" alt=""></div></div>
                 <div class="head"><span class="chip av r8"><img src="img/av-phase.webp" alt="">You are here</span><span class="nbox num">2</span></div>
                 <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
@@ -628,7 +651,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div>
             <div class="ph-head">
               <div><h1 class="rv" style="--d:1">Your progress</h1><div class="chips rv" style="--d:2"><span class="chip av"><img src="img/av-phase.webp" alt="">Phase 2</span><span class="chip sand">Week 6</span></div></div>
-              <button class="icon-btn rv" style="--d:2" data-toast="Log added · nice work" aria-label="Add log"><svg class="i"><use href="#i-plus"/></svg></button>
+              <button class="icon-btn hair rv" style="--d:2" data-toast="Progress settings aren’t part of this prototype" aria-label="Progress settings"><svg class="i"><use href="#i-gear"/></svg></button>
             </div>
             <div class="chart rv" style="--d:3" id="chart">
               <div class="hint" id="hint"><b></b>Drag to explore</div>
@@ -655,14 +678,12 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               </div>
               <div class="months"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span></div>
             </div>
-            <div class="car stats rv" style="--d:4" data-car>
-              <div><div class="k">You’ve already lost</div><div class="big"><span class="num" data-count="12">12</span><span class="u">lbs</span></div></div>
-              <div><div class="k">Current weight</div><div class="big"><span class="num" data-count="176" data-from="188">176</span><span class="u">lbs</span></div></div>
-              <div><div class="k">Goal</div><div class="big"><span class="num" data-count="132" data-from="120">132</span><span class="u">lbs</span></div></div>
-              <div><div class="k">Original weight</div><div class="big"><span class="num" data-count="188" data-from="170">188</span><span class="u">lbs</span></div></div>
+            <div class="stats rv" style="--d:4">
+              <div><div class="top"><div class="k">You’ve already lost</div><div class="big"><span class="num" data-count="12">12</span><span class="u">lbs</span></div></div><div class="ft">Started at 188 lbs</div></div>
+              <div><div class="top"><div class="k">Current weight</div><div class="big"><span class="num" data-count="176" data-from="188">176</span><span class="u">lbs</span></div></div><div class="ft">Goal 132 lbs</div></div>
             </div>
             <div class="summary rv" style="--d:5"><div class="t">Steady Progress</div><div class="d">Your weight trend is moving in the right direction, consistent with where you are in treatment.</div></div>
-            <div class="pad20 rv" style="--d:6"><button class="btn s48 pri-dark" style="width:100%" data-toast="Log added · nice work"><svg class="i"><use href="#i-plus"/></svg>Add log</button></div>
+            <div class="pad20 rv" style="--d:6;padding-bottom:18px"><button class="btn s48 pri-dark" style="width:100%" data-toast="Log added · nice work"><svg class="i"><use href="#i-plus"/></svg>Add log</button></div>
           </div>
           <div class="evid">
             <div class="hd rv"><div class="h-sec">Changes you’ve noticed</div><div class="sub" style="margin-top:4px">Based on recent logs</div></div>
@@ -672,15 +693,15 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             </div>
             <div class="reported rv" style="--d:2">
               <div class="lbl">Reported on your last log</div>
-              <div class="card srow"><div class="l"><span class="icon-box"><svg class="i"><use href="#i-plus"/></svg></span>Mild nausea</div><button class="btn s24 sec-dark" data-symptom="nausea">What helps</button></div>
-              <div class="card srow"><div class="l"><span class="icon-box"><svg class="i"><use href="#i-plus"/></svg></span>Light headaches</div><button class="btn s24 sec-dark" data-symptom="headache">What helps</button></div>
+              <div class="card srow"><div class="l"><span class="icon-box"><svg class="i" style="width:20px;height:20px"><use href="#i-nausea"/></svg></span>Mild nausea</div><button class="btn s24 sec-dark" data-symptom="nausea">What helps</button></div>
+              <div class="card srow"><div class="l"><span class="icon-box"><svg class="i" style="width:20px;height:20px"><use href="#i-nausea"/></svg></span>Light headaches</div><button class="btn s24 sec-dark" data-symptom="headache">What helps</button></div>
             </div>
             <div class="pad20 rv" style="--d:3;margin-top:24px"><button class="btn s32 sec-dark" style="width:100%" data-toast="Log history coming soon">View log entries</button></div>
           </div>
           <div class="pjourney rv">
             <div class="hd h-sec">Your journey</div>
             <div class="pj">
-              <div class="art"><img src="img/journey-bg.jpg" alt=""></div>
+              <div class="art"><div class="mixl"><img src="img/journey-bg.jpg" alt=""></div></div>
               <div><span class="chip av r8"><img src="img/av-phase.webp" alt="">Phase 2</span></div>
               <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-back>Learn more</button></div>
             </div>
