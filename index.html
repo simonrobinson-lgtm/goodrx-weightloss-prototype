@@ -62,7 +62,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
   #app .bs{top:max(calc(env(safe-area-inset-top) + 100px),120px)}
   #app .wl-bs{top:auto}
   #app .stk-nav{top:0;padding-top:env(safe-area-inset-top)}
-  #app .hstk{--o:-39px}
 }
 
 /* ---------- Status bar ---------- */
@@ -73,26 +72,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .statusbar.solid::before{opacity:1}
 .statusbar.stk::before{background:rgba(255,255,251,.94)}
 .statusbar.light.stk::before{background:rgba(92,45,68,.94)}
-/* home: compact hero that pops down on scroll */
-.hstk{--o:0px;position:absolute;left:0;right:0;top:0;height:calc(263px + var(--o));overflow:hidden;z-index:30;transform:translateY(-102%);transition:transform .5s cubic-bezier(.22,.8,.24,1);pointer-events:none;filter:drop-shadow(0 10px 18px rgba(90,84,78,.10))}
-.hstk.on{transform:none}
-.hstk.on .hs-ui{pointer-events:auto}
-.hstk .bg{position:absolute;left:0;top:calc(-114px + var(--o));width:393px;height:696px;overflow:hidden;background:var(--neutral-100)}
-.hstk .bg img{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;animation:drift 18s ease-in-out infinite alternate}
-.hstk .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,#fff 18%,rgba(255,255,255,0) 52%)}
-.hstk .blob{position:absolute;left:-102px;top:calc(333px + var(--o));width:627px;height:208px;border-radius:50%;background:linear-gradient(180deg,#ede0d5,#a6a3a3 78%);filter:blur(100px);opacity:.9}
-.hstk .pen{top:calc(110px + var(--o));transform:translate(-5.5px,-2px) scale(.738);transform-origin:50% 0}
-.hstk .gnav{position:absolute;top:calc(51px + var(--o));left:0;right:0}
-.hstk .hs-t{position:absolute;left:20px;top:calc(118px + var(--o));display:flex;flex-direction:column;gap:6px}
-.hstk .hs-t b{font-weight:400;font-size:16px;line-height:1.2;color:var(--green-700)}
-.hstk .hs-t .link{font-size:12px;height:20px}
-.hstk .hs-pill{position:absolute;left:20px;top:calc(177px + var(--o));height:36px;display:flex;align-items:center;gap:8px;padding:0 12px;border-radius:8px;background:rgba(255,255,251,.85);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:inset 0 0 0 1px var(--neutral-300),0 5px 10px rgba(90,84,78,.1),0 18px 18px rgba(90,84,78,.09),0 41px 25px rgba(90,84,78,.05);font-size:13px;line-height:1.5;color:var(--ink-60);transition:transform .2s var(--ease),background .2s}
-.hstk .hs-pill:hover{background:#fffffb}
-.hstk .hs-pill:active{transform:scale(.97)}
-.hstk .hs-pill i{width:6px;height:6px;border-radius:6px;background:var(--chip-orange-dot)}
-.hstk .lip{position:absolute;left:0;right:0;bottom:0;height:30px;background:#fff;border-radius:12px 12px 0 0}
-.hstk .hs-ui>*{transition:opacity .4s .12s,transform .5s .1s var(--ease)}
-.hstk:not(.on) .hs-t,.hstk:not(.on) .hs-pill{opacity:0;transform:translateY(-6px)}
 /* sticky header that pops down on scroll */
 .stk-nav{position:absolute;left:0;right:0;top:50px;z-index:30;background:rgba(255,255,251,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(18,17,15,.06),0 8px 20px -12px rgba(36,36,36,.18);transform:translateY(calc(-100% - 50px));transition:transform .45s cubic-bezier(.22,.8,.24,1),box-shadow .3s;pointer-events:none}
 .stk-nav .gnav{padding:16px 20px 14px;height:54px}
@@ -199,7 +178,16 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
 /* ---------- HOME ---------- */
 #home{background:var(--neutral-100)}
-.hero{position:relative;height:509px;overflow:hidden}
+.hero{position:sticky;top:-264px;height:509px;overflow:hidden;z-index:4}
+.hero .lip{position:absolute;left:0;right:0;bottom:0;height:12px;background:#fff;border-radius:12px 12px 0 0;z-index:6;pointer-events:none}
+.hero .bg,.hero .blob,.hero .pen,.hero .gnav,.drug>*,.actions,.hero-pill{will-change:translate,scale}
+.hero-pill{position:absolute;left:20px;top:0;height:36px;display:flex;white-space:nowrap;align-items:center;gap:8px;padding:0 12px;border-radius:8px;background:rgba(255,255,251,.85);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:inset 0 0 0 1px var(--neutral-300),0 5px 10px rgba(90,84,78,.1),0 18px 18px rgba(90,84,78,.09);font-size:13px;line-height:1.5;color:var(--ink-60);opacity:0;pointer-events:none;z-index:5;transform-origin:0 50%;transition:background .2s}
+.hero-pill.go{pointer-events:auto}
+.hero-pill:hover{background:#fffffb}
+.hero-pill i{width:6px;height:6px;border-radius:6px;background:var(--chip-orange-dot)}
+.drug>*{transform-origin:0 0}
+.hero .pen{transform-origin:50% 0}
+.actions{transform-origin:20px 0}
 .hero .bg{position:absolute;left:0;top:-24px;width:393px;height:696px;overflow:hidden}
 .hero .bg img{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;animation:drift 18s ease-in-out infinite alternate}
 .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,#fff 18%,rgba(255,255,255,0) 52%)}
@@ -756,20 +744,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         </div>
       </div>
 
-      <div class="hstk" id="hstk" aria-hidden="true">
-        <div class="bg"><img src="img/hero-bg.jpg" alt=""></div>
-        <div class="blob"></div>
-        <div class="pen"><img class="pen-img" src="img/pen.webp" alt=""></div>
-        <div class="hs-ui">
-          <div class="gnav">
-            <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu tabindex="-1"><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-            <div class="r"><button data-toast="No new notifications" aria-label="Notifications" tabindex="-1"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu" tabindex="-1"><svg class="i"><use href="#i-menu"/></svg></button></div>
-          </div>
-          <div class="hs-t"><b>Wegovy®</b><span class="link static">Treatment plan details <svg class="i"><use href="#i-chev-r2"/></svg></span></div>
-          <button class="hs-pill" data-hs-top tabindex="-1"><i></i>2 action items</button>
-        </div>
-        <div class="lip"></div>
-      </div>
       <div class="stk-nav" id="stk" aria-hidden="true">
         <div class="gnav">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu tabindex="-1"><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
@@ -811,6 +785,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               </div>
             </div>
           </div>
+          <button class="hero-pill" data-hero-top tabindex="-1"><i></i>2 action items</button>
+          <div class="lip"></div>
         </div>
         <div class="sheet">
           <div class="sec rv" style="--d:5">
@@ -1185,11 +1161,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 (()=>{
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const app=$('#app'), sb=$('#sb'), stk=$('#stk');
-const hstk=$('#hstk');
 function updStk(el,force){
-  const home=el.id==='home', y=el.scrollTop, hw=hstk.classList.contains('on');
-  const hon=!force && home && (hw ? y>250 : y>330);
-  hstk.classList.toggle('on',hon); hstk.setAttribute('aria-hidden',hon?'false':'true'); $$('button',hstk).forEach(b=>b.tabIndex=hon?0:-1);
+  const home=el.id==='home', y=el.scrollTop, hon=home;
   const has=!home && !!el.querySelector(':scope .gnav'), was=stk.classList.contains('on');
   const on=!force && has && (was ? y>70 : y>120);
   stk.classList.toggle('on',on); stk.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('stk',on);
@@ -1272,7 +1245,7 @@ function back(){
 
 /* ---------- global click wiring ---------- */
 document.addEventListener('click',e=>{
-  if(e.target.closest('[data-hs-top]')){ $('#home').scrollTo({top:0,behavior:'smooth'}); return }
+  if(e.target.closest('[data-hero-top]')){ $('#home').scrollTo({top:0,behavior:'smooth'}); return }
   const t=e.target.closest('[data-go],[data-back],[data-home],[data-toast],[data-symptom],[data-close],[data-menu]');
   if(e.target.closest('[data-nav]')){ $('#navOv').classList.add('on'); return }
   if(e.target.closest('[data-nav-close]')){ $('#navOv').classList.remove('on'); return }
@@ -1387,6 +1360,40 @@ const pTo=(i,sm)=>{ const k=pcs[i]; pcar.scrollTo({left:k.offsetLeft+k.offsetWid
 pcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(pcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ e.stopPropagation(); pTo(i,true); return }
   const b=e.target.closest('[data-phase]'); if(!b) return; e.stopPropagation(); if(i===1) back(); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
 function centerP(){ pTo(1); pActive() }
+
+/* ---------- home hero collapses into a compact header on scroll (parallax) ---------- */
+const hero=$('#home .hero'), H={};
+const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)), sstep=(a,b,v)=>{ const t=clamp((v-a)/(b-a)); return t*t*(3-2*t) };
+function heroMeasure(){
+  const g=$('.gnav',hero), d=$('.drug',hero), [h1,meta,link]=[...d.children];
+  H.o=g.offsetTop-51; H.R=hero.offsetHeight-(245+H.o); hero.style.top=-H.R+'px';
+  H.d=d.offsetTop; H.h1=H.d+h1.offsetTop; H.meta=H.d+meta.offsetTop; H.link=H.d+link.offsetTop; H.act=$('.actions',hero).offsetTop;
+  H.el={g,h1,meta,link,bg:$('.bg',hero),blob:$('.blob',hero),pen:$('.pen',hero),act:$('.actions',hero),pill:$('.hero-pill',hero),cards:$('.actions .car',hero),lbl:$('.actions .lbl',hero)};
+  heroTick();
+}
+function heroTick(){
+  if(!H.el) return;
+  const y=$('#home').scrollTop, yy=clamp(y,0,H.R), p=yy/H.R, o=H.o, E=H.el;
+  const at=(el,base,target,extra='')=>{ el.style.translate=`${extra||'0px'} ${(lerp(base,target,p)-base+yy).toFixed(2)}px` };
+  at(E.g,0,0);                                   // nav stays pinned
+  at(E.bg,-24,-114+o);                           // background drifts slowly (parallax)
+  at(E.blob,423,333+o);
+  at(E.pen,110,108+o,(-5.5*p).toFixed(2)+'px'); E.pen.style.scale=lerp(1,.738,p).toFixed(4);
+  at(E.h1,H.h1,118+o); E.h1.style.scale=lerp(1,16/28,p).toFixed(4);
+  at(E.meta,H.meta,124+o); E.meta.style.scale=lerp(1,.7,p).toFixed(4); E.meta.style.filter=`opacity(${(1-sstep(0,.45,p)).toFixed(3)})`;
+  at(E.link,H.link,143+o); E.link.style.scale=lerp(1,12/14,p).toFixed(4);
+  const a=sstep(0,.75,p);                        // action cards shrink up into the pill
+  E.act.style.translate=`0px ${(lerp(H.act,177+o-6,a)-H.act+yy).toFixed(2)}px`;
+  E.act.style.scale=lerp(1,.55,a).toFixed(4); E.act.style.filter=`opacity(${(1-sstep(.05,.6,p)).toFixed(3)}) blur(${(sstep(.2,.7,p)*2).toFixed(2)}px)`;
+  E.pill.style.translate=`0px ${(lerp(177+o+26,177+o,sstep(.45,1,p))+yy).toFixed(2)}px`; E.pill.style.scale=lerp(.92,1,sstep(.45,1,p)).toFixed(4);
+  E.pill.style.opacity=sstep(.5,.95,p).toFixed(3); E.pill.classList.toggle('go',p>.9); E.pill.tabIndex=p>.9?0:-1;
+  E.act.style.pointerEvents=p>.5?'none':'';
+}
+let hTick, hIdle, hDown=false; const homeEl=$('#home');
+homeEl.addEventListener('pointerdown',()=>hDown=true); addEventListener('pointerup',()=>hDown=false); homeEl.addEventListener('touchstart',()=>hDown=true,{passive:true}); addEventListener('touchend',()=>hDown=false);
+homeEl.addEventListener('scroll',()=>{ cancelAnimationFrame(hTick); hTick=requestAnimationFrame(heroTick);
+  clearTimeout(hIdle); hIdle=setTimeout(()=>{ const y=homeEl.scrollTop; if(hDown||!H.R||y<=2||y>=H.R-2) return; homeEl.scrollTo({top:y<H.R*.45?0:H.R,behavior:'smooth'}) },180) },{passive:true});
+addEventListener('resize',()=>requestAnimationFrame(heroMeasure));
 function centerJ(){ const k=jcs[1]; jcar.scrollLeft=k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2; jActive() }
 
 /* ---------- segmented tabs pill ---------- */
@@ -1462,7 +1469,7 @@ $$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.query
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); centerP(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
+const boot=()=>{ centerJ(); centerP(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
 let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
 (document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();
