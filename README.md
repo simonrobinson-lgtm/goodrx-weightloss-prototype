@@ -1,7 +1,12 @@
 # GoodRx Weight Loss — Prototype
 
-Clickable mobile prototype (MetaLab). Single self-contained `index.html` with fonts and images inlined.
+Clickable mobile prototype (MetaLab). Live at https://simonrobinson-lgtm.github.io/goodrx-weightloss-prototype/
 
-Deep links: append `#progress`, `#symptom`, `#care`, `#support` or `#session` to the URL.
+Deep links: append `#progress`, `#symptom`, `#care`, `#support` or `#session`.
 
-Hosted with GitHub Pages from the `main` branch root. Search engines are asked not to index it (`robots.txt` + `noindex`).
+## Editing
+- `src/src.html` — the prototype source (HTML, CSS, JS). Icons live in `src/sprite.min.svg` (injected at `{{SPRITE}}`), images in `src/img/`, fonts in `src/fonts/`.
+- Rebuild the published page: `python3 src/bundle.py index.html` — inlines fonts, images and icons into one self-contained `index.html`.
+- Commit and push to `main`; GitHub Pages redeploys in about a minute.
+
+Search engines are asked not to index the site (`robots.txt` + `noindex`).
