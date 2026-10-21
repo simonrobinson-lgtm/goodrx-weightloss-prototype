@@ -345,6 +345,66 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .fab .i{width:20px;height:20px;animation:beat 2.4s ease-in-out infinite}
 @keyframes beat{0%,60%,100%{transform:scale(1)}10%{transform:scale(1.14)}20%{transform:scale(1)}30%{transform:scale(1.1)}}
 
+
+/* ---------- YOUR JOURNEY ---------- */
+#journey{background:var(--neutral-0)}
+.jy{padding:27px 0 120px}
+.jy-hero{background:var(--neutral-100);border-radius:16px;padding:0 4px 4px}
+.jy-all{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:20px 0;font-weight:500;font-size:12px;letter-spacing:.01em;line-height:1;color:var(--green-800)}
+.jy-all .i{width:12px;height:12px}
+.jy-card{position:relative;border-radius:12px;overflow:hidden;padding:20px 14px}
+.jy-card .mixl{left:0;top:-19px;width:438px;height:281px}
+.jy-card .mixl img{inset:auto;left:0;top:-311px;width:438px;height:863px;object-fit:fill}
+.jy-card .mixl::after{background:linear-gradient(180.59deg,rgba(194,59,160,.7) 33.6%,rgba(88,20,71,.7) 71.2%)}
+.jy-in{position:relative;display:flex;flex-direction:column;gap:24px}
+.jy-in .chip{align-self:flex-start}
+.jy-in .chip img{width:12px;height:12px}
+.jy-in h1{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:var(--yellow-100)}
+.jy-in p{font-size:16px;line-height:1.4;color:rgba(255,255,251,.6);margin-top:8px}
+.jsec{border-bottom:1px solid var(--ink-10);padding:32px 12px 24px}
+.jy-hero+.jsec{padding-top:24px;padding-bottom:32px}
+.jy-hero+.jsec+.jsec{padding-bottom:14px}
+.jsec-h{display:flex;justify-content:space-between;align-items:center;padding:0 8px;font-size:16px;line-height:1.2;color:rgba(18,17,15,.7)}
+.jtog{width:32px;height:32px;border-radius:8px;box-shadow:inset 0 0 0 .5px var(--green-800);color:var(--green-800);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.jtog:hover{background:var(--green-700);color:var(--yellow-100)}
+.jtog .i{width:16px;height:16px;transition:transform .35s var(--ease)}
+.jsec:not(.open) .jtog .i{transform:rotate(180deg)}
+.jsec-b{display:grid;grid-template-rows:1fr;transition:grid-template-rows .45s var(--ease),opacity .3s}
+.jsec:not(.open) .jsec-b{grid-template-rows:0fr;opacity:0}
+.jsec-b>div{overflow:hidden;min-height:0}
+.trows{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.trow{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 16px;border-radius:12px;box-shadow:inset 0 0 0 1px var(--neutral-300)}
+.cap12{font-size:12px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--green-700);padding:8px 0}
+.cap10{font-size:10px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60)}
+.tv{width:120px;color:var(--green-700)}
+.tv>div{display:flex;align-items:baseline;gap:2px}
+.tv .num{font-size:20px;line-height:1}
+.tv .u{font-size:14px;line-height:1.5}
+.tv small{display:block;font-size:13px;line-height:1.5;color:var(--ink-50)}
+.jcards{gap:8px;margin:24px -12px 0;padding:0 12px;scroll-padding:0 12px}
+.secard,.lcard{width:363px;border-radius:12px;box-shadow:inset 0 0 0 1px var(--neutral-300);padding:16px;position:relative;overflow:hidden}
+.secard{display:flex;flex-direction:column;gap:32px}
+.se-art{position:absolute;left:213px;top:0;width:150px;height:161px;pointer-events:none}
+.se-art img{width:100%;height:100%;mix-blend-mode:multiply}
+.se-art i{position:absolute;left:90px;top:88px;width:15px;height:15px;border-radius:50%;background:var(--yellow-300);filter:blur(3px);opacity:.75}
+.se-top{position:relative;width:178px;display:flex;flex-direction:column;gap:8px}
+.se-top h3,.lcard h3{font-weight:400;font-size:20px;line-height:1.2;color:var(--green-700)}
+.se-top p,.lcard p{font-size:14px;line-height:1.5;color:var(--ink-60)}
+.se-tips{display:flex;flex-direction:column;gap:16px}
+.jsec ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.jsec li{position:relative;padding-left:16px;font-size:14px;line-height:1.5;color:var(--ink-90)}
+.jsec li::before{content:"";position:absolute;left:4px;top:8.5px;width:4px;height:4px;border-radius:4px;background:var(--ink-60)}
+.lcard{min-height:180px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.lc-top{display:flex;gap:32px;justify-content:space-between}
+.lc-top>div{display:flex;flex-direction:column;gap:8px}
+.lc-top p{width:249px}
+.lc-top svg{width:40px;height:40px;flex:none;color:var(--green-700)}
+.jsec-d{font-size:14px;line-height:1.5;color:var(--ink-60);padding:0 8px;width:309px;margin-top:8px}
+.jmore{display:inline-flex;align-items:center;gap:8px;margin:28px 8px 0;font-weight:500;font-size:14px;letter-spacing:.01em;line-height:1;color:var(--green-700)}
+.jmore .i{width:14px;height:14px;transition:transform .2s var(--ease)}
+.jmore:hover .i{transform:translate(2px,-2px)}
+.jdisc{padding:24px 20px 0;font-size:13px;line-height:1.5;color:var(--ink-60)}
+
 /* ---------- CARE CENTER ---------- */
 .care{background:var(--red-700)}
 .care .bgimg{position:absolute;left:-220px;top:-4px;width:843px;height:584px;border-radius:16px;overflow:hidden;pointer-events:none}
@@ -489,6 +549,70 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .ov.on .needsup svg.heart path{animation:drawH 2.2s .5s var(--ease) forwards}
 @keyframes drawH{to{stroke-dashoffset:0}}
 
+
+/* ---------- weight loss dropdown sheet ---------- */
+.ov .scrim{background:linear-gradient(180deg,rgba(255,255,255,.6) 7.6%,rgba(239,231,221,.6) 47.7%)}
+.wl-bs{top:auto;max-height:80%;overflow:visible}
+.wl-lbl{padding:0 20px 12px;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.wl-list{padding:0 12px 60px;display:flex;flex-direction:column}
+.wl-item{display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:16px;text-align:left;transition:background .2s}
+.wl-item:hover{background:var(--neutral-100)}
+.wl-item.on{background:var(--yellow-0);box-shadow:inset 0 0 0 1px var(--ink-10)}
+.wl-item.line{border-radius:0;border-top:1px solid var(--ink-10)}
+.wl-item b,.np-t b{display:block;font-weight:400;font-size:16px;line-height:1.2;color:var(--green-700)}
+.wl-item small,.np-t small{display:block;font-size:13px;line-height:1.5;color:var(--ink-60);margin-top:4px}
+.thumb{position:relative;width:44px;height:44px;flex:none}
+.thumb.t48{width:48px;height:48px}
+.thumb img{width:100%;height:100%;border-radius:8px;object-fit:cover}
+.odot{position:absolute;top:1px;right:-2px;width:8px;height:8px;border-radius:8px;background:var(--urgent);box-shadow:0 0 0 1px var(--neutral-0)}
+/* ---------- side drawer ---------- */
+.nav-ov{position:absolute;inset:0;z-index:42;pointer-events:none}
+.nav-scrim{position:absolute;inset:0;background:rgba(215,209,198,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .4s}
+.nav-panel{position:absolute;top:0;right:0;bottom:0;width:361px;background:var(--neutral-0);transform:translateX(100%);transition:transform .5s var(--ease);overflow-y:auto;scrollbar-width:none;padding:63px 0 40px}
+.nav-panel::-webkit-scrollbar{display:none}
+.nav-ov.on{pointer-events:auto}
+.nav-ov.on .nav-scrim{opacity:1}
+.nav-ov.on .nav-panel{transform:none}
+.nav-ov.on .nav-panel>*{animation:rv .55s var(--ease) both}
+.nav-ov.on .nav-panel>*:nth-child(2){animation-delay:.08s}.nav-ov.on .nav-panel>*:nth-child(3){animation-delay:.11s}.nav-ov.on .nav-panel>*:nth-child(4){animation-delay:.14s}.nav-ov.on .nav-panel>*:nth-child(n+5){animation-delay:.18s}
+.np-top{display:flex;justify-content:space-between;align-items:center;padding:0 20px 0 18px;height:32px;margin-bottom:24px}
+.np-top button{color:var(--ink);padding:4px;margin-right:-4px;border-radius:6px}
+.np-search{padding:0 16px 12px}
+.np-search button{width:100%;height:40px;display:flex;align-items:center;gap:8px;padding:0 8px;border-radius:12px;background:var(--neutral-0);box-shadow:inset 0 0 0 .5px var(--neutral-300);font-size:14px;line-height:1.5;color:var(--ink-60);transition:box-shadow .2s}
+.np-search button:hover{box-shadow:inset 0 0 0 1px var(--neutral-400)}
+.np-search .i{width:16px;height:16px;color:var(--ink)}
+.np-row{display:flex;align-items:center;gap:8px;width:100%;padding:12px 20px;font-size:14px;line-height:1.5;color:var(--green-700);transition:background .2s}
+.np-row:hover,.np-link:hover{background:var(--neutral-100)}
+.np-row img{width:24px;height:24px;border-radius:4px}
+.np-lbl{padding:12px 20px;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.np-sub{background:var(--yellow-0);border-top:1px solid var(--ink-10)}
+.np-subh,.np-sub2{display:flex;align-items:center;gap:12px;padding:12px 20px 8px}
+.np-subh .thumb{width:48px;height:48px}
+.np-t{flex:1;min-width:0}
+.np-tog{width:auto;height:24px;padding:0 8px;border-radius:8px;box-shadow:inset 0 0 0 .5px var(--green-800);color:var(--green-800);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.np-tog:hover{background:var(--green-700);color:var(--yellow-100)}
+.np-tog svg{width:8px;height:8px;transform:rotate(180deg);transition:transform .35s var(--ease)}
+.np-tog.down svg,.np-sub:not(.open) .np-tog svg{transform:none}
+.np-links{display:grid;grid-template-rows:1fr;transition:grid-template-rows .4s var(--ease)}
+.np-sub:not(.open) .np-links{grid-template-rows:0fr}
+.np-links>div{overflow:hidden;padding-bottom:8px}
+.np-sub:not(.open) .np-links>div{padding-bottom:0}
+.np-link{display:block;width:100%;text-align:left;padding:8px 20px;font-size:14px;line-height:1.5;color:var(--green-700);position:relative}
+.np-link.cur{color:var(--neutral-700)}
+.np-link.cur::before{content:"";position:absolute;left:0;top:50%;width:12px;height:1px;background:var(--neutral-700)}
+.np-sub2{padding:12px 20px;border-top:1px solid var(--ink-10)}
+.np-sub2.last{border-bottom:1px solid var(--ink-10)}
+.np-out{padding:24px 20px 0}
+.np-site{background:var(--neutral-100);padding:20px;display:flex;flex-direction:column;gap:18px}
+.np-site hr{border:0;border-top:.5px solid var(--ink-20);margin:0}
+.np-g{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.np-g.g28{gap:28px}
+.np-g button{font-size:14px;line-height:1.5;color:var(--green-700);text-align:left}
+.np-g button:hover{text-decoration:underline;text-underline-offset:3px}
+.np-comp{display:flex;align-items:center;gap:8px}
+.np-comp span{width:24px;height:24px;border-radius:6px;background:var(--neutral-700);color:var(--yellow-100);display:flex;align-items:center;justify-content:center}
+.np-comp svg{width:20px;height:20px}
+
 /* ---------- toast + splash ---------- */
 .toast{position:absolute;left:50%;bottom:28px;z-index:70;transform:translate(-50%,20px);opacity:0;background:var(--neutral-800,#2b2625);color:var(--yellow-0);font-size:13px;line-height:1.4;padding:10px 16px;border-radius:12px;white-space:nowrap;transition:opacity .3s,transform .4s var(--ease);pointer-events:none;display:flex;align-items:center;gap:8px;background:#2b2625}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -520,6 +644,14 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 <symbol id="i-clock" viewBox="0 0 20 20"><path d="M10 6.25V10L12.5 12.5M1.67 4.38L4.17 1.88M18.33 4.38L15.83 1.88M17.92 10C17.92 14.37 14.37 17.92 10 17.92C5.63 17.92 2.08 14.37 2.08 10C2.08 5.63 5.63 2.08 10 2.08C14.37 2.08 17.92 5.63 17.92 10Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-inject" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M14.79 2.29L17.71 5.21"/><path d="M16.25 3.75L14.17 5.83"/><path d="M10.63 3.13L16.88 9.38"/><path d="M11.95 4.58L5.55 10.98C4.9 11.64 4.9 12.69 5.55 13.34L6.66 14.45C7.31 15.1 8.36 15.1 9.01 14.45L15.42 8.04" stroke-linejoin="round"/><path d="M2.5 17.5L6.06 13.94"/></g></symbol>
 <symbol id="i-bubbles" viewBox="0 0 8 8"><path d="M5.83 4.83H6.33C6.79 4.83 7.17 4.46 7.17 4V2C7.17 1.54 6.79 1.17 6.33 1.17H3.08C2.62 1.17 2.25 1.54 2.25 2V2.5M5 2.5H1.67C1.21 2.5 0.83 2.87 0.83 3.33V5.33C0.83 5.79 1.21 6.17 1.67 6.17H2V7L3.5 6.17H5C5.46 6.17 5.83 5.79 5.83 5.33V3.33C5.83 2.87 5.46 2.5 5 2.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-chev-up" viewBox="0 0 16 16"><path d="M2.67 10L6.59 6.08C7.37 5.3 8.63 5.3 9.42 6.08L13.33 10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-slides" viewBox="0 0 12 12"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 1.75H4.25C3.42 1.75 2.75 2.42 2.75 3.25V8.75C2.75 9.58 3.42 10.25 4.25 10.25H7.75C8.58 10.25 9.25 9.58 9.25 8.75V3.25C9.25 2.42 8.58 1.75 7.75 1.75Z"/><path d="M2.75 9.25C1.92 9.25 1.25 8.58 1.25 7.75V4.25C1.25 3.42 1.92 2.75 2.75 2.75"/><path d="M9.25 9.25C10.08 9.25 10.75 8.58 10.75 7.75V4.25C10.75 3.42 10.08 2.75 9.25 2.75"/></g></symbol>
+<symbol id="i-zap" viewBox="0 0 40 40"><path d="M32.3 15H22.67C22.11 15 21.67 14.55 21.67 14V4.55C21.67 3.56 20.38 3.17 19.83 4L6.87 23.45C6.43 24.11 6.9 25 7.7 25H17.33C17.88 25 18.33 25.45 18.33 26V35.45C18.33 36.44 19.62 36.83 20.16 36L33.13 16.55C33.57 15.89 33.1 15 32.3 15Z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
+<symbol id="i-close" viewBox="0 0 20 20"><path d="M3.75 3.75L16.25 16.25M16.25 3.75L3.75 16.25" fill="none" stroke="currentColor" stroke-linecap="round"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 9.62C3.5 9.06 3.5 8.78 3.57 8.52C3.63 8.29 3.74 8.07 3.88 7.88C4.04 7.66 4.26 7.48 4.69 7.13L9.99 2.87C10.71 2.29 11.07 2 11.46 1.89C11.81 1.79 12.19 1.79 12.54 1.89C12.93 2 13.29 2.29 14.01 2.87L19.31 7.13C19.74 7.48 19.96 7.66 20.12 7.88C20.26 8.07 20.37 8.29 20.43 8.52C20.5 8.78 20.5 9.06 20.5 9.62V17.3C20.5 18.42 20.5 18.98 20.28 19.41C20.09 19.78 19.78 20.09 19.41 20.28C18.98 20.5 18.42 20.5 17.3 20.5H6.7C5.58 20.5 5.02 20.5 4.59 20.28C4.22 20.09 3.91 19.78 3.72 19.41C3.5 18.98 3.5 18.42 3.5 17.3V9.62Z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
+<symbol id="i-search16" viewBox="0 0 16 16"><path d="M13.67 13.67L10.87 10.87M12.33 7.33C12.33 10.09 10.09 12.33 7.33 12.33C4.57 12.33 2.33 10.09 2.33 7.33C2.33 4.57 4.57 2.33 7.33 2.33C10.09 2.33 12.33 4.57 12.33 7.33Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-chev8" viewBox="0 0 8 8"><path d="M6.67 3L4.71 4.96C4.32 5.35 3.68 5.35 3.29 4.96L1.33 3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 20 20"><path d="M10 3.5L11.35 7.65L15.5 9L11.35 10.35L10 14.5L8.65 10.35L4.5 9L8.65 7.65Z M15 13L15.6 14.4L17 15L15.6 15.6L15 17L14.4 15.6L13 15L14.4 14.4Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width=".9"/></symbol>
 <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 2.5v15M2.5 10h15" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/></symbol>
 <symbol id="i-check" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-chev-r2" viewBox="0 0 20 20"><path d="M8.5 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -533,6 +665,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
       <button data-go="home">Home</button>
       <button data-go="progress">Your progress</button>
       <button data-go="symptom">Symptom detail</button>
+      <button data-go="journey">Your journey</button>
       <button data-go="care">Care Center · Messages</button>
       <button data-go="support">Care Center · Support</button>
       <button data-go="session">Start a session</button>
@@ -560,7 +693,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="rv" style="--d:2;position:absolute;inset:0;pointer-events:none"><div class="pen"><img class="pen-img" src="img/pen.webp" alt="Wegovy pen"></div></div>
           <div class="gnav">
             <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-            <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-toast="Menu isn’t part of this prototype" aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+            <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
           </div>
           <div class="drug">
             <h1 class="rv" style="--d:0">Wegovy®</h1>
@@ -648,7 +781,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-toast="Menu isn’t part of this prototype" aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div class="wrap">
           <button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button>
@@ -707,9 +840,68 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="pj">
               <div class="art"><div class="mixl"><img src="img/journey-bg.jpg" alt=""></div></div>
               <div><span class="chip av r8"><img src="img/av-phase.webp" alt="">Phase 2</span></div>
-              <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-back>Learn more</button></div>
+              <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-go="journey">Learn more</button></div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- ================= YOUR JOURNEY ================= -->
+      <section class="scr" id="journey" data-sb="dark">
+        <div class="top-pad"></div>
+        <div class="gnav">
+          <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
+          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+        </div>
+        <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
+        <div class="jy">
+          <div class="jy-hero rv" style="--d:1">
+            <button class="jy-all" data-toast="All phases view coming soon"><svg class="i"><use href="#i-slides"/></svg>All phases</button>
+            <div class="jy-card">
+              <div class="mixl"><img src="img/journey-bg.jpg" alt=""></div>
+              <div class="jy-in">
+                <span class="chip av r8"><img src="img/av-phase.webp" alt="">You are here</span>
+                <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="jsec rv open" style="--d:2">
+            <div class="jsec-h"><span>Treatment</span><button class="jtog" aria-label="Collapse Treatment"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div><div class="trows">
+              <div class="trow"><span class="cap12">Current dose</span><div class="tv"><div><span class="num">0.5</span><span class="u">mg</span></div><small>1x a week</small></div></div>
+              <div class="trow"><span class="cap12">Current cost</span><div class="tv"><div><span class="num">$199</span><span class="u">/mo</span></div><small>all in</small></div></div>
+              <div class="trow"><span class="cap12">Weight loss</span><div class="tv"><div><span class="num">-1%</span><span class="u">body weight</span></div><small>Avg by week 8.</small></div></div>
+            </div></div></div>
+          </div>
+          <div class="jsec rv open" style="--d:3">
+            <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Collapse Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <div class="car jcards" data-car>
+                <div class="secard">
+                  <div class="se-art"><img src="img/stomach.png" alt=""><i></i></div>
+                  <div class="se-top"><h3>Mild nausea &amp; constipation</h3><p>Your digestion slows down, so you might experience some discomfort.</p></div>
+                  <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Eat smaller meals, throughout the day</li><li>Have your last meal 3 hours before bedtime</li><li>Stay hydrated</li></ul></div>
+                </div>
+                <div class="secard">
+                  <div class="se-top"><h3>Light headaches</h3><p>Eating less and shifts in hydration can bring them on early in treatment.</p></div>
+                  <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Sip water steadily through the day</li><li>Try not to skip meals</li><li>Rest somewhere quiet and dim</li></ul></div>
+                </div>
+              </div>
+              <button class="jmore" data-symptom="nausea">More on side effects <svg class="i"><use href="#i-link"/></svg></button>
+            </div></div>
+          </div>
+          <div class="jsec rv open" style="--d:4">
+            <div class="jsec-h"><span>Everyday Life</span><button class="jtog" aria-label="Collapse Everyday Life"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <p class="jsec-d">Treatment affects more than digestion. Your energy, habits and social plans may shift too.</p>
+              <div class="car jcards" data-car>
+                <div class="lcard"><div class="lc-top"><div><h3>Energy dips</h3><p>Eating less can leave you running low, especially in the afternoon.</p></div><svg><use href="#i-zap"/></svg></div><ul><li>Add protein to every meal</li><li>Sip water throughout the day</li></ul></div>
+                <div class="lcard"><div class="lc-top"><div><h3>Eating out</h3><p>Smaller portions can make restaurant meals feel like a lot.</p></div><svg><use href="#i-cutlery"/></svg></div><ul><li>Order a starter as your main</li><li>Pack up half before you begin</li></ul></div>
+              </div>
+              <button class="jmore" data-toast="Article view coming soon">More on what to expect <svg class="i"><use href="#i-link"/></svg></button>
+            </div></div>
+          </div>
+          <p class="jdisc rv">Timing and results vary from person to person. Think of this as a guide, not a forecast.</p>
         </div>
       </section>
 
@@ -719,7 +911,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weightloss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-back aria-label="Close"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="care-hd"><h1 class="rv" style="--d:1">Care Center</h1><p class="rv" style="--d:2">Get answers to your questions or symptom support, 24/7</p></div>
@@ -748,7 +940,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weightloss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-toast="Menu isn’t part of this prototype" aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="drcard rv" style="--d:1">
@@ -822,7 +1014,47 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         </div>
       </div>
 
-      <div class="menu-pop" id="menuPop"><small>Your programs</small><button class="on">Weight loss</button><button data-toast="Only Weight loss is set up in this prototype">Add a program</button></div>
+      <div class="ov wl-ov" id="wlOv">
+        <div class="scrim" data-wl-close></div>
+        <div class="bs wl-bs" id="wlBs">
+          <div class="grab" data-grab="wl"><i></i></div>
+          <div class="wl-lbl">Your subscriptions</div>
+          <div class="wl-list">
+            <button class="wl-item on" data-wl-close><span class="thumb"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
+            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img src="img/thumb-hair.png" alt=""></span><span><b>Hair Loss</b><small>Finasteride · 0.5mg</small></span></button>
+            <button class="wl-item line" data-toast="Only Weight loss is set up in this prototype"><span class="thumb"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
+          </div>
+        </div>
+      </div>
+      <div class="nav-ov" id="navOv">
+        <div class="nav-scrim" data-nav-close></div>
+        <aside class="nav-panel" id="navPanel" aria-label="Menu">
+          <div class="np-top"><svg class="logo" style="width:24px;height:24px"><use href="#i-logo"/></svg><button data-nav-close aria-label="Close menu"><svg class="i"><use href="#i-close"/></svg></button></div>
+          <div class="np-search"><button data-toast="Search isn’t part of this prototype"><svg class="i"><use href="#i-search16"/></svg>Search medications or conditions</button></div>
+          <button class="np-row" data-nav-go="home"><svg class="i" style="width:24px;height:24px"><use href="#i-home"/></svg>Dashboard</button>
+          <button class="np-row" data-toast="Account isn’t part of this prototype"><img src="img/av-account.png" alt="">Account</button>
+          <div class="np-lbl">Your subscriptions</div>
+          <div class="np-sub open" id="npWl">
+            <div class="np-subh"><span class="thumb"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog" aria-label="Collapse Weight loss"><svg><use href="#i-chev8"/></svg></button></div>
+            <div class="np-links"><div>
+              <button class="np-link cur" data-nav-go="home">Overview</button>
+              <button class="np-link" data-nav-go="care">Care Center</button>
+              <button class="np-link" data-nav-go="journey">Treatment Plan Details</button>
+            </div></div>
+          </div>
+          <div class="np-sub2"><span class="thumb t44"><img src="img/thumb-hair.png" alt=""></span><span class="np-t"><b>Hair loss</b><small>Finasteride · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Hair loss"><svg><use href="#i-chev8"/></svg></button></div>
+          <div class="np-sub2 last"><span class="thumb t44"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Another condition"><svg><use href="#i-chev8"/></svg></button></div>
+          <div class="np-out"><button class="btn s32 sec-dark" style="width:100%" data-toast="Logging out isn’t part of this prototype">Log out</button></div>
+          <div class="np-lbl" style="margin-top:32px">GoodRx.com</div>
+          <div class="np-site">
+            <div class="np-g"><button data-toast="Opens goodrx.com">Home</button><button data-toast="Opens goodrx.com">Prescription savings</button><button data-toast="Opens goodrx.com">Online care</button><button data-toast="Opens goodrx.com">Health info</button><button data-toast="Companion isn’t part of this prototype" class="np-comp"><span><svg><use href="#i-sparkle"/></svg></span>Companion</button></div>
+            <hr>
+            <div class="np-g g28"><button data-toast="Opens goodrx.com">How GoodRx Works</button><button data-toast="Opens goodrx.com">Health Conditions</button><button data-toast="Opens goodrx.com">Get the GoodRx App</button></div>
+            <hr>
+            <div class="np-g g28"><button data-toast="Opens goodrx.com">Help and FAQs</button><button data-toast="Opens goodrx.com">Try GoodRx for healthcare professionals</button></div>
+          </div>
+        </aside>
+      </div>
       <div class="toast" id="toast"><i></i><span></span></div>
       <div class="splash" id="splash"><svg><use href="#i-logo"/></svg></div>
     </div>
@@ -833,7 +1065,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 (()=>{
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const app=$('#app'), sb=$('#sb');
-const screens=['home','progress','care','support','session'];
+const screens=['home','progress','journey','care','support','session'];
 let stack=['home'];
 const cur=()=>stack[stack.length-1];
 const MODAL=new Set(['session']);
@@ -855,7 +1087,7 @@ function reveal(id){
   setTimeout(()=>{counters(el); if(id==='progress') chartIntro(); if(id==='home') sparkDraw(el);},260);
   $$('#jump button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
   if(TABS.has(id)) setSeg(el);
-  $('.fab')&&$('.fab').classList.toggle('hide',id!=='progress');
+  $('.fab')&&$('.fab').classList.toggle('hide',!['progress','journey'].includes(id));
 }
 function clearAnim(el){el.classList.remove('enter-push','leave-push','enter-pop','leave-pop','enter-modal','leave-modal','under-modal','enter-fade','leave-fade')}
 let shownId='home';
@@ -893,11 +1125,15 @@ function back(){
 /* ---------- global click wiring ---------- */
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-go],[data-back],[data-home],[data-toast],[data-symptom],[data-close],[data-menu]');
-  if(!t) { if(!e.target.closest('#menuPop')) hideMenu(); return }
+  if(e.target.closest('[data-nav]')){ $('#navOv').classList.add('on'); return }
+  if(e.target.closest('[data-nav-close]')){ $('#navOv').classList.remove('on'); return }
+  if(e.target.closest('[data-wl-close]')){ $('#wlOv').classList.remove('on'); return }
+  const ng=e.target.closest('[data-nav-go]'); if(ng){ $('#navOv').classList.remove('on'); const id=ng.dataset.navGo; setTimeout(()=>{ if(id==='home'){ if(cur()!=='home'){ stack=['home',cur()]; back() } } else go(id) },180); return }
+  if(!t) return;
   if(t.closest('.car.was-dragged')) return;
   if(t.hasAttribute('data-menu')){ e.stopPropagation(); toggleMenu(t); return }
-  hideMenu();
   if(t.dataset.toast){ toast(t.dataset.toast); return }
+  hideMenu();
   if(t.hasAttribute('data-close')){ closeSheet(); return }
   if(t.dataset.symptom){ openSheet(t.dataset.symptom); return }
   if(t.hasAttribute('data-back')){ back(); return }
@@ -910,7 +1146,7 @@ document.addEventListener('click',e=>{
   }
 });
 function jump(id){
-  const map={home:['home'],progress:['home','progress'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session']};
+  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session']};
   const target=map[id]; const last=target[target.length-1];
   closeSheet(true);
   if(shownId!==last){ const from=$('#'+shownId), to=$('#'+last); [from,to].forEach(clearAnim); from.classList.remove('active'); to.classList.add('active','enter-fade'); setTimeout(()=>clearAnim(to),400); to.scrollTop=0; shownId=last; reveal(last) }
@@ -921,9 +1157,8 @@ $('#restart').onclick=()=>{ resetSession(); jump('home'); };
 
 /* ---------- toast & menu ---------- */
 let tt; function toast(msg){ const el=$('#toast'); $('span',el).textContent=msg; el.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>el.classList.remove('on'),2200) }
-function toggleMenu(btn){ const m=$('#menuPop'); const r=btn.getBoundingClientRect(), a=app.getBoundingClientRect(); const s=a.width/393;
-  m.style.left=((r.left-a.left)/s-34)+'px'; m.style.top=((r.bottom-a.top)/s+10)+'px'; m.classList.toggle('on') }
-function hideMenu(){ $('#menuPop').classList.remove('on') }
+function toggleMenu(){ $('#wlBs').style.transform=''; $('#wlOv').classList.add('on') }
+function hideMenu(){ const o=$('#wlOv'); if(o) o.classList.remove('on'); const n=$('#navOv'); if(n) n.classList.remove('on') }
 
 /* ---------- counters ---------- */
 function counters(root){
@@ -992,13 +1227,26 @@ function snapNearest(c){
 const jcar=$('[data-jcar]'), jcs=$$('.jc',jcar), dots=$$('.jdots i');
 function jActive(){ const mid=jcar.scrollLeft+jcar.clientWidth/2; let best=0,bd=1e9; jcs.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); jcs.forEach((k,i)=>k.classList.toggle('on',i===best)); dots.forEach((d,i)=>d.classList.toggle('on',i===best)); return best }
 let jt; jcar.addEventListener('scroll',()=>{ cancelAnimationFrame(jt); jt=requestAnimationFrame(jActive) },{passive:true});
-jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else toast(['Phase 1 recap coming soon','What to expect in Phase 2 coming soon','Maintenance preview coming soon'][i]) }));
+jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else if(i===1) go('journey'); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
 function centerJ(){ const k=jcs[1]; jcar.scrollLeft=k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2; jActive() }
 
 /* ---------- segmented tabs pill ---------- */
 function setSeg(scr){ $$('[data-seg]',scr).forEach(seg=>{ const on=$('button.on',seg), pill=$('.pill',seg); pill.style.transition='none'; pill.style.left=on.offsetLeft+'px'; pill.style.width=on.offsetWidth+'px'; }) }
 // animate pill toward the tapped tab before the screen fades
 $$('[data-seg] button').forEach(b=>b.addEventListener('pointerdown',()=>{ const seg=b.parentElement, pill=$('.pill',seg); pill.style.transition=''; pill.style.left=b.offsetLeft+'px'; pill.style.width=b.offsetWidth+'px'; $$('button',seg).forEach(x=>x.classList.toggle('on',x===b)) }));
+
+/* ---------- side drawer subscription toggle ---------- */
+$('#npWl .np-tog').addEventListener('click',e=>{ e.stopPropagation(); const s=$('#npWl'); s.classList.toggle('open'); e.currentTarget.setAttribute('aria-label',(s.classList.contains('open')?'Collapse':'Expand')+' Weight loss') });
+addEventListener('keydown',e=>{ if(e.key==='Escape'){ hideMenu(); closeSheet() } });
+/* drag-to-dismiss for the subscriptions sheet */
+(function(){ const g=$('[data-grab=wl]'), bs=$('#wlBs'); let y0=null,dy=0;
+  g.addEventListener('pointerdown',e=>{ y0=e.clientY; dy=0; bs.classList.add('drag'); g.setPointerCapture(e.pointerId) });
+  g.addEventListener('pointermove',e=>{ if(y0===null) return; const s=app.getBoundingClientRect().width/393; dy=Math.max(0,(e.clientY-y0)/s); bs.style.transform=`translateY(${dy}px)` });
+  const end=()=>{ if(y0===null) return; y0=null; bs.classList.remove('drag'); bs.style.transform=''; if(dy>80) $('#wlOv').classList.remove('on') };
+  g.addEventListener('pointerup',end); g.addEventListener('pointercancel',end); })();
+
+/* ---------- journey section toggles ---------- */
+$$('.jtog').forEach(b=>b.addEventListener('click',()=>{ const sec=b.closest('.jsec'); sec.classList.toggle('open'); b.setAttribute('aria-label',(sec.classList.contains('open')?'Collapse ':'Expand ')+sec.querySelector('.jsec-h span').textContent) }));
 
 /* ---------- accordion ---------- */
 $('#acc>button').onclick=()=>$('#acc').classList.toggle('open');

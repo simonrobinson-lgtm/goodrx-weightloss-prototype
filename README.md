@@ -2,7 +2,7 @@
 
 Clickable mobile prototype (MetaLab). Live at https://simonrobinson-lgtm.github.io/goodrx-weightloss-prototype/
 
-Deep links: append `#progress`, `#symptom`, `#care`, `#support` or `#session`.
+Deep links: append `#progress`, `#symptom`, `#journey`, `#care`, `#support` or `#session`.
 
 ## Editing
 - `src/src.html` — the prototype source (HTML, CSS, JS). Icons live in `src/sprite.min.svg` (injected at `{{SPRITE}}`), images in `src/img/`, fonts in `src/fonts/`.

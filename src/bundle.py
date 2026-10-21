@@ -10,7 +10,7 @@ s = re.sub(r'url\((fonts/[^)]+)\)', lambda m: 'url(%s)' % uri(m.group(1)), s)
 c = {}
 s = re.sub(r'src="(img/[^"]+)"', lambda m: 'src="%s"' % c.setdefault(m.group(1), uri(m.group(1))), s)
 s = s.replace("const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },650) };",
-  "const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','care','support','session'].includes(h)) setTimeout(()=>jump(h),300) },650) };")
+  "const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','journey','care','support','session'].includes(h)) setTimeout(()=>jump(h),300) },650) };")
 s = s.replace('<meta name="viewport"', '<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"', 1)
 out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(root, 'dist.html')
 open(out, 'w').write(s)
