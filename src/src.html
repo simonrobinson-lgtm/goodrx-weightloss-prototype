@@ -130,6 +130,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
 .h-sec{font-size:24px;line-height:1.2;color:var(--ink-90);font-weight:400}
 .h-sm{font-size:16px;line-height:1.2;color:var(--ink-90)}
+#home .h-sec{font-size:20px}
 .sub{font-size:14px;line-height:1.5;color:var(--ink-60)}
 .cap{font-size:10px;line-height:1;letter-spacing:.1em;text-transform:uppercase}
 .num{font-family:"Moon",sans-serif;font-weight:400}
@@ -181,9 +182,9 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .hero-in{position:absolute;inset:0;
   -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 36px) no-repeat,radial-gradient(circle at 12px 0,transparent 11.5px,#000 12px) left 0 bottom 24px/12px 12px no-repeat,radial-gradient(circle at 0 0,transparent 11.5px,#000 12px) right 0 bottom 24px/12px 12px no-repeat;
   mask:linear-gradient(#000,#000) top/100% calc(100% - 36px) no-repeat,radial-gradient(circle at 12px 0,transparent 11.5px,#000 12px) left 0 bottom 24px/12px 12px no-repeat,radial-gradient(circle at 0 0,transparent 11.5px,#000 12px) right 0 bottom 24px/12px 12px no-repeat}
-.hero .feather{position:absolute;left:0;right:0;bottom:0;height:36px;z-index:6;pointer-events:none;opacity:0;background:rgba(255,255,255,.45);backdrop-filter:blur(8px) saturate(1.4);-webkit-backdrop-filter:blur(8px) saturate(1.4);-webkit-mask:linear-gradient(transparent 0,transparent 11px,#000 12px,rgba(0,0,0,.6) 20px,transparent 36px);mask:linear-gradient(transparent 0,transparent 11px,#000 12px,rgba(0,0,0,.6) 20px,transparent 36px)}
+.hero .feather{position:absolute;left:0;right:0;bottom:0;height:24px;z-index:6;pointer-events:none;opacity:0;background:linear-gradient(var(--lipc,#fff),rgba(var(--lipr,255,255,255),.55) 45%,rgba(var(--lipr,255,255,255),0))}
 /* frosted top edge of the sheet: content scrolling underneath is blurred, iOS-style */
-.hero .lip{position:absolute;left:0;right:0;bottom:24px;height:12px;border-radius:12px 12px 0 0;z-index:6;pointer-events:none;background:rgba(255,255,255,.55);backdrop-filter:blur(8px) saturate(1.4);-webkit-backdrop-filter:blur(8px) saturate(1.4);box-shadow:inset 0 .5px 0 rgba(255,255,255,.9)}
+.hero .lip{position:absolute;left:0;right:0;bottom:24px;height:12px;border-radius:12px 12px 0 0;z-index:6;pointer-events:none;background:var(--lipc,#fff)}
 .hero .bg,.hero .blob,.hero .pen,.hero .gnav,.drug>*,.actions,.hero-pill{will-change:translate,scale}
 .hero-pill{position:absolute;left:20px;top:0;height:36px;display:flex;white-space:nowrap;align-items:center;gap:8px;padding:0 12px;border-radius:8px;background:rgba(255,255,251,.85);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:inset 0 0 0 1px var(--neutral-300),0 5px 10px rgba(90,84,78,.1),0 18px 18px rgba(90,84,78,.09);font-size:13px;line-height:1.5;color:var(--ink-60);opacity:0;pointer-events:none;z-index:5;transform-origin:0 50%;transition:background .2s}
 .hero-pill.go{pointer-events:auto}
@@ -1374,7 +1375,7 @@ const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)), sst
 function heroMeasure(){
   const g=$('.gnav',hero), d=$('.drug',hero), [h1,meta,link]=[...d.children];
   H.o=g.offsetTop-51; H.R=hero.offsetHeight-(269+H.o); hero.style.top=-H.R+'px';
-  H.d=d.offsetTop; H.h1=H.d+h1.offsetTop; H.meta=H.d+meta.offsetTop; H.link=H.d+link.offsetTop; H.act=$('.actions',hero).offsetTop; H.fe=$('.feather',hero);
+  H.d=d.offsetTop; H.h1=H.d+h1.offsetTop; H.meta=H.d+meta.offsetTop; H.link=H.d+link.offsetTop; H.act=$('.actions',hero).offsetTop; H.fe=$('.feather',hero); H.sheet=$('#home .sheet');
   H.el={g,h1,meta,link,bg:$('.bg',hero),blob:$('.blob',hero),pen:$('.pen',hero),act:$('.actions',hero),pill:$('.hero-pill',hero),cards:$('.actions .car',hero),lbl:$('.actions .lbl',hero)};
   heroTick();
 }
@@ -1397,6 +1398,9 @@ function heroTick(){
   E.pill.style.translate=`0px ${(lerp(177+o+10,177+o,q)+yy).toFixed(2)}px`; E.pill.style.scale=lerp(.97,1,q).toFixed(4);
   E.pill.style.opacity=q.toFixed(3); E.pill.classList.toggle('go',p>.9); E.pill.tabIndex=p>.9?0:-1;
   H.fe.style.opacity=sstep(.6,1,p).toFixed(3);
+  // match the fade colour to the sheet background passing underneath (white -> neutral-100)
+  const sh=H.sheet, f=clamp(((y-H.R+24)/sh.offsetHeight-.28)/.72), c=[255+(245-255)*f,255+(239-255)*f,255+(229-255)*f].map(Math.round);
+  hero.style.setProperty('--lipc',`rgb(${c})`); hero.style.setProperty('--lipr',c.join(','));
   E.act.style.pointerEvents=p>.5?'none':'';
 }
 let hTick, hIdle, hDown=false; const homeEl=$('#home');
