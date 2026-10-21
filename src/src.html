@@ -4,10 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GoodRx Weight Loss Prototype</title>
+<link rel="preload" href="fonts/GoodRxBolton-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/GoodRxBolton-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/GoodRxMoon-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/hero-bg.jpg" as="image">
 <style>
-@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Regular.woff2) format("woff2");font-weight:400;font-display:block}
-@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Medium.woff2) format("woff2");font-weight:500;font-display:block}
-@font-face{font-family:"Moon";src:url(fonts/GoodRxMoon-Regular.woff2) format("woff2");font-weight:400;font-display:block}
+@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Moon";src:url(fonts/GoodRxMoon-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 :root{
   /* UI kit primitives */
   --neutral-0:#fffffb;--neutral-100:#f5efe5;--neutral-200:#efe7dd;--neutral-300:#d7d1c6;--neutral-400:#bfb6ae;--neutral-600:#897470;--neutral-700:#514543;
@@ -55,6 +59,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
   #app .drug{top:118px}
   #app .shd{height:auto;padding-top:max(env(safe-area-inset-top),16px);padding-bottom:14px}
   #app .bs{top:max(calc(env(safe-area-inset-top) + 100px),120px)}
+  #app .wl-bs{top:auto}
 }
 
 /* ---------- Status bar ---------- */
@@ -276,6 +281,25 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jdots{display:flex;justify-content:center;gap:6px;margin-top:4px}
 .jdots i{width:6px;height:6px;border-radius:6px;background:var(--neutral-300);transition:width .35s var(--ease),background .35s}
 .jdots i.on{width:18px;background:var(--green-700)}
+
+
+/* ---------- ALL PHASES ---------- */
+#phases{background:linear-gradient(180deg,var(--neutral-0) 46%,var(--neutral-100))}
+.ph-head{display:flex;align-items:center;justify-content:space-between;height:40px;margin:46px 20px 0}
+.ph-head .cap12{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-90);line-height:1}
+.ph-x{width:40px;height:40px;margin-right:-10px;display:flex;align-items:center;justify-content:center;color:var(--green-700);border-radius:999px;transition:background .2s,transform .3s var(--ease)}
+.ph-x:hover{background:rgba(28,83,78,.06);transform:rotate(90deg)}
+.ph-x .i{width:20px;height:20px}
+.pcar{gap:12px;padding:20px 33.5px 120px;align-items:center;height:604px;margin:6px 0 -100px;scroll-padding:0 33.5px}
+.pcar>*{scroll-snap-align:center}
+.pcar .jc{height:404px;flex:0 0 326px}
+.pcar .jc.on{height:464px}
+.pcar .jc:not(.on) .nbox{opacity:0}
+.pcar .jc .body{gap:32px}
+.pcar .jc .ph{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(18,17,15,.5);line-height:1}
+.pcar .jc[data-tone=green] .ph,.pcar .jc[data-tone=plum] .ph{color:rgba(255,255,251,.5)}
+.pcar .jc .btn{width:100%;border-radius:8px}
+.pcar .jc .btn:hover{background:rgba(255,246,191,.08)}
 
 /* ---------- PROGRESS ---------- */
 #progress{background:var(--neutral-0)}
@@ -678,6 +702,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
       <button data-go="progress">Your progress</button>
       <button data-go="symptom">Symptom detail</button>
       <button data-go="journey">Your journey</button>
+      <button data-go="phases">All phases</button>
       <button data-go="care">Care Center · Messages</button>
       <button data-go="support">Care Center · Support</button>
       <button data-go="session">Start a session</button>
@@ -725,7 +750,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               <div class="acard">
                 <div class="ct cap orange"><span class="dot"></span>1 new message</div>
                 <div class="in">
-                  <div class="row"><img src="img/av-luna.webp" alt=""><div><div class="t1">Dr. Sarah Bucknor</div><div class="t2">That’s correct, you would start by applying the injection</div></div></div>
+                  <div class="row"><img loading="lazy" decoding="async" src="img/av-luna.webp" alt=""><div><div class="t1">Dr. Sarah Bucknor</div><div class="t2">That’s correct, you would start by applying the injection</div></div></div>
                   <button class="btn s48 pri-plum" data-go="care">Read message</button>
                 </div>
               </div>
@@ -737,7 +762,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="hd h-sec">Your care team</div>
             <div class="card team">
               <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="who"><img src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s">Active session</div></div></div>
+                <div class="who"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s">Active session</div></div></div>
                 <button class="btn s24 sec-plum" data-go="care">Chat</button>
               </div>
               <button class="btn s32 pri-plum" data-go="care">Go to Care Center <svg class="i"><use href="#i-chev-r12"/></svg></button>
@@ -746,7 +771,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="prog-sec rv" style="--d:6">
             <div class="hd"><div><div class="h-sec">Your progress</div><div class="sub" style="margin-top:4px">Last log: 10d ago</div></div><button class="icon-btn hair" data-toast="Log added · nice work" aria-label="Add log"><svg class="i"><use href="#i-plus"/></svg></button></div>
             <button class="card pcard tap" data-go="progress">
-              <div class="top"><div class="l"><span class="chip av"><img src="img/av-phase.webp" alt="">Phase 2</span><span class="cap">steady weight loss</span></div><svg class="i"><use href="#i-chev-right"/></svg></div>
+              <div class="top"><div class="l"><span class="chip av"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="cap">steady weight loss</span></div><svg class="i"><use href="#i-chev-right"/></svg></div>
               <div class="mid">
                 <svg width="90" height="24" viewBox="0 0 90 24" style="overflow:visible"><path class="draw" d="M0 0.75C0.59 0.75 16.98 0.75 28.69 1.2C43.91 7.83 55.89 12.63 55.89 12.63C55.89 12.63 78.85 19.77 89 22.75" fill="none" stroke="#1c534e" stroke-width="1.5"/></svg>
                 <div class="big"><span class="num" data-count="-12" data-from="0">-12</span><span class="u">lbs</span></div>
@@ -760,8 +785,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="foryou rv" style="--d:7">
             <div class="hd h-sm">For how you are feeling</div>
             <div class="car" data-car>
-              <button class="card fcard" data-go="symptom"><div class="ph"><img src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
-              <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
+              <button class="card fcard" data-go="symptom"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
+              <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img loading="lazy" decoding="async" src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
             </div>
           </div>
@@ -769,22 +794,50 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="hd h-sec">Your journey</div>
             <div class="car jcar" data-car data-jcar>
               <button class="jc" data-tone="green" data-i="0">
-                <div class="art"><img src="img/journey-bg.jpg" alt=""></div>
+                <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
                 <div class="head"><span class="chip r8">Completed</span><span class="nbox num">1</span></div>
                 <div class="body"><div><h3>Adjusting to treatment</h3><p>Your body gets used to the medication. Appetite shifts, digestion slows, and you start to learn what works for you.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
               <button class="jc" data-i="1" data-tone="mix">
-                <div class="art"><div class="mixl"><img src="img/journey-bg.jpg" alt=""></div></div>
-                <div class="head"><span class="chip av r8"><img src="img/av-phase.webp" alt="">You are here</span><span class="nbox num">2</span></div>
+                <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
+                <div class="head"><span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">You are here</span><span class="nbox num">2</span></div>
                 <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
               <button class="jc" data-tone="plum" data-i="2">
-                <div class="art"><img src="img/journey-bg.jpg" alt=""></div>
+                <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
                 <div class="head"><span class="chip r8">Up next</span><span class="nbox num">3</span></div>
                 <div class="body"><div><h3>Maintenance</h3><p>Your progress levels out. The focus shifts to habits and a dose that help you keep the results.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- ================= ALL PHASES ================= -->
+      <section class="scr" id="phases" data-sb="dark">
+        <div class="top-pad"></div>
+        <div class="gnav">
+          <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
+          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+        </div>
+        <div style="padding-top:8px"><button class="back rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
+        <div class="ph-head rv" style="--d:1"><span class="cap12">All phases</span><button class="ph-x" data-back aria-label="Close all phases"><svg class="i"><use href="#i-close"/></svg></button></div>
+        <div class="car pcar rv" style="--d:2" data-car data-jcar data-pcar>
+              <div class="jc" role="group" aria-label="Phase 1" data-tone="green" data-i="0">
+                <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
+                <div class="head"><span class="chip r8">Completed</span><span class="nbox num">1</span></div>
+                <div class="body"><div><h3>Adjusting to treatment</h3><p>Your body gets used to the medication. Appetite shifts, digestion slows, and you start to learn what works for you.</p></div><span class="ph">Phase 1: ~week 1-4</span><button class="btn s32 sec-light" data-phase="0">Go to Phase 1</button></div>
+              </div>
+              <div class="jc" role="group" aria-label="Phase 2" data-tone="mix" data-i="1">
+                <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
+                <div class="head"><span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">You are here</span><span class="nbox num">2</span></div>
+                <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="ph">Phase 2: ~week 5-8</span><button class="btn s32 sec-light" data-phase="1">Go to Phase 2</button></div>
+              </div>
+              <div class="jc" role="group" aria-label="Phase 3" data-tone="plum" data-i="2">
+                <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
+                <div class="head"><span class="chip r8">Up next</span><span class="nbox num">3</span></div>
+                <div class="body"><div><h3>Maintenance</h3><p>Your progress levels out. The focus shifts to habits and a dose that help you keep the results.</p></div><span class="ph">Phase 3: ~week 9+</span><button class="btn s32 sec-light" data-phase="2">Go to Phase 3</button></div>
+              </div>
         </div>
       </section>
 
@@ -799,7 +852,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button>
           <div>
             <div class="ph-head">
-              <div><h1 class="rv" style="--d:1">Your progress</h1><div class="chips rv" style="--d:2"><span class="chip av"><img src="img/av-phase.webp" alt="">Phase 2</span><span class="chip sand">Week 6</span></div></div>
+              <div><h1 class="rv" style="--d:1">Your progress</h1><div class="chips rv" style="--d:2"><span class="chip av"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="chip sand">Week 6</span></div></div>
               <button class="icon-btn hair rv" style="--d:2" data-toast="Progress settings aren’t part of this prototype" aria-label="Progress settings"><svg class="i"><use href="#i-gear"/></svg></button>
             </div>
             <div class="chart rv" style="--d:3" id="chart">
@@ -850,8 +903,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="pjourney rv">
             <div class="hd h-sec">Your journey</div>
             <div class="pj">
-              <div class="art"><div class="mixl"><img src="img/journey-bg.jpg" alt=""></div></div>
-              <div><span class="chip av r8"><img src="img/av-phase.webp" alt="">Phase 2</span></div>
+              <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
+              <div><span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span></div>
               <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-go="journey">Learn more</button></div>
             </div>
           </div>
@@ -868,11 +921,11 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="jy">
           <div class="jy-hero rv" style="--d:1">
-            <button class="jy-all" data-toast="All phases view coming soon"><svg class="i"><use href="#i-slides"/></svg>All phases</button>
+            <button class="jy-all" data-go="phases"><svg class="i"><use href="#i-slides"/></svg>All phases</button>
             <div class="jy-card">
-              <div class="mixl"><img src="img/journey-bg.jpg" alt=""></div>
+              <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
               <div class="jy-in">
-                <span class="chip av r8"><img src="img/av-phase.webp" alt="">You are here</span>
+                <span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">You are here</span>
                 <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div>
               </div>
             </div>
@@ -890,7 +943,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="jsec-b"><div>
               <div class="car jcards" data-car>
                 <div class="secard">
-                  <div class="se-art"><img src="img/stomach.png" alt=""><i></i></div>
+                  <div class="se-art"><img loading="lazy" decoding="async" src="img/stomach.png" alt=""><i></i></div>
                   <div class="se-top"><h3>Mild nausea &amp; constipation</h3><p>Your digestion slows down, so you might experience some discomfort.</p></div>
                   <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Eat smaller meals, throughout the day</li><li>Have your last meal 3 hours before bedtime</li><li>Stay hydrated</li></ul></div>
                 </div>
@@ -919,7 +972,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
       <!-- ================= CARE · MESSAGES ================= -->
       <section class="scr care" id="care" data-sb="light">
-        <div class="bgimg"><img src="img/care-bg.jpg" alt=""></div>
+        <div class="bgimg"><img loading="lazy" decoding="async" src="img/care-bg.jpg" alt=""></div>
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weightloss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
@@ -931,24 +984,24 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="as-h"><span class="cap">Active session</span><span class="as-exp">Expires in 12 Days</span></div>
           <div class="as-card">
             <div class="as-t cap"><span class="live"></span>Today</div>
-            <div class="as-row"><img src="img/av-brooke.webp" alt=""><div class="as-b"><div class="n">Dr. Brooke</div><div class="s">You can definitely try increasing the dose. If the side effects are too much, let me know and we can adjust.</div></div></div>
+            <div class="as-row"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div class="as-b"><div class="n">Dr. Brooke</div><div class="s">You can definitely try increasing the dose. If the side effects are too much, let me know and we can adjust.</div></div></div>
             <button class="btn s40 pri-dark" data-toast="Opening your chat with Dr. Brooke…">Chat</button>
           </div>
         </div>
         <div class="csheet rv" style="--d:3">
           <div class="tabs"><div class="seg" data-seg><span class="pill"></span><button class="on" data-tab="messages">Messages</button><button data-tab="support" data-go="support">Support</button></div><button class="srch" data-toast="Search isn’t part of this prototype" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button></div>
           <div class="msgs">
-            <button class="msg rv" style="--d:5" data-toast="Conversation view coming soon"><img src="img/av-ian.webp" alt=""><div class="b"><div class="n">Dr. Ian K.<span>5d ago</span></div><div class="s">Patient follow-up</div></div></button>
-            <button class="msg rv" style="--d:6" data-toast="Conversation view coming soon"><img src="img/av-ian.webp" alt=""><div class="b"><div class="n">Dr. Ian K.<span>5d ago</span></div><div class="s">New medication consultation</div></div></button>
-            <button class="msg rv" style="--d:7" data-toast="Conversation view coming soon"><img src="img/av-emily.webp" alt=""><div class="b"><div class="n">Dr. Emily R.<span>30d ago</span></div><div class="s">Medication adjustment</div></div></button>
-            <button class="msg old rv" style="--d:8" data-toast="Conversation view coming soon"><img src="img/av-luna.webp" alt=""><div class="b"><div class="n">Dr. Luna M.<span>65d ago</span></div><div class="s">Dose enquiry</div></div></button>
+            <button class="msg rv" style="--d:5" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-ian.webp" alt=""><div class="b"><div class="n">Dr. Ian K.<span>5d ago</span></div><div class="s">Patient follow-up</div></div></button>
+            <button class="msg rv" style="--d:6" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-ian.webp" alt=""><div class="b"><div class="n">Dr. Ian K.<span>5d ago</span></div><div class="s">New medication consultation</div></div></button>
+            <button class="msg rv" style="--d:7" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-emily.webp" alt=""><div class="b"><div class="n">Dr. Emily R.<span>30d ago</span></div><div class="s">Medication adjustment</div></div></button>
+            <button class="msg old rv" style="--d:8" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-luna.webp" alt=""><div class="b"><div class="n">Dr. Luna M.<span>65d ago</span></div><div class="s">Dose enquiry</div></div></button>
           </div>
         </div>
       </section>
 
       <!-- ================= CARE · SUPPORT ================= -->
       <section class="scr care" id="support" data-sb="light">
-        <div class="bgimg" style="left:-180px;top:0"><img src="img/care-bg.jpg" alt=""></div>
+        <div class="bgimg" style="left:-180px;top:0"><img loading="lazy" decoding="async" src="img/care-bg.jpg" alt=""></div>
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weightloss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
@@ -956,7 +1009,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         </div>
         <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="drcard rv" style="--d:1">
-          <div class="l"><img src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s"><span class="live"></span>Active session · Today</div></div></div>
+          <div class="l"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s"><span class="live"></span>Active session · Today</div></div></div>
           <button class="btn s24 pri-dark" data-go="care">Chat</button>
         </div>
         <div class="csheet rv" style="--d:2">
@@ -975,7 +1028,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="t">Telehealth support</div>
             <button class="crow" data-toast="Calling (737) 379-1416…"><span class="icon-box"><svg class="i"><use href="#i-phone"/></svg></span><div><div class="a">(737) 379-1416</div><div class="b">Mon-Fri: 9am-6pm PST</div></div></button>
             <button class="crow" data-toast="Opening mail to care-support@goodrx.com"><span class="icon-box"><svg class="i"><use href="#i-mail"/></svg></span><div><div class="a">care-support@goodrx.com</div><div class="b">Expect a response within 48 hrs</div></div></button>
-            <button class="crow" data-go="care"><img src="img/av-brooke.webp" alt=""><div><div class="a">Dr. Brooke</div><div class="b">Active session</div></div></button>
+            <button class="crow" data-go="care"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="a">Dr. Brooke</div><div class="b">Active session</div></div></button>
           </div>
           <div class="pharm rv" style="--d:6">
             <div class="t">Your Pharmacy</div>
@@ -1032,9 +1085,9 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="grab" data-grab="wl"><i></i></div>
           <div class="wl-lbl">Your subscriptions</div>
           <div class="wl-list">
-            <button class="wl-item on" data-wl-close><span class="thumb"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
-            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img src="img/thumb-hair.png" alt=""></span><span><b>Hair Loss</b><small>Finasteride · 0.5mg</small></span></button>
-            <button class="wl-item line" data-toast="Only Weight loss is set up in this prototype"><span class="thumb"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
+            <button class="wl-item on" data-wl-close><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
+            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span><b>Hair Loss</b><small>Finasteride · 0.5mg</small></span></button>
+            <button class="wl-item line" data-toast="Only Weight loss is set up in this prototype"><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
           </div>
         </div>
       </div>
@@ -1044,18 +1097,18 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="np-top"><svg class="logo" style="width:24px;height:24px"><use href="#i-logo"/></svg><button data-nav-close aria-label="Close menu"><svg class="i"><use href="#i-close"/></svg></button></div>
           <div class="np-search"><button data-toast="Search isn’t part of this prototype"><svg class="i"><use href="#i-search16"/></svg>Search medications or conditions</button></div>
           <button class="np-row" data-nav-go="home"><svg class="i" style="width:24px;height:24px"><use href="#i-home"/></svg>Dashboard</button>
-          <button class="np-row" data-toast="Account isn’t part of this prototype"><img src="img/av-account.png" alt="">Account</button>
+          <button class="np-row" data-toast="Account isn’t part of this prototype"><img loading="lazy" decoding="async" src="img/av-account.png" alt="">Account</button>
           <div class="np-lbl">Your subscriptions</div>
           <div class="np-sub open" id="npWl">
-            <div class="np-subh"><span class="thumb"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog" aria-label="Collapse Weight loss"><svg><use href="#i-chev8"/></svg></button></div>
+            <div class="np-subh"><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog" aria-label="Collapse Weight loss"><svg><use href="#i-chev8"/></svg></button></div>
             <div class="np-links"><div>
               <button class="np-link cur" data-nav-go="home">Overview</button>
               <button class="np-link" data-nav-go="care">Care Center</button>
               <button class="np-link" data-nav-go="journey">Treatment Plan Details</button>
             </div></div>
           </div>
-          <div class="np-sub2"><span class="thumb t44"><img src="img/thumb-hair.png" alt=""></span><span class="np-t"><b>Hair loss</b><small>Finasteride · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Hair loss"><svg><use href="#i-chev8"/></svg></button></div>
-          <div class="np-sub2 last"><span class="thumb t44"><img src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Another condition"><svg><use href="#i-chev8"/></svg></button></div>
+          <div class="np-sub2"><span class="thumb t44"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span class="np-t"><b>Hair loss</b><small>Finasteride · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Hair loss"><svg><use href="#i-chev8"/></svg></button></div>
+          <div class="np-sub2 last"><span class="thumb t44"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Another condition"><svg><use href="#i-chev8"/></svg></button></div>
           <div class="np-out"><button class="btn s32 sec-dark" style="width:100%" data-toast="Logging out isn’t part of this prototype">Log out</button></div>
           <div class="np-lbl" style="margin-top:32px">GoodRx.com</div>
           <div class="np-site">
@@ -1080,7 +1133,7 @@ const app=$('#app'), sb=$('#sb');
 const screens=['home','progress','journey','care','support','session'];
 let stack=['home'];
 const cur=()=>stack[stack.length-1];
-const MODAL=new Set(['session']);
+const MODAL=new Set(['session']), FADE=new Set(['phases']);
 const TABS=new Set(['care','support']);
 
 /* ---------- device scaling on desktop ---------- */
@@ -1099,11 +1152,12 @@ function reveal(id){
   setTimeout(()=>{counters(el); if(id==='progress') chartIntro(); if(id==='home') sparkDraw(el);},260);
   $$('#jump button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
   if(TABS.has(id)) setSeg(el);
-  $('.fab')&&$('.fab').classList.toggle('hide',!['progress','journey'].includes(id));
+  $('.fab')&&$('.fab').classList.toggle('hide',!['progress','journey','phases'].includes(id));
 }
 function clearAnim(el){el.classList.remove('enter-push','leave-push','enter-pop','leave-pop','enter-modal','leave-modal','under-modal','enter-fade','leave-fade')}
 let shownId='home';
 function show(id,mode){
+  if(id==='phases') requestAnimationFrame(()=>{ if(typeof centerP==='function') centerP() });
   const from=$('#'+shownId), to=$('#'+id);
   if(from===to) return;
   shownId=id;
@@ -1125,13 +1179,13 @@ function go(id,opts={}){
   if(id===cur()) return;
   const leaving=cur();
   if(TABS.has(id)&&TABS.has(leaving)){ stack[stack.length-1]=id; show(id,'fade'); return }
-  if(stack.includes(id)){ stack=stack.slice(0,stack.lastIndexOf(id)+1); show(id, MODAL.has(leaving)?'unmodal':'pop'); return }
+  if(stack.includes(id)){ stack=stack.slice(0,stack.lastIndexOf(id)+1); show(id, MODAL.has(leaving)?'unmodal':FADE.has(leaving)?'fade':'pop'); return }
   if(opts.replace){ stack[stack.length-1]=id; show(id, MODAL.has(id)?'modal':'push'); return }
-  stack.push(id); show(id, MODAL.has(id)?'modal':'push');
+  stack.push(id); show(id, MODAL.has(id)?'modal':FADE.has(id)?'fade':'push');
 }
 function back(){
   if(stack.length<2){ if(cur()!=='home'){ stack=['home']; show('home','pop') } return }
-  const leaving=stack.pop(); show(cur(), MODAL.has(leaving)?'unmodal':'pop');
+  const leaving=stack.pop(); show(cur(), MODAL.has(leaving)?'unmodal':FADE.has(leaving)?'fade':'pop');
 }
 
 /* ---------- global click wiring ---------- */
@@ -1158,12 +1212,13 @@ document.addEventListener('click',e=>{
   }
 });
 function jump(id){
-  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session']};
+  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],phases:['home','journey','phases'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session']};
   const target=map[id]; const last=target[target.length-1];
   closeSheet(true);
   if(shownId!==last){ const from=$('#'+shownId), to=$('#'+last); [from,to].forEach(clearAnim); from.classList.remove('active'); to.classList.add('active','enter-fade'); setTimeout(()=>clearAnim(to),400); to.scrollTop=0; shownId=last; reveal(last) }
   stack=target;
   if(id==='symptom') setTimeout(()=>openSheet('nausea'),350);
+  if(last==='phases') requestAnimationFrame(centerP);
 }
 $('#restart').onclick=()=>{ resetSession(); jump('home'); };
 
@@ -1240,6 +1295,15 @@ const jcar=$('[data-jcar]'), jcs=$$('.jc',jcar), dots=$$('.jdots i');
 function jActive(){ const mid=jcar.scrollLeft+jcar.clientWidth/2; let best=0,bd=1e9; jcs.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); jcs.forEach((k,i)=>k.classList.toggle('on',i===best)); dots.forEach((d,i)=>d.classList.toggle('on',i===best)); return best }
 let jt; jcar.addEventListener('scroll',()=>{ cancelAnimationFrame(jt); jt=requestAnimationFrame(jActive) },{passive:true});
 jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else if(i===1) go('journey'); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
+
+/* ---------- all phases carousel ---------- */
+const pcar=$('[data-pcar]'), pcs=$$('.jc',pcar);
+function pActive(){ const mid=pcar.scrollLeft+pcar.clientWidth/2; let best=0,bd=1e9; pcs.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); pcs.forEach((k,i)=>k.classList.toggle('on',i===best)); return best }
+let pt; pcar.addEventListener('scroll',()=>{ cancelAnimationFrame(pt); pt=requestAnimationFrame(pActive) },{passive:true});
+const pTo=(i,sm)=>{ const k=pcs[i]; pcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-pcar.clientWidth/2,behavior:sm?'smooth':'auto'}) };
+pcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(pcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ e.stopPropagation(); pTo(i,true); return }
+  const b=e.target.closest('[data-phase]'); if(!b) return; e.stopPropagation(); if(i===1) back(); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
+function centerP(){ pTo(1); pActive() }
 function centerJ(){ const k=jcs[1]; jcar.scrollLeft=k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2; jActive() }
 
 /* ---------- segmented tabs pill ---------- */
@@ -1315,8 +1379,9 @@ $$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.query
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },650) };
-(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>{ if(document.readyState==='complete') boot(); else addEventListener('load',boot) });
+const boot=()=>{ centerJ(); centerP(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
+let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
+(document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();
 </script>
 </body>

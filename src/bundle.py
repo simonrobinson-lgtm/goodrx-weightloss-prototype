@@ -1,17 +1,46 @@
-"""Build index.html (from src.html + sprite) and a fully self-contained dist file."""
-import re, base64, sys, os
+"""Build the prototype.
+
+  python3 bundle.py site OUTDIR        -> OUTDIR/index.html + OUTDIR/img + OUTDIR/fonts (fast: assets load in parallel and cache)
+  python3 bundle.py standalone OUT.html -> one self-contained file (fonts + images inlined; for email/offline)
+  python3 bundle.py artifact OUT.html   -> fonts inlined, images left as relative files (for the Claude share link)
+"""
+import re, base64, sys, os, shutil
 root = os.path.dirname(os.path.abspath(__file__))
+mode, out = sys.argv[1], sys.argv[2]
+
 s = open(os.path.join(root, 'src.html')).read().replace('{{SPRITE}}', open(os.path.join(root, 'sprite.min.svg')).read())
-open(os.path.join(root, 'index.html'), 'w').write(s)
+s = re.sub(r"const boot=\(\)=>\{ centerJ\(\); setTimeout\(\(\)=>\{ \$\('#splash'\)\.classList\.add\('done'\); reveal\('home'\) \},(\d+)\) \};",
+           lambda m: "const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','journey','phases','care','support','session'].includes(h)) setTimeout(()=>jump(h),300) }," + m.group(1) + ") };", s)
+s = s.replace('<meta name="viewport"', '<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"', 1)
+
 def uri(p):
     mt = {'jpg': 'image/jpeg', 'webp': 'image/webp', 'woff2': 'font/woff2', 'png': 'image/png'}[p.rsplit('.', 1)[1]]
     return 'data:%s;base64,%s' % (mt, base64.b64encode(open(os.path.join(root, p), 'rb').read()).decode())
-s = re.sub(r'url\((fonts/[^)]+)\)', lambda m: 'url(%s)' % uri(m.group(1)), s)
-c = {}
-s = re.sub(r'src="(img/[^"]+)"', lambda m: 'src="%s"' % c.setdefault(m.group(1), uri(m.group(1))), s)
-s = s.replace("const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },650) };",
-  "const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','journey','care','support','session'].includes(h)) setTimeout(()=>jump(h),300) },650) };")
-s = s.replace('<meta name="viewport"', '<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"', 1)
-out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(root, 'dist.html')
-open(out, 'w').write(s)
-print('wrote', out, round(len(s) / 1e6, 2), 'MB')
+
+def inline_fonts(t):
+    t = re.sub(r'<link rel="preload" href="fonts/[^"]+"[^>]*>\n?', '', t)
+    return re.sub(r'url\((fonts/[^)]+)\)', lambda m: 'url(%s)' % uri(m.group(1)), t)
+
+if mode == 'site':
+    os.makedirs(out, exist_ok=True)
+    open(os.path.join(out, 'index.html'), 'w').write(s)
+    used = set(re.findall(r'(img/[^"\')\s]+)', s)) | set(re.findall(r'(fonts/[^"\')\s]+)', s))
+    for d in ('img', 'fonts'):
+        shutil.rmtree(os.path.join(out, d), ignore_errors=True); os.makedirs(os.path.join(out, d))
+    for f in used:
+        shutil.copy(os.path.join(root, f), os.path.join(out, f))
+    print('site ->', out, round(len(s) / 1e3), 'KB html,', len(used), 'assets')
+elif mode == 'standalone':
+    t = inline_fonts(s)
+    t = re.sub(r'<link rel="preload" href="img/[^"]+"[^>]*>\n?', '', t)
+    c = {}
+    t = re.sub(r'src="(img/[^"]+)"', lambda m: 'src="%s"' % c.setdefault(m.group(1), uri(m.group(1))), t)
+    open(out, 'w').write(t); print('standalone ->', out, round(len(t) / 1e6, 2), 'MB')
+elif mode == 'artifact':
+    t = inline_fonts(s)
+    t = '<title>GoodRx Weight Loss Prototype</title>\n' + t[t.index('<link rel="preload"'):] if '<link rel="preload"' in t else '<title>GoodRx Weight Loss Prototype</title>\n' + t[t.index('<style>'):]
+    t = t.replace('</style>\n</head>\n<body>', '</style>', 1).replace('</body>\n</html>', '')
+    open(out, 'w').write(t)
+    imgs = sorted(set(re.findall(r'(img/[^"\')\s]+)', t)))
+    open(out + '.files', 'w').write('\n'.join(imgs))
+    print('artifact ->', out, round(len(t) / 1e3), 'KB,', len(imgs), 'image files')
