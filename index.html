@@ -304,9 +304,9 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jc.on .body{opacity:1;transform:none}
 .jc .body h3{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:var(--yellow-100)}
 .jc .body p{font-size:16px;line-height:1.4;color:rgba(255,255,251,.6);margin-top:12px}
-.jdots{display:flex;justify-content:center;gap:6px;margin-top:4px}
-.jdots i{width:6px;height:6px;border-radius:6px;background:var(--neutral-300);transition:width .35s var(--ease),background .35s}
-.jdots i.on{width:18px;background:var(--green-700)}
+.jdots{display:flex;justify-content:center;align-items:center;gap:4px;padding:8px 16px;margin-top:10px}
+.jdots i{width:5px;height:5px;border-radius:40px;background:rgba(26,25,22,.2);cursor:pointer;transition:width .35s var(--ease),background .35s}
+.jdots i.on{width:12px;background:var(--neutral-900,#1a1916)}
 
 
 /* ---------- ALL PHASES ---------- */
@@ -847,6 +847,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                 <div class="body"><div><h3>Maintenance</h3><p>Your progress levels out. The focus shifts to habits and a dose that help you keep the results.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
             </div>
+            <div class="jdots" role="tablist" aria-label="Journey phases"><i data-dot="0"></i><i data-dot="1" class="on"></i><i data-dot="2"></i></div>
           </div>
         </div>
       </section>
@@ -1356,6 +1357,7 @@ function snapNearest(c){
 /* ---------- journey carousel ---------- */
 const jcar=$('[data-jcar]'), jcs=$$('.jc',jcar), dots=$$('.jdots i');
 function jActive(){ const mid=jcar.scrollLeft+jcar.clientWidth/2; let best=0,bd=1e9; jcs.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); jcs.forEach((k,i)=>k.classList.toggle('on',i===best)); dots.forEach((d,i)=>d.classList.toggle('on',i===best)); return best }
+dots.forEach((d,i)=>d.addEventListener('click',()=>{ const k=jcs[i]; jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) }));
 let jt; jcar.addEventListener('scroll',()=>{ cancelAnimationFrame(jt); jt=requestAnimationFrame(jActive) },{passive:true});
 jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else if(i===1) go('journey'); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
 
