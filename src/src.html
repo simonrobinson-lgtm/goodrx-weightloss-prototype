@@ -306,6 +306,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .fcard .ph.illo{background:var(--neutral-0);display:flex;align-items:flex-start;justify-content:flex-start}
 .fcard .ph.illo svg{width:100px;height:100px;color:var(--green-700)}
 .fcard:hover .ph img{transform:scale(1.04)}
+.fcard.nolink{cursor:default}
+.fcard.nolink:hover .ph img{transform:none}
 .fcard .bd{padding:8px 16px 12px;display:flex;flex-direction:column;gap:12px;flex:1}
 .fcard .bd .t{display:flex;justify-content:space-between;align-items:center;color:var(--green-700)}
 .fcard .bd .t .i{width:12px;height:12px}
@@ -919,7 +921,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="foryou rv" style="--d:7">
             <div class="hd h-sm">For how you are feeling</div>
             <div class="car" data-car>
-              <button class="card fcard" data-go="symptom"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
+              <div class="card fcard nolink"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></div>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img loading="lazy" decoding="async" src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
             </div>
