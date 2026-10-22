@@ -353,42 +353,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .nf-list.none+.nf-empty{display:block}
 .nf-list{padding-bottom:110px}
 
-/* ---------- in-app education ---------- */
-#education{background:var(--neutral-0)}
-.ed{padding:36px 0 120px;display:flex;flex-direction:column}
-.ed-hero{position:relative;margin:0 8px 36px;height:230px;border-radius:8px;overflow:hidden;background:var(--neutral-200)}
-.ed-hero img{position:absolute;left:0;top:-30%;width:100%;height:auto;min-height:130%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s var(--ease)}
-#education.revealed .ed-hero img{transform:none}
-.ed-ov{position:absolute;inset:0;padding:12px 12px 16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.6) 100%)}
-.ed-ov::before{content:"";position:absolute;inset:0;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);-webkit-mask:linear-gradient(180deg,transparent 30%,#000 75%);mask:linear-gradient(180deg,transparent 30%,#000 75%)}
-.ed-ov .chip{position:relative}
-.ed-ov h1{position:relative;font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:rgba(255,255,251,.9)}
-.ed-sec{padding:8px 20px 28px;display:flex;flex-direction:column;gap:16px}
-.ed-sec .cap12{color:var(--ink-60);padding:0}
-.ed-sec h2{font-weight:400;font-size:20px;line-height:1.2;color:var(--ink)}
-.ed-sec h2.l{font-size:24px}
-.ed-sec p{font-size:16px;line-height:1.4;color:var(--ink-60)}
-.ed-sec ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.ed-sec li{position:relative;padding-left:16px;font-size:14px;line-height:1.5;color:var(--ink-90)}
-.ed-sec li::before{content:"";position:absolute;left:4px;top:8px;width:4px;height:4px;border-radius:4px;background:var(--ink-60)}
-.ed-cta{align-self:flex-start;margin-top:4px}
-.ed-qw{padding:0 12px 28px}
-.ed-q{position:relative;overflow:hidden;border-radius:8px;padding:16px 16px 20px;display:flex;flex-direction:column;gap:32px;background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,251,.75),rgba(255,255,251,0) 55%),radial-gradient(80% 70% at 0% 100%,rgba(215,209,198,.55),rgba(215,209,198,0) 60%),var(--neutral-200)}
-.ed-q blockquote{position:relative;font-weight:300;font-size:24px;line-height:1.2;letter-spacing:-.01em;color:var(--neutral-700);max-width:284px}
-.ed-swirl{position:absolute;right:-4px;top:40px;width:120px;height:150px}
-.ed-path{stroke-dasharray:320;stroke-dashoffset:320;transition:stroke-dashoffset 2.4s .5s var(--ease)}
-#education.revealed .ed-qw:not(.wait) .ed-path{stroke-dashoffset:0}
-.ed-by{position:relative;display:flex;align-items:center;gap:12px}
-.ed-av{position:relative;width:56px;height:56px;flex:none}
-.ed-av img{width:56px;height:56px;border-radius:8px;object-fit:cover}
-.ed-av i{position:absolute;left:32px;top:33px;width:20px;height:20px;border-radius:4px;background:var(--neutral-0);display:flex;align-items:center;justify-content:center}
-.ed-av i .logo{width:12px;height:12px}
-.ed-by b{display:block;font-weight:400;font-size:13px;line-height:1.4;color:var(--neutral-700)}
-.ed-by small{display:block;margin-top:4px;font-size:10px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--neutral-600)}
-.ed-sim{padding:8px 0 32px}
-.ed-simh{padding:0 20px 16px;font-size:16px;line-height:1.2;color:rgba(18,17,15,.7)}
-.ed-sim .car{gap:12px;padding:0 20px;scroll-padding:0 20px}
-.secard.tap{cursor:pointer}
 
 /* journey carousel */
 .journey{padding:16px 0}
@@ -437,22 +401,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
 
 /* ---------- ALL PHASES ---------- */
-#phases{background:linear-gradient(180deg,var(--neutral-0) 46%,var(--neutral-100))}
-.aph-head{display:flex;align-items:center;justify-content:space-between;height:40px;margin:46px 20px 0}
-.aph-head .cap12{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-90);line-height:1}
-.ph-x{width:40px;height:40px;margin-right:-10px;display:flex;align-items:center;justify-content:center;color:var(--green-700);border-radius:999px;transition:background .2s,transform .3s var(--ease)}
-.ph-x:hover{background:rgba(28,83,78,.06);transform:rotate(90deg)}
-.ph-x .i{width:20px;height:20px}
-.pcar{gap:12px;padding:20px 33.5px 120px;align-items:center;height:604px;margin:6px 0 -100px;scroll-padding:0 33.5px}
-.pcar>*{scroll-snap-align:center}
-.pcar .jc{height:404px;flex:0 0 326px}
-.pcar .jc.on{height:464px}
-.pcar .jc:not(.on) .nbox{opacity:0}
-.pcar .jc .body{gap:32px}
-.pcar .jc .ph{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(18,17,15,.5);line-height:1}
-.pcar .jc[data-tone=green] .ph,.pcar .jc[data-tone=plum] .ph{color:rgba(255,255,251,.5)}
-.pcar .jc .btn{width:100%;border-radius:8px}
-.pcar .jc .btn:hover{background:rgba(255,246,191,.08)}
 
 
 /* ---------- PROGRESS ---------- */
@@ -532,8 +480,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jy-side{position:absolute;top:calc(50% - 74px);height:148px;width:352px;border-radius:12px;transition:transform .35s var(--ease),filter .2s}
 .jy-side.l{right:calc(100% + 8px);background:#1c534e}
 .jy-side.r{left:calc(100% + 8px);background:#015176}
-.jy-side.l:hover{transform:translateX(4px)}
-.jy-side.r:hover{transform:translateX(-4px)}
 .jy-n{position:absolute;z-index:2;top:7px;right:8px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,251,.2);color:var(--yellow-100);font-size:14px;display:flex;align-items:center;justify-content:center}
 .jy-dots{display:flex;justify-content:center;align-items:center;gap:4px;padding:8px 16px}
 .jy-dots i{width:5px;height:5px;border-radius:40px;background:rgba(26,25,22,.2)}
@@ -871,12 +817,10 @@ svg.i{width:20px;height:20px;flex:none;display:block}
       <button data-go="progress">Your progress</button>
       <button data-go="symptom">Symptom detail</button>
       <button data-go="journey">Your journey</button>
-      <button data-go="phases">All phases</button>
       <button data-go="care">Care Center · Messages</button>
       <button data-go="support">Care Center · Support</button>
       <button data-go="session">Start a session</button>
       <button data-go="notifs">Notifications</button>
-      <button data-go="education">Article · Settling your stomach</button>
     </nav>
     <button class="restart" id="restart">Restart prototype</button>
   </aside>
@@ -976,7 +920,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="foryou rv" style="--d:7">
             <div class="hd h-sm">For how you are feeling</div>
             <div class="car" data-car>
-              <button class="card fcard" data-go="education"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
+              <button class="card fcard" data-go="symptom"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img loading="lazy" decoding="async" src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
             </div>
@@ -1005,34 +949,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         </div>
       </section>
 
-      <!-- ================= ALL PHASES ================= -->
-      <section class="scr" id="phases" data-sb="dark">
-        <div class="top-pad"></div>
-        <div class="gnav">
-          <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
-        </div>
-        <div style="padding-top:8px"><button class="back rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
-        <div class="aph-head rv" style="--d:1"><span class="cap12">All phases</span><button class="ph-x" data-back aria-label="Close all phases"><svg class="i"><use href="#i-close"/></svg></button></div>
-        <div class="car pcar rv" style="--d:2" data-car data-jcar data-pcar>
-              <div class="jc" role="group" aria-label="Phase 1" data-tone="green" data-i="0">
-                <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
-                <div class="head"><span class="chip r8">Completed</span><span class="nbox num">1</span></div>
-                <div class="body"><div><h3>Adjusting to treatment</h3><p>Your body gets used to the medication. Appetite shifts, digestion slows, and you start to learn what works for you.</p></div><span class="ph">Phase 1: ~week 1-4</span><button class="btn s32 sec-light" data-phase="0">Go to Phase 1</button></div>
-              </div>
-              <div class="jc" role="group" aria-label="Phase 2" data-tone="mix" data-i="1">
-                <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
-                <div class="head"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span><span class="nbox num">2</span></div>
-                <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="ph">Phase 2: ~week 5-8</span><button class="btn s32 sec-light" data-phase="1">Go to Phase 2</button></div>
-              </div>
-              <div class="jc" role="group" aria-label="Phase 3" data-tone="plum" data-i="2">
-                <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
-                <div class="head"><span class="chip r8">Up next</span><span class="nbox num">3</span></div>
-                <div class="body"><div><h3>Maintenance</h3><p>Your progress levels out. The focus shifts to habits and a dose that help you keep the results.</p></div><span class="ph">Phase 3: ~week 9+</span><button class="btn s32 sec-light" data-phase="2">Go to Phase 3</button></div>
-              </div>
-        </div>
-      </section>
-
+      
       <!-- ================= PROGRESS ================= -->
       <section class="scr" id="progress" data-sb="dark">
         <div class="top-pad"></div>
@@ -1114,7 +1031,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="jy">
           <div class="jy-hero rv" style="--d:1">
             <div class="jy-row">
-              <button class="jy-side l" data-go="phases" aria-label="Phase 1: Adjusting to treatment"></button>
+              <div class="jy-side l" aria-hidden="true"></div>
               <div class="jy-card">
                 <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
                 <span class="jy-n num">2</span>
@@ -1123,7 +1040,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                   <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div>
                 </div>
               </div>
-              <button class="jy-side r" data-go="phases" aria-label="Phase 3: Maintenance"></button>
+              <div class="jy-side r" aria-hidden="true"></div>
             </div>
             <div class="jy-dots" aria-hidden="true"><i></i><i class="on"></i><i></i></div>
           </div>
@@ -1139,7 +1056,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Collapse Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
             <div class="jsec-b"><div>
               <div class="car jcards" data-car>
-                <div class="secard tap" data-go="education" role="button" tabindex="0" aria-label="Read: Settling your stomach and dealing with nausea">
+                <div class="secard">
                   <div class="se-art"><img loading="lazy" decoding="async" src="img/stomach.png" alt=""><i></i></div>
                   <div class="se-top"><h3>Mild nausea &amp; constipation</h3><p>Your digestion slows down, so you might experience some discomfort.</p></div>
                   <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Eat smaller meals, throughout the day</li><li>Have your last meal 3 hours before bedtime</li><li>Stay hydrated</li></ul></div>
@@ -1286,53 +1203,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="nf-empty" id="nfEmpty">You’re all caught up</div>
       </section>
 
-      <!-- ================= EDUCATION ================= -->
-      <section class="scr" id="education" data-sb="dark">
-        <div class="top-pad"></div>
-        <div class="gnav">
-          <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
-        </div>
-        <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
-        <div class="ed">
-          <div class="ed-hero rv" style="--d:1">
-            <img src="img/photo-bottle.jpg" alt="">
-            <div class="ed-ov"><span class="chip r4">3 min</span><h1>Settling your stomach &amp; dealing with nausea</h1></div>
-          </div>
-          <div class="ed-sec rv" style="--d:2">
-            <span class="cap12">At a glance</span>
-            <h2 class="l">Why it happens</h2>
-            <p>Your medication slows how quickly food leaves your stomach. That’s part of what helps you feel full longer, but it also means food sits with you for more time. This can lead to queasiness, slower digestion, or a heavy, bloated feeling.</p>
-          </div>
-          <div class="ed-sec rv" style="--d:3">
-            <h2>Handling nausea</h2>
-            <p>Nausea tends to hit hardest after a big meal or in the days after a dose change.</p>
-            <ul><li>Eat smaller meals, more often. A full stomach empties even more slowly on treatment.</li><li>Stop at the first sign of fullness, even if there’s food left on your plate.</li><li>Sip fluids between meals, rather than drinking a lot with them.</li><li>Go easy on greasy, fried, or rich foods. They take the longest to digest.</li></ul>
-          </div>
-          <div class="ed-sec rv" style="--d:4">
-            <h2>Constipation</h2>
-            <p>Slower digestion and eating less can both slow things down. Constipation for a couple of days is normal but can be easily mitigated.</p>
-            <ul><li>Add fiber gradually from vegetables, fruit, beans, and whole grains. Adding too much at once can make bloating worse.</li></ul>
-          </div>
-          <div class="ed-qw rv" style="--d:5"><div class="ed-q">
-            <svg class="ed-swirl" viewBox="0 0 120 150" fill="none"><path class="ed-path" d="M8 146C40 120 70 92 84 64C96 40 92 14 74 10C56 6 46 26 58 44C72 64 100 66 124 58" stroke="#514543" stroke-width=".75" stroke-linecap="round" opacity=".55"/></svg>
-            <blockquote>“For most people, stomach side effects ease as the body adjusts.”</blockquote>
-            <div class="ed-by"><span class="ed-av"><img loading="lazy" decoding="async" src="img/av-karim.webp" alt=""><i><svg class="logo"><use href="#i-logo"/></svg></i></span><div><b>Dr. Karim Benson</b><small>Medical expert</small></div></div>
-          </div></div>
-          <div class="ed-sec rv" style="--d:6">
-            <h2 class="l">The takeaway</h2>
-            <p>Smaller meals, slower eating, plenty of water, and regular movement help with most stomach side effects. If something feels off or isn’t improving, your care team is here to help.</p>
-          </div>
-          <div class="ed-sim rv" style="--d:7">
-            <div class="ed-simh">Similar articles</div>
-            <div class="car" data-car>
-              <button class="card fcard" data-toast="Article view coming soon"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-water.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">Why staying hydrated is important</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
-              <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img loading="lazy" decoding="async" src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
-              <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- ================= SYMPTOM SHEET ================= -->
       <div class="ov" id="ov">
@@ -1418,7 +1288,7 @@ function updStk(el,force){
 const screens=['home','progress','journey','care','support','session'];
 let stack=['home'];
 const cur=()=>stack[stack.length-1];
-const MODAL=new Set(['session','notifs']), FADE=new Set(['phases']);
+const MODAL=new Set(['session','notifs']), FADE=new Set();
 const TABS=new Set(['care','support']);
 
 
@@ -1508,7 +1378,6 @@ function clearAnim(el){el.classList.remove('enter-push','leave-push','enter-pop'
 let shownId='home';
 const dim=document.createElement('div'); dim.id='dim'; app.appendChild(dim);
 function show(id,mode){
-  if(id==='phases') requestAnimationFrame(()=>{ if(typeof centerP==='function') centerP() });
   const from=$('#'+shownId), to=$('#'+id);
   if(from===to) return;
   shownId=id;
@@ -1588,13 +1457,12 @@ document.addEventListener('click',e=>{
   }
 });
 function jump(id){
-  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],phases:['home','journey','phases'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session'],notifs:['home','notifs'],education:['home','journey','education']};
+  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session'],notifs:['home','notifs']};
   const target=map[id]; const last=target[target.length-1];
   closeSheet(true);
   if(shownId!==last){ const from=$('#'+shownId), to=$('#'+last); [from,to].forEach(clearAnim); from.classList.remove('active'); to.classList.add('active','enter-fade'); setTimeout(()=>clearAnim(to),400); to.scrollTop=0; shownId=last; reveal(last) }
   stack=target;
   if(id==='symptom') setTimeout(()=>openSheet('nausea'),350);
-  if(last==='phases') requestAnimationFrame(centerP);
 }
 $('#restart').onclick=()=>{ resetSession(); jump('home'); };
 
@@ -1673,14 +1541,6 @@ dots.forEach((d,i)=>d.addEventListener('click',()=>{ const k=jcs[i]; jcar.scroll
 let jt; jcar.addEventListener('scroll',()=>{ cancelAnimationFrame(jt); jt=requestAnimationFrame(jActive) },{passive:true});
 jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else if(i===1) go('journey'); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
 
-/* ---------- all phases carousel ---------- */
-const pcar=$('[data-pcar]'), pcs=$$('.jc',pcar);
-function pActive(){ const mid=pcar.scrollLeft+pcar.clientWidth/2; let best=0,bd=1e9; pcs.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); pcs.forEach((k,i)=>k.classList.toggle('on',i===best)); return best }
-let pt; pcar.addEventListener('scroll',()=>{ cancelAnimationFrame(pt); pt=requestAnimationFrame(pActive) },{passive:true});
-const pTo=(i,sm)=>{ const k=pcs[i]; pcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-pcar.clientWidth/2,behavior:sm?'smooth':'auto'}) };
-pcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(pcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ e.stopPropagation(); pTo(i,true); return }
-  const b=e.target.closest('[data-phase]'); if(!b) return; e.stopPropagation(); if(i===1) back(); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
-function centerP(){ pTo(1); pActive() }
 
 /* ---------- home hero collapses into a compact header on scroll (parallax) ---------- */
 const hero=$('#home .hero'), H={}, SDA=!!(window.CSS&&CSS.supports('animation-timeline: --a')&&CSS.supports('scroll-timeline: --a block'));
@@ -1718,10 +1578,10 @@ function heroTick(){
   H.fe.style.opacity=sstep(.6,1,p).toFixed(3);
   heroLive(y,p);
 }
-/* Care Center FAB: always on Progress/Journey/All phases; on Home only once "Your care team" has scrolled out of view */
+/* Care Center FAB: always on Progress/Journey; on Home only once "Your care team" has scrolled out of view */
 function fabUpd(id=shownId){
   const f=$('.fab'); if(!f) return;
-  let show=['progress','journey','phases','education'].includes(id);
+  let show=['progress','journey'].includes(id);
   if(id==='home'){ const c=$('#home .sheet > .sec'), top=$('#home .hero-in').getBoundingClientRect().bottom; show=!!c && c.getBoundingClientRect().bottom < top }
   f.classList.toggle('hide',!show);
 }
@@ -1813,7 +1673,7 @@ $$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.query
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); centerP(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','journey','phases','care','support','session','notifs','education'].includes(h)) setTimeout(()=>jump(h),300) },350) };
+const boot=()=>{ centerJ(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','journey','care','support','session','notifs'].includes(h)) setTimeout(()=>jump(h),300) },350) };
 let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
 (document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();
