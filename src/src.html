@@ -497,8 +497,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
 /* ---------- CARE CENTER ---------- */
 .care{background:var(--red-700)}
-.care .bgimg{position:absolute;left:-220px;top:-4px;width:843px;height:584px;border-radius:16px;overflow:hidden;pointer-events:none}
-.care .bgimg img{width:100%;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.3;animation:drift 22s ease-in-out infinite alternate}
+.care .bgimg{position:absolute;left:0;right:0;top:-4px;height:584px;overflow:hidden;pointer-events:none}
+.care .bgimg img{position:absolute;top:0;left:var(--bx,-220px);width:843px;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.3;animation:drift 22s ease-in-out infinite alternate}
 .care .gnav{position:relative}
 .care-hd{padding:40px 20px 0;color:var(--yellow-0);position:relative}
 .care-hd p{font-size:14px;line-height:1.5;opacity:.8;width:210px;margin-top:8px}
@@ -1068,7 +1068,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
       <!-- ================= CARE · SUPPORT ================= -->
       <section class="scr care" id="support" data-sb="light">
-        <div class="bgimg" style="left:-180px;top:0"><img loading="lazy" decoding="async" src="img/care-bg.jpg" alt=""></div>
+        <div class="bgimg" style="--bx:-180px;top:0"><img loading="lazy" decoding="async" src="img/care-bg.jpg" alt=""></div>
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
@@ -1153,7 +1153,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="wl-lbl">Your subscriptions</div>
           <div class="wl-list">
             <button class="wl-item on" data-wl-close><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
-            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span><b>Hair Loss</b><small>Finasteride · 0.5mg</small></span></button>
+            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span><b>Hair loss</b><small>Finasteride · 0.5mg</small></span></button>
             <button class="wl-item line" data-toast="Only Weight loss is set up in this prototype"><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
           </div>
         </div>
@@ -1400,7 +1400,7 @@ function chartIntro(){
   cline.style.transition='stroke-dashoffset 1.5s cubic-bezier(.65,0,.35,1)'; cline.style.strokeDashoffset=0;
   $('#fc').style.opacity=0; setTimeout(()=>{$('#fc').style.transition='opacity .6s';$('#fc').style.opacity=1},1400);
   const t0=performance.now();
-  const step=t=>{ const p=Math.min(1,(t-t0)/1500), e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2; const x=END_X*e; clipR.setAttribute('width',x); setScrub(x); if(p<1) introRAF=requestAnimationFrame(step) };
+  const step=t=>{ const p=Math.max(0,Math.min(1,(t-t0)/1500)), e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2; const x=END_X*e; clipR.setAttribute('width',x); setScrub(x); if(p<1) introRAF=requestAnimationFrame(step) };
   introRAF=requestAnimationFrame(step);
   $('#hint').style.opacity=1;
 }

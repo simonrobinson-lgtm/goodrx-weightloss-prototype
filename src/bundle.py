@@ -9,8 +9,10 @@ root = os.path.dirname(os.path.abspath(__file__))
 mode, out = sys.argv[1], sys.argv[2]
 
 s = open(os.path.join(root, 'src.html')).read().replace('{{SPRITE}}', open(os.path.join(root, 'sprite.min.svg')).read())
-s = re.sub(r"const boot=\(\)=>\{ centerJ\(\); setTimeout\(\(\)=>\{ \$\('#splash'\)\.classList\.add\('done'\); reveal\('home'\) \},(\d+)\) \};",
-           lambda m: "const boot=()=>{ centerJ(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home'); const h=(location.hash||'').slice(1); if(['progress','symptom','journey','phases','care','support','session'].includes(h)) setTimeout(()=>jump(h),300) }," + m.group(1) + ") };", s)
+_n = len(s)
+s = re.sub(r"(\$\('#splash'\)\.classList\.add\('done'\); reveal\('home'\))",
+           r"\1; const h=(location.hash||'').slice(1); if(['progress','symptom','journey','phases','care','support','session'].includes(h)) setTimeout(()=>jump(h),300)", s, count=1)
+assert len(s) > _n, 'deep-link hook not injected: boot() changed shape'
 s = s.replace('<meta name="viewport"', '<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"', 1)
 
 def uri(p):
