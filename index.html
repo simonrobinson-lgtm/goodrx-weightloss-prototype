@@ -785,6 +785,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .np-search .i{width:16px;height:16px;color:var(--ink)}
 .np-row{display:flex;align-items:center;gap:8px;width:100%;padding:12px 20px;font-size:14px;line-height:1.5;color:var(--green-700);transition:background .2s}
 .np-row:hover,.np-link:hover{background:var(--neutral-100)}
+.np-link.np-off{cursor:default}
+.np-link.np-off:hover{background:none}
 .np-row img{width:24px;height:24px;border-radius:4px}
 .np-lbl{padding:12px 20px;font-size:13px;line-height:1.5;color:var(--ink-60)}
 .np-sub{background:var(--yellow-0);border-top:1px solid var(--ink-10)}
@@ -1380,7 +1382,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="np-links"><div>
               <button class="np-link cur" data-nav-go="home">Overview</button>
               <button class="np-link" data-nav-go="care">Care Center</button>
-              <button class="np-link" data-nav-go="journey">Treatment Plan Details</button>
+              <button class="np-link np-off" type="button" aria-disabled="true">Treatment Plan Details</button>
             </div></div>
           </div>
           <div class="np-sub2"><span class="thumb t44"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span class="np-t"><b>Hair loss</b><small>Finasteride · 0.5mg</small></span><button class="np-tog down" data-toast="Only Weight loss is set up in this prototype" aria-label="Expand Hair loss"><svg><use href="#i-chev8"/></svg></button></div>
