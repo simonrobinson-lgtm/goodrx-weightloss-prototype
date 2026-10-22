@@ -9,6 +9,7 @@
 <link rel="preload" href="fonts/GoodRxBolton-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GoodRxMoon-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/hero-bg.jpg" as="image">
+<link rel="preload" href="img/journey-mix.jpg" as="image">
 <style>
 @font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
@@ -372,7 +373,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jcar .jc[data-tone=blue]{background:#015176}
 .jcar .jc .art{opacity:1;transition:none}
 .jcar .jc[data-tone=green] .art,.jcar .jc[data-tone=blue] .art{display:none}
-.jcar .jc[data-tone=mix]{background:#8a7366}
+.jcar .jc[data-tone=mix]{background:#957763}
 .jcar .jc{transition:height .5s var(--ease),box-shadow .5s}
 .jcar .jc:not(.on) .nbox{opacity:0}
 .jcar .jc .body{gap:24px;left:20px;right:20px}
@@ -444,8 +445,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .stats .k{font-size:13px;line-height:1.5;color:var(--ink);white-space:nowrap}
 .stats .big .u{font-size:10px;line-height:1;margin-bottom:6px}
 .summary{margin:8px 12px 28px;border-radius:12px;background:var(--green-100);padding:16px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px}
-.summary{isolation:isolate}
-.summary::before{content:"";position:absolute;left:-82px;top:7px;width:264px;height:126px;border-radius:50%;background:linear-gradient(180deg,var(--yellow-300),var(--green-700) 80%);filter:blur(50px);mix-blend-mode:overlay;transform:rotate(44.92deg);animation:breathe 8s ease-in-out infinite alternate}
+.summary{isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0)}
+.summary::before{content:"";position:absolute;left:-132px;top:-43px;width:364px;height:226px;background:radial-gradient(closest-side at 50% 38%,rgba(255,224,92,.85),rgba(255,224,92,0) 70%),radial-gradient(closest-side at 50% 68%,rgba(28,83,78,.55),rgba(28,83,78,0) 80%);mix-blend-mode:overlay;transform:rotate(44.92deg);animation:breathe 8s ease-in-out infinite alternate;will-change:transform}
 @keyframes breathe{from{transform:rotate(44.92deg) translateX(-10px)}to{transform:rotate(44.92deg) translateX(24px)}}
 .summary>*{position:relative}
 .summary .t{font-size:16px;line-height:1.2;color:var(--green-700)}
@@ -466,7 +467,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .srow .icon-box .i{width:16px;height:16px}
 .pjourney{padding:16px 0}
 .pjourney .hd{padding:0 20px;margin-bottom:16px;font-size:20px}
-.pj{position:relative;margin:0 12px;border-radius:12px;overflow:hidden;height:224px;padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:space-between;color:var(--yellow-100)}
+.pj{position:relative;margin:0 12px;border-radius:12px;overflow:hidden;background:#987a65;height:224px;padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:space-between;color:var(--yellow-100)}
 .pj .art{position:absolute;inset:0}
 .pj .art img{width:100%;height:100%;object-fit:cover}
 .pj .art::after{content:"";position:absolute;inset:0;background:linear-gradient(176deg,#c23ba0 25%,#581447 80%);opacity:.7}
@@ -483,29 +484,34 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 /* ---------- YOUR JOURNEY ---------- */
 #journey{background:var(--neutral-0)}
 .jy{padding:27px 0 120px}
-.jy-hero{padding:0;overflow:hidden}
-.jy-row{position:relative;margin:0 20px}
-.jy-side{position:absolute;top:calc(50% - 74px);height:148px;width:352px;border-radius:12px;transition:transform .35s var(--ease),filter .2s}
-.jy-side.l{right:calc(100% + 8px);background:#1c534e}
-.jy-side.r{left:calc(100% + 8px);background:#015176}
+.jy-hero{padding:0}
+.jy-car{display:flex;align-items:center;gap:8px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:0 20.5px;scroll-padding:0 20.5px;height:190px;scrollbar-width:none;overscroll-behavior-x:contain}
+.jy-car::-webkit-scrollbar{display:none}
+.jy-card{position:relative;flex:0 0 352px;height:148px;border-radius:12px;overflow:hidden;padding:16px 14px 20px;scroll-snap-align:center;background:#205a51;transition:height .45s var(--ease);cursor:pointer}
+.jy-card[data-i="1"]{background:#997b65}
+.jy-card[data-i="2"]{background:#0b3c56}
+.jy-card.on{height:186px;cursor:default}
+.jy-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .jy-n{position:absolute;z-index:2;top:7px;right:8px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,251,.2);color:var(--yellow-100);font-size:14px;display:flex;align-items:center;justify-content:center}
-.jy-dots{display:flex;justify-content:center;align-items:center;gap:4px;padding:8px 16px}
-.jy-dots i{width:5px;height:5px;border-radius:40px;background:rgba(26,25,22,.2)}
-.jy-dots i.on{width:12px;background:var(--neutral-900,#1a1916)}
-.jy-all{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:20px 0;font-weight:500;font-size:12px;letter-spacing:.01em;line-height:1;color:var(--green-800)}
-.jy-all .i{width:12px;height:12px}
-.jy-card{position:relative;border-radius:12px;overflow:hidden;padding:16px 14px 20px}
-.jy-card .mixl{left:0;top:-19px;width:438px;height:281px}
-.jy-card .mixl img{inset:0;width:100%;height:100%}
-
+.jy-card .jy-n,.jy-card .jy-in{opacity:0;transition:opacity .3s}
+.jy-card.on .jy-n,.jy-card.on .jy-in{opacity:1;transition:opacity .4s .1s}
+.jy-dots{display:flex;justify-content:center;align-items:center;gap:4px;padding:0 16px;height:21px}
+.jy-dots button{width:5px;height:5px;border-radius:40px;background:rgba(26,25,22,.2);transition:width .35s var(--ease),background .35s;padding:0}
+.jy-dots button.on{width:12px;background:var(--neutral-900,#1a1916)}
 .jy-in{position:relative;display:flex;flex-direction:column;gap:40px}
 .jy-in .chip{align-self:flex-start}
 .jy-in .chip img{width:12px;height:12px}
+.chip.ol{background:none;box-shadow:inset 0 0 0 .5px #ffef8a;color:var(--yellow-100)}
 .jy-in h1{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:var(--yellow-100)}
 .jy-in p{font-size:16px;line-height:1.4;color:rgba(255,255,251,.6);margin-top:8px}
+.jphase{display:none}
+.jphase.on{display:block}
+.jphase.in{animation:phIn .45s var(--ease) both}
+@keyframes phIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.jphase>.jsec:first-child{padding-top:24px}
+.tv{display:flex;flex-direction:column;gap:12px}
+.tvg>div{display:flex;align-items:baseline;gap:2px}
 .jsec{border-bottom:1px solid var(--ink-10);padding:32px 12px 24px}
-.jy-hero+.jsec{padding-top:24px;padding-bottom:32px}
-.jy-hero+.jsec+.jsec{padding-bottom:14px}
 .jsec-h{display:flex;justify-content:space-between;align-items:center;padding:0 8px;font-size:16px;line-height:1.2;color:rgba(18,17,15,.7)}
 .jtog{width:32px;height:32px;border-radius:8px;box-shadow:inset 0 0 0 .5px var(--green-800);color:var(--green-800);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
 .jtog:hover{background:var(--green-700);color:var(--yellow-100)}
@@ -519,7 +525,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .cap12{font-size:12px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--green-700);padding:8px 0}
 .cap10{font-size:10px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60)}
 .tv{width:120px;color:var(--green-700)}
-.tv>div{display:flex;align-items:baseline;gap:2px}
+
 .tv .num{font-size:20px;line-height:1}
 .tv .u{font-size:14px;line-height:1.5}
 .tv small{display:block;font-size:13px;line-height:1.5;color:var(--ink-50)}
@@ -606,6 +612,16 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .tabs .seg [data-ctab="messages"] .ndot{transform:scale(0);transition:transform .3s var(--ease)}
 .csheet.sup .tabs .seg [data-ctab="messages"] .ndot{transform:none}
 .csheet.sw .rv{animation:none!important;opacity:1!important;transform:none!important}
+.ccard .illo{width:80px;height:80px;overflow:visible}
+.ccard .il-noise{width:82px}
+.il-energy circle{transform-box:view-box;transform-origin:40px 79px}
+.il-energy .e1{animation:eRip 4.2s var(--ease) infinite}
+.il-energy .e2{animation:eRip 4.2s .25s var(--ease) infinite}
+.il-energy .e3{animation:eRip 4.2s .5s var(--ease) infinite}
+.il-energy .e4{animation:eDot 4.2s .5s ease-in-out infinite;transform-origin:40px 78px}
+@keyframes eRip{0%,100%{transform:scale(.9)}45%{transform:scale(1)}}
+@keyframes eDot{0%,100%{transform:translateY(0)}45%{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.il-energy *{animation:none!important}}
 .tabpane{display:none}
 .tabpane.on{display:block;animation:paneIn .45s var(--ease) both}
 @keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -949,7 +965,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                 <div class="body"><div><h3>Adjusting to treatment</h3><p>Your body gets used to the medication. Appetite shifts, digestion slows, and you start to learn what works for you.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
               <button class="jc" data-i="1" data-tone="mix">
-                <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-mix.jpg" alt=""></div></div>
+                <div class="art"><div class="mixl"><img src="img/journey-mix.jpg" fetchpriority="high" alt=""></div></div>
                 <div class="head"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span><span class="nbox num">2</span></div>
                 <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
@@ -1014,8 +1030,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="evid">
             <div class="hd rv"><div class="h-sec">Changes you’ve noticed</div><div class="sub" style="margin-top:4px">Based on recent logs</div></div>
             <div class="car ccar rv" style="--d:1" data-car>
-              <div class="card ccard"><svg><use href="#i-illo-energy"/></svg><div><div class="t">Increased energy</div><div class="d">Feeling more energized day-to-day</div></div></div>
-              <div class="card ccard"><svg style="width:82px"><use href="#i-illo-noise"/></svg><div><div class="t">Less Food noise</div><div class="d">Fewer intrusive thoughts about food this week</div></div></div>
+              <div class="card ccard"><svg class="illo il-energy" viewBox="0 0 80 80" fill="none" aria-hidden="true"><g stroke="#1c534e" stroke-width=".75"><circle class="e1" cx="40" cy="40" r="39.2"/><circle class="e2" cx="40" cy="53" r="26.2"/><circle class="e3" cx="40" cy="66" r="13.2"/></g><circle class="e4" cx="40" cy="78.4" r="3.2" fill="#dedb7c" stroke="#1c534e" stroke-width=".6"/></svg><div><div class="t">Increased energy</div><div class="d">Feeling more energized day-to-day</div></div></div>
+              <div class="card ccard"><svg class="illo il-noise" viewBox="0 0 82 80" fill="none" aria-hidden="true"><path d="M0 40H82" stroke="#1c534e" stroke-width=".75"/><path d="M1.00 40.00 L2.11 30.98 L3.22 22.79 L4.33 16.20 L5.44 11.81 L6.56 10.03 L7.67 11.02 L8.78 14.70 L9.89 20.72 L11.00 28.52 L12.11 37.39 L13.22 46.49 L14.33 55.00 L15.44 62.12 L16.56 67.19 L17.67 69.74 L18.78 69.54 L19.89 66.61 L21.00 61.21 L22.11 53.85 L23.22 45.21 L24.33 36.08 L25.44 27.32 L26.56 19.73 L27.67 14.02 L28.78 10.71 L29.89 10.11 L31.00 12.28 L32.11 17.02 L33.22 23.88 L34.33 32.24 L35.44 41.31 L36.56 50.26 L37.67 58.26 L38.78 64.57 L39.89 68.61 L41.00 70.00 L42.11 68.61 L43.22 64.57 L44.33 58.26 L45.44 50.26 L46.56 41.31 L47.67 32.24 L48.78 23.88 L49.89 17.02 L51.00 12.28 L52.11 10.11 L53.22 10.71 L54.33 14.02 L55.44 19.73 L56.56 27.32 L57.67 36.08 L58.78 45.21 L59.89 53.85 L61.00 61.21 L62.11 66.61 L63.22 69.54 L64.33 69.74 L65.44 67.19 L66.56 62.12 L67.67 55.00 L68.78 46.49 L69.89 37.39 L71.00 28.52 L72.11 20.72 L73.22 14.70 L74.33 11.02 L75.44 10.03 L76.56 11.81 L77.67 16.20 L78.78 22.79 L79.89 30.98 L81.00 40.00" stroke="#1c534e" stroke-width=".9" stroke-linejoin="round"><animate attributeName="d" values="M1.00 40.00 L2.11 30.98 L3.22 22.79 L4.33 16.20 L5.44 11.81 L6.56 10.03 L7.67 11.02 L8.78 14.70 L9.89 20.72 L11.00 28.52 L12.11 37.39 L13.22 46.49 L14.33 55.00 L15.44 62.12 L16.56 67.19 L17.67 69.74 L18.78 69.54 L19.89 66.61 L21.00 61.21 L22.11 53.85 L23.22 45.21 L24.33 36.08 L25.44 27.32 L26.56 19.73 L27.67 14.02 L28.78 10.71 L29.89 10.11 L31.00 12.28 L32.11 17.02 L33.22 23.88 L34.33 32.24 L35.44 41.31 L36.56 50.26 L37.67 58.26 L38.78 64.57 L39.89 68.61 L41.00 70.00 L42.11 68.61 L43.22 64.57 L44.33 58.26 L45.44 50.26 L46.56 41.31 L47.67 32.24 L48.78 23.88 L49.89 17.02 L51.00 12.28 L52.11 10.11 L53.22 10.71 L54.33 14.02 L55.44 19.73 L56.56 27.32 L57.67 36.08 L58.78 45.21 L59.89 53.85 L61.00 61.21 L62.11 66.61 L63.22 69.54 L64.33 69.74 L65.44 67.19 L66.56 62.12 L67.67 55.00 L68.78 46.49 L69.89 37.39 L71.00 28.52 L72.11 20.72 L73.22 14.70 L74.33 11.02 L75.44 10.03 L76.56 11.81 L77.67 16.20 L78.78 22.79 L79.89 30.98 L81.00 40.00;M1.00 29.03 L2.11 26.92 L3.22 26.03 L4.33 26.42 L5.44 28.07 L6.56 30.83 L7.67 34.43 L8.78 38.55 L9.89 42.81 L11.00 46.80 L12.11 50.17 L13.22 52.59 L14.33 53.85 L15.44 53.83 L16.56 52.52 L17.67 50.06 L18.78 46.67 L19.89 42.66 L21.00 38.40 L22.11 34.29 L23.22 30.71 L24.33 27.99 L25.44 26.38 L26.56 26.04 L27.67 26.98 L28.78 29.13 L29.89 32.29 L31.00 36.16 L32.11 40.38 L33.22 44.57 L34.33 48.34 L35.44 51.34 L36.56 53.28 L37.67 54.00 L38.78 53.42 L39.89 51.60 L41.00 48.70 L42.11 45.00 L43.22 40.84 L44.33 36.60 L45.44 32.67 L46.56 29.42 L47.67 27.15 L48.78 26.08 L49.89 26.28 L51.00 27.76 L52.11 30.37 L53.22 33.88 L54.33 37.95 L55.44 42.21 L56.56 46.26 L57.67 49.74 L58.78 52.31 L59.89 53.75 L61.00 53.91 L62.11 52.78 L63.22 50.47 L64.33 47.20 L65.44 43.25 L66.56 39.01 L67.67 34.85 L68.78 31.18 L69.89 28.32 L71.00 26.54 L72.11 26.01 L73.22 26.77 L74.33 28.76 L75.44 31.78 L76.56 35.57 L77.67 39.77 L78.78 43.99 L79.89 47.84 L81.00 50.97;M1.00 40.00 L2.11 30.98 L3.22 22.79 L4.33 16.20 L5.44 11.81 L6.56 10.03 L7.67 11.02 L8.78 14.70 L9.89 20.72 L11.00 28.52 L12.11 37.39 L13.22 46.49 L14.33 55.00 L15.44 62.12 L16.56 67.19 L17.67 69.74 L18.78 69.54 L19.89 66.61 L21.00 61.21 L22.11 53.85 L23.22 45.21 L24.33 36.08 L25.44 27.32 L26.56 19.73 L27.67 14.02 L28.78 10.71 L29.89 10.11 L31.00 12.28 L32.11 17.02 L33.22 23.88 L34.33 32.24 L35.44 41.31 L36.56 50.26 L37.67 58.26 L38.78 64.57 L39.89 68.61 L41.00 70.00 L42.11 68.61 L43.22 64.57 L44.33 58.26 L45.44 50.26 L46.56 41.31 L47.67 32.24 L48.78 23.88 L49.89 17.02 L51.00 12.28 L52.11 10.11 L53.22 10.71 L54.33 14.02 L55.44 19.73 L56.56 27.32 L57.67 36.08 L58.78 45.21 L59.89 53.85 L61.00 61.21 L62.11 66.61 L63.22 69.54 L64.33 69.74 L65.44 67.19 L66.56 62.12 L67.67 55.00 L68.78 46.49 L69.89 37.39 L71.00 28.52 L72.11 20.72 L73.22 14.70 L74.33 11.02 L75.44 10.03 L76.56 11.81 L77.67 16.20 L78.78 22.79 L79.89 30.98 L81.00 40.00" dur="5.5s" repeatCount="indefinite" keySplines=".45 0 .55 1;.45 0 .55 1" calcMode="spline" keyTimes="0;.5;1"/></path><circle cx="29.57" cy="10.00" r="3.2" fill="#dedb7c" stroke="#1c534e" stroke-width=".6"><animate attributeName="cy" values="10.00;31.30;10.00" dur="5.5s" repeatCount="indefinite" keySplines=".45 0 .55 1;.45 0 .55 1" calcMode="spline" keyTimes="0;.5;1"/></circle><circle cx="18.14" cy="70.00" r="3.2" fill="#dedb7c" stroke="#1c534e" stroke-width=".6"><animate attributeName="cy" values="70.00;48.70;70.00" dur="5.5s" repeatCount="indefinite" keySplines=".45 0 .55 1;.45 0 .55 1" calcMode="spline" keyTimes="0;.5;1"/></circle></svg><div><div class="t">Less Food noise</div><div class="d">Fewer intrusive thoughts about food this week</div></div></div>
             </div>
             <div class="reported rv" style="--d:2">
               <div class="lbl">Last reported side effects</div>
@@ -1027,7 +1043,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="pjourney rv">
             <div class="hd h-sec">Your journey</div>
             <div class="pj">
-              <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-mix-p.jpg" alt=""></div></div>
+              <div class="art"><div class="mixl"><img src="img/journey-mix-p.jpg" alt=""></div></div>
               <div><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span></div>
               <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-go="journey">Learn more</button></div>
             </div>
@@ -1045,30 +1061,56 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg><span class="bk-t">Treatment plan overview</span></button></div>
         <div class="jy">
           <div class="jy-hero rv" style="--d:1">
-            <div class="jy-row">
-              <div class="jy-side l" aria-hidden="true"></div>
-              <div class="jy-card">
-                <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-mix-h.jpg" alt=""></div>
-                <span class="jy-n num">2</span>
+            <div class="jy-car" id="jyCar">
+              <div class="jy-card" data-i="0" role="group" aria-label="Phase 1">
+                <img class="jy-bg" src="img/phase1-bg.jpg" alt="">
+                <span class="jy-n num">1</span>
                 <div class="jy-in">
-                  <span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span>
-                  <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div>
+                  <span class="chip ol r4">Completed</span>
+                  <div><h1>Adjusted to treatment</h1><p>You slowly worked up to a more effective dose, allowing your body to adjust.</p></div>
                 </div>
               </div>
-              <div class="jy-side r" aria-hidden="true"></div>
+              <div class="jy-card on" data-i="1" role="group" aria-label="Phase 2">
+                <img class="jy-bg" src="img/journey-mix-h.jpg" alt="">
+                <span class="jy-n num">2</span>
+                <div class="jy-in">
+                  <span class="chip av sq r4"><img src="img/av-phase.webp" alt="">Current phase</span>
+                  <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes adding up week by week.</p></div>
+                </div>
+              </div>
+              <div class="jy-card" data-i="2" role="group" aria-label="Phase 3">
+                <img class="jy-bg" src="img/phase3-bg.jpg" alt="">
+                <span class="jy-n num">3</span>
+                <div class="jy-in">
+                  <span class="chip ol r4">Up next</span>
+                  <div><h1>Maintenance</h1><p>Your body has a new baseline. The focus shifts to holding your progress long-term.</p></div>
+                </div>
+              </div>
             </div>
-            <div class="jy-dots" aria-hidden="true"><i></i><i class="on"></i><i></i></div>
+            <div class="jy-dots" role="tablist" aria-label="Journey phases"><button data-jd="0" aria-label="Phase 1"></button><button data-jd="1" class="on" aria-label="Phase 2"></button><button data-jd="2" aria-label="Phase 3"></button></div>
           </div>
-          <div class="jsec rv open" style="--d:2">
+          <div class="jphases rv" style="--d:2">
+            <div class="jphase" data-ph="0">
+          <div class="jsec open">
             <div class="jsec-h"><span>Treatment</span><button class="jtog" aria-label="Collapse Treatment"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
             <div class="jsec-b"><div><div class="trows">
-              <div class="trow"><span class="cap12">Current dose</span><div class="tv"><div><span class="num">0.5</span><span class="u">mg</span></div><small>1x a week</small></div></div>
-              <div class="trow"><span class="cap12">Current cost</span><div class="tv"><div><span class="num">$199</span><span class="u">/mo</span></div><small>all in</small></div></div>
-              <div class="trow"><span class="cap12">Weight loss</span><div class="tv"><div><span class="num">-1%</span><span class="u">body weight</span></div><small>Avg by week 8.</small></div></div>
+              <div class="trow"><span class="cap12">Dosage</span><div class="tv"><div class="tvg"><div><span class="num">0.5</span><span class="u">mg</span></div><small>week 1-2</small></div><div class="tvg"><div><span class="num">0.75</span><span class="u">mg</span></div><small>week 3-4</small></div></div></div>
+              <div class="trow"><span class="cap12">Total cost</span><div class="tv"><div class="tvg"><div><span class="num">$199</span><span class="u"></span></div><small>all in</small></div></div></div>
+              <div class="trow"><span class="cap12">Weight loss</span><div class="tv"><div class="tvg"><div><span class="num">-2</span><span class="u">lbs</span></div><small>by week 4</small></div></div></div>
             </div></div></div>
           </div>
-          <div class="jsec rv open" style="--d:3">
-            <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Collapse Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+          <div class="jsec">
+            <div class="jsec-h"><span>What you noticed</span><button class="jtog" aria-label="Expand What you noticed"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <div class="car jcards" data-car>
+                <div class="lcard"><div class="lc-top"><div><h3>Side effects</h3><p>You reported some mild symptoms that eased by week 2.</p></div><svg><use href="#i-zap"/></svg></div><ul><li>Add protein to every meal</li><li>Sip water throughout the day</li></ul></div>
+                <div class="lcard"><div class="lc-top"><div><h3>Changes in your body</h3><p>Began noticing changes by week 3.</p></div><svg><use href="#i-sparkle"/></svg></div><ul><li>Increased energy, less food noise.</li></ul></div>
+              </div>
+              <button class="jmore" data-go="progress">View your logs <svg class="i"><use href="#i-chev-r12"/></svg></button>
+            </div></div>
+          </div>
+          <div class="jsec">
+            <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Expand Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
             <div class="jsec-b"><div>
               <div class="car jcards" data-car>
                 <div class="secard">
@@ -1084,8 +1126,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               <button class="jmore" data-symptom="nausea">More on side effects <svg class="i"><use href="#i-link"/></svg></button>
             </div></div>
           </div>
-          <div class="jsec rv open" style="--d:4">
-            <div class="jsec-h"><span>Everyday Life</span><button class="jtog" aria-label="Collapse Everyday Life"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+          <div class="jsec">
+            <div class="jsec-h"><span>Everyday Life</span><button class="jtog" aria-label="Expand Everyday Life"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
             <div class="jsec-b"><div>
               <p class="jsec-d">Treatment affects more than digestion. Your energy, habits and social plans may shift too.</p>
               <div class="car jcards" data-car>
@@ -1094,6 +1136,84 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               </div>
               <button class="jmore" data-toast="Article view coming soon">More on what to expect <svg class="i"><use href="#i-link"/></svg></button>
             </div></div>
+          </div>
+            </div>
+            <div class="jphase on" data-ph="1">
+          <div class="jsec open">
+            <div class="jsec-h"><span>Treatment</span><button class="jtog" aria-label="Collapse Treatment"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div><div class="trows">
+              <div class="trow"><span class="cap12">Current dose</span><div class="tv"><div class="tvg"><div><span class="num">0.5</span><span class="u">mg</span></div><small>1x a week</small></div></div></div>
+              <div class="trow"><span class="cap12">Current cost</span><div class="tv"><div class="tvg"><div><span class="num">$199</span><span class="u">/mo</span></div><small>all in</small></div></div></div>
+              <div class="trow"><span class="cap12">Weight loss</span><div class="tv"><div class="tvg"><div><span class="num">-1%</span><span class="u">body weight</span></div><small>Avg by week 8.</small></div></div></div>
+            </div></div></div>
+          </div>
+          <div class="jsec">
+            <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Expand Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <div class="car jcards" data-car>
+                <div class="secard">
+                  <div class="se-art"><img loading="lazy" decoding="async" src="img/stomach.png" alt=""><i></i></div>
+                  <div class="se-top"><h3>Mild nausea &amp; constipation</h3><p>Your digestion slows down, so you might experience some discomfort.</p></div>
+                  <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Eat smaller meals, throughout the day</li><li>Have your last meal 3 hours before bedtime</li><li>Stay hydrated</li></ul></div>
+                </div>
+                <div class="secard">
+                  <div class="se-top"><h3>Light headaches</h3><p>Eating less and shifts in hydration can bring them on early in treatment.</p></div>
+                  <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Sip water steadily through the day</li><li>Try not to skip meals</li><li>Rest somewhere quiet and dim</li></ul></div>
+                </div>
+              </div>
+              <button class="jmore" data-symptom="nausea">More on side effects <svg class="i"><use href="#i-link"/></svg></button>
+            </div></div>
+          </div>
+          <div class="jsec">
+            <div class="jsec-h"><span>Everyday Life</span><button class="jtog" aria-label="Expand Everyday Life"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <p class="jsec-d">Treatment affects more than digestion. Your energy, habits and social plans may shift too.</p>
+              <div class="car jcards" data-car>
+                <div class="lcard"><div class="lc-top"><div><h3>Energy dips</h3><p>Eating less can leave you running low, especially in the afternoon.</p></div><svg><use href="#i-zap"/></svg></div><ul><li>Add protein to every meal</li><li>Sip water throughout the day</li></ul></div>
+                <div class="lcard"><div class="lc-top"><div><h3>Eating out</h3><p>Smaller portions can make restaurant meals feel like a lot.</p></div><svg><use href="#i-cutlery"/></svg></div><ul><li>Order a starter as your main</li><li>Pack up half before you begin</li></ul></div>
+              </div>
+              <button class="jmore" data-toast="Article view coming soon">More on what to expect <svg class="i"><use href="#i-link"/></svg></button>
+            </div></div>
+          </div>
+            </div>
+            <div class="jphase" data-ph="2">
+          <div class="jsec open">
+            <div class="jsec-h"><span>Treatment</span><button class="jtog" aria-label="Collapse Treatment"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div><div class="trows">
+              <div class="trow"><span class="cap12">Dosage</span><div class="tv"><div class="tvg"><div><span class="num">0.5-2.75</span><span class="u">mg</span></div><small>avg. increase</small></div></div></div>
+              <div class="trow"><span class="cap12">Cost</span><div class="tv"><div class="tvg"><div><span class="num">+$120-180</span><span class="u"></span></div><small>increment</small></div></div></div>
+              <div class="trow"><span class="cap12">Weight fluctuation</span><div class="tv"><div class="tvg"><div><span class="num">~3-5%</span><span class="u"></span></div><small>of reached weight</small></div></div></div>
+            </div></div></div>
+          </div>
+          <div class="jsec">
+            <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Expand Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <div class="car jcards" data-car>
+                <div class="secard">
+                  <div class="se-art"><img loading="lazy" decoding="async" src="img/stomach.png" alt=""><i></i></div>
+                  <div class="se-top"><h3>Mild nausea &amp; constipation</h3><p>Your digestion slows down, so you might experience some discomfort.</p></div>
+                  <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Eat smaller meals, throughout the day</li><li>Have your last meal 3 hours before bedtime</li><li>Stay hydrated</li></ul></div>
+                </div>
+                <div class="secard">
+                  <div class="se-top"><h3>Light headaches</h3><p>Eating less and shifts in hydration can bring them on early in treatment.</p></div>
+                  <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Sip water steadily through the day</li><li>Try not to skip meals</li><li>Rest somewhere quiet and dim</li></ul></div>
+                </div>
+              </div>
+              <button class="jmore" data-symptom="nausea">More on side effects <svg class="i"><use href="#i-link"/></svg></button>
+            </div></div>
+          </div>
+          <div class="jsec">
+            <div class="jsec-h"><span>Everyday Life</span><button class="jtog" aria-label="Expand Everyday Life"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
+            <div class="jsec-b"><div>
+              <p class="jsec-d">Treatment affects more than digestion. Your energy, habits and social plans may shift too.</p>
+              <div class="car jcards" data-car>
+                <div class="lcard"><div class="lc-top"><div><h3>Energy dips</h3><p>Eating less can leave you running low, especially in the afternoon.</p></div><svg><use href="#i-zap"/></svg></div><ul><li>Add protein to every meal</li><li>Sip water throughout the day</li></ul></div>
+                <div class="lcard"><div class="lc-top"><div><h3>Eating out</h3><p>Smaller portions can make restaurant meals feel like a lot.</p></div><svg><use href="#i-cutlery"/></svg></div><ul><li>Order a starter as your main</li><li>Pack up half before you begin</li></ul></div>
+              </div>
+              <button class="jmore" data-toast="Article view coming soon">More on what to expect <svg class="i"><use href="#i-link"/></svg></button>
+            </div></div>
+          </div>
+            </div>
           </div>
           <p class="jdisc rv">Timing and results vary from person to person. Think of this as a guide, not a forecast.</p>
         </div>
@@ -1402,7 +1522,7 @@ function show(id,mode){
     clearTimeout(from._t); clearTimeout(to._t);
     to._t=from._t=setTimeout(()=>{ if(shownId!==from.id) from.classList.remove('active'); from.style.visibility=''; clearAnim(from); clearAnim(to); dim.className='' },560);
   } else from.classList.remove('active');
-  if(mode!=='unmodal'&&mode!=='pop'){ to.scrollTop=0; if(id==='care'){ CR.sheet.classList.remove('sw'); careTab('messages',false) } }
+  if(mode!=='unmodal'&&mode!=='pop'){ to.scrollTop=0; if(id==='care'){ CR.sheet.classList.remove('sw'); careTab('messages',false) } if(id==='journey'){ jyTo(JY.want??1,false); JY.want=null } }
   crumbs(id); pageTint(id);
   reveal(id, !(mode==='pop'||mode==='unmodal'));   // going back: content is already there, don't replay its entrance
 }
@@ -1504,6 +1624,7 @@ function jump(id){
   closeSheet(true);
   if(shownId!==last){ const from=$('#'+shownId), to=$('#'+last); [from,to].forEach(clearAnim); from.classList.remove('active'); to.classList.add('active','enter-fade'); setTimeout(()=>clearAnim(to),400); to.scrollTop=0; shownId=last; reveal(last) }
   stack=target; crumbs(last); pageTint(last);
+  if(last==='journey') requestAnimationFrame(()=>jyTo(1,false));
   if(last==='care'){ CR.sheet.classList.remove('sw'); careTab(id==='support'?'support':'messages',false) }
   if(id==='symptom') setTimeout(()=>openSheet('nausea'),350);
 }
@@ -1582,7 +1703,7 @@ const jcar=$('[data-jcar]'), jcs=$$('.jc',jcar), dots=$$('.jdots i');
 function jActive(){ const mid=jcar.scrollLeft+jcar.clientWidth/2; let best=0,bd=1e9; jcs.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); jcs.forEach((k,i)=>k.classList.toggle('on',i===best)); dots.forEach((d,i)=>d.classList.toggle('on',i===best)); return best }
 dots.forEach((d,i)=>d.addEventListener('click',()=>{ const k=jcs[i]; jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) }));
 let jt; jcar.addEventListener('scroll',()=>{ cancelAnimationFrame(jt); jt=requestAnimationFrame(jActive) },{passive:true});
-jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else if(i===1) go('journey'); else toast(['Phase 1 recap coming soon','','Maintenance preview coming soon'][i]) }));
+jcs.forEach((k,i)=>k.addEventListener('click',e=>{ if(jcar.classList.contains('was-dragged')) return; if(!k.classList.contains('on')){ jcar.scrollTo({left:k.offsetLeft+k.offsetWidth/2-jcar.clientWidth/2,behavior:'smooth'}) } else { JY.want=i; go('journey') } }));
 
 
 /* ---------- home hero collapses into a compact header on scroll (parallax) ---------- */
@@ -1659,7 +1780,30 @@ addEventListener('keydown',e=>{ if(e.key==='Escape'){ hideMenu(); closeSheet() }
   g.addEventListener('pointerup',end); g.addEventListener('pointercancel',end); })();
 
 /* ---------- journey section toggles ---------- */
-$$('.jtog').forEach(b=>b.addEventListener('click',()=>{ const sec=b.closest('.jsec'); sec.classList.toggle('open'); b.setAttribute('aria-label',(sec.classList.contains('open')?'Collapse ':'Expand ')+sec.querySelector('.jsec-h span').textContent) }));
+const jLbl=sec=>{ const t=$('.jtog',sec); if(t) t.setAttribute('aria-label',(sec.classList.contains('open')?'Collapse ':'Expand ')+$('.jsec-h span',sec).textContent) };
+function jOpen(sec,on){ sec.classList.toggle('open',on); jLbl(sec) }
+$$('.jtog').forEach(b=>b.addEventListener('click',()=>{ const sec=b.closest('.jsec'), on=!sec.classList.contains('open');
+  // one section open at a time within a phase
+  if(on) $$(':scope > .jsec',sec.parentElement).forEach(o=>{ if(o!==sec) jOpen(o,false) });
+  jOpen(sec,on);
+}));
+$$('.jsec-h').forEach(h=>{ h.style.cursor='pointer'; h.addEventListener('click',e=>{ if(!e.target.closest('.jtog')) $('.jtog',h).click() }) });
+
+/* ---------- journey phase carousel ---------- */
+const JY={car:$('#jyCar')}; JY.cards=$$('.jy-card',JY.car); JY.dots=$$('.jy-dots button'); JY.panes=$$('.jphase'); JY.cur=1;
+function jyActive(){ const mid=JY.car.scrollLeft+JY.car.clientWidth/2; let best=0,bd=1e9; JY.cards.forEach((k,i)=>{ const d=Math.abs(k.offsetLeft+k.offsetWidth/2-mid); if(d<bd){bd=d;best=i} }); return best }
+function jySet(i,anim=true){
+  JY.cards.forEach((k,n)=>k.classList.toggle('on',n===i)); JY.dots.forEach((d,n)=>{ d.classList.toggle('on',n===i); d.setAttribute('aria-selected',n===i) });
+  if(i===JY.cur && anim) return; JY.cur=i;
+  JY.panes.forEach((p,n)=>{ p.classList.toggle('on',n===i); p.classList.remove('in'); if(n===i && anim){ void p.offsetWidth; p.classList.add('in') } });
+  // reset accordions: first section open
+  const pane=JY.panes[i]; $$(':scope > .jsec',pane).forEach((sec,n)=>jOpen(sec,n===0));
+}
+function jyTo(i,smooth=true){ const k=JY.cards[i]; JY.car.scrollTo({left:k.offsetLeft+k.offsetWidth/2-JY.car.clientWidth/2,behavior:smooth?'smooth':'auto'}); jySet(i,smooth) }
+let jyt,jyEnd; JY.car.addEventListener('scroll',()=>{ cancelAnimationFrame(jyt); jyt=requestAnimationFrame(()=>{ const i=jyActive(); JY.cards.forEach((k,n)=>k.classList.toggle('on',n===i)); JY.dots.forEach((d,n)=>d.classList.toggle('on',n===i)) }); clearTimeout(jyEnd); jyEnd=setTimeout(()=>jySet(jyActive()),140) },{passive:true});
+JY.cards.forEach((k,i)=>k.addEventListener('click',()=>{ if(!k.classList.contains('on')) jyTo(i) }));
+JY.dots.forEach((d,i)=>d.addEventListener('click',()=>jyTo(i)));
+
 
 /* ---------- accordion ---------- */
 $('#acc>button').onclick=()=>$('#acc').classList.toggle('open');
@@ -1712,11 +1856,11 @@ app.insertBefore(fab,$('#ov'));
 $$('.scr').forEach(sc=>sc.addEventListener('scroll',()=>{ if(sc.id===cur() && !ov.classList.contains('on')) { sb.classList.toggle('solid',sc.scrollTop>30); updStk(sc) } },{passive:true}));
 
 /* ---------- sunlight layer on the bronze journey tiles ---------- */
-$$('.pj .art, .jy-card').forEach(el=>{ const m=el.querySelector('.mixl'); const sun=document.createElement('span'); sun.className='sun'; if(m) m.after(sun); else el.appendChild(sun) });
+$$('.pj .art').forEach(el=>{ const m=el.querySelector('.mixl'); const sun=document.createElement('span'); sun.className='sun'; if(m) m.after(sun); else el.appendChild(sun) });
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); heroMeasure(); pageTint('home'); careMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
+const boot=()=>{ centerJ(); heroMeasure(); jyTo(1,false); pageTint('home'); careMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
 let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
 (document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();
