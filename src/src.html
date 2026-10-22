@@ -1582,7 +1582,7 @@ $$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.query
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); centerP(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350); setTimeout(()=>{ const c=$('#home .acard'); if(c){ c.classList.add('shine'); setTimeout(()=>c.classList.remove('shine'),3000) } },1850) };
+const boot=()=>{ centerJ(); centerP(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
 let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
 (document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();
