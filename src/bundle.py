@@ -11,7 +11,7 @@ mode, out = sys.argv[1], sys.argv[2]
 s = open(os.path.join(root, 'src.html')).read().replace('{{SPRITE}}', open(os.path.join(root, 'sprite.min.svg')).read())
 _n = len(s)
 s = re.sub(r"(\$\('#splash'\)\.classList\.add\('done'\); reveal\('home'\))",
-           r"\1; const h=(location.hash||'').slice(1); if(['progress','symptom','journey','phases','care','support','session'].includes(h)) setTimeout(()=>jump(h),300)", s, count=1)
+           r"\1; const h=(location.hash||'').slice(1); if(['progress','symptom','journey','phases','care','support','session','notifs','education'].includes(h)) setTimeout(()=>jump(h),300)", s, count=1)
 assert len(s) > _n, 'deep-link hook not injected: boot() changed shape'
 s = s.replace('<meta name="viewport"', '<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"', 1)
 
