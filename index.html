@@ -84,7 +84,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 #home.sda .hero .drug>.dh:nth-child(3){animation-name:hsLink}
 #home.sda .hero .actions{animation-name:hsAct}
 #home.sda .hero .hero-pill{animation-name:hsPill}
-#home.sda .hero .feather{position:absolute;left:0;right:0;bottom:0;height:24px;z-index:6;pointer-events:none;opacity:0;background:linear-gradient(rgba(60,48,40,.14),rgba(60,48,40,.06) 35%,rgba(60,48,40,0))}
+#home.sda .hero .feather{animation-name:hsFe}
 @keyframes hsG{from{translate:0 0}to{translate:0 calc(var(--R)*1px)}}
 @keyframes hsBg{from{translate:0 0}to{translate:0 calc((var(--R) - 90 + var(--o))*1px)}}
 @keyframes hsPen{from{translate:0 0;scale:1}to{translate:-5.5px calc((var(--R) - 2 + var(--o))*1px);scale:.738}}
@@ -203,7 +203,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 #home{background:var(--neutral-100)}
 .hero{position:sticky;top:-288px;height:533px;overflow:hidden;z-index:4}
 .hero-in{position:absolute;left:0;right:0;top:0;bottom:24.5px;overflow:hidden}
-.hero .feather{position:absolute;left:0;right:0;bottom:0;height:24px;z-index:6;pointer-events:none;opacity:0;background:linear-gradient(var(--lipc,#fff),rgba(var(--lipr,255,255,255),.55) 45%,rgba(var(--lipr,255,255,255),0))}
+.hero .feather{position:absolute;left:0;right:0;bottom:0;height:24px;z-index:6;pointer-events:none;opacity:0;background:linear-gradient(rgba(60,48,40,.2),rgba(60,48,40,.08) 30%,rgba(60,48,40,0))}
 /* frosted top edge of the sheet: content scrolling underneath is blurred, iOS-style */
 .hero .lip{position:absolute;left:0;right:0;bottom:23px;height:13px;border-radius:12px 12px 0 0;z-index:6;pointer-events:none;background:var(--lipc,#fff)}
 .hero-pill{position:absolute;left:20px;top:0;height:36px;display:flex;white-space:nowrap;align-items:center;gap:8px;padding:0 12px;border-radius:8px;background:rgba(255,255,251,.85);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:inset 0 0 0 1px var(--neutral-300),0 5px 10px rgba(90,84,78,.1),0 18px 18px rgba(90,84,78,.09);font-size:13px;line-height:1.5;color:var(--ink-60);opacity:0;pointer-events:none;z-index:5;transform-origin:0 50%;transition:background .2s}
