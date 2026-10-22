@@ -1284,14 +1284,14 @@ function lazyRv(el){
 }
 function reveal(id,anim=true){
   const el=$('#'+id);
-  if(!anim && el.classList.contains('revealed')){ sb.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('solid',el.scrollTop>30); updStk(el); $$('#jump button').forEach(b=>b.classList.toggle('on',b.dataset.go===id)); if(TABS.has(id)) setSeg(el); $('.fab')&&$('.fab').classList.toggle('hide',!['progress','journey','phases'].includes(id)); return }
+  if(!anim && el.classList.contains('revealed')){ sb.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('solid',el.scrollTop>30); updStk(el); $$('#jump button').forEach(b=>b.classList.toggle('on',b.dataset.go===id)); if(TABS.has(id)) setSeg(el); fabUpd(id); return }
   lazyRv(el);
   el.classList.remove('revealed'); void el.offsetWidth; el.classList.add('revealed');
   sb.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('solid',el.scrollTop>30); updStk(el);
   setTimeout(()=>{counters(el); if(id==='progress') chartIntro(); if(id==='home') sparkDraw(el);},260);
   $$('#jump button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
   if(TABS.has(id)) setSeg(el);
-  $('.fab')&&$('.fab').classList.toggle('hide',!['progress','journey','phases'].includes(id));
+  fabUpd(id);
 }
 function clearAnim(el){el.classList.remove('enter-push','leave-push','enter-pop','leave-pop','enter-modal','leave-modal','under-modal','enter-fade','leave-fade')}
 let shownId='home';
@@ -1484,8 +1484,15 @@ function heroTick(){
   H.fe.style.opacity=sstep(.6,1,p).toFixed(3);
   heroLive(y,p);
 }
+/* Care Center FAB: always on Progress/Journey/All phases; on Home only once "Your care team" has scrolled out of view */
+function fabUpd(id=shownId){
+  const f=$('.fab'); if(!f) return;
+  let show=['progress','journey','phases'].includes(id);
+  if(id==='home'){ const c=$('#home .sheet > .sec'), top=$('#home .hero-in').getBoundingClientRect().bottom; show=!!c && c.getBoundingClientRect().bottom < top }
+  f.classList.toggle('hide',!show);
+}
 function heroLive(y,p){
-  const E=H.el;
+  const E=H.el; if(shownId==='home') fabUpd('home');
   E.pill.classList.toggle('go',p>.9); E.pill.tabIndex=p>.9?0:-1;
   // match the fade colour to the sheet background passing underneath (white -> neutral-100)
   const sh=H.sheet, f=clamp(((y-H.R+24)/sh.offsetHeight-.28)/.72), c=[255+(245-255)*f,255+(239-255)*f,255+(229-255)*f].map(Math.round);
