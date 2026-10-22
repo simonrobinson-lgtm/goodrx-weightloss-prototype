@@ -23,6 +23,7 @@
   --elev:0 3px 6px rgba(36,36,36,.10),-1px 12px 12px rgba(36,36,36,.09),-3px 26px 16px rgba(36,36,36,.05),-5px 46px 19px rgba(36,36,36,.01);
   --ease:cubic-bezier(.22,.8,.24,1);
   --ease-io:cubic-bezier(.65,0,.35,1);
+  --ios:cubic-bezier(.32,.72,0,1);
   --page-bg:#e8e2d8;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -106,24 +107,31 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 /* ---------- Screens & transitions ---------- */
 .scr{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;background:var(--neutral-100);will-change:transform;z-index:1}
 .scr::-webkit-scrollbar{display:none}
+#app.swiping{user-select:none;-webkit-user-select:none;cursor:grabbing}
+#app.swiping .scr{pointer-events:none}
 .scr:not(.active){visibility:hidden;pointer-events:none}
 .scr.active{z-index:2}
-.scr.enter-push{animation:pushIn .52s var(--ease) both;z-index:3}
-.scr.leave-push{animation:pushOut .52s var(--ease) both;visibility:visible}
-.scr.enter-pop{animation:popIn .52s var(--ease) both}
-.scr.leave-pop{animation:popOut .52s var(--ease) both;visibility:visible;z-index:3}
-.scr.enter-modal{animation:modalIn .55s var(--ease) both;z-index:4}
-.scr.leave-modal{animation:modalOut .45s var(--ease-io) both;visibility:visible;z-index:4}
-.scr.under-modal{animation:underIn .55s var(--ease) both;visibility:visible}
+.scr.enter-push{animation:pushIn .5s var(--ios) both;z-index:3;box-shadow:-10px 0 30px rgba(18,17,15,.10)}
+.scr.leave-push{animation:pushOut .5s var(--ios) both;visibility:visible}
+.scr.enter-pop{animation:popIn .5s var(--ios) both}
+.scr.leave-pop{animation:popOut .5s var(--ios) both;visibility:visible;z-index:3;box-shadow:-10px 0 30px rgba(18,17,15,.10)}
+.scr.enter-modal{animation:modalIn .55s var(--ios) both;z-index:4}
+.scr.leave-modal{animation:modalOut .42s cubic-bezier(.4,0,.8,.4) both;visibility:visible;z-index:4}
+.scr.under-modal{visibility:visible}
+/* dims the screen underneath during transitions (cheap opacity instead of a full-screen filter) */
+#dim{position:absolute;inset:0;z-index:2;background:#12110f;opacity:0;pointer-events:none}
+#dim.in{animation:dimIn .5s var(--ios) both}
+#dim.out{animation:dimOut .5s var(--ios) both}
+@keyframes dimIn{from{opacity:0}to{opacity:.12}}
+@keyframes dimOut{from{opacity:.12}to{opacity:0}}
 .scr.enter-fade{animation:fadeIn .38s ease both;z-index:3}
 .scr.leave-fade{animation:fadeOut .3s ease both;visibility:visible}
-@keyframes pushIn{from{transform:translateX(100%);box-shadow:-20px 0 40px rgba(0,0,0,.08)}to{transform:none}}
-@keyframes pushOut{to{transform:translateX(-28%);filter:brightness(.92)}}
-@keyframes popIn{from{transform:translateX(-28%);filter:brightness(.92)}to{transform:none;filter:none}}
-@keyframes popOut{to{transform:translateX(100%)}}
-@keyframes modalIn{from{transform:translateY(100%)}to{transform:none}}
-@keyframes modalOut{to{transform:translateY(100%)}}
-@keyframes underIn{from{filter:brightness(.85)}to{filter:none}}
+@keyframes pushIn{from{transform:translate3d(100%,0,0)}to{transform:translate3d(0,0,0)}}
+@keyframes pushOut{from{transform:translate3d(0,0,0)}to{transform:translate3d(-28%,0,0)}}
+@keyframes popIn{from{transform:translate3d(-28%,0,0)}to{transform:translate3d(0,0,0)}}
+@keyframes popOut{from{transform:translate3d(0,0,0)}to{transform:translate3d(100%,0,0)}}
+@keyframes modalIn{from{transform:translate3d(0,100%,0)}to{transform:translate3d(0,0,0)}}
+@keyframes modalOut{to{transform:translate3d(0,100%,0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeOut{to{opacity:0}}
 
@@ -594,10 +602,10 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 
 /* ---------- SYMPTOM SHEET ---------- */
 .ov{position:absolute;inset:0;z-index:40;pointer-events:none}
-.ov .scrim{position:absolute;inset:0;background:rgba(43,38,37,.28);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);opacity:0;transition:opacity .45s,backdrop-filter .45s}
+.ov .scrim{position:absolute;inset:0;background:rgba(43,38,37,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .45s var(--ios)}
 .ov.on{pointer-events:auto}
-.ov.on .scrim{opacity:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.bs{position:absolute;left:0;right:0;bottom:0;top:163px;background:#fff;border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform .55s var(--ease);overflow-y:auto;scrollbar-width:none;box-shadow:0 -6px 13px rgba(88,81,81,.10),0 -24px 24px rgba(88,81,81,.09),0 -55px 33px rgba(88,81,81,.05)}
+.ov.on .scrim{opacity:1}
+.bs{position:absolute;left:0;right:0;bottom:0;top:163px;background:#fff;border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform .55s var(--ios);overflow-y:auto;scrollbar-width:none;box-shadow:0 -6px 13px rgba(88,81,81,.10),0 -24px 24px rgba(88,81,81,.09),0 -55px 33px rgba(88,81,81,.05)}
 .bs::-webkit-scrollbar{display:none}
 .bs{display:flex;flex-direction:column}.bs>*{flex:none}.bs .needsup{flex:1 0 auto}
 .ov.on .bs{transform:none}
@@ -650,7 +658,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 /* ---------- side drawer ---------- */
 .nav-ov{position:absolute;inset:0;z-index:42;pointer-events:none}
 .nav-scrim{position:absolute;inset:0;background:rgba(215,209,198,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .4s}
-.nav-panel{position:absolute;top:0;right:0;bottom:0;width:361px;background:var(--neutral-0);transform:translateX(100%);transition:transform .5s var(--ease);overflow-y:auto;scrollbar-width:none;padding:63px 0 40px}
+.nav-panel{position:absolute;top:0;right:0;bottom:0;width:361px;background:var(--neutral-0);transform:translateX(100%);transition:transform .5s var(--ios);overflow-y:auto;scrollbar-width:none;padding:63px 0 40px}
 .nav-panel::-webkit-scrollbar{display:none}
 .nav-ov.on{pointer-events:auto}
 .nav-ov.on .nav-scrim{opacity:1}
@@ -1202,6 +1210,49 @@ const cur=()=>stack[stack.length-1];
 const MODAL=new Set(['session']), FADE=new Set(['phases']);
 const TABS=new Set(['care','support']);
 
+
+/* ---------- iOS-style swipe from the left edge to go back ---------- */
+(()=>{
+  let st=null; const EDGE=24;
+  const paint=p=>{ st.cur.style.transform=`translate3d(${(p*100).toFixed(3)}%,0,0)`; st.prev.style.transform=`translate3d(${(-28*(1-p)).toFixed(3)}%,0,0)`; dim.style.opacity=(.12*(1-p)).toFixed(4) };
+  app.addEventListener('pointerdown',e=>{
+    if(e.button>0) return;
+    const r=app.getBoundingClientRect(), x=(e.clientX-r.left)/(r.width/393);
+    if(x>EDGE||stack.length<2||shownId!==cur()) return;
+    const leaving=cur(); if(MODAL.has(leaving)||FADE.has(leaving)||ov.classList.contains('on')||$('#navOv')?.classList.contains('on')||$('#wlOv')?.classList.contains('on')) return;
+    st={phase:'maybe',sx:e.clientX,sy:e.clientY,lx:e.clientX,lt:performance.now(),v:0,dx:0,W:r.width,cur:$('#'+leaving),prev:$('#'+stack[stack.length-2])};
+    e.stopPropagation();
+  },true);
+  addEventListener('pointermove',e=>{
+    if(!st) return;
+    const ddx=e.clientX-st.sx, ddy=e.clientY-st.sy;
+    if(st.phase==='maybe'){
+      if(Math.abs(ddy)>10&&Math.abs(ddy)>Math.abs(ddx)){ st=null; return }
+      if(ddx<8) return;
+      st.phase='drag'; const {cur:c,prev:p}=st;
+      [c,p].forEach(el=>{ clearTimeout(el._t); clearAnim(el); el.style.transition='none'; el.style.visibility='visible' });
+      p.classList.add('active'); c.style.zIndex=3; c.style.boxShadow='-10px 0 30px rgba(18,17,15,.10)';
+      dim.className=''; dim.style.transition='none'; app.classList.add('swiping');
+    }
+    const now=performance.now(); st.v=(e.clientX-st.lx)/Math.max(1,now-st.lt); st.lx=e.clientX; st.lt=now;
+    st.dx=Math.max(0,ddx); paint(Math.min(1,st.dx/st.W));
+  });
+  const end=()=>{
+    if(!st) return; const s=st; st=null; if(s.phase!=='drag') return;
+    st=s; const p=s.dx/s.W, done=p>.4||s.v>.35, ms=Math.round(done?Math.max(200,420*(1-p)):320);
+    const tr=`transform ${ms}ms cubic-bezier(.25,.8,.25,1)`;
+    s.cur.style.transition=tr; s.prev.style.transition=tr; dim.style.transition=`opacity ${ms}ms cubic-bezier(.25,.8,.25,1)`;
+    paint(done?1:0); st=null;
+    setTimeout(()=>{
+      [s.cur,s.prev].forEach(el=>{ el.style.transition=''; el.style.transform=''; el.style.zIndex=''; el.style.boxShadow=''; el.style.visibility='' });
+      dim.style.transition=''; dim.style.opacity=''; app.classList.remove('swiping');
+      if(done){ stack.pop(); shownId=s.prev.id; s.cur.classList.remove('active'); reveal(s.prev.id,false) }
+      else s.prev.classList.remove('active');
+    },ms+30);
+  };
+  addEventListener('pointerup',end); addEventListener('pointercancel',end);
+})();
+
 /* ---------- device scaling on desktop ---------- */
 const IS_SAFARI=/^((?!chrome|chromium|crios|android|edg).)*safari/i.test(navigator.userAgent);
 function fit(){
@@ -1231,8 +1282,9 @@ function lazyRv(el){
   },{root:el,rootMargin:'0px 0px -6% 0px',threshold:0});
   late.forEach(r=>io.observe(r)); rvIO.set(el,io);
 }
-function reveal(id){
+function reveal(id,anim=true){
   const el=$('#'+id);
+  if(!anim && el.classList.contains('revealed')){ sb.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('solid',el.scrollTop>30); updStk(el); $$('#jump button').forEach(b=>b.classList.toggle('on',b.dataset.go===id)); if(TABS.has(id)) setSeg(el); $('.fab')&&$('.fab').classList.toggle('hide',!['progress','journey','phases'].includes(id)); return }
   lazyRv(el);
   el.classList.remove('revealed'); void el.offsetWidth; el.classList.add('revealed');
   sb.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('solid',el.scrollTop>30); updStk(el);
@@ -1243,6 +1295,7 @@ function reveal(id){
 }
 function clearAnim(el){el.classList.remove('enter-push','leave-push','enter-pop','leave-pop','enter-modal','leave-modal','under-modal','enter-fade','leave-fade')}
 let shownId='home';
+const dim=document.createElement('div'); dim.id='dim'; app.appendChild(dim);
 function show(id,mode){
   if(id==='phases') requestAnimationFrame(()=>{ if(typeof centerP==='function') centerP() });
   const from=$('#'+shownId), to=$('#'+id);
@@ -1255,11 +1308,12 @@ function show(id,mode){
     const map={push:['enter-push','leave-push'],pop:['enter-pop','leave-pop'],modal:['enter-modal',null],unmodal:['under-modal','leave-modal'],fade:['enter-fade','leave-fade']}[mode];
     if(map[0]) to.classList.add(map[0]);
     if(map[1]) from.classList.add(map[1]); else from.style.visibility='visible';
+    dim.className=''; void dim.offsetWidth; dim.className={push:'in',modal:'in',pop:'out',unmodal:'out'}[mode]||'';
     clearTimeout(from._t); clearTimeout(to._t);
-    to._t=from._t=setTimeout(()=>{ if(shownId!==from.id) from.classList.remove('active'); from.style.visibility=''; clearAnim(from); clearAnim(to) },560);
+    to._t=from._t=setTimeout(()=>{ if(shownId!==from.id) from.classList.remove('active'); from.style.visibility=''; clearAnim(from); clearAnim(to); dim.className='' },560);
   } else from.classList.remove('active');
   if(mode!=='unmodal'&&mode!=='pop') to.scrollTop=0;
-  reveal(id);
+  reveal(id, !(mode==='pop'||mode==='unmodal'));   // going back: content is already there, don't replay its entrance
 }
 function go(id,opts={}){
   if(id==='symptom'){ if(cur()!=='progress'){ go('progress'); setTimeout(()=>openSheet('nausea'),520);} else openSheet('nausea'); return }
