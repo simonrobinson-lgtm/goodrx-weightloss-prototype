@@ -14,7 +14,7 @@
 @font-face{font-family:"Moon";src:url(fonts/GoodRxMoon-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 :root{
   /* UI kit primitives */
-  --neutral-0:#fffffb;--neutral-100:#f5efe5;--neutral-200:#efe7dd;--neutral-300:#d7d1c6;--neutral-400:#bfb6ae;--neutral-600:#897470;--neutral-700:#514543;
+  --neutral-0:#fffffb;--neutral-100:#f5efe5;--neutral-200:#efe7dd;--neutral-300:#d7d1c6;--neutral-400:#bfb6ae;--neutral-500:#a1938c;--neutral-600:#897470;--neutral-700:#514543;
   --yellow-0:#fffbe5;--yellow-100:#fff6bf;--yellow-200:#ffef8a;--yellow-300:#ffe95c;--yellow-400:#fddb00;
   --green-100:#ebeabd;--green-200:#dedb7c;--green-700:#1c534e;--green-800:#184844;
   --red-600:#7c4f62;--red-700:#5c2d44;--red-900:#3b1f2d;
@@ -152,7 +152,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .gnav .r{display:flex;gap:20px}
 .gnav .r button{color:var(--green-700);position:relative;border-radius:6px}
 .gnav.light .prog,.gnav.light .r button{color:var(--yellow-0)}
-.gnav .bell-dot{position:absolute;top:1px;right:1px;width:6px;height:6px;border-radius:9px;background:var(--urgent);box-shadow:0 0 0 1.5px var(--neutral-0)}
+.gnav .bell-dot{position:absolute;top:1px;right:0;width:6px;height:6px;border-radius:9px;background:#ad5328;box-shadow:0 0 0 1.5px var(--neutral-0);transition:transform .3s var(--ease),opacity .3s}
+.no-unread .gnav .bell-dot{transform:scale(0);opacity:0}
 .gnav.light .bell-dot{box-shadow:0 0 0 1.5px var(--red-700)}
 .logo{width:22px;height:22px}
 .tap{transition:transform .18s var(--ease),opacity .18s}
@@ -254,33 +255,45 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .sheet{position:relative;margin-top:-36px;background:linear-gradient(180deg,#fff 28%,var(--neutral-100));border-radius:12px 12px 0 0;padding:16px 0 56px;display:flex;flex-direction:column;gap:8px;z-index:3}
 .sec{padding:8px 12px}
 .sec .hd{padding:0 8px;margin-bottom:16px}
+.acard .in.review{position:relative;height:140px;gap:2px;justify-content:flex-end}
+.acard .in.review .t2{white-space:normal;max-width:none}
+.acard .rv-ic{position:absolute;top:12px;right:12px;width:48px;height:48px}
+.acard .rv-dot{animation:rvDot 6s var(--ease) infinite}
+@keyframes rvDot{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}
+.addlog{border-radius:8px}
+.addlog .i{width:8px!important;height:8px!important}
+.chip.av.sq img{border-radius:2px;width:12px;height:12px;box-shadow:0 0 0 .5px rgba(18,17,15,.1)}
+.chip.av.sq{padding-left:4px;gap:8px}
 .team{padding:16px;display:flex;flex-direction:column;gap:16px}
 .team .who{display:flex;align-items:center;gap:12px}
 .team .who img{width:40px;height:40px;border-radius:8px}
 .team .who .n{font-size:16px;line-height:1.2;color:var(--ink-90)}
 .team .who .s{font-size:13px;line-height:1.5;color:var(--ink-60);display:flex;align-items:center;gap:6px}
-.live{width:6px;height:6px;border-radius:6px;background:var(--urgent);position:relative}
-.live::after{content:"";position:absolute;inset:0;border-radius:9px;background:var(--urgent);animation:ping 2s ease-out infinite}
+.live{width:6px;height:6px;border-radius:6px;background:#ad5328;position:relative}
+.live::after{content:"";position:absolute;inset:0;border-radius:9px;background:#ad5328;animation:ping 2s ease-out infinite}
 @keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(3);opacity:0}}
 .prog-sec{padding:16px 0}
 .prog-sec .hd{display:flex;align-items:center;justify-content:space-between;padding:0 20px;margin-bottom:16px}
 .prog-sec .icon-btn{width:32px;height:32px}
-.pcard{margin:0 12px;padding:16px 8px 8px;display:flex;flex-direction:column;gap:24px;width:calc(100% - 24px);text-align:left;transition:box-shadow .25s}
-.pcard:hover{box-shadow:inset 0 0 0 1px var(--neutral-300)}
+.pcard{margin:0 12px;padding:12px 4px 4px;display:flex;flex-direction:column;gap:24px;width:calc(100% - 24px);text-align:left}
 .pcard .top{display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:var(--green-700)}
 .pcard .top .l{display:flex;gap:8px;align-items:center}
-.pcard .top .i{width:12px;height:12px;transition:transform .2s var(--ease)}
-.pcard:hover .top .i{transform:translateX(3px)}
-.pcard .mid{display:flex;justify-content:space-between;align-items:flex-start;padding:0 12px;height:40px}
+.pcard .mid{display:flex;justify-content:space-between;align-items:flex-start;padding:0 12px;height:40px;margin-bottom:-4px}
 .pcard .mid svg{margin-top:8px}
 .big{display:flex;align-items:flex-end;gap:4px;color:var(--green-700)}
 .big .num{font-size:40px;line-height:1}
 .big .u{font-size:14px;line-height:1.5}
-.pcard .boxes{margin-top:-8px;display:flex;flex-direction:column;gap:2px;border-radius:12px;overflow:hidden}
-.pcard .boxes>div{background:var(--neutral-100);padding:12px;display:flex;flex-direction:column;gap:4px}
-.pcard .boxes .k{font-size:13px;line-height:1.5;color:var(--ink-60)}
-.pcard .boxes .v{font-size:14px;line-height:1.5;color:var(--ink);display:flex;align-items:center;gap:4px}
-.pcard .boxes .plus2{background:var(--neutral-300);border-radius:4px;padding:6px;font-size:10px;letter-spacing:.1em;line-height:1;color:var(--ink-90)}
+.pcard .boxes{display:flex;flex-direction:column;gap:16px;border-radius:12px;background:var(--neutral-100);padding:12px 0}
+.pcard .brow{display:flex;align-items:center;gap:12px;padding:0 12px}
+.pcard .ibox{flex:none;width:40px;height:40px;border-radius:8px;background:var(--neutral-100);box-shadow:inset 0 0 0 .5px var(--neutral-300);display:flex;align-items:center;justify-content:center;color:var(--ink-90)}
+.pcard .ibox .i{width:20px;height:20px}
+.pcard .brow>div{display:flex;flex-direction:column;min-width:0}
+.pcard .boxes .k{font-size:14px;line-height:1.5;color:var(--ink-60)}
+.pcard .boxes .v{font-size:14px;line-height:1.5;color:var(--ink);display:flex;align-items:center;gap:4px;white-space:nowrap}
+.pcard .boxes .plus2{background:var(--neutral-300);border-radius:4px;padding:5px 6px;font-size:10px;letter-spacing:.1em;line-height:1;color:var(--ink-90)}
+.pcard .pbtn{margin:8px 12px 0;box-shadow:inset 0 0 0 .5px var(--green-700)}
+.pcard .pbtn .i{transition:transform .2s var(--ease)}
+.pcard .pbtn:hover .i{transform:translateX(2px)}
 .foryou{padding:0 0 16px}
 .foryou .hd{padding:0 20px;margin-bottom:12px}
 .foryou .car{gap:8px;padding:0 12px;scroll-padding:0 12px}
@@ -300,14 +313,99 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .fcard .bd .tt{font-size:16px;line-height:1.2;color:var(--ink-90)}
 .fcard .bd .dd{font-size:14px;line-height:1.5;color:var(--ink-60);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 
+/* ---------- notifications ---------- */
+#notifs{background:var(--neutral-0)}
+#notifs .shd{height:auto;padding:58px 20px 0;align-items:flex-start}
+.nf-x{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--ink-90)!important;margin-right:-2px}
+.nf-x .i{width:20px;height:20px}
+.nf-hd{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 12px;position:relative;z-index:4}
+.nf-hd h1{font-weight:400;font-size:20px;line-height:1.2;color:var(--ink-90)}
+.nf-fl{position:relative}
+.nf-sel{height:40px;padding:0 10px;display:flex;align-items:center;gap:8px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--neutral-300);font-size:13px;line-height:1.4;color:var(--ink-60);transition:box-shadow .2s,background .2s}
+.nf-sel:hover,.nf-fl.open .nf-sel{box-shadow:inset 0 0 0 1px var(--neutral-500)}
+.nf-sel .i{width:12px;height:12px;transition:transform .3s var(--ease)}
+.nf-fl.open .nf-sel .i{transform:rotate(180deg)}
+.nf-menu{position:absolute;right:0;top:46px;min-width:156px;background:var(--neutral-0);border-radius:12px;padding:6px;box-shadow:0 0 0 1px var(--neutral-200),0 16px 32px -12px rgba(36,36,36,.25);display:flex;flex-direction:column;opacity:0;transform:translateY(-6px) scale(.98);transform-origin:top right;pointer-events:none;transition:opacity .2s,transform .25s var(--ease)}
+.nf-fl.open .nf-menu{opacity:1;transform:none;pointer-events:auto}
+.nf-menu button{text-align:left;padding:10px 12px;border-radius:8px;font-size:14px;line-height:1.2;color:var(--ink-90);display:flex;justify-content:space-between;align-items:center}
+.nf-menu button:hover{background:var(--neutral-100)}
+.nf-menu button.on{color:var(--green-700)}
+.nf-menu button.on::after{content:"";width:6px;height:6px;border-radius:6px;background:var(--green-700)}
+.nf-g{padding:16px 20px 8px;font-size:13px;line-height:1.4;color:var(--ink-60)}
+.nf-grp:first-child .nf-g{padding-top:8px}
+.nf-grp.empty{display:none}
+.nf{display:flex;align-items:center;gap:12px;width:100%;height:60px;padding:0 20px;border-top:1px solid rgba(18,17,15,.1);text-align:left;transition:background .35s}
+.nf-grp .nf:last-child{border-bottom:1px solid rgba(18,17,15,.1)}
+.nf-grp .nf:not(:last-child){border-bottom:0}
+.nf:hover{background:var(--neutral-100)}
+.nf.unread{background:var(--yellow-0)}
+.nf.unread:hover{background:#fff8d6}
+.nf.hide{display:none}
+.nf-ic{position:relative;flex:none;width:40px;height:40px;border-radius:8px;background:var(--neutral-500);color:var(--neutral-0);display:flex;align-items:center;justify-content:center}
+.nf-ic .i{width:20px;height:20px;stroke-width:1.4}
+.nf-ic .odot{top:-2px;right:-3px;transition:transform .3s var(--ease),opacity .3s}
+.nf:not(.unread) .nf-ic .odot{transform:scale(0);opacity:0}
+.nf-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.nf-m{display:flex;justify-content:space-between;font-size:10px;line-height:1;color:var(--ink-60)}
+.nf-t{font-size:14px;line-height:1.5;color:var(--green-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nf-empty{display:none;padding:48px 20px;text-align:center;font-size:14px;color:var(--ink-60)}
+.nf-list.none+.nf-empty{display:block}
+.nf-list{padding-bottom:110px}
+
+/* ---------- in-app education ---------- */
+#education{background:var(--neutral-0)}
+.ed{padding:36px 0 120px;display:flex;flex-direction:column}
+.ed-hero{position:relative;margin:0 8px 36px;height:230px;border-radius:8px;overflow:hidden;background:var(--neutral-200)}
+.ed-hero img{position:absolute;left:0;top:-30%;width:100%;height:auto;min-height:130%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s var(--ease)}
+#education.revealed .ed-hero img{transform:none}
+.ed-ov{position:absolute;inset:0;padding:12px 12px 16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.6) 100%)}
+.ed-ov::before{content:"";position:absolute;inset:0;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);-webkit-mask:linear-gradient(180deg,transparent 30%,#000 75%);mask:linear-gradient(180deg,transparent 30%,#000 75%)}
+.ed-ov .chip{position:relative}
+.ed-ov h1{position:relative;font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:rgba(255,255,251,.9)}
+.ed-sec{padding:8px 20px 28px;display:flex;flex-direction:column;gap:16px}
+.ed-sec .cap12{color:var(--ink-60);padding:0}
+.ed-sec h2{font-weight:400;font-size:20px;line-height:1.2;color:var(--ink)}
+.ed-sec h2.l{font-size:24px}
+.ed-sec p{font-size:16px;line-height:1.4;color:var(--ink-60)}
+.ed-sec ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ed-sec li{position:relative;padding-left:16px;font-size:14px;line-height:1.5;color:var(--ink-90)}
+.ed-sec li::before{content:"";position:absolute;left:4px;top:8px;width:4px;height:4px;border-radius:4px;background:var(--ink-60)}
+.ed-cta{align-self:flex-start;margin-top:4px}
+.ed-qw{padding:0 12px 28px}
+.ed-q{position:relative;overflow:hidden;border-radius:8px;padding:16px 16px 20px;display:flex;flex-direction:column;gap:32px;background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,251,.75),rgba(255,255,251,0) 55%),radial-gradient(80% 70% at 0% 100%,rgba(215,209,198,.55),rgba(215,209,198,0) 60%),var(--neutral-200)}
+.ed-q blockquote{position:relative;font-weight:300;font-size:24px;line-height:1.2;letter-spacing:-.01em;color:var(--neutral-700);max-width:284px}
+.ed-swirl{position:absolute;right:-4px;top:40px;width:120px;height:150px}
+.ed-path{stroke-dasharray:320;stroke-dashoffset:320;transition:stroke-dashoffset 2.4s .5s var(--ease)}
+#education.revealed .ed-qw:not(.wait) .ed-path{stroke-dashoffset:0}
+.ed-by{position:relative;display:flex;align-items:center;gap:12px}
+.ed-av{position:relative;width:56px;height:56px;flex:none}
+.ed-av img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+.ed-av i{position:absolute;left:32px;top:33px;width:20px;height:20px;border-radius:4px;background:var(--neutral-0);display:flex;align-items:center;justify-content:center}
+.ed-av i .logo{width:12px;height:12px}
+.ed-by b{display:block;font-weight:400;font-size:13px;line-height:1.4;color:var(--neutral-700)}
+.ed-by small{display:block;margin-top:4px;font-size:10px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--neutral-600)}
+.ed-sim{padding:8px 0 32px}
+.ed-simh{padding:0 20px 16px;font-size:16px;line-height:1.2;color:rgba(18,17,15,.7)}
+.ed-sim .car{gap:12px;padding:0 20px;scroll-padding:0 20px}
+.secard.tap{cursor:pointer}
+
 /* journey carousel */
 .journey{padding:16px 0}
 .journey .hd{padding:0 20px;margin-bottom:20px}
-.jcar{gap:8px;padding:0 33.5px 96px;align-items:center;height:492px;margin:-10px 0 -106px;scroll-padding:0 33.5px}
+.jcar{gap:8px;padding:0 33.5px 96px;align-items:center;height:379px;margin:-10px 0 -106px;scroll-padding:0 33.5px}
 .jdots{position:relative;z-index:1}
 .jcar>*{scroll-snap-align:center}
 .jc{position:relative;width:326px;height:325px;border-radius:12px;overflow:hidden;background:var(--neutral-400);box-shadow:inset 0 0 0 1px var(--neutral-200);transition:height .5s var(--ease),box-shadow .5s,transform .5s var(--ease);text-align:left;color:var(--yellow-100)}
 .jc.on{height:381px;box-shadow:var(--elev)}
+.jcar .jc{height:240px}
+.jcar .jc.on{height:268px}
+.jcar .jc[data-tone=green]{background:#1c534e}
+.jcar .jc[data-tone=blue]{background:#015176}
+.jcar .jc:not(.on) .nbox{opacity:0}
+.jcar .jc .body{gap:24px;left:20px;right:20px}
+.jcar .jc .body h3{font-size:24px;letter-spacing:0}
+.jcar .jc .body p{font-size:14px;line-height:1.5;margin-top:8px}
+.jc[data-tone=blue] .art::after{background:linear-gradient(176deg,#2f6f8f 30%,#0b3247 75%);opacity:.8}
 .jc .art{position:absolute;inset:0;opacity:0;transition:opacity .5s}
 .jc.on .art{opacity:1}
 .jc .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.2s var(--ease)}
@@ -378,14 +476,14 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .tip{position:absolute;top:-30px;height:28px;min-width:42px;padding:4px 8px;border-radius:8px;background:var(--yellow-400);box-shadow:inset 0 0 0 1px rgba(255,239,138,.5);font-family:"Moon";font-size:20px;line-height:20px;color:var(--green-700);text-align:center;transform:translateX(-50%);pointer-events:none;white-space:nowrap}
 .tip small{display:block;position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:"Bolton";font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-50);opacity:0;transition:opacity .2s}
 .chart.scrubbing .tip small{opacity:1}
-.hint{position:absolute;left:20px;top:-6px;font-size:11px;color:var(--ink-40);display:flex;align-items:center;gap:6px;transition:opacity .4s}
+.hint{display:none!important;position:absolute;left:20px;top:-6px;font-size:11px;color:var(--ink-40);display:flex;align-items:center;gap:6px;transition:opacity .4s}
 .hint b{width:14px;height:14px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--ink-20);display:inline-block;position:relative}
 .hint b::after{content:"";position:absolute;left:4px;top:4px;width:6px;height:6px;border-radius:6px;background:var(--yellow-400);animation:nudge 1.6s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 8px 12px;margin-top:8px}
 .stats>div{display:flex;flex-direction:column;gap:12px;border-radius:12px;min-width:0}
 .stats .top{padding:16px 16px 0;display:flex;flex-direction:column;gap:8px}
-.stats .ft{border-top:.5px solid var(--ink-10);padding:12px 16px;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.stats .ft{border-top:.5px solid var(--ink-10);padding:12px 16px;font-size:13px;line-height:1.5;color:var(--green-700)}
 .stats .k{font-size:13px;line-height:1.5;color:var(--ink);white-space:nowrap}
 .stats .big .u{font-size:10px;line-height:1;margin-bottom:6px}
 .summary{margin:8px 12px 28px;border-radius:12px;background:var(--green-100);padding:16px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px}
@@ -428,14 +526,24 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 /* ---------- YOUR JOURNEY ---------- */
 #journey{background:var(--neutral-0)}
 .jy{padding:27px 0 120px}
-.jy-hero{background:var(--neutral-100);border-radius:16px;padding:0 4px 4px}
+.jy-hero{padding:0;overflow:hidden}
+.jy-row{position:relative;margin:0 20px}
+.jy-side{position:absolute;top:calc(50% - 74px);height:148px;width:352px;border-radius:12px;transition:transform .35s var(--ease),filter .2s}
+.jy-side.l{right:calc(100% + 8px);background:#1c534e}
+.jy-side.r{left:calc(100% + 8px);background:#015176}
+.jy-side.l:hover{transform:translateX(4px)}
+.jy-side.r:hover{transform:translateX(-4px)}
+.jy-n{position:absolute;z-index:2;top:7px;right:8px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,251,.2);color:var(--yellow-100);font-size:14px;display:flex;align-items:center;justify-content:center}
+.jy-dots{display:flex;justify-content:center;align-items:center;gap:4px;padding:8px 16px}
+.jy-dots i{width:5px;height:5px;border-radius:40px;background:rgba(26,25,22,.2)}
+.jy-dots i.on{width:12px;background:var(--neutral-900,#1a1916)}
 .jy-all{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:20px 0;font-weight:500;font-size:12px;letter-spacing:.01em;line-height:1;color:var(--green-800)}
 .jy-all .i{width:12px;height:12px}
-.jy-card{position:relative;border-radius:12px;overflow:hidden;padding:20px 14px}
+.jy-card{position:relative;border-radius:12px;overflow:hidden;padding:16px 14px 20px}
 .jy-card .mixl{left:0;top:-19px;width:438px;height:281px}
 .jy-card .mixl img{inset:auto;left:0;top:-311px;width:438px;height:863px;object-fit:fill}
 .jy-card .mixl::after{background:linear-gradient(180.59deg,rgba(194,59,160,.7) 33.6%,rgba(88,20,71,.7) 71.2%)}
-.jy-in{position:relative;display:flex;flex-direction:column;gap:24px}
+.jy-in{position:relative;display:flex;flex-direction:column;gap:40px}
 .jy-in .chip{align-self:flex-start}
 .jy-in .chip img{width:12px;height:12px}
 .jy-in h1{font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:var(--yellow-100)}
@@ -502,7 +610,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .care .bgimg img{position:absolute;top:0;left:var(--bx,-220px);width:843px;height:100%;object-fit:cover;mix-blend-mode:overlay;opacity:.3;animation:drift 22s ease-in-out infinite alternate}
 .care .gnav{position:relative}
 .care-hd{padding:40px 20px 0;color:var(--yellow-0);position:relative}
-.care-hd p{font-size:14px;line-height:1.5;opacity:.8;width:210px;margin-top:8px}
+.care-hd p{font-size:14px;line-height:1.5;opacity:.8;width:196px;margin-top:8px}
 .active-s{position:relative;padding:40px 0 23px;display:flex;flex-direction:column;gap:16px}
 .as-h{display:flex;justify-content:space-between;align-items:center;padding:0 20px;color:var(--yellow-0)}
 .as-exp{font-size:10px;line-height:1;opacity:.8}
@@ -527,7 +635,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .tabs .seg .pill{position:absolute;top:4px;height:34px;border-radius:8px;background:var(--neutral-300);transition:left .4s var(--ease),width .4s var(--ease)}
 .tabs .seg button{position:relative;height:34px;padding:6px 12px;font-size:14px;line-height:22px;color:var(--ink-60);transition:color .3s;border-radius:8px}
 .tabs .seg button.on{color:var(--ink)}
-.tabs .seg .ndot{position:absolute;top:7px;right:5px;width:6px;height:6px;border-radius:6px;background:var(--urgent)}
+.tabs .seg .ndot{position:absolute;top:7px;right:5px;width:6px;height:6px;border-radius:6px;background:#ad5328}
 .tabs .srch{color:var(--ink)}
 .tabpane{display:none}
 .tabpane.on{display:block;animation:paneIn .45s var(--ease) both}
@@ -542,7 +650,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .msg .s{font-size:13px;line-height:1.5;color:var(--ink-50)}
 .msg.unread .n{font-weight:500}
 .msg.unread .s{color:var(--ink-90)}
-.msg.unread::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:6px;background:var(--urgent)}
+.msg.unread::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:6px;background:#ad5328}
 .sup-hd{padding:32px 20px 12px}
 .sup-hd h2{font-weight:400;font-size:24px;line-height:1.2;color:#000}
 .sup-hd p{font-size:14px;line-height:1.5;color:var(--ink-60);margin-top:8px}
@@ -633,9 +741,9 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .tipc.on .tx small{height:10px;opacity:1;margin-bottom:6px}
 .needsup{background:var(--red-700);padding:32px 20px 48px;position:relative;overflow:hidden;color:var(--yellow-0)}
 .needsup .t{font-size:20px;line-height:1.2;padding-right:32px}
-.needsup .d{font-size:14px;line-height:1.5;opacity:.8;margin-top:8px;padding-right:50px}
+.needsup .d{font-size:14px;line-height:1.5;opacity:.8;margin-top:8px;max-width:216px}
 .needsup .btn{margin-top:16px;display:inline-flex}
-.needsup svg.heart{position:absolute;right:-14px;top:14px;width:92px;height:92px}
+.needsup svg.heart{position:absolute;right:-14px;top:52px;width:84px;height:84px}
 .needsup svg.heart path{stroke-dasharray:260;stroke-dashoffset:260}
 .ov.on .needsup svg.heart path{animation:drawH 2.2s .5s var(--ease) forwards}
 @keyframes drawH{to{stroke-dashoffset:0}}
@@ -655,7 +763,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .thumb{position:relative;width:44px;height:44px;flex:none}
 .thumb.t48{width:48px;height:48px}
 .thumb img{width:100%;height:100%;border-radius:8px;object-fit:cover}
-.odot{position:absolute;top:1px;right:-2px;width:8px;height:8px;border-radius:8px;background:var(--urgent);box-shadow:0 0 0 1px var(--neutral-0)}
+.odot{position:absolute;top:1px;right:-2px;width:8px;height:8px;border-radius:8px;background:var(--chip-orange-dot);box-shadow:0 0 0 1px var(--neutral-0)}
 /* ---------- side drawer ---------- */
 .nav-ov{position:absolute;inset:0;z-index:42;pointer-events:none}
 .nav-scrim{position:absolute;inset:0;background:rgba(215,209,198,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .4s}
@@ -740,6 +848,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 <symbol id="i-chev-up" viewBox="0 0 16 16"><path d="M2.67 10L6.59 6.08C7.37 5.3 8.63 5.3 9.42 6.08L13.33 10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-slides" viewBox="0 0 12 12"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 1.75H4.25C3.42 1.75 2.75 2.42 2.75 3.25V8.75C2.75 9.58 3.42 10.25 4.25 10.25H7.75C8.58 10.25 9.25 9.58 9.25 8.75V3.25C9.25 2.42 8.58 1.75 7.75 1.75Z"/><path d="M2.75 9.25C1.92 9.25 1.25 8.58 1.25 7.75V4.25C1.25 3.42 1.92 2.75 2.75 2.75"/><path d="M9.25 9.25C10.08 9.25 10.75 8.58 10.75 7.75V4.25C10.75 3.42 10.08 2.75 9.25 2.75"/></g></symbol>
 <symbol id="i-zap" viewBox="0 0 40 40"><path d="M32.3 15H22.67C22.11 15 21.67 14.55 21.67 14V4.55C21.67 3.56 20.38 3.17 19.83 4L6.87 23.45C6.43 24.11 6.9 25 7.7 25H17.33C17.88 25 18.33 25.45 18.33 26V35.45C18.33 36.44 19.62 36.83 20.16 36L33.13 16.55C33.57 15.89 33.1 15 32.3 15Z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 20"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2.5"/><path d="M2.5 7.5h19M6 13h3"/></g></symbol>
 <symbol id="i-close" viewBox="0 0 20 20"><path d="M3.75 3.75L16.25 16.25M16.25 3.75L3.75 16.25" fill="none" stroke="currentColor" stroke-linecap="round"/></symbol>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 9.62C3.5 9.06 3.5 8.78 3.57 8.52C3.63 8.29 3.74 8.07 3.88 7.88C4.04 7.66 4.26 7.48 4.69 7.13L9.99 2.87C10.71 2.29 11.07 2 11.46 1.89C11.81 1.79 12.19 1.79 12.54 1.89C12.93 2 13.29 2.29 14.01 2.87L19.31 7.13C19.74 7.48 19.96 7.66 20.12 7.88C20.26 8.07 20.37 8.29 20.43 8.52C20.5 8.78 20.5 9.06 20.5 9.62V17.3C20.5 18.42 20.5 18.98 20.28 19.41C20.09 19.78 19.78 20.09 19.41 20.28C18.98 20.5 18.42 20.5 17.3 20.5H6.7C5.58 20.5 5.02 20.5 4.59 20.28C4.22 20.09 3.91 19.78 3.72 19.41C3.5 18.98 3.5 18.42 3.5 17.3V9.62Z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
 <symbol id="i-search16" viewBox="0 0 16 16"><path d="M13.67 13.67L10.87 10.87M12.33 7.33C12.33 10.09 10.09 12.33 7.33 12.33C4.57 12.33 2.33 10.09 2.33 7.33C2.33 4.57 4.57 2.33 7.33 2.33C10.09 2.33 12.33 4.57 12.33 7.33Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -763,6 +872,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
       <button data-go="care">Care Center · Messages</button>
       <button data-go="support">Care Center · Support</button>
       <button data-go="session">Start a session</button>
+      <button data-go="notifs">Notifications</button>
+      <button data-go="education">Article · Settling your stomach</button>
     </nav>
     <button class="restart" id="restart">Restart prototype</button>
   </aside>
@@ -782,7 +893,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
       <div class="stk-nav" id="stk" aria-hidden="true">
         <div class="gnav">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu tabindex="-1"><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications" tabindex="-1"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu" tabindex="-1"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications" tabindex="-1"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu" tabindex="-1"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
       </div>
 
@@ -795,7 +906,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="rv" style="--d:2;position:absolute;inset:0;pointer-events:none"><div class="pen"><img class="pen-img" src="img/pen.webp" alt="Wegovy pen"></div></div>
           <div class="gnav">
             <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-            <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+            <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
           </div>
           <div class="drug">
             <div class="dh"><h1 class="rv" style="--d:0">Wegovy®</h1></div>
@@ -819,6 +930,13 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                   <button class="btn s48 pri-plum" data-go="care">Read message</button>
                 </div>
               </div>
+              <div class="acard">
+                <div class="ct cap">your prescription</div>
+                <div class="in review">
+                  <svg class="rv-ic" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23.5" stroke="#1c534e" stroke-width=".75"/><ellipse cx="24" cy="24" rx="23.5" ry="10.5" stroke="#1c534e" stroke-width=".75"/><circle class="rv-dot" cx="24" cy="24" r="2.4" fill="#dedb7c"/></svg>
+                  <div><div class="t1">Under review</div><div class="t2">A licensed provider is reviewing your info. Expect a reply within 24 hours.</div></div>
+                </div>
+              </div>
             </div>
           </div>
           <button class="hero-pill" data-hero-top tabindex="-1"><i></i>2 action items</button>
@@ -831,30 +949,31 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="hd h-sec">Your care team</div>
             <div class="card team">
               <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="who"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s">Active session</div></div></div>
+                <div class="who"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s">Active session · expires in 18d</div></div></div>
                 <button class="btn s24 sec-plum" data-go="care">Chat</button>
               </div>
-              <button class="btn s32 pri-plum" data-go="care">Go to Care Center <svg class="i"><use href="#i-chev-r12"/></svg></button>
+              <button class="btn s32 pri-plum" data-go="care">Care Center <svg class="i"><use href="#i-chev-r12"/></svg></button>
             </div>
           </div>
           <div class="prog-sec rv" style="--d:6">
-            <div class="hd"><div><div class="h-sec">Your progress</div><div class="sub" style="margin-top:4px">Last log: 10d ago</div></div><button class="icon-btn hair" data-toast="Log added · nice work" aria-label="Add log"><svg class="i"><use href="#i-plus"/></svg></button></div>
-            <button class="card pcard tap" data-go="progress">
-              <div class="top"><div class="l"><span class="chip av"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="cap">steady weight loss</span></div><svg class="i"><use href="#i-chev-right"/></svg></div>
+            <div class="hd"><div><div class="h-sec">Your progress</div><div class="sub" style="margin-top:4px">Last log: 10d ago</div></div><button class="btn s24 sec-dark addlog" data-toast="Log added · nice work"><svg class="i"><use href="#i-plus"/></svg>Add log</button></div>
+            <div class="card pcard">
+              <div class="top"><div class="l"><span class="chip av sq"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="cap">steady weight loss</span></div></div>
               <div class="mid">
                 <svg width="90" height="24" viewBox="0 0 90 24" style="overflow:visible"><path class="draw" d="M0 0.75C0.59 0.75 16.98 0.75 28.69 1.2C43.91 7.83 55.89 12.63 55.89 12.63C55.89 12.63 78.85 19.77 89 22.75" fill="none" stroke="#1c534e" stroke-width="1.5"/></svg>
                 <div class="big"><span class="num" data-count="-12" data-from="0">-12</span><span class="u">lbs</span></div>
               </div>
               <div class="boxes">
-                <div><span class="k">Changes you’ve noticed</span><span class="v">Increased energy, less food noise <span class="plus2">+2</span></span></div>
-                <div><span class="k">Reported side effects</span><span class="v">Nausea, constipation and light headaches</span></div>
+                <div class="brow"><span class="ibox"><svg class="i" style="stroke-width:2"><use href="#i-zap"/></svg></span><div><span class="k">Changes you’ve noticed</span><span class="v">Increased energy, less food noise <span class="plus2">+2</span></span></div></div>
+                <div class="brow"><span class="ibox"><svg class="i"><use href="#i-nausea"/></svg></span><div><span class="k">Reported side effects</span><span class="v">Nausea, constipation and light headaches</span></div></div>
+                <button class="btn s32 sec-dark pbtn" data-go="progress">Your progress <svg class="i"><use href="#i-chev-r12"/></svg></button>
               </div>
-            </button>
+            </div>
           </div>
           <div class="foryou rv" style="--d:7">
             <div class="hd h-sm">For how you are feeling</div>
             <div class="car" data-car>
-              <button class="card fcard" data-go="symptom"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
+              <button class="card fcard" data-go="education"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-bottle.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Settling your stomach</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img loading="lazy" decoding="async" src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
               <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
             </div>
@@ -869,10 +988,10 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               </button>
               <button class="jc" data-i="1" data-tone="mix">
                 <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
-                <div class="head"><span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">You are here</span><span class="nbox num">2</span></div>
+                <div class="head"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span><span class="nbox num">2</span></div>
                 <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
-              <button class="jc" data-tone="plum" data-i="2">
+              <button class="jc" data-tone="blue" data-i="2">
                 <div class="art"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
                 <div class="head"><span class="chip r8">Up next</span><span class="nbox num">3</span></div>
                 <div class="body"><div><h3>Maintenance</h3><p>Your progress levels out. The focus shifts to habits and a dose that help you keep the results.</p></div><span class="btn s32 sec-light">What to expect</span></div>
@@ -888,7 +1007,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div style="padding-top:8px"><button class="back rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="aph-head rv" style="--d:1"><span class="cap12">All phases</span><button class="ph-x" data-back aria-label="Close all phases"><svg class="i"><use href="#i-close"/></svg></button></div>
@@ -900,7 +1019,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               </div>
               <div class="jc" role="group" aria-label="Phase 2" data-tone="mix" data-i="1">
                 <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
-                <div class="head"><span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">You are here</span><span class="nbox num">2</span></div>
+                <div class="head"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span><span class="nbox num">2</span></div>
                 <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="ph">Phase 2: ~week 5-8</span><button class="btn s32 sec-light" data-phase="1">Go to Phase 2</button></div>
               </div>
               <div class="jc" role="group" aria-label="Phase 3" data-tone="plum" data-i="2">
@@ -916,13 +1035,13 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div class="wrap">
           <button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button>
           <div>
             <div class="ph-head">
-              <div><h1 class="rv" style="--d:1">Your progress</h1><div class="chips rv" style="--d:2"><span class="chip av"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="chip sand">Week 6</span></div></div>
+              <div><h1 class="rv" style="--d:1">Your progress</h1><div class="chips rv" style="--d:2"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="chip sand">Week 6</span></div></div>
               <button class="icon-btn hair rv" style="--d:2" data-toast="Progress settings aren’t part of this prototype" aria-label="Progress settings"><svg class="i"><use href="#i-gear"/></svg></button>
             </div>
             <div class="chart rv" style="--d:3" id="chart">
@@ -964,7 +1083,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               <div class="card ccard"><svg style="width:82px"><use href="#i-illo-noise"/></svg><div><div class="t">Less Food noise</div><div class="d">Fewer intrusive thoughts about food this week</div></div></div>
             </div>
             <div class="reported rv" style="--d:2">
-              <div class="lbl">Reported on your last log</div>
+              <div class="lbl">Last reported side effects</div>
               <div class="card srow"><div class="l"><span class="icon-box"><svg class="i" style="width:20px;height:20px"><use href="#i-nausea"/></svg></span>Mild nausea</div><button class="btn s24 sec-dark" data-symptom="nausea">What helps</button></div>
               <div class="card srow"><div class="l"><span class="icon-box"><svg class="i" style="width:20px;height:20px"><use href="#i-nausea"/></svg></span>Light headaches</div><button class="btn s24 sec-dark" data-symptom="headache">What helps</button></div>
             </div>
@@ -974,7 +1093,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="hd h-sec">Your journey</div>
             <div class="pj">
               <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
-              <div><span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span></div>
+              <div><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span></div>
               <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-go="journey">Learn more</button></div>
             </div>
           </div>
@@ -986,19 +1105,24 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="jy">
           <div class="jy-hero rv" style="--d:1">
-            <button class="jy-all" data-go="phases"><svg class="i"><use href="#i-slides"/></svg>All phases</button>
-            <div class="jy-card">
-              <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
-              <div class="jy-in">
-                <span class="chip av r8"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">You are here</span>
-                <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div>
+            <div class="jy-row">
+              <button class="jy-side l" data-go="phases" aria-label="Phase 1: Adjusting to treatment"></button>
+              <div class="jy-card">
+                <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
+                <span class="jy-n num">2</span>
+                <div class="jy-in">
+                  <span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span>
+                  <div><h1>Steady weight loss</h1><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div>
+                </div>
               </div>
+              <button class="jy-side r" data-go="phases" aria-label="Phase 3: Maintenance"></button>
             </div>
+            <div class="jy-dots" aria-hidden="true"><i></i><i class="on"></i><i></i></div>
           </div>
           <div class="jsec rv open" style="--d:2">
             <div class="jsec-h"><span>Treatment</span><button class="jtog" aria-label="Collapse Treatment"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
@@ -1012,7 +1136,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
             <div class="jsec-h"><span>Common side effects</span><button class="jtog" aria-label="Collapse Common side effects"><svg class="i"><use href="#i-chev-up"/></svg></button></div>
             <div class="jsec-b"><div>
               <div class="car jcards" data-car>
-                <div class="secard">
+                <div class="secard tap" data-go="education" role="button" tabindex="0" aria-label="Read: Settling your stomach and dealing with nausea">
                   <div class="se-art"><img loading="lazy" decoding="async" src="img/stomach.png" alt=""><i></i></div>
                   <div class="se-top"><h3>Mild nausea &amp; constipation</h3><p>Your digestion slows down, so you might experience some discomfort.</p></div>
                   <div class="se-tips"><span class="cap10">Manage side effects</span><ul><li>Eat smaller meals, throughout the day</li><li>Have your last meal 3 hours before bedtime</li><li>Stay hydrated</li></ul></div>
@@ -1046,7 +1170,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="care-hd"><h1 class="rv" style="--d:1">Care Center</h1><p class="rv" style="--d:2">Get answers to your questions or symptom support, 24/7</p></div>
@@ -1075,7 +1199,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-toast="No new notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
         <div class="drcard rv" style="--d:1">
@@ -1126,6 +1250,87 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         </div>
       </section>
 
+      <!-- ================= NOTIFICATIONS ================= -->
+      <section class="scr" id="notifs" data-sb="dark">
+        <div class="shd"><svg class="logo"><use href="#i-logo"/></svg><button data-back aria-label="Close notifications" class="nf-x"><svg class="i"><use href="#i-close"/></svg></button></div>
+        <div class="nf-hd rv" style="--d:1"><h1>Notifications</h1>
+          <div class="nf-fl"><button class="nf-sel" id="nfSel" aria-haspopup="listbox"><span id="nfLbl">All</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button>
+            <div class="nf-menu" id="nfMenu" role="listbox"><button data-f="all" class="on">All</button><button data-f="unread">Unread</button><button data-f="Weight loss">Weight loss</button><button data-f="Hair loss">Hair loss</button><button data-f="Companion">Companion</button></div>
+          </div>
+        </div>
+        <div class="nf-list" id="nfList">
+        <div class="nf-grp rv" style="--d:2">
+          <div class="nf-g">Today</div>
+          <button class="nf unread" data-cat="Hair loss" data-nf-toast="Hair loss isn’t set up in this prototype"><span class="nf-ic"><svg class="i"><use href="#i-clipboard"/></svg><i class="odot"></i></span><span class="nf-tx"><span class="nf-m"><span>Hair loss</span><span>30m</span></span><span class="nf-t">Review your Rx</span></span></button>
+          <button class="nf unread" data-cat="Weight loss" data-nf-go="home"><span class="nf-ic"><svg class="i"><use href="#i-bubbles"/></svg><i class="odot"></i></span><span class="nf-tx"><span class="nf-m"><span>Weight loss</span><span>2h</span></span><span class="nf-t">Book your follow-up</span></span></button>
+          <button class="nf" data-cat="Weight loss" data-nf-go="care"><span class="nf-ic"><svg class="i"><use href="#i-bubbles"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Weight loss</span><span>3h</span></span><span class="nf-t">New message from Dr. Brooke</span></span></button>
+        </div>
+        <div class="nf-grp rv" style="--d:3">
+          <div class="nf-g">Yesterday</div>
+          <button class="nf" data-cat="Weight loss" data-nf-go="care"><span class="nf-ic"><svg class="i"><use href="#i-bubbles"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Weight loss</span><span>1d</span></span><span class="nf-t">New message from Dr. Brooke</span></span></button>
+          <button class="nf" data-cat="Weight loss" data-nf-toast="Billing isn’t part of this prototype"><span class="nf-ic"><svg class="i"><use href="#i-card"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Weight loss</span><span>1d</span></span><span class="nf-t">Update your billing information</span></span></button>
+          <button class="nf" data-cat="Companion" data-nf-toast="Companion isn’t set up in this prototype"><span class="nf-ic"><svg class="i"><use href="#i-card"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Companion</span><span>1d</span></span><span class="nf-t">Your subscription has renewed</span></span></button>
+          <button class="nf" data-cat="Hair loss" data-nf-toast="Hair loss isn’t set up in this prototype"><span class="nf-ic"><svg class="i"><use href="#i-bubbles"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Hair loss</span><span>1d</span></span><span class="nf-t">New message from Dr. Mills</span></span></button>
+        </div>
+        <div class="nf-grp rv" style="--d:4">
+          <div class="nf-g">Last 7 days</div>
+          <button class="nf" data-cat="Weight loss" data-nf-go="care"><span class="nf-ic"><svg class="i"><use href="#i-bubbles"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Weight loss</span><span>4d</span></span><span class="nf-t">New message from Dr. Brooke</span></span></button>
+          <button class="nf" data-cat="Weight loss" data-nf-toast="Billing isn’t part of this prototype"><span class="nf-ic"><svg class="i"><use href="#i-card"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Weight loss</span><span>5d</span></span><span class="nf-t">Update your billing information</span></span></button>
+          <button class="nf" data-cat="Companion" data-nf-toast="Companion isn’t set up in this prototype"><span class="nf-ic"><svg class="i"><use href="#i-card"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Companion</span><span>6d</span></span><span class="nf-t">Your subscription has renewed</span></span></button>
+          <button class="nf" data-cat="Hair loss" data-nf-toast="Hair loss isn’t set up in this prototype"><span class="nf-ic"><svg class="i"><use href="#i-bubbles"/></svg></span><span class="nf-tx"><span class="nf-m"><span>Hair loss</span><span>6d</span></span><span class="nf-t">New message from Dr. Mills</span></span></button>
+        </div>
+        </div>
+        <div class="nf-empty" id="nfEmpty">You’re all caught up</div>
+      </section>
+
+      <!-- ================= EDUCATION ================= -->
+      <section class="scr" id="education" data-sb="dark">
+        <div class="top-pad"></div>
+        <div class="gnav">
+          <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
+          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
+        </div>
+        <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
+        <div class="ed">
+          <div class="ed-hero rv" style="--d:1">
+            <img src="img/photo-bottle.jpg" alt="">
+            <div class="ed-ov"><span class="chip r4">3 min</span><h1>Settling your stomach &amp; dealing with nausea</h1></div>
+          </div>
+          <div class="ed-sec rv" style="--d:2">
+            <span class="cap12">At a glance</span>
+            <h2 class="l">Why it happens</h2>
+            <p>Your medication slows how quickly food leaves your stomach. That’s part of what helps you feel full longer, but it also means food sits with you for more time. This can lead to queasiness, slower digestion, or a heavy, bloated feeling.</p>
+          </div>
+          <div class="ed-sec rv" style="--d:3">
+            <h2>Handling nausea</h2>
+            <p>Nausea tends to hit hardest after a big meal or in the days after a dose change.</p>
+            <ul><li>Eat smaller meals, more often. A full stomach empties even more slowly on treatment.</li><li>Stop at the first sign of fullness, even if there’s food left on your plate.</li><li>Sip fluids between meals, rather than drinking a lot with them.</li><li>Go easy on greasy, fried, or rich foods. They take the longest to digest.</li></ul>
+          </div>
+          <div class="ed-sec rv" style="--d:4">
+            <h2>Constipation</h2>
+            <p>Slower digestion and eating less can both slow things down. Constipation for a couple of days is normal but can be easily mitigated.</p>
+            <ul><li>Add fiber gradually from vegetables, fruit, beans, and whole grains. Adding too much at once can make bloating worse.</li></ul>
+          </div>
+          <div class="ed-qw rv" style="--d:5"><div class="ed-q">
+            <svg class="ed-swirl" viewBox="0 0 120 150" fill="none"><path class="ed-path" d="M8 146C40 120 70 92 84 64C96 40 92 14 74 10C56 6 46 26 58 44C72 64 100 66 124 58" stroke="#514543" stroke-width=".75" stroke-linecap="round" opacity=".55"/></svg>
+            <blockquote>“For most people, stomach side effects ease as the body adjusts.”</blockquote>
+            <div class="ed-by"><span class="ed-av"><img loading="lazy" decoding="async" src="img/av-karim.webp" alt=""><i><svg class="logo"><use href="#i-logo"/></svg></i></span><div><b>Dr. Karim Benson</b><small>Medical expert</small></div></div>
+          </div></div>
+          <div class="ed-sec rv" style="--d:6">
+            <h2 class="l">The takeaway</h2>
+            <p>Smaller meals, slower eating, plenty of water, and regular movement help with most stomach side effects. If something feels off or isn’t improving, your care team is here to help.</p>
+          </div>
+          <div class="ed-sim rv" style="--d:7">
+            <div class="ed-simh">Similar articles</div>
+            <div class="car" data-car>
+              <button class="card fcard" data-toast="Article view coming soon"><div class="ph"><img loading="lazy" decoding="async" src="img/photo-water.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">3 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">Why staying hydrated is important</div><div class="dd">Nausea, constipation and bloating are common as your body adjusts</div></div></div></button>
+              <button class="card fcard" data-toast="Article view coming soon"><div class="ph grain"><img loading="lazy" decoding="async" src="img/photo-phone.jpg" alt=""></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-link"/></svg></div><div class="tx"><div class="tt">Understanding dose adjustments</div><div class="dd">When a dose change might help, and what to expect</div></div></div></button>
+              <button class="card fcard" data-toast="Article view coming soon"><div class="ph illo"><svg><use href="#i-illo-noise"/></svg></div><div class="bd"><div class="t"><span class="chip r4">2 min</span><svg class="i"><use href="#i-chev-right"/></svg></div><div class="tx"><div class="tt">How to tell if you’ve reached maintenance</div><div class="dd">Maintenance differs from a temporary plateau</div></div></div></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ================= SYMPTOM SHEET ================= -->
       <div class="ov" id="ov">
         <div class="scrim" data-close></div>
@@ -1133,7 +1338,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="grab" id="grab"><i></i></div>
           <div class="hl">
             <h2 id="s-title">Mild Nausea</h2>
-            <div class="ci">Common in <span class="chip">Phase 1</span><span class="chip">Dose increases</span></div>
+            <div class="ci">Common in <span class="chip sand r4">Phase 1</span><span class="chip sand r4">Dose increases</span></div>
             <p class="ds" id="s-desc">Slower digestion can cause mild nausea. It usually eases as your body adjusts.</p>
           </div>
           <div class="mg">
@@ -1156,7 +1361,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="wl-lbl">Your subscriptions</div>
           <div class="wl-list">
             <button class="wl-item on" data-wl-close><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
-            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span><b>Hair loss</b><small>Finasteride · 0.5mg</small></span></button>
+            <button class="wl-item" data-toast="Only Weight loss is set up in this prototype"><span class="thumb t48"><img loading="lazy" decoding="async" src="img/thumb-hair.png" alt=""></span><span><b>Hair Loss</b><small>Finasteride · 0.5mg</small></span></button>
             <button class="wl-item line" data-toast="Only Weight loss is set up in this prototype"><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span><b>Another condition</b><small>Wegovy · Semaglutide · 0.5mg</small></span></button>
           </div>
         </div>
@@ -1210,7 +1415,7 @@ function updStk(el,force){
 const screens=['home','progress','journey','care','support','session'];
 let stack=['home'];
 const cur=()=>stack[stack.length-1];
-const MODAL=new Set(['session']), FADE=new Set(['phases']);
+const MODAL=new Set(['session','notifs']), FADE=new Set(['phases']);
 const TABS=new Set(['care','support']);
 
 
@@ -1332,6 +1537,29 @@ function back(){
   const leaving=stack.pop(); show(cur(), MODAL.has(leaving)?'unmodal':FADE.has(leaving)?'fade':'pop');
 }
 
+
+/* ---------- notifications ---------- */
+(()=>{
+  const list=$('#nfList'), fl=$('.nf-fl'), sel=$('#nfSel'); let filt='all';
+  const unread=()=>$$('.nf.unread',list).length;
+  const sync=()=>{ document.body.classList.toggle('no-unread',!unread()) };
+  const apply=()=>{
+    let any=false;
+    $$('.nf-grp',list).forEach(g=>{ let n=0; $$('.nf',g).forEach(r=>{ const ok=filt==='all'||(filt==='unread'?r.classList.contains('unread'):r.dataset.cat===filt); r.classList.toggle('hide',!ok); if(ok) n++ }); g.classList.toggle('empty',!n); if(n) any=true });
+    list.classList.toggle('none',!any);
+  };
+  sel.addEventListener('click',e=>{ e.stopPropagation(); fl.classList.toggle('open') });
+  $$('#nfMenu button').forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); filt=b.dataset.f; $('#nfLbl').textContent=b.textContent; $$('#nfMenu button').forEach(x=>x.classList.toggle('on',x===b)); fl.classList.remove('open'); apply() }));
+  document.addEventListener('click',e=>{ if(!e.target.closest('.nf-fl')) fl.classList.remove('open') });
+  $$('.nf',list).forEach(r=>r.addEventListener('click',()=>{
+    r.classList.remove('unread'); sync(); if(filt==='unread') setTimeout(apply,350);
+    if(r.dataset.nfToast) return toast(r.dataset.nfToast);
+    const to=r.dataset.nfGo;
+    if(to==='home'){ setTimeout(()=>{ back(); setTimeout(()=>{ const h=$('#home'); h.scrollTo({top:0,behavior:'smooth'}); const c=$('#home [data-car]'); c&&c.scrollTo({left:0,behavior:'smooth'}) },380) },120) }
+    else if(to){ setTimeout(()=>{ stack.pop(); if(stack.includes(to)) stack=stack.slice(0,stack.lastIndexOf(to)+1); else stack.push(to); $('#'+to).scrollTop=0; show(to,'unmodal') },120) }
+  }));
+  sync();
+})();
 /* ---------- global click wiring ---------- */
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-hero-top]')){ $('#home').scrollTo({top:0,behavior:'smooth'}); return }
@@ -1357,7 +1585,7 @@ document.addEventListener('click',e=>{
   }
 });
 function jump(id){
-  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],phases:['home','journey','phases'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session']};
+  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],phases:['home','journey','phases'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session'],notifs:['home','notifs'],education:['home','journey','education']};
   const target=map[id]; const last=target[target.length-1];
   closeSheet(true);
   if(shownId!==last){ const from=$('#'+shownId), to=$('#'+last); [from,to].forEach(clearAnim); from.classList.remove('active'); to.classList.add('active','enter-fade'); setTimeout(()=>clearAnim(to),400); to.scrollTop=0; shownId=last; reveal(last) }
@@ -1490,7 +1718,7 @@ function heroTick(){
 /* Care Center FAB: always on Progress/Journey/All phases; on Home only once "Your care team" has scrolled out of view */
 function fabUpd(id=shownId){
   const f=$('.fab'); if(!f) return;
-  let show=['progress','journey','phases'].includes(id);
+  let show=['progress','journey','phases','education'].includes(id);
   if(id==='home'){ const c=$('#home .sheet > .sec'), top=$('#home .hero-in').getBoundingClientRect().bottom; show=!!c && c.getBoundingClientRect().bottom < top }
   f.classList.toggle('hide',!show);
 }
