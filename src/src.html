@@ -489,6 +489,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jy-hero{padding:0}
 .jy-car{display:flex;align-items:center;gap:8px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:0 20.5px;scroll-padding:0 20.5px;height:190px;scrollbar-width:none;overscroll-behavior-x:contain}
 .jy-car::-webkit-scrollbar{display:none}
+.jy-car.dragging{cursor:grabbing;scroll-snap-type:none}
+.jy-car.dragging .jy-card{cursor:grabbing}
 .jy-card{position:relative;flex:0 0 352px;height:148px;border-radius:12px;overflow:hidden;padding:16px 14px 20px;scroll-snap-align:center;background:#205a51;transition:height .45s var(--ease);cursor:pointer}
 .jy-card[data-i="1"]{background:#997b65}
 .jy-card[data-i="2"]{background:#0b3c56}
@@ -1064,7 +1066,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg><span class="bk-t">Treatment plan overview</span></button></div>
         <div class="jy">
           <div class="jy-hero rv" style="--d:1">
-            <div class="jy-car" id="jyCar">
+            <div class="jy-car" id="jyCar" data-car data-jcar>
               <div class="jy-card" data-i="0" role="group" aria-label="Phase 1">
                 <img class="jy-bg" src="img/phase1-bg.jpg" alt="">
                 <span class="jy-n num">1</span>
@@ -1815,7 +1817,7 @@ function jySet(i,anim=true){
 }
 function jyTo(i,smooth=true){ const k=JY.cards[i]; JY.car.scrollTo({left:k.offsetLeft+k.offsetWidth/2-JY.car.clientWidth/2,behavior:smooth?'smooth':'auto'}); jySet(i,smooth) }
 let jyt,jyEnd; JY.car.addEventListener('scroll',()=>{ cancelAnimationFrame(jyt); jyt=requestAnimationFrame(()=>{ const i=jyActive(); JY.cards.forEach((k,n)=>k.classList.toggle('on',n===i)); JY.dots.forEach((d,n)=>d.classList.toggle('on',n===i)) }); clearTimeout(jyEnd); jyEnd=setTimeout(()=>jySet(jyActive()),140) },{passive:true});
-JY.cards.forEach((k,i)=>k.addEventListener('click',()=>{ if(!k.classList.contains('on')) jyTo(i) }));
+JY.cards.forEach((k,i)=>k.addEventListener('click',()=>{ if(JY.car.classList.contains('was-dragged')) return; if(!k.classList.contains('on')) jyTo(i) }));
 JY.dots.forEach((d,i)=>d.addEventListener('click',()=>jyTo(i)));
 
 
