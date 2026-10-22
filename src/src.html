@@ -240,7 +240,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .actions{position:absolute;left:0;right:0;top:280px;z-index:2}
 .actions .lbl{font-size:13px;line-height:20px;color:var(--ink-60);padding:0 20px 8px}
 .actions .car{gap:8px;padding:0 12px 40px;scroll-padding:0 12px;margin-bottom:-40px}
-.acard{width:360px;background:var(--green-100);border-radius:16px;box-shadow:inset 0 0 0 1px var(--green-200),var(--elev);padding:0 0 4px;transition:transform .3s var(--ease)}
+.acard{position:relative;width:360px;background:var(--green-100);border-radius:16px;box-shadow:inset 0 0 0 1px var(--green-200),var(--elev);padding:0 0 4px;transition:transform .3s var(--ease)}
 .acard .ct{height:31px;display:flex;align-items:center;gap:4px;padding:0 16px;color:rgba(18,17,15,.9)}
 .acard .ct.orange{color:var(--chip-orange)}
 .acard .ct .dot{width:6px;height:6px;border-radius:6px;background:var(--chip-orange-dot)}
@@ -354,6 +354,15 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .pcar .jc[data-tone=green] .ph,.pcar .jc[data-tone=plum] .ph{color:rgba(255,255,251,.5)}
 .pcar .jc .btn{width:100%;border-radius:8px}
 .pcar .jc .btn:hover{background:rgba(255,246,191,.08)}
+
+/* one-off metallic glint that travels around the first action card's stroke */
+.acard.shine::after{content:"";position:absolute;inset:0;border-radius:16px;padding:2px;pointer-events:none;z-index:2;
+  background:linear-gradient(115deg,transparent 0 40%,rgba(196,186,92,0) 42%,rgba(196,186,92,.85) 45.5%,#fffef4 48.5%,#ffffff 50%,#f6f0b8 51.5%,rgba(176,166,72,.85) 54.5%,rgba(176,166,72,0) 58%,transparent 100%) 125% 0/360% 100% no-repeat;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:cardGlint 1.8s cubic-bezier(.45,.05,.25,1) both}
+.acard.shine::before{content:"";position:absolute;inset:-1px;border-radius:17px;pointer-events:none;z-index:0;box-shadow:0 0 0 0 rgba(222,219,124,0);animation:cardGlow 1.7s ease-out both}
+@keyframes cardGlint{0%{background-position:-25% 0;opacity:0}10%{opacity:1}88%{opacity:1}100%{background-position:125% 0;opacity:0}}
+@keyframes cardGlow{0%{box-shadow:0 0 0 0 rgba(222,219,124,0)}40%{box-shadow:0 0 0 3px rgba(222,219,124,.35)}100%{box-shadow:0 0 0 6px rgba(222,219,124,0)}}
 
 /* ---------- PROGRESS ---------- */
 #progress{background:var(--neutral-0)}
@@ -1581,7 +1590,7 @@ $$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.query
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); centerP(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
+const boot=()=>{ centerJ(); centerP(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350); setTimeout(()=>{ const c=$('#home .acard'); if(c){ c.classList.add('shine'); setTimeout(()=>c.classList.remove('shine'),2000) } },1850) };
 let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
 (document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();
