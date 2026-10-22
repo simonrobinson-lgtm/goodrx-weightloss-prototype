@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5efe5" id="themeC">
 <title>GoodRx Weight Loss Prototype</title>
 <link rel="preload" href="fonts/GoodRxBolton-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GoodRxBolton-Medium.woff2" as="font" type="font/woff2" crossorigin>
@@ -51,7 +52,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .side .restart:hover{background:var(--green-700);color:var(--yellow-100)}
 @media (max-width:860px){.side{display:none}}
 @media (max-width:500px){
-  .stage{padding:0}
+  html,body{height:100lvh;min-height:100%}
+  .stage{padding:0;bottom:auto;height:100lvh}
   .device{width:100%;height:100%;border-radius:0;padding:0;box-shadow:none;background:none}
   .screen-wrap{width:100%;height:100%;border-radius:0}
   .island,.statusbar{display:none}
@@ -228,7 +230,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .hero .blob{position:absolute;left:-102px;top:423px;width:627px;height:208px;border-radius:50%;background:linear-gradient(180deg,#ede0d5,#a6a3a3 78%);filter:blur(100px);opacity:.9}
 .pen{position:absolute;left:255px;top:110px;width:117px;height:292px}
 .pen img{position:absolute;left:15.4px;top:0;width:86.2px;height:292.5px}
-.pen img.pen-img{left:44.2px;top:15.5px;width:auto;height:228px;filter:drop-shadow(10px 14px 14px rgba(81,69,67,.22)) drop-shadow(2px 3px 3px rgba(81,69,67,.12))}
+.pen img.pen-sh{opacity:1}
+.pen img.pen-img{left:44.2px;top:15.5px;width:auto;height:228px;filter:drop-shadow(1px 2px 2px rgba(81,69,67,.14))}
 @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(.6deg)}}
 .hero .gnav{position:absolute;top:51px;left:0;right:0}
 .drug{position:absolute;left:20px;top:152px;display:flex;flex-direction:column;gap:6px;z-index:2}
@@ -367,6 +370,10 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jcar .jc.on{height:268px}
 .jcar .jc[data-tone=green]{background:#1c534e}
 .jcar .jc[data-tone=blue]{background:#015176}
+.jcar .jc .art{opacity:1;transition:none}
+.jcar .jc[data-tone=green] .art,.jcar .jc[data-tone=blue] .art{display:none}
+.jcar .jc[data-tone=mix]{background:#8a7366}
+.jcar .jc{transition:height .5s var(--ease),box-shadow .5s}
 .jcar .jc:not(.on) .nbox{opacity:0}
 .jcar .jc .body{gap:24px;left:20px;right:20px}
 .jcar .jc .body h3{font-size:24px;letter-spacing:0}
@@ -376,12 +383,12 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jc.on .art{opacity:1}
 .jc .art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.2s var(--ease)}
 .jc.on .art img{transform:scale(1)}
-.jc .mixl img{transform:scaleX(-1) scale(1.08)}
-.jc.on .mixl img{transform:scaleX(-1)}
+.jc .mixl img{transform:scale(1.08)}
+.jc.on .mixl img{transform:none}
 .jc .art::after{content:"";position:absolute;inset:0;background:linear-gradient(176deg,#c23ba0 30%,#581447 75%);opacity:.7}
-.mixl{position:absolute;left:-9px;top:-163px;width:457px;height:817px;filter:url(#fx-mix)}
-.mixl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
-.mixl::after{content:"";position:absolute;inset:0;background:linear-gradient(181.65deg,rgba(194,59,160,.7) 33.6%,rgba(88,20,71,.7) 71.2%)}
+.mixl{position:absolute;left:-9px;top:-163px;width:457px;height:817px}
+.mixl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
 .jc[data-tone=mix] .art::after{display:none}
 .pj .mixl{left:-8px;top:-24px;width:457px;height:266px}
 .pj .art:has(.mixl)::after{display:none}
@@ -489,8 +496,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .jy-all .i{width:12px;height:12px}
 .jy-card{position:relative;border-radius:12px;overflow:hidden;padding:16px 14px 20px}
 .jy-card .mixl{left:0;top:-19px;width:438px;height:281px}
-.jy-card .mixl img{inset:auto;left:0;top:-311px;width:438px;height:863px;object-fit:fill}
-.jy-card .mixl::after{background:linear-gradient(180.59deg,rgba(194,59,160,.7) 33.6%,rgba(88,20,71,.7) 71.2%)}
+.jy-card .mixl img{inset:0;width:100%;height:100%}
+
 .jy-in{position:relative;display:flex;flex-direction:column;gap:40px}
 .jy-in .chip{align-self:flex-start}
 .jy-in .chip img{width:12px;height:12px}
@@ -585,6 +592,20 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .tabs .seg button.on{color:var(--ink)}
 .tabs .seg .ndot{position:absolute;top:7px;right:5px;width:6px;height:6px;border-radius:6px;background:#ad5328}
 .tabs .srch{color:var(--ink)}
+
+/* care: sticky collapsing header + in-place tabs */
+.cstk{position:sticky;top:0;z-index:6}
+.cstk>*:not(.cbg):not(.cdr){position:relative}
+.cbg{position:absolute;left:0;right:0;top:0;height:100%;background:var(--red-700);opacity:var(--sa,0);transition:height .5s var(--ease),box-shadow .4s}
+.cbg::after{content:"";position:absolute;inset:0;background:url(img/care-bg.jpg) -200px -40px/843px auto;mix-blend-mode:overlay;opacity:.22}
+#care.col .cbg{height:calc(100% + var(--ch,96px));box-shadow:0 12px 24px -16px rgba(30,10,20,.55)}
+.drcard.cdr{position:absolute;left:12px;right:12px;top:calc(100% + 23px);margin:0;opacity:0;transform:translateY(18px) scale(.97);transform-origin:50% 0;pointer-events:none;transition:opacity .3s,transform .5s var(--ease)}
+#care.col .drcard.cdr{opacity:1;transform:none;pointer-events:auto;transition:opacity .35s .08s,transform .5s var(--ease)}
+.as-card{transition:opacity .3s,transform .45s var(--ease)}
+#care.col .as-card{opacity:0;transform:scale(.97)}
+.tabs .seg [data-ctab="messages"] .ndot{transform:scale(0);transition:transform .3s var(--ease)}
+.csheet.sup .tabs .seg [data-ctab="messages"] .ndot{transform:none}
+.csheet.sw .rv{animation:none!important;opacity:1!important;transform:none!important}
 .tabpane{display:none}
 .tabpane.on{display:block;animation:paneIn .45s var(--ease) both}
 @keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -851,7 +872,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="hero-in">
           <div class="bg"><img src="img/hero-bg.jpg" alt=""></div>
           <div class="blob"></div>
-          <div class="rv" style="--d:2;position:absolute;inset:0;pointer-events:none"><div class="pen"><img class="pen-img" src="img/pen.webp" alt="Wegovy pen"></div></div>
+          <div class="rv" style="--d:2;position:absolute;inset:0;pointer-events:none"><div class="pen"><img class="pen-sh" src="img/pen-shadow-a.webp" alt=""><img class="pen-img" src="img/pen.webp" alt="Wegovy pen"></div></div>
           <div class="gnav">
             <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
             <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
@@ -869,13 +890,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                 <div class="in">
                   <div class="row"><div class="icon-box"><svg class="i" style="width:24px;height:24px"><use href="#i-clipboard"/></svg></div><div><div class="t1">Book your follow-up</div><div class="t2">Required to authorize your next refill</div></div></div>
                   <button class="btn s48 pri-dark" type="button">Check-in to book</button>
-                </div>
-              </div>
-              <div class="acard">
-                <div class="ct cap orange"><span class="dot"></span>1 new message</div>
-                <div class="in">
-                  <div class="row"><img loading="lazy" decoding="async" src="img/av-luna.webp" alt=""><div><div class="t1">Dr. Sarah Bucknor</div><div class="t2">That’s correct, you would start by applying the injection</div></div></div>
-                  <button class="btn s48 pri-plum" data-go="care">Read message</button>
                 </div>
               </div>
               <div class="acard">
@@ -935,7 +949,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
                 <div class="body"><div><h3>Adjusting to treatment</h3><p>Your body gets used to the medication. Appetite shifts, digestion slows, and you start to learn what works for you.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
               <button class="jc" data-i="1" data-tone="mix">
-                <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
+                <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-mix.jpg" alt=""></div></div>
                 <div class="head"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span><span class="nbox num">2</span></div>
                 <div class="body"><div><h3>Steady weight loss</h3><p>Your dose is set, side effects have usually eased, and changes keep adding up week by week.</p></div><span class="btn s32 sec-light">What to expect</span></div>
               </button>
@@ -959,7 +973,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
         <div class="wrap">
-          <button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button>
+          <button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg><span class="bk-t">Treatment plan overview</span></button>
           <div>
             <div class="ph-head">
               <div><h1 class="rv" style="--d:1">Your progress</h1><div class="chips rv" style="--d:2"><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Phase 2</span><span class="chip sand">Week 6</span></div></div>
@@ -1013,7 +1027,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="pjourney rv">
             <div class="hd h-sec">Your journey</div>
             <div class="pj">
-              <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div></div>
+              <div class="art"><div class="mixl"><img loading="lazy" decoding="async" src="img/journey-mix-p.jpg" alt=""></div></div>
               <div><span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span></div>
               <div><h3>Steady weight loss</h3><p>You’re on an effective dose, and this is where most of the change happens. Steady habits matter more now.</p><button class="btn s32 sec-light" style="width:100%;margin-top:20px" data-go="journey">Learn more</button></div>
             </div>
@@ -1028,13 +1042,13 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
           <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
-        <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
+        <div style="padding-top:8px"><button class="back rv" data-back><svg class="i"><use href="#i-chev-left"/></svg><span class="bk-t">Treatment plan overview</span></button></div>
         <div class="jy">
           <div class="jy-hero rv" style="--d:1">
             <div class="jy-row">
               <div class="jy-side l" aria-hidden="true"></div>
               <div class="jy-card">
-                <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-bg.jpg" alt=""></div>
+                <div class="mixl"><img loading="lazy" decoding="async" src="img/journey-mix-h.jpg" alt=""></div>
                 <span class="jy-n num">2</span>
                 <div class="jy-in">
                   <span class="chip av sq r4"><img loading="lazy" decoding="async" src="img/av-phase.webp" alt="">Current phase</span>
@@ -1085,15 +1099,22 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         </div>
       </section>
 
-      <!-- ================= CARE · MESSAGES ================= -->
+      <!-- ================= CARE CENTER (Messages + Support tabs) ================= -->
       <section class="scr care" id="care" data-sb="light">
         <div class="bgimg"><img loading="lazy" decoding="async" src="img/care-bg.jpg" alt=""></div>
-        <div class="top-pad"></div>
+        <div class="cstk">
+          <div class="cbg"></div>
+          <div class="top-pad"></div>
         <div class="gnav light">
           <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
           <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
         </div>
-        <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
+          <div style="padding-top:11px"><button class="back light rv" data-back><svg class="i"><use href="#i-chev-left"/></svg><span class="bk-t">Treatment plan overview</span></button></div>
+        <div class="drcard cdr" aria-hidden="true">
+          <div class="l"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s"><span class="live"></span>Active session · Today</div></div></div>
+          <button class="btn s24 pri-dark" data-toast="Opening your chat with Dr. Brooke…" tabindex="-1">Chat</button>
+        </div>
+        </div>
         <div class="care-hd"><h1 class="rv" style="--d:1">Care Center</h1><p class="rv" style="--d:2">Get answers to your questions or symptom support, 24/7</p></div>
         <div class="active-s rv" style="--d:3">
           <div class="as-h"><span class="cap">Active session</span><span class="as-exp">Expires in 12 Days</span></div>
@@ -1104,33 +1125,18 @@ svg.i{width:20px;height:20px;flex:none;display:block}
           </div>
         </div>
         <div class="csheet rv" style="--d:3">
-          <div class="tabs"><div class="seg" data-seg><span class="pill"></span><button class="on" data-tab="messages">Messages</button><button data-tab="support" data-go="support">Support</button></div><button class="srch" data-toast="Search isn’t part of this prototype" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button></div>
-          <div class="msgs">
+          <div class="tabs"><div class="seg" data-seg><span class="pill"></span><button class="on" data-ctab="messages">Messages<span class="ndot"></span></button><button data-ctab="support">Support</button></div><button class="srch" data-toast="Search isn’t part of this prototype" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button></div>
+          <div class="tabpane on" data-pane="messages">
+            <div class="msgs">
             <button class="msg rv" style="--d:5" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-ian.webp" alt=""><div class="b"><div class="n">Dr. Ian K.<span>5d ago</span></div><div class="s">Patient follow-up</div></div></button>
             <button class="msg rv" style="--d:6" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-ian.webp" alt=""><div class="b"><div class="n">Dr. Ian K.<span>5d ago</span></div><div class="s">New medication consultation</div></div></button>
             <button class="msg rv" style="--d:7" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-emily.webp" alt=""><div class="b"><div class="n">Dr. Emily R.<span>30d ago</span></div><div class="s">Medication adjustment</div></div></button>
             <button class="msg old rv" style="--d:8" data-toast="Conversation view coming soon"><img loading="lazy" decoding="async" src="img/av-luna.webp" alt=""><div class="b"><div class="n">Dr. Luna M.<span>65d ago</span></div><div class="s">Dose enquiry</div></div></button>
           </div>
-        </div>
-      </section>
-
-      <!-- ================= CARE · SUPPORT ================= -->
-      <section class="scr care" id="support" data-sb="light">
-        <div class="bgimg" style="--bx:-180px;top:0"><img loading="lazy" decoding="async" src="img/care-bg.jpg" alt=""></div>
-        <div class="top-pad"></div>
-        <div class="gnav light">
-          <div class="l"><svg class="logo"><use href="#i-logo"/></svg><button class="prog" data-menu><span>Weight loss</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button></div>
-          <div class="r"><button data-go="notifs" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="bell-dot"></i></button><button data-nav aria-label="Menu"><svg class="i"><use href="#i-menu"/></svg></button></div>
-        </div>
-        <div style="padding-top:11px"><button class="back light rv" data-home><svg class="i"><use href="#i-chev-left"/></svg>Treatment plan overview</button></div>
-        <div class="drcard rv" style="--d:1">
-          <div class="l"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="n">Dr. Brooke</div><div class="s"><span class="live"></span>Active session · Today</div></div></div>
-          <button class="btn s24 pri-dark" data-go="care">Chat</button>
-        </div>
-        <div class="csheet rv" style="--d:2">
-          <div class="tabs"><div class="seg" data-seg><span class="pill"></span><button data-tab="messages" data-go="care">Messages<span class="ndot"></span></button><button class="on" data-tab="support">Support</button></div><button class="srch" data-toast="Search isn’t part of this prototype" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button></div>
-          <div class="sup-hd rv" style="--d:3"><h2>Contact GoodRx Care</h2><p>Questions are part of the journey. Our team is here day or night to help you feel supported.</p></div>
-          <div class="acc rv" style="--d:4" id="acc">
+          </div>
+          <div class="tabpane" data-pane="support">
+          <div class="sup-hd"><h2>Contact GoodRx Care</h2><p>Questions are part of the journey. Our team is here day or night to help you feel supported.</p></div>
+          <div class="acc" id="acc">
             <button><span>When to get in touch?</span><svg class="i"><use href="#i-chev-down-lg"/></svg></button>
             <div class="ab"><div><ul>
               <li>Side effects that last longer than a week or get in the way of eating and drinking</li>
@@ -1139,19 +1145,21 @@ svg.i{width:20px;height:20px;flex:none;display:block}
               <li class="urgent">For severe symptoms or an emergency, call 911</li>
             </ul></div></div>
           </div>
-          <div class="contact rv" style="--d:5">
+          <div class="contact">
             <div class="t">Telehealth support</div>
             <button class="crow" data-toast="Calling (737) 379-1416…"><span class="icon-box"><svg class="i"><use href="#i-phone"/></svg></span><div><div class="a">(737) 379-1416</div><div class="b">Mon-Fri: 9am-6pm PST</div></div></button>
             <button class="crow" data-toast="Opening mail to care-support@goodrx.com"><span class="icon-box"><svg class="i"><use href="#i-mail"/></svg></span><div><div class="a">care-support@goodrx.com</div><div class="b">Expect a response within 48 hrs</div></div></button>
-            <button class="crow" data-go="care"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="a">Dr. Brooke</div><div class="b">Active session</div></div></button>
+            <button class="crow" data-toast="Opening your chat with Dr. Brooke…"><img loading="lazy" decoding="async" src="img/av-brooke.webp" alt=""><div><div class="a">Dr. Brooke</div><div class="b">Active session</div></div></button>
           </div>
-          <div class="pharm rv" style="--d:6">
+          <div class="pharm">
             <div class="t">Your Pharmacy</div>
             <div class="crow"><span class="icon-box"><svg class="i"><use href="#i-pills"/></svg></span><div><div class="a">CVS West Broadway</div><div class="b">Mon-Fri: 9am-6pm PST</div><div class="a" style="font-size:14px;line-height:1.5">(737) 379-1416</div></div></div>
             <button class="btn s24 sec-dark" data-toast="Calling CVS West Broadway…">Contact pharmacy</button>
           </div>
+          </div>
         </div>
       </section>
+
 
       <!-- ================= START A SESSION ================= -->
       <section class="scr" id="session" data-sb="dark">
@@ -1281,16 +1289,16 @@ const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelect
 const app=$('#app'), sb=$('#sb'), stk=$('#stk');
 function updStk(el,force){
   const home=el.id==='home', y=el.scrollTop, hon=home;
-  const has=!home && !!el.querySelector(':scope .gnav'), was=stk.classList.contains('on');
+  const has=!home && el.id!=='care' && !!el.querySelector(':scope .gnav'), was=stk.classList.contains('on');
   const on=!force && has && (was ? y>70 : y>120);
   stk.classList.toggle('on',on); stk.classList.toggle('light',el.dataset.sb==='light'); sb.classList.toggle('stk',on);
   if(hon) sb.classList.remove('solid','stk'); stk.setAttribute('aria-hidden',on?'false':'true'); $$('button',stk).forEach(b=>b.tabIndex=on?0:-1);
 }
-const screens=['home','progress','journey','care','support','session'];
+const screens=['home','progress','journey','care','session'];
 let stack=['home'];
 const cur=()=>stack[stack.length-1];
 const MODAL=new Set(['session','notifs']), FADE=new Set();
-const TABS=new Set(['care','support']);
+const TABS=new Set(['care']);
 
 
 /* ---------- iOS-style swipe from the left edge to go back ---------- */
@@ -1336,9 +1344,10 @@ const TABS=new Set(['care','support']);
 })();
 
 /* ---------- device scaling on desktop ---------- */
+const LVH=CSS.supports('height','100lvh');
 const IS_SAFARI=/^((?!chrome|chromium|crios|android|edg).)*safari/i.test(navigator.userAgent);
 function fit(){
-  const d=$('#device'); if(innerWidth<=500){ d.style.transform=''; d.style.margin=''; const z=innerWidth/393; app.style.zoom=z; app.style.width='393px'; app.style.height=(innerHeight/z)+'px'; return }
+  const d=$('#device'); if(innerWidth<=500){ d.style.transform=''; d.style.margin=''; const z=innerWidth/393; app.style.zoom=z; app.style.width='393px'; app.style.height=LVH?`calc(100lvh / ${z})`:(innerHeight/z)+'px'; return }
   app.style.zoom=''; app.style.width=''; app.style.height=''; d.style.zoom='';
   const s=Math.min(1,(innerHeight-40)/876);
   // Safari mis-clips sticky/composited layers inside a transformed ancestor, so scale the phone with zoom there instead
@@ -1393,10 +1402,12 @@ function show(id,mode){
     clearTimeout(from._t); clearTimeout(to._t);
     to._t=from._t=setTimeout(()=>{ if(shownId!==from.id) from.classList.remove('active'); from.style.visibility=''; clearAnim(from); clearAnim(to); dim.className='' },560);
   } else from.classList.remove('active');
-  if(mode!=='unmodal'&&mode!=='pop') to.scrollTop=0;
+  if(mode!=='unmodal'&&mode!=='pop'){ to.scrollTop=0; if(id==='care'){ CR.sheet.classList.remove('sw'); careTab('messages',false) } }
+  crumbs(id); pageTint(id);
   reveal(id, !(mode==='pop'||mode==='unmodal'));   // going back: content is already there, don't replay its entrance
 }
 function go(id,opts={}){
+  if(id==='support'){ const was=cur()==='care'; if(!was) go('care',opts); setTimeout(()=>careTab('support'),was?0:460); return }
   if(id==='symptom'){ if(cur()!=='progress'){ go('progress'); setTimeout(()=>openSheet('nausea'),520);} else openSheet('nausea'); return }
   if(id===cur()) return;
   const leaving=cur();
@@ -1433,6 +1444,36 @@ function back(){
   }));
   sync();
 })();
+
+/* ---------- care center: collapsing active session + in-place tabs ---------- */
+const CR={el:$('#care')}; CR.stk=$('.cstk',CR.el); CR.sheet=$('.csheet',CR.el); CR.as=$('.as-card',CR.el); CR.dr=$('.cdr',CR.el);
+function careMeasure(){ const ch=23+CR.dr.offsetHeight+17; CR.ch=ch; CR.el.style.setProperty('--ch',ch+'px'); CR.sheet.style.minHeight=Math.max(440,CR.el.clientHeight-(CR.stk.offsetHeight+ch))+'px' }
+function careUpd(){
+  const el=CR.el; el.style.setProperty('--sa',Math.min(1,el.scrollTop/60).toFixed(3));
+  const sb=CR.stk.getBoundingClientRect().bottom, at=CR.as.getBoundingClientRect().top, was=el.classList.contains('col');
+  el.classList.toggle('col', was ? at < sb+31 : at < sb+23);
+}
+let crt; CR.el.addEventListener('scroll',()=>{ cancelAnimationFrame(crt); crt=requestAnimationFrame(careUpd) },{passive:true});
+function careTab(t,anim=true){
+  const seg=$('[data-seg]',CR.sheet), pill=$('.pill',seg), on=$(`[data-ctab="${t}"]`,seg);
+  $$('[data-ctab]',seg).forEach(b=>b.classList.toggle('on',b===on));
+  pill.style.transition=anim?'':'none'; pill.style.left=on.offsetLeft+'px'; pill.style.width=on.offsetWidth+'px';
+  if(anim) CR.sheet.classList.add('sw'); CR.sheet.classList.toggle('sup',t==='support');
+  $$('.tabpane',CR.sheet).forEach(p=>p.classList.toggle('on',p.dataset.pane===t));
+  careMeasure();
+  if(t==='support'){ const target=CR.sheet.offsetTop-(CR.stk.offsetHeight+CR.ch); if(CR.el.scrollTop<target-2) CR.el.scrollTo({top:target,behavior:anim?'smooth':'auto'}) }
+  if(!anim) careUpd();
+}
+$$('[data-ctab]',CR.el).forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); careTab(b.dataset.ctab) }));
+addEventListener('resize',careMeasure);
+
+/* ---------- dynamic back breadcrumbs ---------- */
+const CRUMB={home:'Treatment plan overview',progress:'Your progress',journey:'Your journey',care:'Care Center'};
+function crumbs(id){ const prev=stack.length>1?stack[stack.length-2]:'home'; $$('#'+id+' .bk-t').forEach(t=>t.textContent=CRUMB[prev]||CRUMB.home) }
+
+/* ---------- on phones, paint the page behind Safari's toolbars in the current screen's colour ---------- */
+const SCR_BG={home:'#f5efe5',progress:'#f5efe5',journey:'#fffffb',care:'#5c2d44',session:'#f5efe5',notifs:'#fffffb'};
+function pageTint(id){ if(innerWidth>500) { document.documentElement.style.background=''; document.body.style.background=''; return } const c=SCR_BG[id]||'#f5efe5'; document.documentElement.style.background=c; document.body.style.background=c; const m=$('#themeC'); if(m) m.content=c }
 /* ---------- global click wiring ---------- */
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-hero-top]')){ $('#home').scrollTo({top:0,behavior:'smooth'}); return }
@@ -1458,11 +1499,12 @@ document.addEventListener('click',e=>{
   }
 });
 function jump(id){
-  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],symptom:['home','progress'],care:['home','care'],support:['home','support'],session:['home','session'],notifs:['home','notifs']};
+  const map={home:['home'],progress:['home','progress'],journey:['home','journey'],symptom:['home','progress'],care:['home','care'],support:['home','care'],session:['home','session'],notifs:['home','notifs']};
   const target=map[id]; const last=target[target.length-1];
   closeSheet(true);
   if(shownId!==last){ const from=$('#'+shownId), to=$('#'+last); [from,to].forEach(clearAnim); from.classList.remove('active'); to.classList.add('active','enter-fade'); setTimeout(()=>clearAnim(to),400); to.scrollTop=0; shownId=last; reveal(last) }
-  stack=target;
+  stack=target; crumbs(last); pageTint(last);
+  if(last==='care'){ CR.sheet.classList.remove('sw'); careTab(id==='support'?'support':'messages',false) }
   if(id==='symptom') setTimeout(()=>openSheet('nausea'),350);
 }
 $('#restart').onclick=()=>{ resetSession(); jump('home'); };
@@ -1670,11 +1712,11 @@ app.insertBefore(fab,$('#ov'));
 $$('.scr').forEach(sc=>sc.addEventListener('scroll',()=>{ if(sc.id===cur() && !ov.classList.contains('on')) { sb.classList.toggle('solid',sc.scrollTop>30); updStk(sc) } },{passive:true}));
 
 /* ---------- sunlight layer on the bronze journey tiles ---------- */
-$$('.jc[data-tone=mix] .art, .pj .art, .jy-card').forEach(el=>{ const m=el.querySelector('.mixl'); const sun=document.createElement('span'); sun.className='sun'; if(m) m.after(sun); else el.appendChild(sun) });
+$$('.pj .art, .jy-card').forEach(el=>{ const m=el.querySelector('.mixl'); const sun=document.createElement('span'); sun.className='sun'; if(m) m.after(sun); else el.appendChild(sun) });
 
 /* ---------- boot ---------- */
 $('#home').classList.add('active');
-const boot=()=>{ centerJ(); heroMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
+const boot=()=>{ centerJ(); heroMeasure(); pageTint('home'); careMeasure(); setTimeout(()=>{ $('#splash').classList.add('done'); reveal('home') },350) };
 let booted=false; const go1=()=>{ if(!booted){ booted=true; boot() } };
 (document.fonts?document.fonts.ready:Promise.resolve()).then(go1); setTimeout(go1,900);
 })();

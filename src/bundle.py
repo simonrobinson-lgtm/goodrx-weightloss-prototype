@@ -5,6 +5,8 @@
   python3 bundle.py artifact OUT.html   -> fonts inlined, images left as relative files (for the Claude share link)
 """
 import re, base64, sys, os, shutil
+import protect
+PW = protect.password()
 root = os.path.dirname(os.path.abspath(__file__))
 mode, out = sys.argv[1], sys.argv[2]
 
@@ -25,7 +27,7 @@ def inline_fonts(t):
 
 if mode == 'site':
     os.makedirs(out, exist_ok=True)
-    open(os.path.join(out, 'index.html'), 'w').write(s)
+    open(os.path.join(out, 'index.html'), 'w').write(protect.gate(s, PW) if PW else s)
     used = set(re.findall(r'(img/[^"\')\s]+)', s)) | set(re.findall(r'(fonts/[^"\')\s]+)', s))
     for d in ('img', 'fonts'):
         shutil.rmtree(os.path.join(out, d), ignore_errors=True); os.makedirs(os.path.join(out, d))
@@ -37,12 +39,14 @@ elif mode == 'standalone':
     t = re.sub(r'<link rel="preload" href="img/[^"]+"[^>]*>\n?', '', t)
     c = {}
     t = re.sub(r'src="(img/[^"]+)"', lambda m: 'src="%s"' % c.setdefault(m.group(1), uri(m.group(1))), t)
+    t = protect.gate(t, PW) if PW else t
     open(out, 'w').write(t); print('standalone ->', out, round(len(t) / 1e6, 2), 'MB')
 elif mode == 'artifact':
     t = inline_fonts(s)
     t = '<title>GoodRx Weight Loss Prototype</title>\n' + t[t.index('<link rel="preload"'):] if '<link rel="preload"' in t else '<title>GoodRx Weight Loss Prototype</title>\n' + t[t.index('<style>'):]
     t = t.replace('</style>\n</head>\n<body>', '</style>', 1).replace('</body>\n</html>', '')
-    open(out, 'w').write(t)
     imgs = sorted(set(re.findall(r'(img/[^"\')\s]+)', t)))
+    t = protect.gate(inline_fonts(s), PW, fragment=True) if PW else t
+    open(out, 'w').write(t)
     open(out + '.files', 'w').write('\n'.join(imgs))
     print('artifact ->', out, round(len(t) / 1e3), 'KB,', len(imgs), 'image files')
