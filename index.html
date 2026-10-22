@@ -661,6 +661,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .nav-scrim{position:absolute;inset:0;background:rgba(215,209,198,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .4s}
 .nav-panel{position:absolute;top:0;right:0;bottom:0;width:361px;background:var(--neutral-0);transform:translateX(100%);transition:transform .5s var(--ios);overflow-y:auto;scrollbar-width:none;padding:63px 0 40px}
 .nav-panel::-webkit-scrollbar{display:none}
+.np-row.np-off{cursor:default}
+.np-subh [data-nav-go]{cursor:pointer}
 .nav-ov.on{pointer-events:auto}
 .nav-ov.on .nav-scrim{opacity:1}
 .nav-ov.on .nav-panel{transform:none}
@@ -1164,11 +1166,11 @@ svg.i{width:20px;height:20px;flex:none;display:block}
         <aside class="nav-panel" id="navPanel" aria-label="Menu">
           <div class="np-top"><svg class="logo" style="width:24px;height:24px"><use href="#i-logo"/></svg><button data-nav-close aria-label="Close menu"><svg class="i"><use href="#i-close"/></svg></button></div>
           <div class="np-search"><button data-toast="Search isn’t part of this prototype"><svg class="i"><use href="#i-search16"/></svg>Search medications or conditions</button></div>
-          <button class="np-row" data-nav-go="home"><svg class="i" style="width:24px;height:24px"><use href="#i-home"/></svg>Dashboard</button>
+          <button class="np-row np-off" type="button" aria-disabled="true"><svg class="i" style="width:24px;height:24px"><use href="#i-home"/></svg>Dashboard</button>
           <button class="np-row" data-toast="Account isn’t part of this prototype"><img loading="lazy" decoding="async" src="img/av-account.png" alt="">Account</button>
           <div class="np-lbl">Your subscriptions</div>
           <div class="np-sub open" id="npWl">
-            <div class="np-subh"><span class="thumb"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t"><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog" aria-label="Collapse Weight loss"><svg><use href="#i-chev8"/></svg></button></div>
+            <div class="np-subh"><span class="thumb" data-nav-go="home"><img loading="lazy" decoding="async" src="img/thumb-wl.png" alt=""><i class="odot"></i></span><span class="np-t" data-nav-go="home" role="link" tabindex="0"><b>Weight loss</b><small>Wegovy · Semaglutide · 0.5mg</small></span><button class="np-tog" aria-label="Collapse Weight loss"><svg><use href="#i-chev8"/></svg></button></div>
             <div class="np-links"><div>
               <button class="np-link cur" data-nav-go="home">Overview</button>
               <button class="np-link" data-nav-go="care">Care Center</button>
