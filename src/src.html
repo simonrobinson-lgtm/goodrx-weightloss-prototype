@@ -355,14 +355,6 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .pcar .jc .btn{width:100%;border-radius:8px}
 .pcar .jc .btn:hover{background:rgba(255,246,191,.08)}
 
-/* one-off metallic glint that travels around the first action card's stroke */
-.acard.shine::after{content:"";position:absolute;inset:0;border-radius:16px;padding:2px;pointer-events:none;z-index:2;
-  background:linear-gradient(45deg,rgba(214,204,110,.45) 0%,rgba(226,216,128,.7) 40%,#fffbe2 47%,#ffffff 49.5%,rgba(255,255,255,0) 54%,transparent 100%) 100% 0/300% 300% no-repeat;
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
-  animation:cardGlint 2.8s cubic-bezier(.4,0,.2,1) both}
-.acard.shine::before{content:"";position:absolute;inset:-1px;border-radius:17px;pointer-events:none;z-index:0;box-shadow:0 0 0 0 rgba(222,219,124,0);animation:cardGlow 2.8s ease-out both}
-@keyframes cardGlint{0%{background-position:100% 0;opacity:.4}70%{background-position:0 100%;opacity:.4}100%{background-position:0 100%;opacity:0}}
-@keyframes cardGlow{0%{box-shadow:0 0 0 0 rgba(222,219,124,0)}40%{box-shadow:0 0 0 3px rgba(222,219,124,.12)}100%{box-shadow:0 0 0 6px rgba(222,219,124,0)}}
 
 /* ---------- PROGRESS ---------- */
 #progress{background:var(--neutral-0)}
