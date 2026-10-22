@@ -8,7 +8,7 @@
 <link rel="preload" href="fonts/GoodRxBolton-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GoodRxBolton-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GoodRxMoon-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/hero-bg.jpg" as="image">
+<link rel="preload" href="img/hero-loop-poster.jpg" as="image">
 <link rel="preload" href="img/journey-mix.jpg" as="image">
 <style>
 @font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -225,7 +225,8 @@ svg.i{width:20px;height:20px;flex:none;display:block}
 .hero .pen{transform-origin:50% 0}
 .actions{transform-origin:20px 0}
 .hero .bg{position:absolute;left:0;top:-24px;width:393px;height:696px;overflow:hidden}
-.hero .bg img{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;animation:drift 18s ease-in-out infinite alternate}
+.hero .bg .bgv{position:absolute;left:0;top:-6px;width:100%;height:calc(100% + 12px);object-fit:cover;pointer-events:none;background:#f1ebe3 url(img/hero-loop-poster.jpg) center/cover}
+.hero .bg .bgv::-webkit-media-controls{display:none!important}
 .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,#fff 18%,rgba(255,255,255,0) 52%)}
 @keyframes drift{0%{transform:translate3d(-2%,-1%,0) scale(1)}100%{transform:translate3d(3%,2%,0) scale(1.05)}}
 .hero .blob{position:absolute;left:-102px;top:423px;width:627px;height:208px;border-radius:50%;background:linear-gradient(180deg,#ede0d5,#a6a3a3 78%);filter:blur(100px);opacity:.9}
@@ -886,7 +887,7 @@ svg.i{width:20px;height:20px;flex:none;display:block}
       <section class="scr" id="home" data-sb="dark">
         <div class="hero">
           <div class="hero-in">
-          <div class="bg"><img src="img/hero-bg.jpg" alt=""></div>
+          <div class="bg"><video class="bgv" src="img/hero-loop.mp4" poster="img/hero-loop-poster.jpg" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-hidden="true" tabindex="-1"></video></div>
           <div class="blob"></div>
           <div class="rv" style="--d:2;position:absolute;inset:0;pointer-events:none"><div class="pen"><img class="pen-sh" src="img/pen-shadow-a.webp" alt=""><img class="pen-img" src="img/pen.webp" alt="Wegovy pen"></div></div>
           <div class="gnav">
@@ -1594,6 +1595,12 @@ function crumbs(id){ const prev=stack.length>1?stack[stack.length-2]:'home'; $$(
 /* ---------- on phones, paint the page behind Safari's toolbars in the current screen's colour ---------- */
 const SCR_BG={home:'#f5efe5',progress:'#f5efe5',journey:'#fffffb',care:'#5c2d44',session:'#f5efe5',notifs:'#fffffb'};
 function pageTint(id){ if(innerWidth>500) { document.documentElement.style.background=''; document.body.style.background=''; return } const c=SCR_BG[id]||'#f5efe5'; document.documentElement.style.background=c; document.body.style.background=c; const m=$('#themeC'); if(m) m.content=c }
+
+/* ---------- home hero loop video: keep it playing (iOS can pause muted autoplay) ---------- */
+(()=>{ const v=$('#home .bgv'); if(!v) return; v.muted=true; const play=()=>{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}) };
+  play(); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) play() }); ['touchstart','pointerdown'].forEach(ev=>addEventListener(ev,play,{once:true,passive:true}));
+  const m=matchMedia('(prefers-reduced-motion: reduce)'); if(m.matches){ v.removeAttribute('autoplay'); v.pause() }
+})();
 /* ---------- global click wiring ---------- */
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-hero-top]')){ $('#home').scrollTo({top:0,behavior:'smooth'}); return }

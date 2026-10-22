@@ -18,7 +18,7 @@ assert len(s) > _n, 'deep-link hook not injected: boot() changed shape'
 s = s.replace('<meta name="viewport"', '<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"', 1)
 
 def uri(p):
-    mt = {'jpg': 'image/jpeg', 'webp': 'image/webp', 'woff2': 'font/woff2', 'png': 'image/png'}[p.rsplit('.', 1)[1]]
+    mt = {'jpg': 'image/jpeg', 'webp': 'image/webp', 'woff2': 'font/woff2', 'png': 'image/png', 'mp4': 'video/mp4'}[p.rsplit('.', 1)[1]]
     return 'data:%s;base64,%s' % (mt, base64.b64encode(open(os.path.join(root, p), 'rb').read()).decode())
 
 def inline_fonts(t):
@@ -38,7 +38,8 @@ elif mode == 'standalone':
     t = inline_fonts(s)
     t = re.sub(r'<link rel="preload" href="img/[^"]+"[^>]*>\n?', '', t)
     c = {}
-    t = re.sub(r'src="(img/[^"]+)"', lambda m: 'src="%s"' % c.setdefault(m.group(1), uri(m.group(1))), t)
+    t = re.sub(r'(src|poster)="(img/[^"]+)"', lambda m: '%s="%s"' % (m.group(1), c.setdefault(m.group(2), uri(m.group(2)))), t)
+    t = re.sub(r'url\((img/[^)]+)\)', lambda m: 'url(%s)' % c.setdefault(m.group(1), uri(m.group(1))), t)
     t = protect.gate(t, PW) if PW else t
     open(out, 'w').write(t); print('standalone ->', out, round(len(t) / 1e6, 2), 'MB')
 elif mode == 'artifact':
