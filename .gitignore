@@ -1,2 +1,4 @@
 .proto-pass
 src/.proto-pass
+src/__pycache__/
+**/__pycache__/
