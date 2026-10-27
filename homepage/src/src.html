@@ -76,7 +76,8 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- reveal on scroll ---------- */
 .r-wait{opacity:0;transform:translate3d(0,28px,0)}
 .r-in{transition:opacity 1s var(--ease) calc(var(--i,0)*90ms),transform 1.1s var(--ease) calc(var(--i,0)*90ms)}
-.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .18em .14em .06em;margin:0 -.18em -.14em -.06em}
+.split.split-done .w{overflow:visible}
 .split .w>span{display:inline-block;transition:transform 1.1s var(--ease) calc(var(--d,0)*1ms + var(--wi)*45ms),opacity .8s var(--ease) calc(var(--d,0)*1ms + var(--wi)*45ms)}
 .split.s-wait .w>span{transform:translate3d(0,105%,0);opacity:0}
 
@@ -118,6 +119,7 @@ p,h1,h2,h3,ul{margin:0}
 .quiz .arr{position:absolute;right:20px;top:50%;width:16px;height:16px;margin-top:-8px;color:var(--soft);transition:transform .45s var(--spring),color .3s}
 .quiz:hover .arr{transform:translateX(4px);color:var(--g700)}
 /* intro sequence */
+.intro [data-intro]{visibility:hidden}
 .intro .hero .bg .media{transform:scale(1.12)}
 .hero .bg .media{transition:transform 2.4s var(--ease)}
 .intro .hdr{transform:translate3d(0,-130%,0)}
@@ -139,7 +141,7 @@ p,h1,h2,h3,ul{margin:0}
 .dash{position:relative;border-bottom:1px dashed var(--g700);color:var(--g700);display:inline-flex;align-items:baseline;gap:8px;padding-bottom:4px;cursor:help}
 .dash .num{font-size:32px;line-height:1}
 .dash.soft{color:var(--soft);border-color:var(--g700)}
-.tip{position:absolute;left:0;bottom:calc(100% + 12px);width:240px;padding:12px 14px;border-radius:10px;background:var(--n0);box-shadow:var(--elev);color:var(--soft);font-size:13px;line-height:1.4;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .3s var(--ease),transform .4s var(--ease);z-index:5}
+.tip{position:absolute;left:0;top:calc(100% + 12px);width:240px;padding:12px 14px;border-radius:10px;background:var(--n0);box-shadow:var(--elev);color:var(--soft);font-size:13px;line-height:1.4;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .3s var(--ease),transform .4s var(--ease);z-index:5}
 .tip b{display:block;color:var(--dark);font-weight:400;font-size:14px;margin-bottom:2px}
 .dash:hover .tip,.dash:focus-visible .tip{opacity:1;transform:none}
 .price-row .right{display:flex;gap:12px;align-items:center}
@@ -247,8 +249,9 @@ p,h1,h2,h3,ul{margin:0}
 .big-price .v small{font-size:18px}
 .big-price .c{font-size:13px;color:var(--rev-soft)}
 .scrib{position:absolute;pointer-events:none;overflow:visible}
-.scrib path{fill:none;stroke:var(--y400);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:var(--len,200);stroke-dashoffset:var(--len,200);transition:stroke-dashoffset 1.2s var(--ease-io) .5s}
-.scrib.drawn path{stroke-dashoffset:0}
+.scrib{clip-path:inset(-4px 100% -4px -4px);transition:clip-path 1.1s var(--ease-io) .45s}
+.scrib.drawn{clip-path:inset(-4px -4px -4px -4px)}
+.scrib path{fill:none;stroke:var(--y400);stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .big-price .scrib{left:0;top:52px;width:82px;height:14px}
 .panel .lede{font-size:14px;color:var(--rev)}
 .rule{height:1px;background:rgba(255,255,251,.1)}
@@ -291,7 +294,7 @@ p,h1,h2,h3,ul{margin:0}
 .sec-head .display{color:var(--n900)}
 .sec-head p{width:428px;max-width:100%;font-size:14px;color:var(--k50)}
 .em-wrap{position:relative;display:inline-block}
-.em-wrap .scrib{left:-2px;right:0;bottom:-10px;width:calc(100% + 4px);height:16px}
+.em-wrap .scrib{left:2px;top:calc(100% - 1px);width:calc(100% - 6px);height:10px}
 .jour>.wrap-16{width:100%}
 .pbox{position:relative;background:var(--n0);border-radius:16px;overflow:hidden}
 .pstage{position:relative;height:616px}
@@ -370,11 +373,12 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- testimonials ---------- */
 .testi{padding-block:96px 56px;display:flex;flex-direction:column;align-items:center;gap:56px}
 .testi .sec-head p{font-size:16px;color:var(--soft)}
-.tmarq{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch}
+.tmarq{-webkit-user-select:none;user-select:none;width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch}
 .tmarq::-webkit-scrollbar{display:none}
 .tmarq.dragging{cursor:grabbing}
 .tmarq.dragging .tcard{pointer-events:none}
 .ttrack{display:flex;gap:16px;width:max-content;padding:0 max(var(--gut),calc((100vw - 1328px)/2))}
+.tcard:focus-visible{outline-offset:-3px;outline-color:var(--y100)}
 .tcard{position:relative;width:432px;height:480px;flex:none;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;color:var(--y100);transition:transform .7s var(--ease)}
 .tcard .media{position:absolute;inset:0}
 .tcard .media>img{transition:opacity .9s var(--ease),transform 1.8s var(--ease),filter .9s var(--ease)}
@@ -384,14 +388,12 @@ p,h1,h2,h3,ul{margin:0}
 .tcard .stat{position:relative;z-index:3;padding:0 24px 24px;display:flex;flex-direction:column;gap:8px;background:linear-gradient(0deg,rgba(0,0,0,.2) 2%,rgba(0,0,0,0));transition:opacity .45s var(--ease),transform .6s var(--ease)}
 .tcard .stat .v{display:flex;align-items:baseline;gap:2px}
 .tcard .stat .num{font-size:56px;line-height:1}
-.tcard .quote{position:absolute;inset:0;z-index:5;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:var(--g800);--grain:.35;clip-path:inset(100% 0 0 0);transition:clip-path .75s var(--ease-io)}
+.tcard .quote{position:absolute;inset:-1px;z-index:5;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:var(--g800);--grain:.35;clip-path:inset(100% 0 0 0);transition:clip-path .75s var(--ease-io)}
 .tcard .quote q{font-size:24px;line-height:1.2;letter-spacing:-.01em;font-weight:300;quotes:"“" "”";opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease) .2s,transform .7s var(--ease) .2s}
 .tcard .quote .who{display:flex;flex-direction:column;gap:18px;opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease) .3s,transform .7s var(--ease) .3s}
 .tcard .quote .who b{font-weight:400;font-size:24px;line-height:1.2}
 .tcard:hover .quote,.tcard:focus-visible .quote,.tcard.peek .quote{clip-path:inset(0 0 0 0)}
 .tcard:hover .quote q,.tcard:hover .quote .who,.tcard:focus-visible .quote q,.tcard:focus-visible .quote .who,.tcard.peek .quote q,.tcard.peek .quote .who{opacity:1;transform:none}
-.drag-hint{position:fixed;z-index:60;left:0;top:0;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--g700);color:var(--y100);display:grid;place-items:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;transform:scale(0);transition:transform .45s var(--spring)}
-.drag-hint.on{transform:scale(1)}
 
 /* ---------- FAQ ---------- */
 .faq{padding-block:80px 56px;display:flex;justify-content:space-between;gap:48px}
@@ -594,8 +596,10 @@ p,h1,h2,h3,ul{margin:0}
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .r-wait,.split.s-wait .w>span{opacity:1;transform:none}
   .draw path{stroke-dashoffset:0}
+  .scrib{clip-path:none}
 }
 </style>
+<script>try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro")}catch(e){}</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-chev" viewBox="0 0 14 14"><path d="M5.25 2.33398L8.67923 5.7632C9.36265 6.44662 9.36265 7.55466 8.67923 8.23808L5.25 11.6673" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -606,7 +610,6 @@ p,h1,h2,h3,ul{margin:0}
   <symbol id="i-mark" viewBox="0 0 24 24"><path fill="#FDDB00" d="M19.4246 7.371H16.2153V4.08C16.2153 1.827 14.4336 0 12.2365 0C10.0395 0 8.25781 1.827 8.25781 4.08V15.528H19.4246C21.6216 15.528 23.4033 13.701 23.4033 11.448C23.4033 9.195 21.6216 7.371 19.4246 7.371Z"/><path fill="#FDDB00" d="M8.26172 16.5781V19.9201C8.26172 22.1731 10.0434 24.0001 12.2404 24.0001C14.4375 24.0001 16.2192 22.1731 16.2192 19.9201V16.5781H8.26172Z"/><path fill="#FDDB00" d="M7.18511 7.37109H3.97872C1.78165 7.37109 0 9.19509 0 11.4481C0 13.7011 1.78165 15.5281 3.97872 15.5281H7.18511V7.37109Z"/></symbol>
 </svg>
 
-<div class="drag-hint" id="dragHint">Drag</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <header class="hdr" id="hdr">
@@ -775,7 +778,7 @@ p,h1,h2,h3,ul{margin:0}
 <!-- JOURNEY -->
 <section class="jour" id="journey">
   <div class="wrap sec-head">
-    <h2 class="display split">From first step to <span class="em-wrap"><em>steady routine</em><svg class="scrib" viewBox="0 0 110 16" preserveAspectRatio="none"><path d="M2 11C20 6.5 44 4.2 66 5.4C82 6.2 96 8.4 108 5.2"/></svg></span></h2>
+    <h2 class="display split">From first step to <span class="em-wrap"><em>steady routine</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
     <p data-r>See what to expect as you get started and continue on to maintenance.</p>
   </div>
   <div class="wrap-16"><div class="pbox" id="stage" data-r>
@@ -787,7 +790,7 @@ p,h1,h2,h3,ul{margin:0}
 <!-- TESTIMONIALS -->
 <section class="testi">
   <div class="wrap sec-head">
-    <h2 class="display split">No two journeys look the same.<br><span class="em-wrap"><em>Yours shouldn’t either.</em><svg class="scrib" viewBox="0 0 110 16" preserveAspectRatio="none" style="width:40%;left:2%"><path d="M2 11C20 6.5 44 4.2 66 5.4C82 6.2 96 8.4 108 5.2"/></svg></span></h2>
+    <h2 class="display split">No two journeys look the same.<br><span class="em-wrap"><em>Yours shouldn’t either.</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
     <p data-r>Everyone's body responds differently — and that's normal.<br>We pay attention to how you're doing and shape your treatment around it.</p>
   </div>
   <div class="tmarq" id="tmarq" data-lenis-prevent>
@@ -1076,20 +1079,19 @@ $$('.media:not(.eager)').forEach(m=>watch(m,1.7,load));
 /* ---------- reveal on scroll ---------- */
 const counters=new WeakSet();
 function countUp(el){if(counters.has(el)||RM)return;counters.add(el);const to=+el.dataset.count,pre=el.dataset.prefix||'',t0=performance.now(),d=1400;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,4);el.textContent=pre+Math.round(to*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-const revIO={observe:el=>watch(el,.88,el=>{el.classList.remove('r-wait','s-wait');$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)})};
+const revIO={observe:el=>watch(el,.88,el=>{el.classList.remove('r-wait','s-wait');if(el.classList.contains('split'))setTimeout(()=>el.classList.add('split-done'),1800);$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)})};
 function arm(){
   const vh=innerHeight;
   $$('[data-r]').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM){el.classList.add('r-wait');requestAnimationFrame(()=>el.classList.add('r-in'))}revIO.observe(el)});
   $$('.split:not([data-intro])').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM)el.classList.add('s-wait');revIO.observe(el)});
   $$('.tcard,.big-price').forEach(el=>revIO.observe(el));
-  $$('.scrib path').forEach(p=>{try{p.parentElement.style.setProperty('--len',Math.ceil(p.getTotalLength()+2))}catch(_){}});
 }
 arm();
 
 /* ---------- intro ---------- */
 const h1=$('[data-intro]');
 if(!RM){h1.classList.add('s-wait');$$('.w>span',h1).forEach(s=>s.style.setProperty('--d',250))}
-const start=()=>{requestAnimationFrame(()=>{root.classList.remove('intro');h1.classList.remove('s-wait');setTimeout(()=>root.classList.add('ready'),2200)})};
+const start=()=>{requestAnimationFrame(()=>{root.classList.remove('intro');h1.classList.remove('s-wait');setTimeout(()=>h1.classList.add('split-done'),2400);setTimeout(()=>root.classList.add('ready'),2200)})};
 const fontsReady=document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,700))]):Promise.resolve();
 fontsReady.then(()=>setTimeout(start,80));
 
@@ -1176,19 +1178,16 @@ tabs[0].classList.add('on');phases[0].setAttribute('aria-hidden','false');
 watch(stage,.7,()=>{if(!started){started=true;go(0)}});
 
 /* ---------- testimonial drag-scroll with inertia ---------- */
-const mq=$('#tmarq'),hint=$('#dragHint');
+const mq=$('#tmarq');
 const firstCard=()=>ttrack.children[1];
 requestAnimationFrame(()=>{const c=firstCard();if(c)mq.scrollLeft=c.offsetLeft-ttrack.firstElementChild.offsetLeft});
 let down=false,px=0,vx=0,lastT=0,raf2=0,startX=0,moved=false;
+mq.addEventListener('mousedown',e=>e.preventDefault());
 mq.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;startX=px=e.clientX;vx=0;lastT=performance.now();cancelAnimationFrame(raf2);mq.setPointerCapture(e.pointerId)});
-mq.addEventListener('pointermove',e=>{hint.style.left=e.clientX+'px';hint.style.top=e.clientY+'px';if(!down)return;const d=e.clientX-px,t=performance.now();if(Math.abs(e.clientX-startX)>5){moved=true;mq.classList.add('dragging')}mq.scrollLeft-=d;vx=d/Math.max(1,t-lastT);px=e.clientX;lastT=t});
+mq.addEventListener('pointermove',e=>{if(!down)return;const d=e.clientX-px,t=performance.now();if(Math.abs(e.clientX-startX)>5){moved=true;mq.classList.add('dragging')}mq.scrollLeft-=d;vx=d/Math.max(1,t-lastT);px=e.clientX;lastT=t});
 const rel=()=>{if(!down)return;down=false;mq.classList.remove('dragging');let v=vx*16;const f=()=>{if(Math.abs(v)<.3)return;mq.scrollLeft-=v;v*=.94;raf2=requestAnimationFrame(f)};if(!RM)f()};
 mq.addEventListener('pointerup',rel);mq.addEventListener('pointercancel',rel);
 mq.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation()}},true);
-mq.addEventListener('mouseenter',()=>{if(matchMedia('(pointer:fine)').matches)hint.classList.add('on')});
-mq.addEventListener('mouseleave',()=>hint.classList.remove('on'));
-ttrack.addEventListener('mouseover',e=>{hint.classList.toggle('on',!e.target.closest('.tcard'))});
-ttrack.addEventListener('mouseleave',()=>{if(mq.matches(':hover'))hint.classList.add('on')});
 // Peek the first quote once so people learn cards flip on hover
 const peekIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!RM){const c=ttrack.children[1];setTimeout(()=>{c.classList.add('peek');setTimeout(()=>c.classList.remove('peek'),2200)},900);peekIO.disconnect()}}),{threshold:.5});peekIO.observe(mq);
 
