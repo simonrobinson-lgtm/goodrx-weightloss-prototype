@@ -1181,7 +1181,7 @@ function go(i){const n=(i+PHASES.length)%PHASES.length;const changed=n!==cur;cur
   if(!RM){bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:DUR,easing:'linear',fill:'forwards'});if(paused)bar.getAnimations().forEach(a=>a.pause())}else bar.style.transform='scaleX(1)';
   clearTimeout(auto);if(!RM&&!paused)auto=setTimeout(()=>go(cur+1),DUR);
 }
-tabs.forEach(t=>t.addEventListener('click',()=>go(+t.dataset.i)));
+tabs.forEach(t=>t.addEventListener('click',()=>{go(+t.dataset.i);if(innerWidth<=1024){const y=stage.getBoundingClientRect().top+scrollY-84;lenis?lenis.scrollTo(y):scrollTo({top:y,behavior:RM?'auto':'smooth'})}}));
 stage.addEventListener('mouseenter',()=>{paused=true;clearTimeout(auto);$('i',tabs[Math.max(cur,0)]).getAnimations().forEach(a=>a.pause())});
 stage.addEventListener('mouseleave',()=>{paused=false;if(cur<0)return;const a=$('i',tabs[cur]).getAnimations()[0];if(a){a.play();clearTimeout(auto);auto=setTimeout(()=>go(cur+1),Math.max(300,DUR-(a.currentTime||0)))}});
 addEventListener('keydown',e=>{const r=stage.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!stage.contains(document.activeElement))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
