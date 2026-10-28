@@ -3,7 +3,13 @@
 <style>
 {{basecss}}
 /* ================= PDP ================= */
-.pd{padding:144px max(var(--gut),env(safe-area-inset-right,0px)) 48px max(var(--gut),env(safe-area-inset-left,0px));max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:48px}
+.crumbs{max-width:1440px;margin:0 auto;padding:112px max(var(--gut),env(safe-area-inset-right,0px)) 0 max(var(--gut),env(safe-area-inset-left,0px));display:flex;align-items:center;gap:4px;font-weight:500;font-size:14px;line-height:1;letter-spacing:.01em;color:var(--g700)}
+.crumbs svg{width:14px;height:14px;margin:0 3px;opacity:.8}
+.crumbs a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .4s var(--ease)}
+.crumbs a:hover{background-size:100% 1px}
+.crumbs span{padding-bottom:2px}
+
+.pd{padding:64px max(var(--gut),env(safe-area-inset-right,0px)) 48px max(var(--gut),env(safe-area-inset-left,0px));max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:48px}
 .pd-info{width:542px;flex:none;display:flex;flex-direction:column;gap:32px}
 .pd-top{display:flex;flex-direction:column;gap:16px}
 .pd-name{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
@@ -195,7 +201,8 @@
   .rel-row .rart:nth-child(3){display:none}
 }
 @media (max-width:1024px){
-  .pd{padding-top:120px;gap:32px}
+  .crumbs{padding-top:96px}
+  .pd{padding-top:40px;gap:32px}
   .gal{width:48%}
   .gal-main{height:auto;aspect-ratio:1}
   .rcards{height:440px}
@@ -204,7 +211,7 @@
   .xcard{width:380px}
 }
 @media (max-width:860px){
-  .pd{flex-direction:column;align-items:stretch;padding-top:112px}
+  .pd{flex-direction:column;align-items:stretch;padding-top:32px}
   .gal{width:100%;order:-1}
   .gal-main{aspect-ratio:656/520}
   .rel-row{grid-template-columns:minmax(0,1fr)}
@@ -255,6 +262,7 @@
   .rcard.on .shade{opacity:1}
 }
 @media (max-width:720px){
+  .crumbs{display:none}
   .pd{padding:12px 20px 40px;gap:24px}
   .gal{margin:0 -12px;width:auto;gap:12px}
   .gal-main{aspect-ratio:377/280;border-radius:16px}
@@ -343,6 +351,7 @@
 {{header}}
 
 <main id="top">
+<nav class="crumbs" aria-label="Breadcrumb" data-r><a href="index.html">Home</a><svg aria-hidden="true"><use href="#i-chev"/></svg><a href="index.html#products">Weight loss</a><svg aria-hidden="true"><use href="#i-chev"/></svg><span aria-current="page">Wegovy</span></nav>
 <!-- PRODUCT -->
 <section class="pd" id="product">
   <div class="pd-info">
@@ -522,13 +531,13 @@ $$('.links a').forEach(a=>{if(a.textContent.trim()==='Online care')a.setAttribut
 
 /* ---------- data ---------- */
 const PHASES=[
- {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['The dose is small on purpose, your body is adjusting to the medication. It’s also when the habits take shape: when and how you take it, and the small lifestyle shifts that make the rest easier.'],fx:['Mild nausea','Decreased appetite'],
-  media:{type:'cards',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head'],cards:[{img:'pdp-hand',dim:1,chip:'2 mins',title:'How to take your daily pill',sub:'Empty stomach, a sip of water, then 30 minutes before breakfast'},{img:'ph-doctor',mhide:1,chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
- {n:2,t:'Building tolerance',w:'-3% body weight*',k:'Week 5-8*',p:['Your dose steps up gradually so your body can adjust. Side effects, if you have them, are usually mild and ease with time.','Your care team checks in before each step so the plan keeps fitting how you feel.'],fx:['Mild nausea','Decreased appetite'],
-  media:{type:'chart',week:'Week 8',dose:'Dose: 4mg',last:'Last entry: Oct 27, 8:23am',val:176,sumT:'Steady Progress',sumP:'Your weight trend is moving in the right direction, consistent with where you are in treatment.'}},
- {n:3,t:'Seeing progress',w:'-6% body weight*',k:'Week 9-16*',p:['The changes start to show. Cravings are quieter, portions feel smaller, and clothes begin to fit differently.','Regular check-ins let your care team tune the dose so it keeps working for you.'],fx:['Constipation','Fatigue'],
-  media:{type:'chart',week:'Week 16',dose:'Dose: 9mg',last:'Last entry: Nov 24, 7:51am',val:171,sumT:'Noticeable change',sumP:'You’re down about 6% since starting. Your provider will check in before your next dose step.'}},
- {n:4,t:'Maintenance',w:'-10% body weight*',k:'Week 17+*',p:['You’ve reached a dose that works for you. The daily pill is part of your morning now, and the habits you built carry more of the load.','From here, your care team plans with you for the long term, including how to keep your results.'],fx:['Occasional nausea','Heartburn'],
+ {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['This is when habits take shape: when and how you take your medication, and the small lifestyle changes that make the rest easier. You’ll start at a low dose to let your body adjust to the medication.','You may not see any weight loss yet, but you’re laying the foundation for your body and brain.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'panel',kind:'fx',bg:'jr-fx',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head']}},
+ {n:2,t:'Building tolerance',w:'-5% body weight*',k:'Week 5-12*',p:['You may move up to the next dose at week 5, and start stepping up every 4 weeks if you’re ready. You may begin to see change start to happen.','Many people lose about 5 percent of their body weight by the end of 12 weeks.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'panel',kind:'chart',bg:'jr-chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176}},
+ {n:3,t:'Seeing progress',w:'-10% body weight*',k:'Week 13-23*',p:['You might reach your top dose during this time, depending on which medication you take and how you respond. You’ll likely see real change, both on the scale and in your habits.','Many people lose at least 10% of their body weight by the end of 24 weeks, depending on their medication and dose.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'panel',kind:'noise',bg:'jr-noise',title:'Less food noise',sub:'Fewer intrusive thoughts about food this week'}},
+ {n:4,t:'Maintenance',w:'Holding steady*',k:'Week 24+*',p:['You’ve reached a dose that works for you. The daily pill is part of your morning now, and the habits you built carry more of the load.','From here, your care team plans with you for the long term, including how to keep your results.'],fx:['Occasional nausea','Heartburn'],
   media:{type:'cards',cards:[{img:'pdp-box',dim:1,chip:'5 mins',title:'Finding your maintenance dose',sub:'How your provider decides what comes next'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Dec 12',title:'Dose review',sub:'Review how you’re feeling so your provider can confirm your ongoing dose.'}]}}
 ];
 const STORIES=[

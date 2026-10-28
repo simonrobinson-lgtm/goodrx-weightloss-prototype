@@ -318,6 +318,7 @@ p,h1,h2,h3,ul{margin:0}
 .pp.on .pw>*{opacity:1;transform:none;transition-duration:.8s,1s}
 .pp.on .pw>:nth-child(2){transition-delay:.06s}.pp.on .pw>:nth-child(3){transition-delay:.12s}.pp.on .pw>:nth-child(4){transition-delay:.18s}.pp.on .pw>:nth-child(5){transition-delay:.24s}
 .pw .ttl{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.pw .ttl{order:0}.pw .copy{order:1}.pw .li{order:2}.pw .fx{order:3}.pw .fine{order:4}
 .pw h3{font-size:32px;line-height:1.2;letter-spacing:-.01em;font-weight:400;color:var(--g700)}
 .pw .copy p{font-size:14px;color:var(--soft)}
 .pw .copy p+p{margin-top:19px}
@@ -373,6 +374,44 @@ p,h1,h2,h3,ul{margin:0}
 .pp.on .psum{opacity:1;transform:none;transition-duration:.9s,1.1s;transition-delay:.3s}
 .psum b{font-weight:400;font-size:16.8px;line-height:1.2;color:var(--g700)}
 .psum p{font-size:14.7px;color:var(--soft)}
+/* phase panels: photo with a floating UI card */
+.ppanel{position:relative;height:480px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;opacity:0;transform:translateY(36px) scale(.98);transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.pp.on .ppanel{opacity:1;transform:none;transition-duration:.9s,1.1s;transition-delay:.12s}
+.ppanel>.media{position:absolute;inset:0}
+.ppanel>.media>img{transform:scale(1.08)}
+.ppanel>.media.loaded>img{transform:scale(1.08);transition:opacity .9s var(--ease),transform 1.8s var(--ease)}
+.pp.on .ppanel>.media.loaded>img{transform:none}
+.ppanel .tint{position:absolute;inset:0;z-index:2;background:#b4801f;mix-blend-mode:color;opacity:.55;pointer-events:none}
+.pf{position:relative;z-index:3;opacity:0;transform:translateY(22px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.pp.on .pf{opacity:1;transform:none;transition-duration:.9s,1.1s;transition-delay:.4s}
+.fxp{width:min(393px,calc(100% - 32px));padding:8px 12px 16px;border-radius:16px;background:var(--n100);border:1px solid var(--n200);box-shadow:var(--elev);display:flex;flex-direction:column;gap:8px}
+.pf-t{font-size:14px;color:var(--soft);padding:8px 8px 4px}
+.pfr{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:var(--n0);border:1px solid var(--n200);color:var(--g700);font-size:16px;line-height:1.2;opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease),transform .5s var(--ease)}
+.pp.on .pfr{opacity:1;transform:none;transition-duration:.7s,.9s;transition-delay:calc(.75s + var(--k)*.1s)}
+.pfr .ic{width:40px;height:40px;background:var(--n200);border-color:var(--n300)}
+.pfr .ic svg{width:20px;height:20px}
+.pfr .nm{flex:1;min-width:0}
+.pfr button{height:24px;padding:0 12px;border-radius:8px;border:.5px solid var(--g700);font-size:12px;font-weight:500;color:var(--g700);white-space:nowrap;transition:background-color .3s,color .3s}
+.pfr button:hover{background:var(--g700);color:var(--y100)}
+.chp{width:min(462px,calc(100% - 48px))}
+.chp .pchart{box-shadow:var(--elev);border-color:var(--n0)}
+.chp .pchart .hd{top:14px;left:16px;right:16px;gap:8px}.chp .pchart .hd b{font-size:20px}.chp .pchart .hd .chips span{height:18px;font-size:9px}.chp .pchart .hd small{font-size:11px}.chp .pchart .bub{margin-top:18px;font-size:17px}
+.nzp{width:224px;height:262px}
+.nzb{position:absolute;inset:0;border-radius:12px;background:#ddd6cb;box-shadow:0 3px 6px rgba(36,36,36,.12);transition:transform 1s var(--spring) .7s}
+.nzb.b2{background:#cfc8bc}
+.pp.on .nzb.b1{transform:rotate(-7deg) translate(-10px,6px)}
+.pp.on .nzb.b2{transform:rotate(6deg) translate(12px,8px)}
+.nzc{position:absolute;inset:0;border-radius:12px;background:var(--n0);box-shadow:var(--elev);padding:16px 20px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.wave{width:96px;height:72px;overflow:visible}
+.wave line{stroke:var(--g700);stroke-width:1}
+.wave path{fill:none;stroke:var(--g700);stroke-width:1.2;stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.55,.05,.25,1) .8s}
+.pp.on .wave path{stroke-dashoffset:0}
+.wave circle{fill:#dedb7c;stroke:var(--g700);stroke-width:1;transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s var(--spring)}
+.pp.on .wave circle{transform:scale(1);transition-delay:1.6s}.pp.on .wave circle+circle{transition-delay:1.8s}
+.nzt{display:flex;flex-direction:column;gap:8px}
+.nzt b{font-weight:400;font-size:20px;line-height:1.2;color:var(--g700)}
+.nzt p{font-size:14px;color:var(--soft)}
+
 /* tabs live inside the container */
 .tabs{display:flex;gap:12px;padding:0 40px 32px;border-top:1px solid var(--k10)}
 .tab{flex:1;min-width:0;position:relative;padding-top:24px;display:flex;flex-direction:column;gap:12px;text-align:left;color:rgba(18,17,15,.3);transition:color .4s var(--ease)}
@@ -686,6 +725,12 @@ p,h1,h2,h3,ul{margin:0}
   .fxrow span:nth-child(2){flex:1;min-width:0}
   .fxrow button{height:22px;padding:0 11px;border-radius:7px;border:.5px solid var(--g700);font-size:11px;font-weight:500;color:var(--g700);white-space:nowrap}
   .pchart{aspect-ratio:auto;height:300px}
+  .ppanel{height:360px}
+  .fxp{width:calc(100% - 24px);gap:8px;padding:6px 8px 10px}
+  .pfr{padding:9px;font-size:14px;gap:10px}
+  .pfr .ic{width:34px;height:34px}
+  .chp{width:calc(100% - 24px)}
+  .chp .pchart{height:250px}
   .pchart .hd small{display:none}
   .pchart svg{width:auto;height:100%;left:auto;right:0}
   /* testimonials */
@@ -1107,12 +1152,12 @@ const LQ={{lqjson}};
 const ILLU={{illu}};
 const PHASES=[
  {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['This is when habits take shape: when and how you take your medication, and the small lifestyle changes that make the rest easier. You’ll start at a low dose to let your body adjust to the medication.','You may not see any weight loss yet, but you’re laying the foundation for your body and brain.'],fx:['Mild nausea','Decreased appetite'],
-  media:{type:'cards',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head'],cards:[{img:'ph-inject',dim:1,mhide:1,chip:'2 mins',title:'How to give yourself an injection',sub:'We’ll walk you through it, step by step'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
- {n:2,t:'Building tolerance',w:'-3% body weight*',k:'Week 5-8*',p:['The dose is small on purpose: your body is adjusting to the medication. It’s also when the habits take shape, like when and how you take it, and the small lifestyle shifts that make the rest easier.'],fx:['Mild nausea','Decreased appetite'],
-  media:{type:'chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176,sumT:'Steady Progress',sumP:'Your weight trend is moving in the right direction, consistent with where you are in treatment.'}},
- {n:3,t:'Noticing changes',w:'-6% body weight*',k:'Week 9-16*',p:['Your dose steps up as your body adjusts, and the changes start to show. Cravings are quieter, portions feel smaller, and clothes begin to fit differently.','Regular check-ins let your care team tune the dose so it keeps working for you.'],fx:['Constipation','Fatigue'],
-  media:{type:'chart',week:'Week 16',dose:'Dose: 1.0mg',last:'Last entry: Nov 24, 7:51am',val:171,sumT:'Noticeable change',sumP:'You’re down about 6% since starting. Your provider will check in before your next dose step.'}},
- {n:4,t:'Gaining momentum',w:'-10% body weight*',k:'Week 17+*',p:['You’ve reached a dose that works for you. Weight loss continues at a steady pace, and the habits you built early now carry more of the load.','From here, your care team plans with you for the long term, including how to maintain your results.'],fx:['Occasional nausea','Heartburn'],
+  media:{type:'panel',kind:'fx',bg:'jr-fx',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head']}},
+ {n:2,t:'Building tolerance',w:'-5% body weight*',k:'Week 5-12*',p:['You may move up to the next dose at week 5, and start stepping up every 4 weeks if you’re ready. You may begin to see change start to happen.','Many people lose about 5 percent of their body weight by the end of 12 weeks.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'panel',kind:'chart',bg:'jr-chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176}},
+ {n:3,t:'Seeing progress',w:'-10% body weight*',k:'Week 13-23*',p:['You might reach your top dose during this time, depending on which medication you take and how you respond. You’ll likely see real change, both on the scale and in your habits.','Many people lose at least 10% of their body weight by the end of 24 weeks, depending on their medication and dose.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'panel',kind:'noise',bg:'jr-noise',title:'Less food noise',sub:'Fewer intrusive thoughts about food this week'}},
+ {n:4,t:'Maintenance',w:'Holding steady*',k:'Week 24+*',p:['You’ve reached a dose that works for you. Weight loss slows and steadies, and the habits you built early now carry more of the load.','From here, your care team plans with you for the long term, including how to maintain your results.'],fx:['Occasional nausea','Heartburn'],
   media:{type:'cards',cards:[{img:'a2',dim:1,chip:'5 mins',title:'Finding your maintenance dose',sub:'How your provider decides what comes next'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Dec 12',title:'Dose review',sub:'Review how you’re feeling so your provider can confirm your ongoing dose.'}]}}
 ];
 const PEOPLE=[
@@ -1154,7 +1199,7 @@ const SVG_ARR='<svg viewBox="0 0 16 16"><use href="#i-arrow-dr"/></svg>', SVG_CL
 const AREA='M295.813 38.8868L165.092 22.0706C165.092 22.0706 117.272 11.5606 75.2313 2.10167C38.446 -0.000168324 2.32776 0.391522 0.480469 0V205.997C0.480469 205.997 637.559 234.05 637.559 205.997V103.139L516.559 66.6387L396.559 62.1387L357.059 32.6387L295.813 38.8868Z';
 const LINE='M0.0820312 1.05078C1.93048 1.24067 38.3824 1.05063 74.7065 2.7468C106.669 8.61355 160.499 22.4538 164.716 22.7498C172.511 23.2972 296.466 39.938 296.466 39.938L356.059 32.1387L395.559 62.1387L515.059 66.6387L636.559 103.139';
 const DOTS=[[75.2,3.2],[163.5,23.1],[222.4,30.5],[296.4,39.5],[356.4,31.5],[396.4,62.5],[452.7,64.3],[515.4,66.5],[579.4,86.5]];
-function chartHTML(m,i){
+function chartHTML(m,i,bare){
   const g=[157,221,285,349].map(y=>`<line x1="0" x2="735" y1="${y}" y2="${y}"/>`).join('');
   const dots=DOTS.map((d,k)=>`<circle class="dot" cx="${d[0]}" cy="${d[1]}" r="2.6" fill="#FFFFFB" stroke="#1C534E" stroke-width="1.05" style="transition-delay:${(.45+k*.15).toFixed(2)}s"/>`).join('');
   return `<div class="prog"><div class="pchart">
@@ -1173,7 +1218,16 @@ function chartHTML(m,i){
     </g></svg>
    ${[[157,200],[221,190],[285,170],[349,150]].map(([y,v])=>`<span class="yl" style="top:${(y/393*100).toFixed(2)}%">${v}</span>`).join('')}
    <span class="bub" style="left:${(638/781*100).toFixed(2)}%;top:${(116/393*100).toFixed(2)}%" data-v="${m.val}">${m.val}</span>
-  </div><div class="psum"><b>${m.sumT}</b><p>${m.sumP}</p></div></div>`;
+  </div>${bare?'':`<div class="psum"><b>${m.sumT}</b><p>${m.sumP}</p></div>`}</div>`;
+}
+// wave for the "less food noise" card
+const WAVE=(()=>{let d='';for(let x=10;x<=86;x+=2){const y=36-24*Math.sin((x-10)/26*2*Math.PI);d+=(x===10?'M':'L')+x+' '+y.toFixed(1)+' '}return d})();
+function panelHTML(m,i){
+  let inner='';
+  if(m.kind==='fx')inner=`<div class="pf fxp"><p class="pf-t">Last reported side effects</p>${m.fx.map((x,k)=>{const [t,ic]=x.split('|');return `<div class="pfr" style="--k:${k}"><span class="ic"><svg viewBox="0 0 19 19"><use href="#${ic}"/></svg></span><span class="nm">${t}</span><button type="button" data-toast="Side-effect tips aren’t part of this prototype">What helps</button></div>`}).join('')}</div>`;
+  else if(m.kind==='chart')inner=`<div class="pf chp">${chartHTML(m,'p'+i,true)}</div>`;
+  else inner=`<div class="pf nzp"><span class="nzb b1"></span><span class="nzb b2"></span><div class="nzc"><svg class="wave" viewBox="0 0 96 72" aria-hidden="true"><line x1="2" x2="94" y1="36" y2="36"/><path d="${WAVE}" pathLength="1"/><circle cx="16.5" cy="12" r="4"/><circle cx="29.5" cy="60" r="4"/></svg><div class="nzt"><b>${m.title}</b><p>${m.sub}</p></div></div></div>`;
+  return `<div class="ppanel ${m.kind}"><div class="media grain" style="--lq:url(${LQ[m.bg]})"><img data-src="img/${m.bg}.webp" alt=""></div>${m.kind==='noise'?'<span class="tint"></span>':''}${inner}</div>`;
 }
 function fxHTML(m){if(!m.fx)return '';return `<div class="scard fxcard"><div class="media grain" style="--lq:url(${LQ['ph-fx']})"><img data-src="img/ph-fx.webp" alt=""></div><div class="shade"></div><div class="in"><p>Last reported side effects</p>${m.fx.map(x=>{const [t,ic]=x.split('|');return `<div class="fxrow"><span class="ic"><svg viewBox="0 0 19 19"><use href="#${ic}"/></svg></span><span>${t}</span><button type="button" data-toast="Side-effect tips aren’t part of this prototype">What helps</button></div>`}).join('')}</div></div>`}
 function cardsHTML(m){return `<div class="pcards">${fxHTML(m)}${m.cards.map(c=>`<a href="#" class="scard${c.mhide?' mhide':''}" data-toast="Treatment content isn’t part of this prototype">
@@ -1187,7 +1241,7 @@ PHASES.forEach((p,i)=>{
    <div class="copy">${p.p.map(x=>`<p>${x}</p>`).join('')}</div>
    <div class="fx"><p class="label">Common side effects*</p><ul>${p.fx.map(x=>`<li>${x}</li>`).join('')}</ul></div>
    <p class="fine">*Every body is different. Use this as a guide, not a forecast.</p></div>
-   <div class="pmed">${p.media.type==='chart'?chartHTML(p.media,i):cardsHTML(p.media)}</div></article>`);
+   <div class="pmed">${p.media.type==='panel'?panelHTML(p.media,i):p.media.type==='chart'?chartHTML(p.media,i):cardsHTML(p.media)}</div></article>`);
   ptabs.insertAdjacentHTML('beforeend',`<button class="tab" role="tab" data-i="${i}" aria-selected="false"><i></i><span class="label">Phase ${p.n}</span><span>${p.t}</span></button>`);
 });
 
