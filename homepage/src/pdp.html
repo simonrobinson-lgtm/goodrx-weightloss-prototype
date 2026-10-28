@@ -28,18 +28,14 @@
 .qa.sm .ans p{padding-bottom:20px;font-size:14px}
 /* gallery */
 .gal{width:656px;flex:none;display:flex;flex-direction:column;align-items:center;gap:20px}
-.gal-main{position:relative;width:100%;height:560px;border-radius:16px;overflow:hidden;background:#ece5da;isolation:isolate;cursor:zoom-in}
+.gal-main{position:relative;width:100%;height:560px;border-radius:16px;overflow:hidden;background:#ece5da;isolation:isolate}
 .gal-main .slide{position:absolute;inset:0;clip-path:inset(0 0 0 100%);transition:clip-path .9s var(--ease-io)}
 .gal-main .slide.on{clip-path:inset(0 0 0 0);z-index:2}
 .gal-main .slide.was{clip-path:inset(0 0 0 0);z-index:1}
 .gal-main .media{position:absolute;inset:0;background:#ece5da}
-.gal-main .media>img{transform-origin:var(--ox,50%) var(--oy,50%)}
 .gal-main .slide .media.loaded>img{transform:scale(1.14);transition:opacity .9s var(--ease),transform 1.4s var(--ease),filter .9s var(--ease)}
 .gal-main .slide.on .media.loaded>img{transform:scale(1.04)}
-.gal-main.zoom .slide.on .media.loaded>img{transform:scale(1.18);transition:transform .6s var(--ease)}
-.gal-main .slide[data-i="0"] .media>img{object-position:50% 46%}
 .gal-main .slide[data-i="0"].on .media.loaded>img{transform:scale(1.15)}
-.gal-main.zoom .slide[data-i="0"].on .media.loaded>img{transform:scale(1.3)}
 .thumbs{display:flex;gap:12px}
 .thumb{position:relative;width:64px;height:64px;border-radius:8px;overflow:hidden;transition:transform .45s var(--spring)}
 .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
@@ -128,7 +124,7 @@
 /* wide testimonials */
 .wt{padding:80px 0 56px;overflow:hidden}
 .wt-vp{position:relative;--cw:min(1144px,calc(100vw - 296px))}
-.wt-track{display:flex;gap:16px;will-change:transform;transition:transform 1s var(--ease-io)}
+.wt-track{display:flex;gap:16px;will-change:transform;transition:transform .9s var(--ease-io)}
 .wt-track.jump{transition:none}
 .wcard{position:relative;width:var(--cw);height:616px;flex:none;border-radius:16px;overflow:hidden;padding:40px;display:flex;flex-direction:column;justify-content:space-between;color:var(--y100);cursor:pointer;-webkit-user-select:none;user-select:none}
 .wcard.on{cursor:default}
@@ -147,8 +143,8 @@
 .wcard .bot .v{display:flex;align-items:baseline;gap:2px}
 .wcard .bot .num{font-size:56px;line-height:1}
 .wcard .top>*,.wcard .bot{opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
-.wcard.on .top>*,.wcard.on .bot{opacity:1;transform:none;transition:opacity .9s var(--ease) .5s,transform 1.1s var(--ease) .5s}
-.wcard.on .top>q{transition-delay:.62s}.wcard.on .bot{transition-delay:.75s}
+.wcard.on .top>*,.wcard.on .bot{opacity:1;transform:none;transition:opacity .7s var(--ease) .35s,transform .9s var(--ease) .35s}
+.wcard.on .top>q{transition-delay:.45s}.wcard.on .bot{transition-delay:.55s}
 .wt-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
 .wt-dots button{position:relative;width:28px;height:3px;border-radius:2px;background:var(--k10);overflow:hidden}
 .wt-dots button i{position:absolute;inset:0;background:var(--g700);transform:scaleX(0);transform-origin:left}
@@ -211,10 +207,6 @@
   .pd{flex-direction:column;align-items:stretch;padding-top:112px}
   .gal{width:100%;order:-1}
   .gal-main{aspect-ratio:656/520}
-  .rcards{height:auto;flex-direction:column}
-  .rcard,.rcard.on{flex:none;height:420px}
-  .rcard .inner{opacity:1;transform:none}
-  .rcard{--br:none}
   .rel-row{grid-template-columns:minmax(0,1fr)}
   .rel-row .rart:nth-child(3){display:flex}
 }
@@ -227,39 +219,115 @@
   .pd-cta{flex-direction:column;align-items:stretch;gap:20px}
   .pd-cta .btn{width:100%}
   .pd-cta .tlink{align-self:center}
-  .rit{padding:40px 20px;gap:32px}
   .rit h2{font-size:24px}
-  .rcards{flex-direction:row;height:auto;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px;gap:8px;scrollbar-width:none}
-  .rcards::-webkit-scrollbar{display:none}
-  .rcard,.rcard.on{flex:none;width:300px;height:440px;scroll-snap-align:center}
-  .rcard .tt{font-size:20px;padding-right:16px;white-space:normal;padding-bottom:180px}
-  .inner{left:8px;right:8px;width:auto;gap:24px;padding:16px}
-  .inner .big .v{font-size:44px}
-  .duo{padding:40px 4px 20px;gap:8px}
-  .dcard{height:auto;flex-direction:column;gap:8px}
-  .dtx{width:auto;padding:16px 16px 8px;gap:20px}
-  .dvis{flex:none;height:340px}
-  .rel{padding:40px 20px}
-  .rel .head{flex-direction:column;align-items:flex-start;gap:12px}
-  .wt{padding:40px 0}
-  .wt-vp{--cw:calc(100vw - 40px)}
-  .wt-track{gap:8px}
-  .wcard{height:520px;padding:24px}
-  .wcard .shade{background:linear-gradient(0deg,rgba(0,0,0,.55),rgba(0,0,0,0) 45%),linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
-  .wcard q{font-size:22px}
-  .wcard .top{gap:20px}
-  .wcard .bot .num{font-size:44px}
-  .tw2 .media>img{object-position:62% 50%}
-  .tw3 .media>img{object-position:58% 50%}
   .pd-faq{padding-block:40px 56px}
-  .ex{padding:40px 0 56px;gap:24px}
-  .ex .head h2{font-size:24px}
-  .ex-track{padding:0 20px;gap:8px}
-  .xcard{width:300px;padding-right:16px;gap:12px}
-  .xcard .media{width:96px;height:96px}
-  .xcard .nm b{font-size:18px}
+}
+/* ritual toggle (mobile) */
+.rcard .tog{display:none}
+/* sticky get-started */
+.stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
+.stick.show{transform:none}
+.stick-in{pointer-events:auto;width:min(560px,100%);height:64px;display:flex;align-items:center;gap:20px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n100);box-shadow:0 3px 6px rgba(36,36,36,.08),-1px 12px 24px rgba(36,36,36,.12)}
+.stick .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;line-height:1.2}
+.stick .nm b{font-weight:400;font-size:18px;color:var(--n900)}
+.stick .nm span{font-size:12px;color:var(--soft)}
+.stick .pr{display:flex;flex-direction:column;align-items:flex-end;font-size:12px;color:var(--k40);line-height:1.2}
+.stick .pr .v{display:flex;align-items:baseline;color:var(--n900)}
+.stick .pr .num{font-size:22px;line-height:1}
+.stick .pr small{font-size:12px}
+.stick .btn{height:48px;width:150px}
+.has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.wcard .wchip,.wcard .flip,.wcard .wq{display:none}
+@media (max-width:860px){
+  .rcards{flex-direction:column;height:auto;gap:8px}
+  .rcard,.rcard.on{flex:none!important;height:160px;transition:height .8s var(--ease-io)}
+  .rcard.on{height:364px}
+  .rcard,.rcard.on{--br:inline}
+  .rcard .chip{left:16px;top:16px}
+  .rcard .tt{padding:0 72px 16px 16px;white-space:normal}
+  .rcard .tog{display:block;position:absolute;z-index:5;right:16px;bottom:16px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,251,.85)}
+  .rcard .tog::before,.rcard .tog::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1px;margin:-.5px 0 0 -5.5px;background:var(--n900);transition:transform .5s var(--ease)}
+  .rcard .tog::after{transform:rotate(90deg)}
+  .rcard.on .tog::after{transform:rotate(0)}
+  .inner{left:16px;right:16px;top:48px;bottom:auto;width:auto;gap:40px;padding:20px 16px 16px;background:rgba(255,255,251,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:rgba(255,255,251,.5)}
+  .rcard .inner{opacity:0;transform:translateY(-10px)}
+  .rcard.on .inner{opacity:1;transform:none}
+  .rcard.on .shade{opacity:1}
+}
+@media (max-width:720px){
+  .pd{padding:12px 20px 40px;gap:24px}
+  .gal{margin:0 -12px;width:auto;gap:12px}
+  .gal-main{aspect-ratio:377/280;border-radius:16px}
+  .thumbs{gap:8px}
+  .thumb{width:56px;height:56px}
+  .pd-info{gap:24px}
+  .pd-name{gap:12px}
+  .pd-price{display:grid;grid-template-columns:1fr auto;column-gap:16px;row-gap:4px}
+  .pd-price .from,.pd-price .v{grid-column:1}
+  .pd-price .row{display:contents}
+  .pd-price .row>span:first-child{grid-column:1/-1;grid-row:3;padding:4px 0 0;max-width:210px}
+  .pd-price .tot{grid-column:2;grid-row:2;align-self:end}
+  .tot .switch{width:32px;height:20px}.tot .switch i{width:12px;height:12px}.tot .switch[aria-checked="true"] i{transform:translateX(12px)}
+  .pd-cta .btn{height:48px;font-size:14px}
+  .pd-cta{gap:16px}
+  .rit{padding:40px 12px;gap:24px}
+  .rit h2{padding:0 8px}
+  .duo{padding:0 0 16px;gap:16px;flex-direction:column}
+  .dcard{margin:0 12px;padding:4px;flex-direction:column;gap:0;height:auto}
+  .dcard.cmp{margin:0;border-radius:0;padding:40px 12px}
+  .dcard.cmp .dtx{display:contents}
+  .dcard.cmp .dtx .t{padding:0 8px 24px;order:0;position:relative;z-index:2}
+  .dcard.cmp .dvis{order:1;flex:none;height:380px;border-radius:16px}
+  .dcard.cmp .btn-sm{order:2;margin:16px 16px 0;align-self:stretch;position:relative;z-index:2}
+  .dtx{width:auto;padding:20px 12px;gap:20px}
+  .dtx .btn-sm{align-self:stretch}
+  .dcard .dvis.photo{flex:none;height:214px;border-radius:12px}
+  .dvis .chip{left:16px;top:16px}
+  .rel{padding:40px 0 16px;gap:16px}
+  .rel .head{padding:0 20px}
+  .rel-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 12px;gap:8px;scroll-padding:0 12px}
+  .rel-row::-webkit-scrollbar{display:none}
+  .rel-row .rart{flex:none;width:346px;max-width:calc(100vw - 47px);scroll-snap-align:start}
+  .wt{padding:24px 0 32px}
+  .wt-vp{--cw:calc(100vw - 47px)}
+  .wt-track{gap:8px}
+  .wcard{height:360px;padding:16px;justify-content:flex-end}
+  .wcard .top{display:none}
+  .wcard .shade{background:linear-gradient(45deg,rgba(0,0,0,.5) .6%,rgba(0,0,0,0) 40.6%)}
+  .tw1 .media>img{object-position:45% 50%}.tw2 .media>img{object-position:58% 50%}.tw3 .media>img{object-position:60% 50%}
+  .wcard .wchip{display:inline-flex;position:absolute;left:16px;top:16px;z-index:4}
+  .wcard .bot{font-size:13px;gap:4px}
+  .wcard .bot .num{font-size:40px}
+  .wcard .flip{display:grid;position:absolute;z-index:7;right:8px;bottom:8px;width:32px;height:32px;border-radius:8px;background:var(--y100);color:var(--g800);place-items:center}
+  .wcard .flip svg{width:16px;height:16px;transition:transform .6s var(--ease)}
+  .wcard.peek .flip svg{transform:rotate(180deg)}
+  .wcard .wq{display:flex;position:absolute;inset:-1px;z-index:6;padding:16px 16px 56px;flex-direction:column;justify-content:space-between;background:var(--g800);--grain:.35;color:var(--y100);clip-path:inset(100% 0 0 0);transition:clip-path .75s var(--ease-io)}
+  .wcard .wq q{font-size:18px;line-height:1.3;quotes:"“" "”";opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease) .2s,transform .7s var(--ease) .2s}
+  .wcard .wq .who{display:flex;flex-direction:column;gap:8px;opacity:0;transition:opacity .5s var(--ease) .3s}
+  .wcard .wq .who b{font-weight:400;font-size:20px}
+  .wcard.peek .wq{clip-path:inset(0 0 0 0)}
+  .wcard.peek .wq q,.wcard.peek .wq .who{opacity:1;transform:none}
+  .wt-dots{margin-top:16px}
+  .ex{padding:24px 0 40px;gap:24px}
+  .ex .head{flex-direction:column;align-items:flex-start;gap:16px;padding:0 20px}
+  .ex .head h2{font-size:24px;max-width:300px}
+  .ex .tot .lb svg{display:none}
+  .ex .tot .lb{border-bottom:1px dashed var(--g700)}
+  .ex .tot .switch{width:32px;height:20px}.ex .tot .switch i{width:12px;height:12px}.ex .tot .switch[aria-checked="true"] i{transform:translateX(12px)}
+  .ex-track{padding:8px 12px;gap:8px}
+  .ex-row{scroll-padding:0 12px}
+  .xcard{position:relative;width:240px;flex-direction:column;padding:4px 4px 20px;gap:12px}
+  .xcard .media{width:100%;height:auto;aspect-ratio:1;border-radius:12px}
+  .xcard .chip{position:absolute;left:12px;top:12px;z-index:3}
+  .xcard .c{padding:0 8px;justify-content:flex-end}
+  .xcard .nm{white-space:normal}
+  .xcard .nm b{font-size:20px}
   .xcard .pr .v .num{font-size:20px}
-  .xcard .nm span{white-space:normal}
+  .stick{padding:0 20px}
+  .stick-in{width:100%;height:auto;padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .stick .nm,.stick .pr{display:none}
+  .stick .btn{width:100%;height:48px;font-size:14px;box-shadow:0 10px 24px -8px rgba(18,17,15,.35)}
+  .has-stick .toast{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
 }
 @media (prefers-reduced-motion:reduce){
   .intro .gal-main{clip-path:none}
@@ -328,19 +396,19 @@
       <div class="media grain" style="--lq:url({{lq:acc1}})"><img data-src="img/acc1.webp" alt=""></div><div class="shade"></div>
       <span class="chip sm">Effective medication</span>
       <span class="tt">Proven treatment</span>
-      <span class="inner"><span class="big"><span class="v" data-count="14" data-prefix="~">~14<small>%</small></span><p>average body weight lost*</p></span><span class="fn">*64-week study · 3 in 4 lost 5%+ · ~17% when taken as prescribed</span></span>
+      <span class="tog" aria-hidden="true"></span><span class="inner"><span class="big"><span class="v" data-count="14" data-prefix="~">~14<small>%</small></span><p>average body weight lost*</p></span><span class="fn">*64-week study · 3 in 4 lost 5%+ · ~17% when taken as prescribed</span></span>
     </button>
     <button class="rcard" data-r style="--i:1" aria-expanded="false">
       <div class="media grain" style="--lq:url({{lq:acc2}})"><img data-src="img/acc2.webp" alt=""></div><div class="shade"></div>
       <span class="chip sm">Daily pill • taken on empty stomach</span>
       <span class="tt">Built for your <br>morning routine</span>
-      <span class="inner"><span class="big"><span class="v">30<small> min</small></span><p>then breakfast as usual</p></span><span class="fn">Take it with a sip of water when you wake up, and wait 30 minutes before eating or drinking.</span></span>
+      <span class="tog" aria-hidden="true"></span><span class="inner"><span class="big"><span class="v">30<small> min</small></span><p>then breakfast as usual</p></span><span class="fn">Take it with a sip of water when you wake up, and wait 30 minutes before eating or drinking.</span></span>
     </button>
     <button class="rcard" data-r style="--i:2" aria-expanded="false">
       <div class="media grain" style="--lq:url({{lq:acc3}})"><img data-src="img/acc3.webp" alt=""></div><div class="shade"></div>
       <span class="chip sm">Travel-friendly</span>
       <span class="tt">Great for <br>travel</span>
-      <span class="inner"><span class="big"><span class="v">0<small> needles</small></span><p>and no fridge to plan around</p></span><span class="fn">Tablets keep at room temperature in their original pack, so they fit in a carry-on.</span></span>
+      <span class="tog" aria-hidden="true"></span><span class="inner"><span class="big"><span class="v">0<small> needles</small></span><p>and no fridge to plan around</p></span><span class="fn">Tablets keep at room temperature in their original pack, so they fit in a carry-on.</span></span>
     </button>
   </div>
 </section>
@@ -410,14 +478,22 @@
     <span class="tot" data-r><span class="lb" title="Includes the $39/mo membership">Total price<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.2" stroke="currentColor"/><path d="M6.4 6.3a1.65 1.65 0 0 1 3.2.5c0 1.1-1.6 1.4-1.6 2.3M8 11.2h.01" stroke="currentColor" stroke-linecap="round"/></svg></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
   <div class="ex-row" id="exRow" data-lenis-prevent-horizontal>
     <div class="ex-track">
-      <a href="#" class="xcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex1}})"><img data-src="img/ex1.webp" alt="A pink Foundayo tablet"></div><div class="c"><span class="chip sm">Daily pill</span><div class="row"><div class="nm"><b>Foundayo™</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
-      <a href="#" class="xcard" data-r style="--i:1" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex2}})"><img data-src="img/ex2.webp" alt="A Wegovy HD pen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="199">$238</span><small>/mo</small></span></div></div></div></a>
-      <a href="#top" class="xcard here" data-r style="--i:2" aria-current="page"><div class="media grain" style="--lq:url({{lq:ex3}})"><img data-src="img/ex3.webp" alt="A white Wegovy tablet"></div><div class="c"><span class="chip sm now">You’re viewing</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
-      <a href="#" class="xcard" data-r style="--i:3" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex4}})"><img data-src="img/ex4.webp" alt="A Zepbound KwikPen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Zepbound® KwikPen</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$338</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex1}})"><img data-src="img/ex1.webp" data-src-m="img/p1.webp" alt="A pink Foundayo tablet"></div><div class="c"><span class="chip sm">Daily pill</span><div class="row"><div class="nm"><b>Foundayo™</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:1" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex2}})"><img data-src="img/ex2.webp" data-src-m="img/p2.webp" alt="A Wegovy HD pen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="199">$238</span><small>/mo</small></span></div></div></div></a>
+      <a href="#top" class="xcard here" data-r style="--i:2" aria-current="page"><div class="media grain" style="--lq:url({{lq:ex3}})"><img data-src="img/ex3.webp" data-src-m="img/p3.webp" alt="A white Wegovy tablet"></div><div class="c"><span class="chip sm now">You’re viewing</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:3" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex4}})"><img data-src="img/ex4.webp" data-src-m="img/p4.webp" alt="A Zepbound KwikPen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Zepbound® KwikPen</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$338</span><small>/mo</small></span></div></div></div></a>
     </div>
   </div>
 </section>
 </main>
+
+<div class="stick" id="stick" aria-hidden="true">
+  <div class="stick-in">
+    <span class="nm"><b>Wegovy®</b><span>Daily pill</span></span>
+    <span class="pr"><span>from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></span>
+    <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+  </div>
+</div>
 
 {{footer}}
 
@@ -429,6 +505,10 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MQ=matchMedia('(max-width:720px)'),isM=()=>MQ.matches;
 const root=document.documentElement;
 if(!RM) root.classList.add('intro');
+// a product page always opens at the top, even if the browser remembers an older scroll position
+try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+if(!location.hash)scrollTo(0,0);
+addEventListener('pageshow',e=>{if(e.persisted&&!location.hash)scrollTo(0,0)});
 const LQ={{lqjson}};
 let lenis=null;
 
@@ -443,7 +523,7 @@ $$('.links a').forEach(a=>{if(a.textContent.trim()==='Online care')a.setAttribut
 /* ---------- data ---------- */
 const PHASES=[
  {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['The dose is small on purpose, your body is adjusting to the medication. It’s also when the habits take shape: when and how you take it, and the small lifestyle shifts that make the rest easier.'],fx:['Mild nausea','Decreased appetite'],
-  media:{type:'cards',cards:[{img:'pdp-hand',dim:1,chip:'2 mins',title:'How to take your daily pill',sub:'Empty stomach, a sip of water, then 30 minutes before breakfast'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
+  media:{type:'cards',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head'],cards:[{img:'pdp-hand',dim:1,chip:'2 mins',title:'How to take your daily pill',sub:'Empty stomach, a sip of water, then 30 minutes before breakfast'},{img:'ph-doctor',mhide:1,chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
  {n:2,t:'Building tolerance',w:'-3% body weight*',k:'Week 5-8*',p:['Your dose steps up gradually so your body can adjust. Side effects, if you have them, are usually mild and ease with time.','Your care team checks in before each step so the plan keeps fitting how you feel.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'chart',week:'Week 8',dose:'Dose: 4mg',last:'Last entry: Oct 27, 8:23am',val:176,sumT:'Steady Progress',sumP:'Your weight trend is moving in the right direction, consistent with where you are in treatment.'}},
  {n:3,t:'Seeing progress',w:'-6% body weight*',k:'Week 9-16*',p:['The changes start to show. Cravings are quieter, portions feel smaller, and clothes begin to fit differently.','Regular check-ins let your care team tune the dose so it keeps working for you.'],fx:['Constipation','Fatigue'],
@@ -474,7 +554,10 @@ const N=STORIES.length, order=[N-1,...STORIES.keys(),0];
 order.forEach((si,k)=>{const p=STORIES[si];wtTrack.insertAdjacentHTML('beforeend',`<article class="wcard ${p.img}" data-s="${si}" aria-label="${p.nm}, lost ${p.lbs} pounds in 3 months"${k===0||k===order.length-1?' aria-hidden="true"':''}>
   <div class="media grain" style="--lq:url(${LQ[p.img]})"><img data-src="img/${p.img}.webp" alt=""></div><div class="shade"></div>
   <div class="top"><div class="who"><b>${p.nm} ${p.age}</b><span class="label">Real customer</span></div><q>${p.q}</q></div>
-  <div class="bot"><span class="v"><span class="num">${p.lbs}</span><span>&nbsp;lbs</span></span><span>lost in 3 months</span></div></article>`)});
+  <div class="bot"><span class="v"><span class="num">${p.lbs}</span><span>&nbsp;lbs</span></span><span>lost in 3 months</span></div>
+  <span class="chip wchip">${p.nm}</span>
+  <button class="flip" type="button" aria-label="Flip to read ${p.nm}’s story"><svg><use href="#i-flip"/></svg></button>
+  <div class="wq grain"><q>${p.q}</q><div class="who"><b>${p.nm} ${p.age}</b><span class="label">Real customer</span></div></div></article>`)});
 STORIES.forEach((p,i)=>wtDots.insertAdjacentHTML('beforeend',`<button aria-label="Show ${p.nm}’s story"><i></i></button>`));
 
 /* ---------- FAQ ---------- */
@@ -493,13 +576,14 @@ function split(el){
 $$('.split').forEach(split);
 
 /* ---------- lazy loading ---------- */
-function load(m){if(m.dataset.l)return;m.dataset.l=1;const img=$('img',m);if(!img||!img.dataset.src)return;const done=()=>{m.classList.add('loaded')};img.decoding='async';img.onload=()=>{(img.decode?img.decode():Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(done))};img.onerror=done;img.src=img.dataset.src;if(img.complete&&img.naturalWidth)done()}
+function load(m){if(m.dataset.l)return;m.dataset.l=1;const img=$('img',m);if(!img||!img.dataset.src)return;const done=()=>{m.classList.add('loaded')};const src=(img.dataset.srcM&&isM())?img.dataset.srcM:img.dataset.src;img.decoding='async';img.onload=()=>{(img.decode?img.decode():Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(done))};img.onerror=done;img.src=src;if(img.complete&&img.naturalWidth)done()}
 $$('.media.eager').forEach(load);
 /* Viewport triggers come from scroll position (IntersectionObserver ignores rootMargin inside the artifact frame). */
 const watchers=[];
 function watch(el,frac,enter,leave){watchers.push({el,frac,enter,leave,on:false})}
-function checkWatch(){const vh=innerHeight;for(const w of watchers){const r=w.el.getBoundingClientRect();const inZone=r.top<vh*w.frac&&r.bottom>0;
-  if(inZone&&!w.on){w.on=true;w.enter(w.el)}else if(w.on&&w.leave&&(r.top>vh||r.bottom<0)){w.on=false;w.leave(w.el)}}}
+function checkWatch(){const vh=innerHeight,fire=[];for(const w of watchers){if(w.done)continue;const r=w.el.getBoundingClientRect();const inZone=r.top<vh*w.frac&&r.bottom>0;
+  if(inZone&&!w.on){w.on=true;fire.push([w.enter,w.el]);if(!w.leave)w.done=true}else if(w.on&&w.leave&&(r.top>vh||r.bottom<0)){w.on=false;fire.push([w.leave,w.el])}}
+  if(fire.length){for(const [f,el] of fire)f(el);for(let i=watchers.length-1;i>=0;i--)if(watchers[i].done)watchers.splice(i,1)}}
 $$('.media:not(.eager)').forEach(m=>watch(m,1.7,load));
 [$('#ptrack'),$('#wtTrack'),$('#gal')].forEach(t=>watch(t,2,el=>$$('.media',el).forEach(load)));
 
@@ -525,16 +609,22 @@ fontsReady.then(()=>setTimeout(start,80));
 /* ---------- smooth scroll ---------- */
 if(!RM&&window.Lenis&&matchMedia('(pointer:fine)').matches){
   lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+  if(!location.hash)lenis.scrollTo(0,{immediate:true,force:true});
   const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
 }
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.hasAttribute('data-toast'))return;const id=a.getAttribute('href');const t=id==='#top'?document.body:$(id);if(!t)return;e.preventDefault();if(lenis)lenis.scrollTo(id==='#top'?0:t,{offset:-90});else (id==='#top'?scrollTo({top:0,behavior:'smooth'}):t.scrollIntoView({behavior:'smooth'}))});
 
 /* ---------- header + wordmark ---------- */
 const hdr=$('#hdr'),wm=$('#wordmark');let lastY=scrollY;
-function onScroll(){const y=scrollY,vh=innerHeight;
+let sTick=false;
+function onScroll(){if(lenis){tickScroll();return}if(!sTick){sTick=true;requestAnimationFrame(()=>{sTick=false;tickScroll()})}}
+const stick=$('#stick'),pdCta=$('.pd-cta'),footEl=$('.foot');let stickOn=false;
+function tickScroll(){const y=scrollY,vh=innerHeight;const wr=wm?wm.getBoundingClientRect():null;const cr=pdCta.getBoundingClientRect(),fr=footEl.getBoundingClientRect();
+  const want=cr.bottom<64&&fr.top>vh-40;if(want!==stickOn){stickOn=want;stick.classList.toggle('show',want);stick.setAttribute('aria-hidden',!want);$('a',stick).tabIndex=want?0:-1;root.classList.toggle('has-stick',want)}
   if(y>220&&y>lastY+4)hdr.classList.add('hide');else if(y<lastY-4||y<220)hdr.classList.remove('hide');
-  hdr.classList.toggle('scrolled',y>40);lastY=y;checkWatch();
-  if(wm){const wr=wm.getBoundingClientRect();if(wr.top<vh){const k=Math.min(1,Math.max(0,(vh-wr.top)/(wr.height+120)));wm.style.setProperty('--wy',`${(1-k)*40}%`)}}}
+  hdr.classList.toggle('scrolled',y>40);lastY=y;
+  if(wr&&wr.top<vh){const k=Math.min(1,Math.max(0,(vh-wr.top)/(wr.height+120)));wm.style.setProperty('--wy',`${(1-k)*40}%`)}
+  checkWatch()}
 if(lenis)lenis.on('scroll',onScroll);else addEventListener('scroll',onScroll,{passive:true});
 addEventListener('resize',onScroll);onScroll();
 
@@ -551,18 +641,13 @@ function showSlide(i){i=(i+slides.length)%slides.length;if(i===gi)return;const p
   clearTimeout(gBusy);gBusy=setTimeout(()=>prev.classList.remove('was'),950)}
 thumbs.forEach(t=>t.addEventListener('click',()=>showSlide(+t.dataset.i)));
 $('.thumbs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();showSlide(gi+(e.key==='ArrowRight'?1:-1));thumbs[gi].focus()}});
-// pointer zoom: the photo leans towards the cursor
-if(matchMedia('(pointer:fine)').matches&&!RM){
-  gm.addEventListener('pointermove',e=>{const r=gm.getBoundingClientRect();gm.style.setProperty('--ox',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');gm.style.setProperty('--oy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')});
-  gm.addEventListener('pointerenter',()=>gm.classList.add('zoom'));gm.addEventListener('pointerleave',()=>gm.classList.remove('zoom'));
-}
 let gx=0;gm.addEventListener('touchstart',e=>{gx=e.touches[0].clientX},{passive:true});gm.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-gx;if(Math.abs(d)>50)showSlide(gi+(d<0?1:-1))});
 gm.addEventListener('click',()=>{if(!matchMedia('(pointer:fine)').matches)showSlide(gi+1)});
 
 /* ---------- morning ritual cards ---------- */
 const rcards=$$('.rcard');
-function openCard(c){if(c.classList.contains('on'))return;rcards.forEach(x=>{x.classList.toggle('on',x===c);x.setAttribute('aria-expanded',x===c)})}
-rcards.forEach(c=>{c.addEventListener('mouseenter',()=>{if(innerWidth>860)openCard(c)});c.addEventListener('focus',()=>openCard(c));c.addEventListener('click',()=>openCard(c))});
+function openCard(c,tap){if(c.classList.contains('on')){if(tap&&innerWidth<=860){c.classList.remove('on');c.setAttribute('aria-expanded',false)}return}rcards.forEach(x=>{x.classList.toggle('on',x===c);x.setAttribute('aria-expanded',x===c)})}
+rcards.forEach(c=>{c.addEventListener('mouseenter',()=>{if(innerWidth>860)openCard(c)});c.addEventListener('focus',()=>{if(innerWidth>860)openCard(c)});c.addEventListener('click',()=>openCard(c,true))});
 
 /* ---------- compare picker ---------- */
 const crows=$$('.crow'),cmpBtn=$('#cmpBtn');
@@ -570,21 +655,20 @@ function cmpLabel(){const n=crows.filter(r=>r.classList.contains('on')).length;c
 crows.forEach(r=>r.addEventListener('click',()=>{const on=r.classList.toggle('on');r.setAttribute('aria-pressed',on);cmpLabel()}));
 
 /* ---------- stories carousel ---------- */
-const wcards=$$('.wcard',wtTrack),dots=$$('button',wtDots),vp=$('#wtVp');let wi=1,wAuto=0,wPaused=false;const WDUR=7000;
+const wcards=$$('.wcard',wtTrack),dots=$$('button',wtDots),vp=$('#wtVp');let wi=1,wAuto=0,wPaused=false,wVis=false;const WDUR=3000;
 function wPos(jump){const c=wcards[wi];const x=c.offsetLeft-(vp.clientWidth-c.offsetWidth)/2;wtTrack.classList.toggle('jump',!!jump);wtTrack.style.transform=`translate3d(${-x}px,0,0)`;if(jump){void wtTrack.offsetWidth;wtTrack.classList.remove('jump')}}
-function wGo(i,jump){wi=i;wcards.forEach((c,k)=>{c.classList.toggle('on',k===wi);c.setAttribute('aria-hidden',k!==wi)});$$('.media',wtTrack).forEach(load);wPos(jump);
+function wGo(i,jump){if(i!==wi)wcards.forEach(c=>c.classList.remove('peek'));wi=i;wcards.forEach((c,k)=>{c.classList.toggle('on',k===wi);c.setAttribute('aria-hidden',k!==wi)});$$('.media',wtTrack).forEach(load);wPos(jump);
   const s=+wcards[wi].dataset.s;dots.forEach((d,k)=>{d.classList.toggle('done',k<s);const b=$('i',d);b.getAnimations().forEach(a=>a.cancel());b.style.transform=k<s?'scaleX(1)':''});
   if(!RM&&!wPaused){$('i',dots[s]).animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:WDUR,easing:'linear',fill:'forwards'})}else $('i',dots[s]).style.transform='scaleX(1)';
   clearTimeout(wAuto);if(!RM&&!wPaused&&wStarted)wAuto=setTimeout(()=>wGo(wi+1),WDUR)}
 wtTrack.addEventListener('transitionend',e=>{if(e.target!==wtTrack)return;if(wi===0)wGo(N,true);else if(wi===N+1)wGo(1,true)});
-wcards.forEach((c,k)=>c.addEventListener('click',()=>{if(k!==wi)wGo(k)}));
+wcards.forEach((c,k)=>c.addEventListener('click',e=>{const f=e.target.closest('.flip');if(f){e.stopPropagation();const on=c.classList.toggle('peek');if(on){wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))}else{wPaused=!wVis;if(wVis)wGo(wi)}return}if(k!==wi)wGo(k)}));
 dots.forEach((d,k)=>d.addEventListener('click',()=>wGo(k+1)));
-vp.addEventListener('mouseenter',()=>{wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))});
-vp.addEventListener('mouseleave',()=>{wPaused=false;const a=$('i',dots[+wcards[wi].dataset.s]).getAnimations()[0];if(a){a.play();clearTimeout(wAuto);wAuto=setTimeout(()=>wGo(wi+1),Math.max(300,WDUR-(a.currentTime||0)))}});
+document.addEventListener('visibilitychange',()=>{wPaused=document.hidden;if(wPaused){clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))}else if(wStarted&&wVis)wGo(wi)});
 let wx=0;vp.addEventListener('touchstart',e=>{wx=e.touches[0].clientX},{passive:true});vp.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-wx;if(Math.abs(d)>50)wGo(wi+(d<0?1:-1))});
 addEventListener('keydown',e=>{const r=vp.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!$('#stories').contains(document.activeElement))return;if(e.key==='ArrowRight')wGo(wi+1);if(e.key==='ArrowLeft')wGo(wi-1)});
 let wStarted=false;wGo(1,true);addEventListener('resize',()=>wPos(true));
-watch($('#stories'),.75,()=>{if(!wStarted){wStarted=true;wGo(wi)}});
+watch($('#stories'),.75,()=>{wVis=true;if(!wStarted){wStarted=true;wGo(wi)}else if(!document.hidden){wPaused=false;wGo(wi)}},()=>{wVis=false;wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))});
 
 /* ---------- explore: drag to scroll ---------- */
 const xr=$('#exRow');let xd=false,xpx=0,xvx=0,xlt=0,xraf=0,xsx=0,xmoved=false;
