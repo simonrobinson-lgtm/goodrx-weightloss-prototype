@@ -22,12 +22,13 @@
 .pd-price .row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
 .pd-price .row>span{font-size:14px;color:var(--soft);padding-bottom:4px;transition:opacity .2s}
 .tot{display:flex;align-items:center;gap:12px}
-.tot .lb{font-size:14px;color:var(--soft);border-bottom:1px dashed var(--g700);line-height:18px}
+.tot .lb{font-size:14px;color:var(--soft);line-height:1.4;padding-bottom:2px;align-items:center}
+.tot .lb .tip{text-align:left;font-size:13px}
 .pd-desc{font-size:18px;line-height:1.4;color:var(--dark)}
 .pd-perks{display:flex;flex-direction:column;gap:12px;padding-bottom:8px}
 .pd-perks div{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--dark)}
 .pd-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.pd-cta .btn{width:170px}
+.pd-cta .btn{padding:0 24px}
 .pd-body{display:flex;flex-direction:column;gap:24px}
 .qa.sm>button{padding:16px 0}
 .qa.sm>button span:first-child{font-size:16px}
@@ -98,9 +99,10 @@
 .crow .nm b{font-weight:400;font-size:16px;line-height:1.2;color:var(--soft);transition:color .3s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .crow .nm span{font-size:13px;color:var(--soft)}
 .crow.on .nm b{color:var(--ink)}
-.crow .pi{position:absolute;right:42px;pointer-events:none;transition:transform .7s var(--spring)}
-.crow .pi.pill{width:64px;top:6px}
-.crow .pi.pen{width:44px;top:-2px}
+.crow .pi{position:absolute;right:44px;top:50%;width:56px;height:56px;margin-top:-28px;object-fit:contain;pointer-events:none;transition:transform .7s var(--spring)}
+.crow .pi.pill{padding:2px}
+.crow .pi.pen{padding:0}
+.btn.is-off{opacity:.4;pointer-events:none;box-shadow:none}
 .crow:hover .pi{transform:translateY(-4px) rotate(-4deg)}
 .ck{position:relative;width:20px;height:20px;flex:none;border-radius:50%;border:1px solid var(--k20);display:grid;place-items:center;transition:background-color .3s,border-color .3s}
 .ck svg{width:12px;height:12px;stroke:var(--n0);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14;transition:stroke-dashoffset .35s var(--ease) .05s}
@@ -131,7 +133,11 @@
 .wt{padding:80px 0 56px;overflow:hidden}
 .wt-vp{position:relative;--cw:min(1144px,calc(100vw - 296px))}
 .wt-track{display:flex;gap:16px;will-change:transform;transition:transform .9s var(--ease-io)}
-.wt-track.jump{transition:none}
+.wt-track.jump,.wt-track.jump *,.wt-track.jump *::before,.wt-track.jump *::after{transition:none!important}
+.wt-vp{touch-action:pan-y;cursor:grab}
+.wt-vp.dragging{cursor:grabbing}
+.wt-vp.dragging .wcard{pointer-events:none}
+.wcard .media>img{-webkit-user-drag:none}
 .wcard{position:relative;width:var(--cw);height:616px;flex:none;border-radius:16px;overflow:hidden;padding:40px;display:flex;flex-direction:column;justify-content:space-between;color:var(--y100);cursor:pointer;-webkit-user-select:none;user-select:none}
 .wcard.on{cursor:default}
 .wcard .media{position:absolute;inset:0}
@@ -159,8 +165,6 @@
 .ex{padding:56px 0 96px;display:flex;flex-direction:column;gap:32px;overflow:hidden}
 .ex .head{max-width:1440px;width:100%;margin:0 auto;padding:0 max(var(--gut),env(safe-area-inset-right,0px)) 0 max(var(--gut),env(safe-area-inset-left,0px));display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap}
 .ex .head h2{color:#262626}
-.ex .tot .lb{border:0;display:inline-flex;align-items:center;gap:4px}
-.ex .tot .lb svg{width:16px;height:16px}
 .ex-row{scroll-padding:0 max(var(--gut),calc((100vw - 1328px)/2));overflow-x:auto;scrollbar-width:none;cursor:grab;-webkit-user-select:none;user-select:none;scroll-snap-type:x proximity}
 .ex-row::-webkit-scrollbar{display:none}
 .ex-row.dragging{cursor:grabbing;scroll-snap-type:none}
@@ -230,7 +234,15 @@
   .pd-faq{padding-block:40px 56px}
 }
 /* ritual toggle (mobile) */
-.rcard .tog{display:none}
+.rcard{cursor:pointer}
+.rcard.on{cursor:default}
+.rcard .tog{position:absolute;z-index:5;right:16px;bottom:16px;width:40px;height:40px;border-radius:8px;background:var(--n100);box-shadow:0 2px 8px rgba(18,17,15,.12);opacity:0;transform:scale(.7);transition:opacity .35s var(--ease),transform .5s var(--spring),background-color .3s}
+.rcard .tog::before,.rcard .tog::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:1px;margin:-.5px 0 0 -6.5px;background:var(--g700);transition:transform .5s var(--ease)}
+.rcard .tog::after{transform:rotate(90deg)}
+.rcard:not(.on):is(:hover,:focus-visible) .tog{opacity:1;transform:none}
+.rcard:not(.on):hover .tog{background:var(--n100)}
+.rcard:not(.on) .tt{transition:padding .4s var(--ease)}
+.rcard:not(.on):hover .tt{padding-right:72px}
 /* sticky get-started */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
@@ -242,7 +254,7 @@
 .stick .pr .v{display:flex;align-items:baseline;color:var(--n900)}
 .stick .pr .num{font-size:22px;line-height:1}
 .stick .pr small{font-size:12px}
-.stick .btn{height:48px;width:150px}
+.stick .btn{height:48px;padding:0 20px}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 .wcard .wchip,.wcard .flip,.wcard .wq{display:none}
 @media (max-width:860px){
@@ -252,8 +264,7 @@
   .rcard,.rcard.on{--br:inline}
   .rcard .chip{left:16px;top:16px}
   .rcard .tt{padding:0 72px 16px 16px;white-space:normal}
-  .rcard .tog{display:block;position:absolute;z-index:5;right:16px;bottom:16px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,251,.85)}
-  .rcard .tog::before,.rcard .tog::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1px;margin:-.5px 0 0 -5.5px;background:var(--n900);transition:transform .5s var(--ease)}
+  .rcard .tog,.rcard.on .tog{opacity:1;transform:none;right:16px;bottom:16px;width:32px;height:32px;background:var(--n100)}
   .rcard .tog::after{transform:rotate(90deg)}
   .rcard.on .tog::after{transform:rotate(0)}
   .inner{left:16px;right:16px;top:48px;bottom:auto;width:auto;gap:40px;padding:20px 16px 16px;background:rgba(255,255,251,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:rgba(255,255,251,.5)}
@@ -275,7 +286,6 @@
   .pd-price .row{display:contents}
   .pd-price .row>span:first-child{grid-column:1/-1;grid-row:3;padding:4px 0 0;max-width:210px}
   .pd-price .tot{grid-column:2;grid-row:2;align-self:end}
-  .tot .switch{width:32px;height:20px}.tot .switch i{width:12px;height:12px}.tot .switch[aria-checked="true"] i{transform:translateX(12px)}
   .pd-cta .btn{height:48px;font-size:14px}
   .pd-cta{gap:16px}
   .rit{padding:40px 12px;gap:24px}
@@ -319,9 +329,7 @@
   .ex{padding:24px 0 40px;gap:24px}
   .ex .head{flex-direction:column;align-items:flex-start;gap:16px;padding:0 20px}
   .ex .head h2{font-size:24px;max-width:300px}
-  .ex .tot .lb svg{display:none}
-  .ex .tot .lb{border-bottom:1px dashed var(--g700)}
-  .ex .tot .switch{width:32px;height:20px}.ex .tot .switch i{width:12px;height:12px}.ex .tot .switch[aria-checked="true"] i{transform:translateX(12px)}
+  .ex .tot .tip{left:0;right:auto}
   .ex-track{padding:8px 12px;gap:8px}
   .ex-row{scroll-padding:0 12px}
   .xcard{position:relative;width:240px;flex-direction:column;padding:4px 4px 20px;gap:12px}
@@ -364,7 +372,7 @@
         <span class="from">starting at</span>
         <span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span>
         <div class="row"><span data-sub>Includes membership + medication price</span>
-          <span class="tot"><span class="lb">Total price</span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
+          <span class="tot"><span class="dash soft lb" tabindex="0">Total price<span class="tip" role="tooltip" style="left:auto;right:0"><b>Total price</b>Shows medication plus the $39/mo membership. Turn it off to see the medication price on its own.</span></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
       </div>
     </div>
     <div class="pd-body">
@@ -374,7 +382,7 @@
         <div><span class="ic lt"><svg viewBox="0 0 16 16" fill="none"><path d="M6.33268 11H9.66602M5.66602 4.33333V10M5.66602 4.33333H4.23542C3.47787 4.33333 2.78535 4.76134 2.44656 5.43891L1.87716 6.57771C1.73831 6.85542 1.66602 7.16165 1.66602 7.47214V9.66667C1.66602 10.403 2.26297 11 2.99935 11M5.66602 4.33333C5.66602 3.59695 6.26297 3 6.99935 3H12.3327C13.4373 3 14.3327 3.89543 14.3327 5V9.33333C14.3327 10.2538 13.5865 11 12.666 11M6.26595 11.3333C6.26595 12.2538 5.51976 13 4.59928 13C3.67881 13 2.93262 12.2538 2.93262 11.3333C2.93262 10.4129 3.67881 9.66667 4.59928 9.66667C5.51976 9.66667 6.26595 10.4129 6.26595 11.3333ZM12.9993 11.3333C12.9993 12.2538 12.2532 13 11.3327 13C10.4122 13 9.66602 12.2538 9.66602 11.3333C9.66602 10.4129 10.4122 9.66667 11.3327 9.66667C12.2532 9.66667 12.9993 10.4129 12.9993 11.3333Z" stroke="#1C534E"/></svg></span>Pharmacy pickup or mail delivery</div>
       </div>
       <div class="pd-cta" data-r style="--i:4">
-        <a href="#" class="btn btn-g" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+        <a href="#" class="btn btn-g" data-toast="Sign-up isn’t part of this prototype">Get started on Wegovy</a>
         <a href="#" class="tlink" style="color:var(--g700)" data-toast><span>I already have a prescription</span><svg><use href="#i-chev"/></svg></a>
       </div>
     </div>
@@ -443,7 +451,7 @@
       <span class="chip sm">Select to compare</span>
       <div class="cmp-list" role="group" aria-label="Medications to compare">
         <button class="crow on" style="--k:0" aria-pressed="true"><span class="nm"><b>Foundayo™</b><span>Pill</span></span><img class="pi pill" src="img/cut-foundayo.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
-        <button class="crow on" style="--k:1" aria-pressed="true"><span class="nm"><b>Wegovy®</b><span>Pill</span></span><img class="pi pill" src="img/cut-wpill.webp" alt="" loading="lazy" style="width:58px;top:10px"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
+        <button class="crow on" style="--k:1" aria-pressed="true"><span class="nm"><b>Wegovy®</b><span>Pill</span></span><img class="pi pill" src="img/cut-wpill.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
         <button class="crow" style="--k:2" aria-pressed="false"><span class="nm"><b>Wegovy®</b><span>Pen</span></span><img class="pi pen" src="img/cut-wpen.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
         <button class="crow" style="--k:3" aria-pressed="false"><span class="nm"><b>Zepbound® KwikPen</b><span>Pen</span></span><img class="pi pen" src="img/cut-zep.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
       </div>
@@ -484,7 +492,7 @@
 <!-- EXPLORE -->
 <section class="ex" id="explore">
   <div class="head"><h2 class="h-xl split">Explore our FDA-approved GLP-1s</h2>
-    <span class="tot" data-r><span class="lb" title="Includes the $39/mo membership">Total price<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.2" stroke="currentColor"/><path d="M6.4 6.3a1.65 1.65 0 0 1 3.2.5c0 1.1-1.6 1.4-1.6 2.3M8 11.2h.01" stroke="currentColor" stroke-linecap="round"/></svg></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
+    <span class="tot" data-r><span class="dash soft lb" tabindex="0">Total price<span class="tip" role="tooltip" style="left:auto;right:0"><b>Total price</b>Shows medication plus the $39/mo membership. Turn it off to see the medication price on its own.</span></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
   <div class="ex-row" id="exRow" data-lenis-prevent-horizontal>
     <div class="ex-track">
       <a href="#" class="xcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex1}})"><img data-src="img/ex1.webp" data-src-m="img/p1.webp" alt="A pink Foundayo tablet"></div><div class="c"><span class="chip sm">Daily pill</span><div class="row"><div class="nm"><b>Foundayo™</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
@@ -500,7 +508,7 @@
   <div class="stick-in">
     <span class="nm"><b>Wegovy®</b><span>Daily pill</span></span>
     <span class="pr"><span>from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></span>
-    <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+    <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started on Wegovy</a>
   </div>
 </div>
 
@@ -656,28 +664,43 @@ gm.addEventListener('click',()=>{if(!matchMedia('(pointer:fine)').matches)showSl
 /* ---------- morning ritual cards ---------- */
 const rcards=$$('.rcard');
 function openCard(c,tap){if(c.classList.contains('on')){if(tap&&innerWidth<=860){c.classList.remove('on');c.setAttribute('aria-expanded',false)}return}rcards.forEach(x=>{x.classList.toggle('on',x===c);x.setAttribute('aria-expanded',x===c)})}
-rcards.forEach(c=>{c.addEventListener('mouseenter',()=>{if(innerWidth>860)openCard(c)});c.addEventListener('focus',()=>{if(innerWidth>860)openCard(c)});c.addEventListener('click',()=>openCard(c,true))});
+rcards.forEach(c=>c.addEventListener('click',()=>openCard(c,true)));
 
 /* ---------- compare picker ---------- */
 const crows=$$('.crow'),cmpBtn=$('#cmpBtn');
-function cmpLabel(){const n=crows.filter(r=>r.classList.contains('on')).length;cmpBtn.textContent=n<2?'Select 2 to compare':`Compare ${n} medications`;cmpBtn.dataset.toast=n<2?'Pick at least two medications to compare':'Medication comparison isn’t part of this prototype'}
+function cmpLabel(){const n=crows.filter(r=>r.classList.contains('on')).length;cmpBtn.textContent=n<2?'Compare medications':`Compare ${n} medications`;cmpBtn.classList.toggle('is-off',n<2);cmpBtn.setAttribute('aria-disabled',n<2);cmpBtn.tabIndex=n<2?-1:0;cmpBtn.dataset.toast=n<2?'Pick at least two medications to compare':'Medication comparison isn’t part of this prototype'}
 crows.forEach(r=>r.addEventListener('click',()=>{const on=r.classList.toggle('on');r.setAttribute('aria-pressed',on);cmpLabel()}));
 
 /* ---------- stories carousel ---------- */
-const wcards=$$('.wcard',wtTrack),dots=$$('button',wtDots),vp=$('#wtVp');let wi=1,wAuto=0,wPaused=false,wVis=false;const WDUR=3000;
-function wPos(jump){const c=wcards[wi];const x=c.offsetLeft-(vp.clientWidth-c.offsetWidth)/2;wtTrack.classList.toggle('jump',!!jump);wtTrack.style.transform=`translate3d(${-x}px,0,0)`;if(jump){void wtTrack.offsetWidth;wtTrack.classList.remove('jump')}}
-function wGo(i,jump){if(i!==wi)wcards.forEach(c=>c.classList.remove('peek'));wi=i;wcards.forEach((c,k)=>{c.classList.toggle('on',k===wi);c.setAttribute('aria-hidden',k!==wi)});$$('.media',wtTrack).forEach(load);wPos(jump);
+const wcards=$$('.wcard',wtTrack),dots=$$('button',wtDots),vp=$('#wtVp');let wi=1,wAuto=0,wPaused=false,wVis=false,wBase=0;const WDUR=6000;
+function wPos(){const c=wcards[wi];wBase=-(c.offsetLeft-(vp.clientWidth-c.offsetWidth)/2);wtTrack.style.transform=`translate3d(${wBase}px,0,0)`}
+// a jump (looping from a clone back to the real card) swaps everything with no transitions, so nothing visibly reloads
+function wGo(i,jump){if(i!==wi)wcards.forEach(c=>c.classList.remove('peek'));
+  if(jump)wtTrack.classList.add('jump');
+  wi=i;wcards.forEach((c,k)=>{c.classList.toggle('on',k===wi);c.setAttribute('aria-hidden',k!==wi)});$$('.media',wtTrack).forEach(load);wPos();
+  if(jump){void wtTrack.offsetWidth;requestAnimationFrame(()=>wtTrack.classList.remove('jump'))}
   const s=+wcards[wi].dataset.s;dots.forEach((d,k)=>{d.classList.toggle('done',k<s);const b=$('i',d);b.getAnimations().forEach(a=>a.cancel());b.style.transform=k<s?'scaleX(1)':''});
-  if(!RM&&!wPaused){$('i',dots[s]).animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:WDUR,easing:'linear',fill:'forwards'})}else $('i',dots[s]).style.transform='scaleX(1)';
+  if(!RM&&!wPaused&&wStarted){$('i',dots[s]).animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:WDUR,easing:'linear',fill:'forwards'})}else $('i',dots[s]).style.transform=wStarted?'scaleX(1)':'';
   clearTimeout(wAuto);if(!RM&&!wPaused&&wStarted)wAuto=setTimeout(()=>wGo(wi+1),WDUR)}
-wtTrack.addEventListener('transitionend',e=>{if(e.target!==wtTrack)return;if(wi===0)wGo(N,true);else if(wi===N+1)wGo(1,true)});
-wcards.forEach((c,k)=>c.addEventListener('click',e=>{const f=e.target.closest('.flip');if(f){e.stopPropagation();const on=c.classList.toggle('peek');if(on){wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))}else{wPaused=!wVis;if(wVis)wGo(wi)}return}if(k!==wi)wGo(k)}));
+wtTrack.addEventListener('transitionend',e=>{if(e.target!==wtTrack||e.propertyName!=='transform')return;if(wi===0)wGo(N,true);else if(wi===N+1)wGo(1,true)});
+function wPause(){wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))}
+// drag (mouse or touch) to move between stories
+let wd=null,wMoved=false;
+vp.addEventListener('pointerdown',e=>{if(e.button>0||e.target.closest('.flip'))return;wd={x:e.clientX,y:e.clientY,id:e.pointerId,t:performance.now(),lock:null};wMoved=false});
+vp.addEventListener('pointermove',e=>{if(!wd||e.pointerId!==wd.id)return;const dx=e.clientX-wd.x,dy=e.clientY-wd.y;
+  if(wd.lock===null&&(Math.abs(dx)>6||Math.abs(dy)>6)){wd.lock=Math.abs(dx)>Math.abs(dy);if(wd.lock){vp.setPointerCapture(e.pointerId);wtTrack.classList.add('jump');vp.classList.add('dragging');wPause()}else{wd=null;return}}
+  if(wd.lock){wMoved=true;const edge=(wi===0&&dx>0)||(wi===N+1&&dx<0)?.35:1;wtTrack.style.transform=`translate3d(${wBase+dx*edge}px,0,0)`}});
+const wEnd=e=>{if(!wd||e.pointerId!==wd.id)return;const dx=e.clientX-wd.x,v=Math.abs(dx)/Math.max(1,performance.now()-wd.t),locked=wd.lock;wd=null;vp.classList.remove('dragging');
+  setTimeout(()=>wMoved=false,0);if(!locked)return;wtTrack.classList.remove('jump');void wtTrack.offsetWidth;wPaused=!wVis||document.hidden;
+  if(Math.abs(dx)>vp.clientWidth*.12||v>.5)wGo(wi+(dx<0?1:-1));else wGo(wi)};
+vp.addEventListener('pointerup',wEnd);vp.addEventListener('pointercancel',wEnd);
+vp.addEventListener('dragstart',e=>e.preventDefault());
+wcards.forEach((c,k)=>c.addEventListener('click',e=>{if(wMoved){e.preventDefault();e.stopPropagation();wMoved=false;return}const f=e.target.closest('.flip');if(f){e.stopPropagation();const on=c.classList.toggle('peek');if(on)wPause();else{wPaused=!wVis;if(wVis)wGo(wi)}return}if(k!==wi)wGo(k)}));
 dots.forEach((d,k)=>d.addEventListener('click',()=>wGo(k+1)));
-document.addEventListener('visibilitychange',()=>{wPaused=document.hidden;if(wPaused){clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))}else if(wStarted&&wVis)wGo(wi)});
-let wx=0;vp.addEventListener('touchstart',e=>{wx=e.touches[0].clientX},{passive:true});vp.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-wx;if(Math.abs(d)>50)wGo(wi+(d<0?1:-1))});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)wPause();else if(wStarted&&wVis){wPaused=false;wGo(wi)}});
 addEventListener('keydown',e=>{const r=vp.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!$('#stories').contains(document.activeElement))return;if(e.key==='ArrowRight')wGo(wi+1);if(e.key==='ArrowLeft')wGo(wi-1)});
-let wStarted=false;wGo(1,true);addEventListener('resize',()=>wPos(true));
-watch($('#stories'),.75,()=>{wVis=true;if(!wStarted){wStarted=true;wGo(wi)}else if(!document.hidden){wPaused=false;wGo(wi)}},()=>{wVis=false;wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))});
+let wStarted=false;wGo(1,true);addEventListener('resize',()=>{wtTrack.classList.add('jump');wPos();requestAnimationFrame(()=>wtTrack.classList.remove('jump'))});
+watch($('#stories'),.75,()=>{wVis=true;if(!wStarted){wStarted=true;wGo(wi)}else if(!document.hidden){wPaused=false;wGo(wi)}},()=>{wVis=false;wPause()});
 
 /* ---------- explore: drag to scroll ---------- */
 const xr=$('#exRow');let xd=false,xpx=0,xvx=0,xlt=0,xraf=0,xsx=0,xmoved=false;
