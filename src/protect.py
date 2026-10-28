@@ -6,8 +6,8 @@ from cryptography.hazmat.primitives import hashes
 
 ITER = 250000
 
-def encrypt(html, password):
-    salt, iv = os.urandom(16), os.urandom(12)
+def encrypt(html, password, salt=None):
+    salt, iv = salt or os.urandom(16), os.urandom(12)
     key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=ITER).derive(password.encode())
     ct = AESGCM(key).encrypt(iv, html.encode(), None)
     b = lambda x: base64.b64encode(x).decode()
@@ -66,8 +66,8 @@ f.addEventListener('submit',async ev=>{
 })();
 </script>'''
 
-def gate(html, password, fragment=False):
-    payload = json.dumps(encrypt(html, password))
+def gate(html, password, fragment=False, salt=None):
+    payload = json.dumps(encrypt(html, password, salt))
     import re as _re
     logo=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'logo.svg')).read().strip()
     body = (BODY % payload).replace('%LOGO%',logo)

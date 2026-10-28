@@ -1,0 +1,607 @@
+<meta charset="utf-8">
+<title>Wegovy Pill · GoodRx</title>
+<style>
+{{basecss}}
+/* ================= PDP ================= */
+.pd{padding:144px max(var(--gut),env(safe-area-inset-right,0px)) 48px max(var(--gut),env(safe-area-inset-left,0px));max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:48px}
+.pd-info{width:542px;flex:none;display:flex;flex-direction:column;gap:32px}
+.pd-top{display:flex;flex-direction:column;gap:16px}
+.pd-name{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.pd-name h1{font-size:48px;line-height:1.08;letter-spacing:-.02em;font-weight:300;color:var(--dark)}
+.pd-price{display:flex;flex-direction:column;gap:4px}
+.pd-price .from{font-size:14px;color:var(--soft)}
+.pd-price .v{display:flex;align-items:baseline;color:var(--dark)}
+.pd-price .v .num{font-size:40px;line-height:1}
+.pd-price .v small{font-size:18px}
+.pd-price .row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.pd-price .row>span{font-size:14px;color:var(--soft);padding-bottom:4px;transition:opacity .2s}
+.tot{display:flex;align-items:center;gap:12px}
+.tot .lb{font-size:14px;color:var(--soft);border-bottom:1px dashed var(--g700);line-height:18px}
+.pd-desc{font-size:18px;line-height:1.4;color:var(--dark)}
+.pd-perks{display:flex;flex-direction:column;gap:12px;padding-bottom:8px}
+.pd-perks div{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--dark)}
+.pd-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.pd-cta .btn{width:170px}
+.pd-body{display:flex;flex-direction:column;gap:24px}
+.qa.sm>button{padding:16px 0}
+.qa.sm>button span:first-child{font-size:16px}
+.qa.sm .ans p{padding-bottom:20px;font-size:14px}
+/* gallery */
+.gal{width:656px;flex:none;display:flex;flex-direction:column;align-items:center;gap:20px}
+.gal-main{position:relative;width:100%;height:560px;border-radius:16px;overflow:hidden;background:#ece5da;isolation:isolate;cursor:zoom-in}
+.gal-main .slide{position:absolute;inset:0;clip-path:inset(0 0 0 100%);transition:clip-path .9s var(--ease-io)}
+.gal-main .slide.on{clip-path:inset(0 0 0 0);z-index:2}
+.gal-main .slide.was{clip-path:inset(0 0 0 0);z-index:1}
+.gal-main .media{position:absolute;inset:0;background:#ece5da}
+.gal-main .media>img{transform-origin:var(--ox,50%) var(--oy,50%)}
+.gal-main .slide .media.loaded>img{transform:scale(1.14);transition:opacity .9s var(--ease),transform 1.4s var(--ease),filter .9s var(--ease)}
+.gal-main .slide.on .media.loaded>img{transform:scale(1.04)}
+.gal-main.zoom .slide.on .media.loaded>img{transform:scale(1.18);transition:transform .6s var(--ease)}
+.gal-main .slide[data-i="0"] .media>img{object-position:50% 46%}
+.gal-main .slide[data-i="0"].on .media.loaded>img{transform:scale(1.15)}
+.gal-main.zoom .slide[data-i="0"].on .media.loaded>img{transform:scale(1.3)}
+.thumbs{display:flex;gap:12px}
+.thumb{position:relative;width:64px;height:64px;border-radius:8px;overflow:hidden;transition:transform .45s var(--spring)}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.thumb::after{content:"";position:absolute;inset:0;border-radius:8px;border:1px solid var(--g700);opacity:0;transition:opacity .3s}
+.thumb.on::after{opacity:1}
+.thumb:hover{transform:translateY(-2px)}
+.thumb:hover img{transform:scale(1.08)}
+.intro .gal-main{clip-path:inset(100% 0 0 0 round 16px)}
+.gal-main{transition:clip-path 1.3s var(--ease-io) .15s}
+.intro .thumb{opacity:0;transform:translateY(12px)}
+.thumb{transition:transform .45s var(--spring),opacity .8s var(--ease)}
+.ready .thumb{transition:transform .45s var(--spring)}
+/* morning ritual accordion cards */
+.rit{max-width:1440px;margin:0 auto;padding:56px max(var(--gut),env(safe-area-inset-right,0px)) 56px max(var(--gut),env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:48px}
+.rit h2{width:432px;max-width:100%;color:#262626}
+.rcards{display:flex;gap:15px;height:480px}
+.rcard{position:relative;flex:1 1 0;min-width:0;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;text-align:left;color:var(--n0);transition:flex-grow .9s var(--ease-io)}
+.rcard.on{flex-grow:2.06}
+.rcard .media{position:absolute;inset:0}
+.rcard .media>img{transition:opacity .9s var(--ease),transform 1.6s var(--ease),filter .9s var(--ease)}
+.rcard:not(.on):hover .media.loaded>img{transform:scale(1.04)}
+.rcard .shade{position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,rgba(0,0,0,.5) 2.4%,rgba(0,0,0,0) 39.4%);transition:opacity .8s var(--ease)}
+.rcard.on .shade{opacity:.45}
+.rcard .chip{position:absolute;left:24px;top:24px;z-index:4;max-width:calc(100% - 48px);overflow:hidden;text-overflow:ellipsis;display:block;line-height:20px}
+.rcard .tt{position:relative;z-index:3;padding:0 24px 24px;background:linear-gradient(0deg,rgba(0,0,0,.3) 2.4%,rgba(0,0,0,0));font-size:24px;line-height:1.2;text-shadow:0 1px 10px rgba(18,17,15,.35);white-space:nowrap}
+.rcard .tt br{display:var(--br,inline)}
+.rcard.on{--br:none}
+.inner{position:absolute;z-index:4;right:8px;bottom:8px;width:255px;padding:20px 24px 20px 20px;border-radius:12px;background:var(--n100);border:.5px solid var(--n0);display:flex;flex-direction:column;gap:48px;color:var(--g700);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--ease)}
+.rcard.on .inner{opacity:1;transform:none;transition:opacity .6s var(--ease) .45s,transform .8s var(--ease) .45s}
+.inner .big{display:flex;flex-direction:column;gap:8px}
+.inner .big .v{font-family:var(--num);font-size:56px;line-height:1;white-space:nowrap}
+.inner .big .v small{font-size:24px}
+.inner .big p{font-size:14px}
+.inner .fn{font-size:13px;color:var(--soft)}
+/* compare + fit */
+.duo{max-width:1440px;margin:0 auto;padding:80px max(var(--gut),env(safe-area-inset-right,0px)) 56px max(var(--gut),env(safe-area-inset-left,0px));display:flex;gap:16px}
+.dcard{position:relative;flex:1 1 0;min-width:0;height:420px;border-radius:16px;overflow:hidden;padding:8px;display:flex;gap:18px;background:var(--n0)}
+.dcard.cmp{background:var(--n200)}
+.dcard.cmp::before{content:"";position:absolute;inset:-12% -6%;background:url(img/cmp-bg.webp) center/cover;mix-blend-mode:overlay;opacity:.5;transform:rotate(180deg) scaleY(-1)}
+.dtx{position:relative;z-index:2;width:260px;flex:none;padding:16px 32px 16px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.dtx .t{display:flex;flex-direction:column;gap:12px}
+.dtx h3{font-size:24px;line-height:1.2;font-weight:400;color:var(--dark);text-wrap:balance}
+.dtx p{font-size:14px;color:var(--soft)}
+.btn-sm{height:40px;padding:0 16px;font-size:12px;align-self:flex-start}
+.btn-o.btn-sm{border-width:.5px}
+.dvis{position:relative;z-index:2;flex:1;min-width:0;border-radius:8px;overflow:hidden;background:var(--n0)}
+.dvis .chip{position:absolute;left:12px;top:12px;z-index:3}
+.cmp-list{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column}
+.crow{position:relative;height:80px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:.5px solid var(--k10);text-align:left;overflow:hidden;transition:background-color .3s}
+.crow:first-child{border-top:.5px solid var(--k10)}
+.crow:last-child{border-bottom:0}
+.crow:hover{background:rgba(245,239,229,.55)}
+.crow .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.crow .nm b{font-weight:400;font-size:16px;line-height:1.2;color:var(--soft);transition:color .3s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .nm span{font-size:13px;color:var(--soft)}
+.crow.on .nm b{color:var(--ink)}
+.crow .pi{position:absolute;right:42px;pointer-events:none;transition:transform .7s var(--spring)}
+.crow .pi.pill{width:64px;top:6px}
+.crow .pi.pen{width:44px;top:-2px}
+.crow:hover .pi{transform:translateY(-4px) rotate(-4deg)}
+.ck{position:relative;width:20px;height:20px;flex:none;border-radius:50%;border:1px solid var(--k20);display:grid;place-items:center;transition:background-color .3s,border-color .3s}
+.ck svg{width:12px;height:12px;stroke:var(--n0);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14;transition:stroke-dashoffset .35s var(--ease) .05s}
+.crow.on .ck{background:var(--g700);border-color:var(--g700);animation:pop .45s var(--spring)}
+.crow.on .ck svg{stroke-dashoffset:0}
+@keyframes pop{40%{transform:scale(1.18)}}
+.cmp-list .crow{transition:background-color .3s,opacity .7s var(--ease),transform .9s var(--ease);transition-delay:0s,calc(var(--k)*80ms + .2s),calc(var(--k)*80ms + .2s)}
+.dcard.pre .crow{opacity:0;transform:translateY(24px)}
+.dvis.photo .media{position:absolute;inset:0}
+.dvis.photo .media>img{transition:opacity .9s var(--ease),transform 1.8s var(--ease),filter .9s var(--ease)}
+.dcard:hover .dvis.photo .media.loaded>img{transform:scale(1.04)}
+/* related articles */
+.rel{max-width:1440px;margin:0 auto;padding:56px max(var(--gut),env(safe-area-inset-right,0px)) 56px max(var(--gut),env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:24px}
+.rel .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.rel h2{font-size:24px;line-height:1.2;font-weight:400;color:#262626}
+.rel-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.rart{min-width:0;display:flex;align-items:stretch;gap:12px;padding:8px 16px 8px 8px;border-radius:16px;background:var(--n0);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.rart:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(36,36,36,.04),0 16px 28px -16px rgba(36,36,36,.28)}
+.rart .media{width:96px;height:96px;flex:none;border-radius:8px}
+.rart .media>img{transition:opacity .9s var(--ease),transform 1.4s var(--ease),filter .9s var(--ease)}
+.rart:hover .media.loaded>img{transform:scale(1.08)}
+.rart .chip{position:absolute;left:7px;top:6px;z-index:3}
+.rart .tx{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px}
+.rart .tx b{font-weight:400;font-size:16px;line-height:1.4;color:var(--n900);transition:color .3s}
+.rart:hover .tx b{color:var(--g700)}
+.rart .tx span{font-size:13px;color:var(--k40);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* wide testimonials */
+.wt{padding:80px 0 56px;overflow:hidden}
+.wt-vp{position:relative;--cw:min(1144px,calc(100vw - 296px))}
+.wt-track{display:flex;gap:16px;will-change:transform;transition:transform 1s var(--ease-io)}
+.wt-track.jump{transition:none}
+.wcard{position:relative;width:var(--cw);height:616px;flex:none;border-radius:16px;overflow:hidden;padding:40px;display:flex;flex-direction:column;justify-content:space-between;color:var(--y100);cursor:pointer;-webkit-user-select:none;user-select:none}
+.wcard.on{cursor:default}
+.wcard .media{position:absolute;inset:0}
+.wcard .media>img{transform:scale(1.06);transition:opacity .9s var(--ease),transform 1.6s var(--ease),filter .9s var(--ease)}
+.wcard.on .media.loaded>img{transform:none}
+.wcard .shade{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(0,0,0,.4),rgba(0,0,0,0) 49%)}
+.wcard::after{content:"";position:absolute;inset:0;z-index:3;background:var(--n100);opacity:.0;transition:opacity .9s var(--ease);pointer-events:none}
+.wcard:not(.on)::after{opacity:.18}
+.wcard .top,.wcard .bot{position:relative;z-index:4;width:300px;max-width:100%}
+.wcard .top{display:flex;flex-direction:column;gap:32px}
+.wcard .who{display:flex;flex-direction:column;gap:18px}
+.wcard .who b{font-weight:400;font-size:24px;line-height:1.2}
+.wcard q{font-size:28px;line-height:1.2;letter-spacing:-.01em;font-weight:300;quotes:"“" "”";text-shadow:0 1px 14px rgba(18,17,15,.25)}
+.wcard .bot{display:flex;flex-direction:column;gap:8px;font-size:16px}
+.wcard .bot .v{display:flex;align-items:baseline;gap:2px}
+.wcard .bot .num{font-size:56px;line-height:1}
+.wcard .top>*,.wcard .bot{opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.wcard.on .top>*,.wcard.on .bot{opacity:1;transform:none;transition:opacity .9s var(--ease) .5s,transform 1.1s var(--ease) .5s}
+.wcard.on .top>q{transition-delay:.62s}.wcard.on .bot{transition-delay:.75s}
+.wt-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.wt-dots button{position:relative;width:28px;height:3px;border-radius:2px;background:var(--k10);overflow:hidden}
+.wt-dots button i{position:absolute;inset:0;background:var(--g700);transform:scaleX(0);transform-origin:left}
+.wt-dots button.done i{transform:scaleX(1)}
+/* explore */
+.ex{padding:56px 0 96px;display:flex;flex-direction:column;gap:32px;overflow:hidden}
+.ex .head{max-width:1440px;width:100%;margin:0 auto;padding:0 max(var(--gut),env(safe-area-inset-right,0px)) 0 max(var(--gut),env(safe-area-inset-left,0px));display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap}
+.ex .head h2{color:#262626}
+.ex .tot .lb{border:0;display:inline-flex;align-items:center;gap:4px}
+.ex .tot .lb svg{width:16px;height:16px}
+.ex-row{scroll-padding:0 max(var(--gut),calc((100vw - 1328px)/2));overflow-x:auto;scrollbar-width:none;cursor:grab;-webkit-user-select:none;user-select:none;scroll-snap-type:x proximity}
+.ex-row::-webkit-scrollbar{display:none}
+.ex-row.dragging{cursor:grabbing;scroll-snap-type:none}
+.ex-row.dragging .xcard{pointer-events:none}
+.ex-track{display:flex;gap:16px;width:max-content;padding:0 max(var(--gut),calc((100vw - 1328px)/2))}
+.xcard{width:420px;flex:none;display:flex;gap:16px;padding:8px 24px 8px 8px;border-radius:16px;background:var(--n0);scroll-snap-align:start;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.xcard:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(36,36,36,.04),0 16px 28px -16px rgba(36,36,36,.28)}
+.xcard .media{width:120px;height:120px;flex:none;border-radius:8px;background:var(--n400)}
+.xcard .media>img{transition:opacity .9s var(--ease),transform 1.4s var(--ease),filter .9s var(--ease)}
+.xcard:hover .media.loaded>img{transform:scale(1.07)}
+.xcard .c{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:8px 0}
+.xcard .chip{align-self:flex-start}
+.xcard .row{display:flex;align-items:flex-end;gap:12px}
+.xcard .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;white-space:nowrap}
+.xcard .nm b{font-weight:400;font-size:24px;line-height:1.2;color:var(--n900);transition:color .3s}
+.xcard:hover .nm b{color:var(--g700)}
+.xcard .nm span{font-size:13px;color:var(--k40);overflow:hidden;text-overflow:ellipsis}
+.xcard .pr{display:flex;flex-direction:column;align-items:flex-end;white-space:nowrap}
+.xcard .pr .from{font-size:13px;color:var(--k40)}
+.xcard .pr .v{display:flex;align-items:baseline;color:var(--n900)}
+.xcard .pr .v .num{font-size:24px;line-height:1}
+.xcard .pr .v small{font-size:13px}
+.xcard.here{box-shadow:inset 0 0 0 1px var(--g200)}
+.xcard.here .chip.now{background:var(--g700);border-color:var(--g800);color:var(--y100)}
+.pd-faq{padding-block:80px 56px}
+.pd-faq .r .acc{border-top:0}
+#journey{padding-bottom:24px}
+.jour .sec-head p{width:365px}
+/* PDP responsive */
+@media (max-width:1340px){
+  .pd-info{width:auto;flex:1 1 0;min-width:0}
+  .gal{width:min(656px,50%)}
+}
+@media (max-width:1180px){
+  .duo{flex-direction:column}
+  .dcard{flex:none}
+  .rel-row{grid-template-columns:1fr 1fr}
+  .rel-row .rart:nth-child(3){display:none}
+}
+@media (max-width:1024px){
+  .pd{padding-top:120px;gap:32px}
+  .gal{width:48%}
+  .gal-main{height:auto;aspect-ratio:1}
+  .rcards{height:440px}
+  .wt-vp{--cw:calc(100vw - 96px)}
+  .wcard{height:540px}
+  .xcard{width:380px}
+}
+@media (max-width:860px){
+  .pd{flex-direction:column;align-items:stretch;padding-top:112px}
+  .gal{width:100%;order:-1}
+  .gal-main{aspect-ratio:656/520}
+  .rcards{height:auto;flex-direction:column}
+  .rcard,.rcard.on{flex:none;height:420px}
+  .rcard .inner{opacity:1;transform:none}
+  .rcard{--br:none}
+  .rel-row{grid-template-columns:minmax(0,1fr)}
+  .rel-row .rart:nth-child(3){display:flex}
+}
+@media (max-width:720px){
+  .pd{padding:72px 20px 40px;gap:24px}
+  .gal{gap:12px}
+  .gal-main{aspect-ratio:1;border-radius:12px}
+  .pd-name h1{font-size:40px}
+  .pd-desc{font-size:16px}
+  .pd-cta{flex-direction:column;align-items:stretch;gap:20px}
+  .pd-cta .btn{width:100%}
+  .pd-cta .tlink{align-self:center}
+  .rit{padding:40px 20px;gap:32px}
+  .rit h2{font-size:24px}
+  .rcards{flex-direction:row;height:auto;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px;gap:8px;scrollbar-width:none}
+  .rcards::-webkit-scrollbar{display:none}
+  .rcard,.rcard.on{flex:none;width:300px;height:440px;scroll-snap-align:center}
+  .rcard .tt{font-size:20px;padding-right:16px;white-space:normal;padding-bottom:180px}
+  .inner{left:8px;right:8px;width:auto;gap:24px;padding:16px}
+  .inner .big .v{font-size:44px}
+  .duo{padding:40px 4px 20px;gap:8px}
+  .dcard{height:auto;flex-direction:column;gap:8px}
+  .dtx{width:auto;padding:16px 16px 8px;gap:20px}
+  .dvis{flex:none;height:340px}
+  .rel{padding:40px 20px}
+  .rel .head{flex-direction:column;align-items:flex-start;gap:12px}
+  .wt{padding:40px 0}
+  .wt-vp{--cw:calc(100vw - 40px)}
+  .wt-track{gap:8px}
+  .wcard{height:520px;padding:24px}
+  .wcard .shade{background:linear-gradient(0deg,rgba(0,0,0,.55),rgba(0,0,0,0) 45%),linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
+  .wcard q{font-size:22px}
+  .wcard .top{gap:20px}
+  .wcard .bot .num{font-size:44px}
+  .tw2 .media>img{object-position:62% 50%}
+  .tw3 .media>img{object-position:58% 50%}
+  .pd-faq{padding-block:40px 56px}
+  .ex{padding:40px 0 56px;gap:24px}
+  .ex .head h2{font-size:24px}
+  .ex-track{padding:0 20px;gap:8px}
+  .xcard{width:300px;padding-right:16px;gap:12px}
+  .xcard .media{width:96px;height:96px}
+  .xcard .nm b{font-size:18px}
+  .xcard .pr .v .num{font-size:20px}
+  .xcard .nm span{white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){
+  .intro .gal-main{clip-path:none}
+  .dcard.pre .crow{opacity:1;transform:none}
+}
+</style>
+<script>try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro")}catch(e){}</script>
+
+{{svgdefs}}
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+{{header}}
+
+<main id="top">
+<!-- PRODUCT -->
+<section class="pd" id="product">
+  <div class="pd-info">
+    <div class="pd-top">
+      <div class="pd-name">
+        <span class="chip sm" data-r>Daily pill</span>
+        <h1 class="split" data-intro>Wegovy®</h1>
+      </div>
+      <div class="pd-price" data-r style="--i:1">
+        <span class="from">starting at</span>
+        <span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span>
+        <div class="row"><span data-sub>Includes membership + medication price</span>
+          <span class="tot"><span class="lb">Total price</span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
+      </div>
+    </div>
+    <div class="pd-body">
+      <p class="pd-desc" data-r style="--i:2">A small daily tablet with the same active ingredient as Wegovy injections— minus the needles. Take it with a sip of water when you wake up. A daily step towards a goal you can achieve.</p>
+      <div class="pd-perks" data-r style="--i:3">
+        <div><span class="ic lt"><svg viewBox="0 0 16 16" fill="none"><path d="M8.24237 3.07114C9.67055 1.64295 11.9861 1.64295 13.4143 3.07114C14.8425 4.49933 14.8425 6.81487 13.4143 8.24306L10.8283 10.829L5.6564 5.6571L8.24237 3.07114Z" stroke="#1C534E"/><path d="M8.24306 13.4148C6.81487 14.843 4.49933 14.843 3.07114 13.4148C1.64295 11.9867 1.64295 9.67111 3.07114 8.24292L5.6571 5.65696L10.829 10.8289L8.24306 13.4148Z" stroke="#1C534E"/></svg></span>FDA-approved · Prescribed by a licensed clinician</div>
+        <div><span class="ic lt"><svg viewBox="0 0 16 16" fill="none"><path d="M6.33268 11H9.66602M5.66602 4.33333V10M5.66602 4.33333H4.23542C3.47787 4.33333 2.78535 4.76134 2.44656 5.43891L1.87716 6.57771C1.73831 6.85542 1.66602 7.16165 1.66602 7.47214V9.66667C1.66602 10.403 2.26297 11 2.99935 11M5.66602 4.33333C5.66602 3.59695 6.26297 3 6.99935 3H12.3327C13.4373 3 14.3327 3.89543 14.3327 5V9.33333C14.3327 10.2538 13.5865 11 12.666 11M6.26595 11.3333C6.26595 12.2538 5.51976 13 4.59928 13C3.67881 13 2.93262 12.2538 2.93262 11.3333C2.93262 10.4129 3.67881 9.66667 4.59928 9.66667C5.51976 9.66667 6.26595 10.4129 6.26595 11.3333ZM12.9993 11.3333C12.9993 12.2538 12.2532 13 11.3327 13C10.4122 13 9.66602 12.2538 9.66602 11.3333C9.66602 10.4129 10.4122 9.66667 11.3327 9.66667C12.2532 9.66667 12.9993 10.4129 12.9993 11.3333Z" stroke="#1C534E"/></svg></span>Pharmacy pickup or mail delivery</div>
+      </div>
+      <div class="pd-cta" data-r style="--i:4">
+        <a href="#" class="btn btn-g" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+        <a href="#" class="tlink" style="color:var(--g700)" data-toast><span>I already have a prescription</span><svg><use href="#i-chev"/></svg></a>
+      </div>
+    </div>
+    <div class="acc" data-r style="--i:5" id="infoAcc">
+      <div class="qa sm"><button aria-expanded="false" aria-controls="ia0" id="iq0"><span>About the ingredients</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="ia0" role="region" aria-labelledby="iq0"><div><p>Each tablet contains semaglutide, the same GLP-1 medication used in Wegovy injections, paired with an absorption enhancer that helps it get through the stomach lining. Doses start low and step up as your body adjusts.</p></div></div></div>
+      <div class="qa sm"><button aria-expanded="false" aria-controls="ia1" id="iq1"><span>How to take</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="ia1" role="region" aria-labelledby="iq1"><div><p>Take one tablet in the morning on an empty stomach with a sip of water (up to 4 oz). Wait at least 30 minutes before eating, drinking or taking other oral medicines. Swallow it whole; don’t split, crush or chew it.</p></div></div></div>
+    </div>
+  </div>
+  <div class="gal" id="gal">
+    <div class="gal-main" id="galMain" aria-roledescription="carousel" aria-label="Wegovy pill photos">
+      <div class="slide on" data-i="0"><div class="media eager" style="--lq:url({{lq:pdp-main}})"><img data-src="img/pdp-main.webp" alt="A white Wegovy tablet embossed with “novo” on linen in soft sunlight" fetchpriority="high"></div></div>
+      <div class="slide" data-i="1"><div class="media" style="--lq:url({{lq:pdp-hand}})"><img data-src="img/pdp-hand.webp" alt="A Wegovy tablet resting in an open palm"></div></div>
+      <div class="slide" data-i="2"><div class="media" style="--lq:url({{lq:pdp-box}})"><img data-src="img/pdp-box.webp" alt="A hand holding a pack of Wegovy 1.5 mg tablets"></div></div>
+    </div>
+    <div class="thumbs" role="tablist" aria-label="Choose a photo">
+      <button class="thumb on" role="tab" aria-selected="true" data-i="0" aria-label="Tablet on linen"><img src="img/ex3.webp" alt=""></button>
+      <button class="thumb" role="tab" aria-selected="false" data-i="1" aria-label="Tablet in hand"><img src="img/pdp-hand.webp" alt="" loading="lazy" style="object-position:48% 46%;transform-origin:48% 46%"></button>
+      <button class="thumb" role="tab" aria-selected="false" data-i="2" aria-label="Pack in hand"><img src="img/pdp-box.webp" alt="" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+
+<!-- MORNING RITUAL -->
+<section class="rit" id="ritual">
+  <h2 class="h-xl split">A morning ritual that’s done before your coffee</h2>
+  <div class="rcards" id="rcards">
+    <button class="rcard on" data-r style="--i:0" aria-expanded="true">
+      <div class="media grain" style="--lq:url({{lq:acc1}})"><img data-src="img/acc1.webp" alt=""></div><div class="shade"></div>
+      <span class="chip sm">Effective medication</span>
+      <span class="tt">Proven treatment</span>
+      <span class="inner"><span class="big"><span class="v" data-count="14" data-prefix="~">~14<small>%</small></span><p>average body weight lost*</p></span><span class="fn">*64-week study · 3 in 4 lost 5%+ · ~17% when taken as prescribed</span></span>
+    </button>
+    <button class="rcard" data-r style="--i:1" aria-expanded="false">
+      <div class="media grain" style="--lq:url({{lq:acc2}})"><img data-src="img/acc2.webp" alt=""></div><div class="shade"></div>
+      <span class="chip sm">Daily pill • taken on empty stomach</span>
+      <span class="tt">Built for your <br>morning routine</span>
+      <span class="inner"><span class="big"><span class="v">30<small> min</small></span><p>then breakfast as usual</p></span><span class="fn">Take it with a sip of water when you wake up, and wait 30 minutes before eating or drinking.</span></span>
+    </button>
+    <button class="rcard" data-r style="--i:2" aria-expanded="false">
+      <div class="media grain" style="--lq:url({{lq:acc3}})"><img data-src="img/acc3.webp" alt=""></div><div class="shade"></div>
+      <span class="chip sm">Travel-friendly</span>
+      <span class="tt">Great for <br>travel</span>
+      <span class="inner"><span class="big"><span class="v">0<small> needles</small></span><p>and no fridge to plan around</p></span><span class="fn">Tablets keep at room temperature in their original pack, so they fit in a carry-on.</span></span>
+    </button>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="jour" id="journey">
+  <div class="wrap sec-head">
+    <h2 class="display split">What to expect on <span class="em-wrap">Wegovy®<svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
+    <p data-r>Your path is your own. This is a general picture of how things usually unfold, and your plan will adjust as you go.</p>
+  </div>
+  <div class="wrap-16"><div class="pbox" id="stage" data-r>
+    <div class="pstage" id="ptrack"></div>
+    <div class="tabs" id="ptabs" role="tablist" aria-label="Treatment phases"></div>
+  </div></div>
+</section>
+
+<!-- COMPARE + FIT -->
+<section class="duo" id="compare">
+  <div class="dcard cmp pre" id="cmpCard" data-r>
+    <div class="dtx"><div class="t"><h3>Compare your options</h3><p>Compare pills and pens side by side, with prices up front. With four FDA-approved medications, you’ve got real options.</p></div>
+      <a href="#" class="btn btn-o btn-sm" id="cmpBtn" data-toast="Medication comparison isn’t part of this prototype">Compare 2 medications</a></div>
+    <div class="dvis">
+      <span class="chip sm">Select to compare</span>
+      <div class="cmp-list" role="group" aria-label="Medications to compare">
+        <button class="crow on" style="--k:0" aria-pressed="true"><span class="nm"><b>Foundayo™</b><span>Pill</span></span><img class="pi pill" src="img/cut-foundayo.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
+        <button class="crow on" style="--k:1" aria-pressed="true"><span class="nm"><b>Wegovy®</b><span>Pill</span></span><img class="pi pill" src="img/cut-wpill.webp" alt="" loading="lazy" style="width:58px;top:10px"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
+        <button class="crow" style="--k:2" aria-pressed="false"><span class="nm"><b>Wegovy®</b><span>Pen</span></span><img class="pi pen" src="img/cut-wpen.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
+        <button class="crow" style="--k:3" aria-pressed="false"><span class="nm"><b>Zepbound® KwikPen</b><span>Pen</span></span><img class="pi pen" src="img/cut-zep.webp" alt="" loading="lazy"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2 5 8.5l4.5-5"/></svg></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="dcard" data-r style="--i:1">
+    <div class="dtx"><div class="t"><h3>Is Wegovy the right fit for your routine?</h3><p>Answer a few quick questions about your schedule, habits and preferences. We’ll show you whether Wegovy fits your life better, or whether another option might suit you best.</p></div>
+      <a href="#" class="btn btn-o btn-sm" data-toast="The 3-minute quiz isn’t part of this prototype">Find out in 3 minutes</a></div>
+    <div class="dvis photo"><div class="media grain" style="--lq:url({{lq:fit}})"><img data-src="img/fit.webp" alt="A woman on a sofa with a mug, reading on her phone"></div></div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="rel" id="related">
+  <div class="head"><h2 class="split">Related articles</h2><a href="#" class="tlink" data-r style="color:var(--g700)" data-toast><span>All weight loss articles</span><svg><use href="#i-chev"/></svg></a></div>
+  <div class="rel-row">
+    <a href="#" class="rart" data-r style="--i:0" data-toast="Articles aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:a3}})"><img data-src="img/a3.webp" alt="" style="object-position:30% 50%"><span class="chip sm">7 min</span></div><div class="tx"><b>Considering GLP-1 Pills for Weight Loss?</b><span>8 Things to Know Before You Start</span></div></a>
+    <a href="#" class="rart" data-r style="--i:1" data-toast="Articles aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:a1}})"><img data-src="img/a1.webp" alt=""><span class="chip sm">7 min</span></div><div class="tx"><b>How to Start a GLP-1: What to Expect in the First Weeks</b><span>From dosing to side effects</span></div></a>
+    <a href="#" class="rart" data-r style="--i:2" data-toast="Articles aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:a2}})"><img data-src="img/a2.webp" alt="" style="object-position:40% 50%"><span class="chip sm">9 min</span></div><div class="tx"><b>GLP-1 Injections: What to Consider Before Using GLP-1s</b><span>The key things to know before your first injection</span></div></a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="wt" id="stories" aria-roledescription="carousel" aria-label="Customer stories">
+  <div class="wt-vp" id="wtVp" data-lenis-prevent-horizontal><div class="wt-track" id="wtTrack"></div></div>
+  <div class="wt-dots" id="wtDots"></div>
+</section>
+
+<!-- FAQ -->
+<section class="wrap faq pd-faq" id="faq">
+  <div class="l">
+    <div class="t"><h2 class="h-xl split">Honest answers to real questions</h2>
+    <p data-r>No hidden costs, no glossing over the hard parts.<br>Just what you need to know to decide.</p></div>
+  </div>
+  <div class="r"><div class="acc" id="acc"></div></div>
+</section>
+
+<!-- EXPLORE -->
+<section class="ex" id="explore">
+  <div class="head"><h2 class="h-xl split">Explore our FDA-approved GLP-1s</h2>
+    <span class="tot" data-r><span class="lb" title="Includes the $39/mo membership">Total price<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.2" stroke="currentColor"/><path d="M6.4 6.3a1.65 1.65 0 0 1 3.2.5c0 1.1-1.6 1.4-1.6 2.3M8 11.2h.01" stroke="currentColor" stroke-linecap="round"/></svg></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
+  <div class="ex-row" id="exRow" data-lenis-prevent-horizontal>
+    <div class="ex-track">
+      <a href="#" class="xcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex1}})"><img data-src="img/ex1.webp" alt="A pink Foundayo tablet"></div><div class="c"><span class="chip sm">Daily pill</span><div class="row"><div class="nm"><b>Foundayo™</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:1" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex2}})"><img data-src="img/ex2.webp" alt="A Wegovy HD pen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="199">$238</span><small>/mo</small></span></div></div></div></a>
+      <a href="#top" class="xcard here" data-r style="--i:2" aria-current="page"><div class="media grain" style="--lq:url({{lq:ex3}})"><img data-src="img/ex3.webp" alt="A white Wegovy tablet"></div><div class="c"><span class="chip sm now">You’re viewing</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:3" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex4}})"><img data-src="img/ex4.webp" alt="A Zepbound KwikPen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Zepbound® KwikPen</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$338</span><small>/mo</small></span></div></div></div></a>
+    </div>
+  </div>
+</section>
+</main>
+
+{{footer}}
+
+<script src="lenis.min.js"></script>
+<script>
+(()=>{
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MQ=matchMedia('(max-width:720px)'),isM=()=>MQ.matches;
+const root=document.documentElement;
+if(!RM) root.classList.add('intro');
+const LQ={{lqjson}};
+let lenis=null;
+
+/* ---------- toast ---------- */
+const toastEl=$('#toast'); let tt;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),2400)}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-toast]');if(!a)return;e.preventDefault();toast(a.dataset.toast||`“${a.textContent.trim()||a.getAttribute('aria-label')}” isn’t part of this prototype`)});
+// nav: logo goes home; "Online care" is the current section
+$$('.nav a.logo').forEach(a=>a.setAttribute('href','index.html'));
+$$('.links a').forEach(a=>{if(a.textContent.trim()==='Online care')a.setAttribute('href','index.html')});
+
+/* ---------- data ---------- */
+const PHASES=[
+ {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['The dose is small on purpose, your body is adjusting to the medication. It’s also when the habits take shape: when and how you take it, and the small lifestyle shifts that make the rest easier.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'cards',cards:[{img:'pdp-hand',dim:1,chip:'2 mins',title:'How to take your daily pill',sub:'Empty stomach, a sip of water, then 30 minutes before breakfast'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
+ {n:2,t:'Building tolerance',w:'-3% body weight*',k:'Week 5-8*',p:['Your dose steps up gradually so your body can adjust. Side effects, if you have them, are usually mild and ease with time.','Your care team checks in before each step so the plan keeps fitting how you feel.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'chart',week:'Week 8',dose:'Dose: 4mg',last:'Last entry: Oct 27, 8:23am',val:176,sumT:'Steady Progress',sumP:'Your weight trend is moving in the right direction, consistent with where you are in treatment.'}},
+ {n:3,t:'Seeing progress',w:'-6% body weight*',k:'Week 9-16*',p:['The changes start to show. Cravings are quieter, portions feel smaller, and clothes begin to fit differently.','Regular check-ins let your care team tune the dose so it keeps working for you.'],fx:['Constipation','Fatigue'],
+  media:{type:'chart',week:'Week 16',dose:'Dose: 9mg',last:'Last entry: Nov 24, 7:51am',val:171,sumT:'Noticeable change',sumP:'You’re down about 6% since starting. Your provider will check in before your next dose step.'}},
+ {n:4,t:'Maintenance',w:'-10% body weight*',k:'Week 17+*',p:['You’ve reached a dose that works for you. The daily pill is part of your morning now, and the habits you built carry more of the load.','From here, your care team plans with you for the long term, including how to keep your results.'],fx:['Occasional nausea','Heartburn'],
+  media:{type:'cards',cards:[{img:'pdp-box',dim:1,chip:'5 mins',title:'Finding your maintenance dose',sub:'How your provider decides what comes next'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Dec 12',title:'Dose review',sub:'Review how you’re feeling so your provider can confirm your ongoing dose.'}]}}
+];
+const STORIES=[
+ {img:'tw1',nm:'Jane',age:32,lbs:22,q:'I kept waiting to feel deprived. It wasn’t that. I’d get halfway through my plate and realize I was done.'},
+ {img:'tw2',nm:'Dylan',age:32,lbs:31,q:'Taking one pill with my morning water was easier than I expected. It just became part of getting up.'},
+ {img:'tw3',nm:'Sarah',age:32,lbs:27,q:'Having a clinician check in every month made it feel like a plan, not a guess.'}
+];
+const FAQ=[
+ ['What is the Wegovy pill?','A once-daily tablet form of semaglutide, the same active ingredient as Wegovy injections. It’s FDA-approved for chronic weight management in adults, alongside a reduced-calorie diet and more physical activity.'],
+ ['What is the difference between Wegovy pills and the Wegovy injection?','Both contain semaglutide. The pill is taken by mouth once a day; the pen is a once-weekly injection. The doses look different because less medication is absorbed from a tablet. Your provider helps you choose the one that fits your routine.'],
+ ['How do Wegovy pills work for weight loss?','Semaglutide mimics GLP-1, a hormone your gut releases after eating. It helps you feel full sooner, slows digestion and quiets food noise, which makes it easier to eat less.'],
+ ['Are Wegovy pills safe for weight loss?','Wegovy was studied in large clinical trials before FDA approval. Most side effects are digestive and tend to ease over time. It isn’t right for everyone, so your provider reviews your health history before prescribing.'],
+ ['What are common side effects of Wegovy pills?','Nausea, diarrhea, vomiting, constipation and stomach pain are the most common, especially after a dose increase. Tell your care team if they don’t improve.'],
+ ['How much do Wegovy pills cost?','With GoodRx, Wegovy pills start at $149/mo for the medication plus the $39/mo membership, or $188/mo in total at the starting dose. Higher doses cost more; your provider will walk you through pricing before anything changes.']
+];
+
+/* ---------- journey (shared with the homepage) ---------- */
+{{js:journeyBuild}}
+
+/* ---------- stories ---------- */
+const wtTrack=$('#wtTrack'),wtDots=$('#wtDots');
+const N=STORIES.length, order=[N-1,...STORIES.keys(),0];
+order.forEach((si,k)=>{const p=STORIES[si];wtTrack.insertAdjacentHTML('beforeend',`<article class="wcard ${p.img}" data-s="${si}" aria-label="${p.nm}, lost ${p.lbs} pounds in 3 months"${k===0||k===order.length-1?' aria-hidden="true"':''}>
+  <div class="media grain" style="--lq:url(${LQ[p.img]})"><img data-src="img/${p.img}.webp" alt=""></div><div class="shade"></div>
+  <div class="top"><div class="who"><b>${p.nm} ${p.age}</b><span class="label">Real customer</span></div><q>${p.q}</q></div>
+  <div class="bot"><span class="v"><span class="num">${p.lbs}</span><span>&nbsp;lbs</span></span><span>lost in 3 months</span></div></article>`)});
+STORIES.forEach((p,i)=>wtDots.insertAdjacentHTML('beforeend',`<button aria-label="Show ${p.nm}’s story"><i></i></button>`));
+
+/* ---------- FAQ ---------- */
+const acc=$('#acc');
+acc.innerHTML=FAQ.map(([q,a],i)=>`<div class="qa"><button aria-expanded="false" aria-controls="ans${i}" id="q${i}"><span>${q}</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="ans${i}" role="region" aria-labelledby="q${i}"><div><p>${a}</p></div></div></div>`).join('');
+[acc,$('#infoAcc')].forEach(box=>box.addEventListener('click',e=>{const b=e.target.closest('.qa>button');if(!b)return;const qa=b.parentElement,open=!qa.classList.contains('open');$$('.qa',box).forEach(x=>{x.classList.remove('open');x.firstElementChild.setAttribute('aria-expanded','false')});if(open){qa.classList.add('open');b.setAttribute('aria-expanded','true')}}));
+
+/* ---------- split headings into words ---------- */
+function split(el){
+  const walk=(node)=>{[...node.childNodes].forEach(n=>{
+    if(n.nodeType===3){const parts=n.textContent.split(/(\s+)/);const frag=document.createDocumentFragment();parts.forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(t));return}const w=document.createElement('span');w.className='w';const s=document.createElement('span');s.textContent=t;w.appendChild(s);frag.appendChild(w)});n.replaceWith(frag)}
+    else if(n.nodeType===1&&n.tagName!=='svg'&&n.tagName!=='BR') walk(n);
+  })};
+  walk(el); $$('.w>span',el).forEach((s,i)=>s.style.setProperty('--wi',i));
+}
+$$('.split').forEach(split);
+
+/* ---------- lazy loading ---------- */
+function load(m){if(m.dataset.l)return;m.dataset.l=1;const img=$('img',m);if(!img||!img.dataset.src)return;const done=()=>{m.classList.add('loaded')};img.decoding='async';img.onload=()=>{(img.decode?img.decode():Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(done))};img.onerror=done;img.src=img.dataset.src;if(img.complete&&img.naturalWidth)done()}
+$$('.media.eager').forEach(load);
+/* Viewport triggers come from scroll position (IntersectionObserver ignores rootMargin inside the artifact frame). */
+const watchers=[];
+function watch(el,frac,enter,leave){watchers.push({el,frac,enter,leave,on:false})}
+function checkWatch(){const vh=innerHeight;for(const w of watchers){const r=w.el.getBoundingClientRect();const inZone=r.top<vh*w.frac&&r.bottom>0;
+  if(inZone&&!w.on){w.on=true;w.enter(w.el)}else if(w.on&&w.leave&&(r.top>vh||r.bottom<0)){w.on=false;w.leave(w.el)}}}
+$$('.media:not(.eager)').forEach(m=>watch(m,1.7,load));
+[$('#ptrack'),$('#wtTrack'),$('#gal')].forEach(t=>watch(t,2,el=>$$('.media',el).forEach(load)));
+
+/* ---------- reveal on scroll ---------- */
+const counters=new WeakSet();
+function countUp(el){if(counters.has(el)||RM)return;counters.add(el);const to=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.querySelector('small')?el.querySelector('small').outerHTML:'',t0=performance.now(),d=1400;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,4);el.innerHTML=pre+Math.round(to*e)+suf;if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+const rev=el=>watch(el,.88,el=>{el.classList.remove('r-wait','s-wait');if(el.classList.contains('split'))setTimeout(()=>el.classList.add('split-done'),1800);$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)});
+function arm(){const vh=innerHeight;
+  $$('[data-r]').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM){el.classList.add('r-wait');requestAnimationFrame(()=>el.classList.add('r-in'))}rev(el)});
+  $$('.split:not([data-intro])').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM)el.classList.add('s-wait');rev(el)});}
+arm();
+watch($('#cmpCard'),.8,el=>el.classList.remove('pre'));
+if(RM)$('#cmpCard').classList.remove('pre');
+
+/* ---------- intro ---------- */
+const h1=$('[data-intro]');
+if(!RM){h1.classList.add('s-wait');$$('.w>span',h1).forEach(s=>s.style.setProperty('--d',350))}
+$$('.thumb').forEach((t,i)=>t.style.transitionDelay=RM?'0s':(.9+i*.08)+'s');
+const start=()=>{requestAnimationFrame(()=>{root.classList.remove('intro');h1.classList.remove('s-wait');setTimeout(()=>h1.classList.add('split-done'),2400);setTimeout(()=>{root.classList.add('ready');$$('.thumb').forEach(t=>t.style.transitionDelay='')},2200)})};
+const fontsReady=document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,700))]):Promise.resolve();
+fontsReady.then(()=>setTimeout(start,80));
+
+/* ---------- smooth scroll ---------- */
+if(!RM&&window.Lenis&&matchMedia('(pointer:fine)').matches){
+  lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+  const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
+}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.hasAttribute('data-toast'))return;const id=a.getAttribute('href');const t=id==='#top'?document.body:$(id);if(!t)return;e.preventDefault();if(lenis)lenis.scrollTo(id==='#top'?0:t,{offset:-90});else (id==='#top'?scrollTo({top:0,behavior:'smooth'}):t.scrollIntoView({behavior:'smooth'}))});
+
+/* ---------- header + wordmark ---------- */
+const hdr=$('#hdr'),wm=$('#wordmark');let lastY=scrollY;
+function onScroll(){const y=scrollY,vh=innerHeight;
+  if(y>220&&y>lastY+4)hdr.classList.add('hide');else if(y<lastY-4||y<220)hdr.classList.remove('hide');
+  hdr.classList.toggle('scrolled',y>40);lastY=y;checkWatch();
+  if(wm){const wr=wm.getBoundingClientRect();if(wr.top<vh){const k=Math.min(1,Math.max(0,(vh-wr.top)/(wr.height+120)));wm.style.setProperty('--wy',`${(1-k)*40}%`)}}}
+if(lenis)lenis.on('scroll',onScroll);else addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',onScroll);onScroll();
+
+/* ---------- price toggle (both switches stay in sync) ---------- */
+function animNum(el,to){const from=+el.textContent.replace(/\D/g,'')||0,t0=performance.now(),d=RM?1:650;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent='$'+Math.round(from+(to-from)*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+$$('[data-sw]').forEach(sw=>sw.addEventListener('click',()=>{const on=sw.getAttribute('aria-checked')!=='true';$$('[data-sw]').forEach(s=>s.setAttribute('aria-checked',on));$$('[data-med]').forEach(el=>animNum(el,+el.dataset.med+(on?39:0)));
+  $$('[data-sub]').forEach(s=>{const hero=!!s.closest('.pd-price');s.style.opacity=0;setTimeout(()=>{s.textContent=hero?(on?'Includes membership + medication price':'Medication price only, membership is $39/mo'):(on?'Membership + Medication':'Medication only');s.style.opacity=1},200)})}));
+
+/* ---------- gallery ---------- */
+const gm=$('#galMain'),slides=$$('.slide',gm),thumbs=$$('.thumb');let gi=0,gBusy=0;
+function showSlide(i){i=(i+slides.length)%slides.length;if(i===gi)return;const prev=slides[gi];gi=i;load($('.media',slides[i]));
+  slides.forEach(s=>s.classList.remove('was'));prev.classList.remove('on');prev.classList.add('was');slides[i].classList.add('on');
+  thumbs.forEach((t,k)=>{t.classList.toggle('on',k===i);t.setAttribute('aria-selected',k===i)});
+  clearTimeout(gBusy);gBusy=setTimeout(()=>prev.classList.remove('was'),950)}
+thumbs.forEach(t=>t.addEventListener('click',()=>showSlide(+t.dataset.i)));
+$('.thumbs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();showSlide(gi+(e.key==='ArrowRight'?1:-1));thumbs[gi].focus()}});
+// pointer zoom: the photo leans towards the cursor
+if(matchMedia('(pointer:fine)').matches&&!RM){
+  gm.addEventListener('pointermove',e=>{const r=gm.getBoundingClientRect();gm.style.setProperty('--ox',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');gm.style.setProperty('--oy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')});
+  gm.addEventListener('pointerenter',()=>gm.classList.add('zoom'));gm.addEventListener('pointerleave',()=>gm.classList.remove('zoom'));
+}
+let gx=0;gm.addEventListener('touchstart',e=>{gx=e.touches[0].clientX},{passive:true});gm.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-gx;if(Math.abs(d)>50)showSlide(gi+(d<0?1:-1))});
+gm.addEventListener('click',()=>{if(!matchMedia('(pointer:fine)').matches)showSlide(gi+1)});
+
+/* ---------- morning ritual cards ---------- */
+const rcards=$$('.rcard');
+function openCard(c){if(c.classList.contains('on'))return;rcards.forEach(x=>{x.classList.toggle('on',x===c);x.setAttribute('aria-expanded',x===c)})}
+rcards.forEach(c=>{c.addEventListener('mouseenter',()=>{if(innerWidth>860)openCard(c)});c.addEventListener('focus',()=>openCard(c));c.addEventListener('click',()=>openCard(c))});
+
+/* ---------- compare picker ---------- */
+const crows=$$('.crow'),cmpBtn=$('#cmpBtn');
+function cmpLabel(){const n=crows.filter(r=>r.classList.contains('on')).length;cmpBtn.textContent=n<2?'Select 2 to compare':`Compare ${n} medications`;cmpBtn.dataset.toast=n<2?'Pick at least two medications to compare':'Medication comparison isn’t part of this prototype'}
+crows.forEach(r=>r.addEventListener('click',()=>{const on=r.classList.toggle('on');r.setAttribute('aria-pressed',on);cmpLabel()}));
+
+/* ---------- stories carousel ---------- */
+const wcards=$$('.wcard',wtTrack),dots=$$('button',wtDots),vp=$('#wtVp');let wi=1,wAuto=0,wPaused=false;const WDUR=7000;
+function wPos(jump){const c=wcards[wi];const x=c.offsetLeft-(vp.clientWidth-c.offsetWidth)/2;wtTrack.classList.toggle('jump',!!jump);wtTrack.style.transform=`translate3d(${-x}px,0,0)`;if(jump){void wtTrack.offsetWidth;wtTrack.classList.remove('jump')}}
+function wGo(i,jump){wi=i;wcards.forEach((c,k)=>{c.classList.toggle('on',k===wi);c.setAttribute('aria-hidden',k!==wi)});$$('.media',wtTrack).forEach(load);wPos(jump);
+  const s=+wcards[wi].dataset.s;dots.forEach((d,k)=>{d.classList.toggle('done',k<s);const b=$('i',d);b.getAnimations().forEach(a=>a.cancel());b.style.transform=k<s?'scaleX(1)':''});
+  if(!RM&&!wPaused){$('i',dots[s]).animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:WDUR,easing:'linear',fill:'forwards'})}else $('i',dots[s]).style.transform='scaleX(1)';
+  clearTimeout(wAuto);if(!RM&&!wPaused&&wStarted)wAuto=setTimeout(()=>wGo(wi+1),WDUR)}
+wtTrack.addEventListener('transitionend',e=>{if(e.target!==wtTrack)return;if(wi===0)wGo(N,true);else if(wi===N+1)wGo(1,true)});
+wcards.forEach((c,k)=>c.addEventListener('click',()=>{if(k!==wi)wGo(k)}));
+dots.forEach((d,k)=>d.addEventListener('click',()=>wGo(k+1)));
+vp.addEventListener('mouseenter',()=>{wPaused=true;clearTimeout(wAuto);dots.forEach(d=>$('i',d).getAnimations().forEach(a=>a.pause()))});
+vp.addEventListener('mouseleave',()=>{wPaused=false;const a=$('i',dots[+wcards[wi].dataset.s]).getAnimations()[0];if(a){a.play();clearTimeout(wAuto);wAuto=setTimeout(()=>wGo(wi+1),Math.max(300,WDUR-(a.currentTime||0)))}});
+let wx=0;vp.addEventListener('touchstart',e=>{wx=e.touches[0].clientX},{passive:true});vp.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-wx;if(Math.abs(d)>50)wGo(wi+(d<0?1:-1))});
+addEventListener('keydown',e=>{const r=vp.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!$('#stories').contains(document.activeElement))return;if(e.key==='ArrowRight')wGo(wi+1);if(e.key==='ArrowLeft')wGo(wi-1)});
+let wStarted=false;wGo(1,true);addEventListener('resize',()=>wPos(true));
+watch($('#stories'),.75,()=>{if(!wStarted){wStarted=true;wGo(wi)}});
+
+/* ---------- explore: drag to scroll ---------- */
+const xr=$('#exRow');let xd=false,xpx=0,xvx=0,xlt=0,xraf=0,xsx=0,xmoved=false;
+xr.addEventListener('mousedown',e=>e.preventDefault());
+xr.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;xd=true;xmoved=false;xsx=xpx=e.clientX;xvx=0;xlt=performance.now();cancelAnimationFrame(xraf);xr.setPointerCapture(e.pointerId)});
+xr.addEventListener('pointermove',e=>{if(!xd)return;const d=e.clientX-xpx,t=performance.now();if(Math.abs(e.clientX-xsx)>5){xmoved=true;xr.classList.add('dragging')}xr.scrollLeft-=d;xvx=d/Math.max(1,t-xlt);xpx=e.clientX;xlt=t});
+const xrel=()=>{if(!xd)return;xd=false;xr.classList.remove('dragging');let v=xvx*16;const f=()=>{if(Math.abs(v)<.3)return;xr.scrollLeft-=v;v*=.94;xraf=requestAnimationFrame(f)};if(!RM)f()};
+xr.addEventListener('pointerup',xrel);xr.addEventListener('pointercancel',xrel);
+xr.addEventListener('click',e=>{if(xmoved){e.preventDefault();e.stopPropagation()}},true);
+
+/* ---------- journey tabs (shared with the homepage) ---------- */
+{{js:journeyTabs}}
+
+/* ---------- footer ---------- */
+$$('.gh').forEach(b=>{b.tabIndex=isM()?0:-1;b.addEventListener('click',()=>{if(!isM())return;const g=b.parentElement,o=g.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
+MQ.addEventListener('change',()=>$$('.gh').forEach(b=>b.tabIndex=isM()?0:-1));
+const form=$('#subForm'),msg=$('#formMsg');
+form.addEventListener('submit',e=>{e.preventDefault();const v=$('#email').value.trim();const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);form.classList.toggle('err',!ok);msg.hidden=false;msg.style.color=ok?'var(--g700)':'#b3402a';msg.textContent=ok?`Subscribed. Tips and discounts will go to ${v}.`:'Enter a full email address, like name@example.com.';if(ok)$('#email').value=''});
+})();
+</script>
