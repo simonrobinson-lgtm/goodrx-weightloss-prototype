@@ -71,7 +71,7 @@ p,h1,h2,h3,ul{margin:0}
 .media::before{content:"";position:absolute;inset:-12px;background:var(--lq) center/cover;filter:blur(14px);transform:scale(1.06);transition:opacity .9s var(--ease) .1s}
 .media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .9s var(--ease),transform 1.4s var(--ease)}
 .media.loaded>img{opacity:1;transform:none}
-.media.loaded::before{opacity:0}
+.media.loaded::before{opacity:0;visibility:hidden;transition:opacity .9s var(--ease) .1s,visibility 0s 1s}
 
 /* ---------- reveal on scroll ---------- */
 .r-wait{opacity:0;transform:translate3d(0,28px,0)}
@@ -285,7 +285,7 @@ p,h1,h2,h3,ul{margin:0}
 .hot{position:absolute;z-index:4;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;display:grid;place-items:center}
 .hot::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--n500);transition:border-color .3s,transform .5s var(--spring)}
 .hot::after{content:"";width:11px;height:11px;border-radius:50%;background:var(--n500);transition:background-color .3s,transform .5s var(--spring)}
-.hot .wave{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,251,.9);animation:pulse 2.6s var(--ease) infinite;animation-delay:var(--wd,0s)}
+.hot .wave{display:none}
 .hot.off{opacity:0!important;pointer-events:none}
 .hot:hover::before,.hot.on::before{border-color:var(--g700);transform:scale(1.15)}
 .hot:hover::after,.hot.on::after{background:var(--g700)}
@@ -427,7 +427,8 @@ p,h1,h2,h3,ul{margin:0}
 /* tabs live inside the container */
 .tabs{display:flex;gap:12px;padding:0 40px 32px;border-top:1px solid var(--k10)}
 .tab{flex:1;min-width:0;position:relative;padding-top:24px;display:flex;flex-direction:column;gap:12px;text-align:left;color:rgba(18,17,15,.3);transition:color .4s var(--ease)}
-.tab i{position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--g700);transform:scaleX(0);transform-origin:left}
+.tab i{position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--g700);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.tab.on i{transform:scaleX(1)}
 .tab.on{color:var(--g700)}
 .tab.done i{transform:scaleX(0)}
 .tab .label{line-height:1}
@@ -452,6 +453,8 @@ p,h1,h2,h3,ul{margin:0}
 .tcard .stat{position:relative;z-index:3;padding:0 24px 24px;display:flex;flex-direction:column;gap:8px;background:linear-gradient(0deg,rgba(0,0,0,.2) 2%,rgba(0,0,0,0));transition:opacity .45s var(--ease),transform .6s var(--ease)}
 .tcard .stat .v{display:flex;align-items:baseline;gap:2px}
 .tcard .stat .num{font-size:56px;line-height:1}
+.tcard .quote::before,.wcard .wq::before{content:"";position:absolute;inset:0;background:url(img/quote-pat.webp) center/cover;mix-blend-mode:overlay;opacity:.64;pointer-events:none}
+.tcard .quote>*,.wcard .wq>*{position:relative;z-index:2}
 .tcard .quote{position:absolute;inset:-1px;z-index:5;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:var(--g800);--grain:.35;clip-path:inset(100% 0 0 0);transition:clip-path .75s var(--ease-io)}
 .tcard .quote q{font-size:24px;line-height:1.2;letter-spacing:-.01em;font-weight:300;quotes:"“" "”";opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease) .2s,transform .7s var(--ease) .2s}
 .tcard .quote .who{display:flex;flex-direction:column;gap:18px;opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease) .3s,transform .7s var(--ease) .3s}
@@ -499,7 +502,8 @@ p,h1,h2,h3,ul{margin:0}
 .guides .head .t{width:433px;max-width:100%;display:flex;flex-direction:column;gap:24px;color:#262626}
 .guides .head p{opacity:.7;width:420px;max-width:100%}
 .cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.acard{position:relative;height:480px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;color:var(--n100)}
+.acard{position:relative;height:480px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;color:var(--n100);isolation:isolate;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.acard:hover{transform:translateY(-4px);box-shadow:0 2px 4px rgba(36,36,36,.05),0 18px 34px -16px rgba(36,36,36,.32)}
 .acard .media{position:absolute;inset:0}
 .acard .media>img{transition:opacity .9s var(--ease),transform 1.8s var(--ease),filter .9s var(--ease)}
 .acard:hover .media.loaded>img{transform:scale(1.06)}
@@ -508,9 +512,6 @@ p,h1,h2,h3,ul{margin:0}
 .acard .tt{position:relative;z-index:3;padding:0 24px 24px;display:flex;flex-direction:column;gap:12px;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);background:linear-gradient(0deg,rgba(0,0,0,.3) 2.4%,rgba(0,0,0,0));text-shadow:0 1px 10px rgba(18,17,15,.4)}
 .acard h3{font-size:24px;line-height:1.2;font-weight:400;text-wrap:balance}
 .acard .tt div{display:flex;justify-content:space-between;align-items:center;font-size:14px}
-.acard .go{width:32px;height:32px;border-radius:50%;background:var(--y100);color:var(--g800);display:grid;place-items:center;opacity:0;transform:translate(-8px,0) scale(.8);transition:all .5s var(--spring);text-shadow:none}
-.acard .go svg{width:14px;height:14px}
-.acard:hover .go{opacity:1;transform:none}
 
 /* ---------- CTA ---------- */
 .cta{padding-block:24px 48px}
@@ -998,7 +999,7 @@ p,h1,h2,h3,ul{margin:0}
       </div>
       <a href="#" class="btn btn-y" data-toast="Membership details aren’t part of this prototype">See membership details</a>
     </div>
-    <button class="hot on" style="left:51.78%;top:45.76%;--wd:0s" data-hot='{"nm":"Wegovy® HD pen","t":238,"m":199}' aria-label="Wegovy HD pen price"><span class="wave"></span></button>
+    <button class="hot" style="left:51.78%;top:45.76%;--wd:0s" data-hot='{"nm":"Wegovy® HD pen","t":238,"m":199}' aria-label="Wegovy HD pen price"><span class="wave"></span></button>
     <button class="hot" style="left:66.26%;top:39.97%;--wd:.5s" data-hot='{"nm":"Wegovy® pen","t":238,"m":199}' aria-label="Wegovy pen price"><span class="wave"></span></button>
     <button class="hot" style="left:83.17%;top:48.59%;--wd:1s" data-hot='{"nm":"Zepbound® KwikPen","t":338,"m":299}' aria-label="Zepbound KwikPen price"><span class="wave"></span></button>
     <button class="hot" style="left:91.19%;top:15.17%;--wd:1.5s" data-hot='{"nm":"Wegovy® pill","t":188,"m":149}' aria-label="Wegovy pill price"><span class="wave"></span></button>
@@ -1062,17 +1063,17 @@ p,h1,h2,h3,ul{margin:0}
     <a href="#" class="acard" data-r style="--i:0" data-toast="Articles aren’t part of this prototype">
       <div class="media grain" style="--lq:url({{lq:a1}})"><img data-src="img/a1.webp" alt="Close-up of a face in dappled sunlight"></div><div class="shade"></div>
       <span class="chip sm">7 min</span>
-      <div class="tt"><h3>How to Start a <span style="white-space:nowrap">GLP-1</span>: What to Expect in the First Weeks</h3><div><span>From dosing to side effects</span><span class="go"><svg><use href="#i-chev"/></svg></span></div></div>
+      <div class="tt"><h3>How to Start a <span style="white-space:nowrap">GLP-1</span>: What to Expect in the First Weeks</h3><div><span>From dosing to side effects</span></div></div>
     </a>
     <a href="#" class="acard" data-r style="--i:1" data-toast="Articles aren’t part of this prototype">
       <div class="media grain" style="--lq:url({{lq:a2}})"><img data-src="img/a2.webp" alt="Wegovy, Wegovy HD and Zepbound injection pens"></div><div class="shade"></div>
       <span class="chip sm">9 min</span>
-      <div class="tt"><h3><span style="white-space:nowrap">GLP-1</span> Injections: What to Consider Before Using GLP-1s</h3><div><span>The key things to know before your first injection</span><span class="go"><svg><use href="#i-chev"/></svg></span></div></div>
+      <div class="tt"><h3><span style="white-space:nowrap">GLP-1</span> Injections: What to Consider Before Using GLP-1s</h3><div><span>The key things to know before your first injection</span></div></div>
     </a>
     <a href="#" class="acard" data-r style="--i:2" data-toast="Articles aren’t part of this prototype">
       <div class="media grain" style="--lq:url({{lq:a3}})"><img data-src="img/a3.webp" alt="A hand picking up a pink pill among white and pink GLP-1 pills"></div><div class="shade"></div>
       <span class="chip sm">7 min</span>
-      <div class="tt"><h3>Considering <span style="white-space:nowrap">GLP-1</span> Pills for Weight Loss?</h3><div><span>8 Things to Know Before You Start</span><span class="go"><svg><use href="#i-chev"/></svg></span></div></div>
+      <div class="tt"><h3>Considering <span style="white-space:nowrap">GLP-1</span> Pills for Weight Loss?</h3><div><span>8 Things to Know Before You Start</span></div></div>
     </a>
   </div>
 </section>
@@ -1169,7 +1170,7 @@ const ILLU={{illu}};
 const PHASES=[
  {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['This is when habits take shape: when and how you take your medication, and the small lifestyle changes that make the rest easier. You’ll start at a low dose to let your body adjust to the medication.','You may not see any weight loss yet, but you’re laying the foundation for your body and brain.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'fx',bg:'jr-fx',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head']}},
- {n:2,t:'Building tolerance',w:'-5% body weight*',k:'Week 5-12*',p:['You may move up to the next dose at week 5, and start stepping up every 4 weeks if you’re ready. You may begin to see change start to happen.','Many people lose about 5 percent of their body weight by the end of 12 weeks.'],fx:['Mild nausea','Decreased appetite'],
+ {n:2,t:'Building momentum',w:'-5% body weight*',k:'Week 5-12*',p:['You may move up to the next dose at week 5, and start stepping up every 4 weeks if you’re ready. You may begin to see change start to happen.','Many people lose about 5 percent of their body weight by the end of 12 weeks.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'chart',bg:'jr-chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176}},
  {n:3,t:'Seeing progress',w:'-10% body weight*',k:'Week 13-23*',p:['You might reach your top dose during this time, depending on which medication you take and how you respond. You’ll likely see real change, both on the scale and in your habits.','Many people lose at least 10% of their body weight by the end of 24 weeks, depending on their medication and dose.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'noise',bg:'jr-noise',title:'Less food noise',sub:'Fewer intrusive thoughts about food this week'}},
@@ -1424,12 +1425,16 @@ function showTip(h){if(h.classList.contains('off'))return;curHot=h;const d=JSON.
 function placeTip(h){
   const fr=frame.getBoundingClientRect(),hr=h.getBoundingClientRect();const cx=hr.left-fr.left+11,cy=hr.top-fr.top+11;const tw=170,th=tip.offsetHeight||150;
   let left=cx-17,top=cy-th-22;if(top<16)top=cy+22;if(left<12)left=12;if(left+tw>fr.width-16)left=fr.width-16-tw;tip.style.left=left+'px';tip.style.top=top+'px';tip.style.transformOrigin=`${cx-left}px ${top<cy?'100%':'0%'}`}
-hots.forEach(h=>{h.addEventListener('mouseenter',()=>showTip(h));h.addEventListener('focus',()=>showTip(h));h.addEventListener('click',()=>showTip(h))});
-const subIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>showTip(hots[0]),RM?0:2000);subIO.disconnect()}}),{threshold:.45});subIO.observe(frame);
-// gentle auto-tour until the visitor interacts
-let tourI=0,tour=setInterval(()=>{if(tipHold||frame.classList.contains('pre')||!tip.classList.contains('show'))return;const r=frame.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;for(let n=0;n<hots.length;n++){tourI=(tourI+1)%hots.length;if(!hots[tourI].classList.contains('off'))break}showTip(hots[tourI])},3200);
+// tooltips open only when a visitor points at, focuses or taps a hotspot
+let tipT=0;
+function hideTip(){clearTimeout(tipT);tip.classList.remove('show');hots.forEach(x=>x.classList.remove('on'));curHot=null}
+hots.forEach(h=>{h.addEventListener('mouseenter',()=>{clearTimeout(tipT);showTip(h)});h.addEventListener('mouseleave',()=>{tipT=setTimeout(hideTip,220)});
+  h.addEventListener('focus',()=>showTip(h));h.addEventListener('blur',()=>{tipT=setTimeout(hideTip,120)});
+  // tap toggles on touch screens; with a mouse, hover already opened it, so a click just keeps it open
+  h.addEventListener('click',e=>{e.stopPropagation();clearTimeout(tipT);if(e.pointerType==='touch'&&curHot===h&&tip.classList.contains('show'))hideTip();else showTip(h)})});
+document.addEventListener('click',e=>{if(!e.target.closest('.hot'))hideTip()});
+addEventListener('keydown',e=>{if(e.key==='Escape')hideTip()});
 addEventListener('resize',placeHots);setTimeout(placeHots,50);
-frame.addEventListener('mouseenter',()=>tipHold=true);frame.addEventListener('mouseleave',()=>tipHold=false);
 
 /* ---------- journey: tabbed phases ---------- */
 const stage=$('#stage'),phases=$$('.pp'),tabs=$$('.tab');let cur=-1,auto=null,paused=false,started=false;const DUR=8000;
@@ -1437,15 +1442,9 @@ function bubCount(p){const b=$('.bub',p);if(!b)return;const to=+b.dataset.v;if(R
 function go(i){const n=(i+PHASES.length)%PHASES.length;const changed=n!==cur;cur=n;
   phases.forEach((p,k)=>{if(k===cur&&changed){p.classList.remove('on');void p.offsetWidth;$$('.media',p).forEach(load)}p.classList.toggle('on',k===cur);p.setAttribute('aria-hidden',k!==cur)});
   if(changed)bubCount(phases[cur]);
-  tabs.forEach((t,k)=>{t.classList.toggle('on',k===cur);t.setAttribute('aria-selected',k===cur);const bi=$('i',t);bi.getAnimations().forEach(a=>a.cancel());bi.style.transform=''});
-  const bar=$('i',tabs[cur]);
-  if(isM()){bar.style.transform='scaleX(1)';clearTimeout(auto);return}bar.style.transform='';
-  if(!RM){bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:DUR,easing:'linear',fill:'forwards'});if(paused)bar.getAnimations().forEach(a=>a.pause())}else bar.style.transform='scaleX(1)';
-  clearTimeout(auto);if(!RM&&!paused)auto=setTimeout(()=>go(cur+1),DUR);
+  tabs.forEach((t,k)=>{t.classList.toggle('on',k===cur);t.setAttribute('aria-selected',k===cur)});
 }
 tabs.forEach(t=>t.addEventListener('click',()=>{go(+t.dataset.i);if(innerWidth<=1024){const y=stage.getBoundingClientRect().top+scrollY-(isM()?56:84);lenis?lenis.scrollTo(y):scrollTo({top:y,behavior:RM?'auto':'smooth'})}}));
-stage.addEventListener('mouseenter',()=>{paused=true;clearTimeout(auto);$('i',tabs[Math.max(cur,0)]).getAnimations().forEach(a=>a.pause())});
-stage.addEventListener('mouseleave',()=>{paused=false;if(cur<0)return;const a=$('i',tabs[cur]).getAnimations()[0];if(a){a.play();clearTimeout(auto);auto=setTimeout(()=>go(cur+1),Math.max(300,DUR-(a.currentTime||0)))}});
 addEventListener('keydown',e=>{const r=stage.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!stage.contains(document.activeElement))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
 // swipe on touch
 let tx=0;stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)go(cur+(d<0?1:-1))});
