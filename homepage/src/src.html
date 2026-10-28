@@ -625,12 +625,12 @@ p,h1,h2,h3,ul{margin:0}
   /* header: full-width bar, icon logo + menu */
   .hdr{top:0;padding:0}
   .hdr.hide{transform:translate3d(0,-100%,0)}
-  .nav,.hdr.scrolled .nav{width:100%;height:calc(48px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 20px 0;border-radius:0;border:0;border-bottom:.5px solid var(--n200);background:rgba(255,255,251,.96);filter:none}
+  .nav,.hdr.scrolled .nav{width:100%;height:calc(60px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 20px 0;border-radius:0;border:0;border-bottom:.5px solid var(--n200);background:rgba(255,255,251,.96);filter:none}
   a.logo{width:24px;overflow:hidden}
   a.logo svg{width:110px;height:24px}
   .nav-r .icon-btn:first-child{display:none}
   .icon-btn,.icon-btn svg{width:24px;height:24px}
-  main{padding-top:calc(48px + env(safe-area-inset-top,0px))}
+  main{padding-top:calc(60px + env(safe-area-inset-top,0px))}
   body::before{display:none}
   /* hero */
   .hero{height:555px;min-height:0;max-height:none}
@@ -1444,7 +1444,7 @@ function go(i){const n=(i+PHASES.length)%PHASES.length;const changed=n!==cur;cur
   if(changed)bubCount(phases[cur]);
   tabs.forEach((t,k)=>{t.classList.toggle('on',k===cur);t.setAttribute('aria-selected',k===cur)});
 }
-tabs.forEach(t=>t.addEventListener('click',()=>{go(+t.dataset.i);if(innerWidth<=1024){const y=stage.getBoundingClientRect().top+scrollY-(isM()?56:84);lenis?lenis.scrollTo(y):scrollTo({top:y,behavior:RM?'auto':'smooth'})}}));
+tabs.forEach(t=>t.addEventListener('click',()=>{go(+t.dataset.i);if(innerWidth<=1024){const y=stage.getBoundingClientRect().top+scrollY-(isM()?68:84);lenis?lenis.scrollTo(y):scrollTo({top:y,behavior:RM?'auto':'smooth'})}}));
 addEventListener('keydown',e=>{const r=stage.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!stage.contains(document.activeElement))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
 // swipe on touch
 let tx=0;stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)go(cur+(d<0?1:-1))});
