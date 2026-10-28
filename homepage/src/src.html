@@ -477,7 +477,7 @@ p,h1,h2,h3,ul{margin:0}
 .foot-top{padding-top:80px;display:flex;gap:16px}
 .col{flex:1;min-width:0;padding-right:32px;display:flex;flex-direction:column;gap:32px;font-size:14px}
 .grp{display:flex;flex-direction:column;gap:12px}
-.grp>span{color:var(--soft)}
+
 .grp ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;color:var(--dark)}
 .grp a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .4s var(--ease),color .3s}
 .grp a:hover{background-size:100% 1px;color:var(--g700)}
@@ -563,47 +563,203 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:860px){
   .links{display:none}
 }
+.m-only,.quiz-slot,.fxcard,.tcard .flip,.gh svg{display:none}
+.gh{display:block;font:inherit;color:var(--soft);text-align:left;cursor:default;pointer-events:none}
+.pcard .sub .nb{white-space:nowrap}
 @media (max-width:720px){
-  :root{--gut:16px}
+  :root{--gut:20px}
+  .m-only{display:revert}
+  .d-only{display:none!important}
+  /* header: full-width bar, icon logo + menu */
+  .hdr{top:0;padding:0}
+  .hdr.hide{transform:translate3d(0,-100%,0)}
+  .nav,.hdr.scrolled .nav{width:100%;height:calc(48px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 20px 0;border-radius:0;border:0;border-bottom:.5px solid var(--n200);background:rgba(255,255,251,.96);filter:none}
+  a.logo{width:24px;overflow:hidden}
+  a.logo svg{width:110px;height:24px}
   .nav-r .icon-btn:first-child{display:none}
-  .nav{padding:0 20px}
-  .hero{height:auto;min-height:680px;max-height:none}
-  .hero-in{justify-content:flex-start;padding-top:140px;padding-bottom:180px}
-  .hero-copy{width:auto}
-  .hero-copy h1,.display{font-size:32px}
-  .hero-copy p{font-size:16px}
-  .hero .shade{background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.1) 70%)}
-  .quiz{left:16px;right:16px;width:auto}
+  .icon-btn,.icon-btn svg{width:24px;height:24px}
+  main{padding-top:calc(48px + env(safe-area-inset-top,0px))}
+  body::before{display:none}
+  /* hero */
+  .hero{height:555px;min-height:0;max-height:none}
+  .hero .bg .media>img{object-position:50% 50%}
+  .hero .shade{background:linear-gradient(0deg,rgba(0,0,0,.4) 26.9%,rgba(0,0,0,0) 46.4%)}
+  .hero-in{justify-content:flex-end;padding:0 20px 20px}
+  .hero-in::before{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;z-index:-1;background:linear-gradient(0deg,rgba(0,0,0,.2) 27.9%,rgba(0,0,0,0));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask:linear-gradient(0deg,#000 60%,transparent);mask:linear-gradient(0deg,#000 60%,transparent)}
+  .hero-copy{width:300px;gap:20px}
+  .hero-copy .t{gap:16px}
+  .hero-copy h1,.display{font-size:28px}
+  .h-xl,.display{text-wrap:wrap}
+  .hero-copy p{font-size:14px}
+  .hero-copy .btn{height:40px;font-size:12px;padding:0 16px}
+  /* quiz card sits below the hero */
+  .quiz-slot{display:block;padding:16px 12px;background:var(--n100)}
+  .quiz{position:relative;left:auto;right:auto;bottom:auto;width:100%;gap:16px;padding:8px 16px 8px 8px;border:1px solid var(--n300);box-shadow:none}
+  .quiz:hover{transform:none}
+  .quiz .media{width:64px;height:64px}
+  .quiz .q1{font-size:14px;color:var(--n900)}
+  .quiz .q2{font-size:13px;margin-top:2px}
+  .quiz .arr{display:none}
+  .h-xl{font-size:24px}
+  /* products */
+  .prod{padding:32px 20px 56px;gap:28px}
+  .row-between{display:block}
+  .prod-body{gap:24px}
+  .price-line{gap:16px}
+  .price-row{flex-direction:column;align-items:flex-start;gap:24px}
+  .pl{gap:4px}
+  .dash .num{font-size:24px}
   .tip{width:min(240px,calc(100vw - 48px))}
-  .price-row .right{width:100%;justify-content:space-between}
-  .cards4,.cards3{grid-template-columns:1fr}
-  .how-panel{height:470px;padding:24px 24px 0}
-  .body{transform:translateX(-50%) scale(.52)}
-  .hcard{padding:24px}
-  .illu{height:240px}.illu .box{transform:scale(.8)}
-  .sub-frame{flex-direction:column;padding:0;gap:12px;align-items:stretch;height:auto;clip-path:none;overflow:visible}
-  .sub-frame>.bgwrap{position:relative;inset:auto;height:280px;border-radius:16px;overflow:hidden;transform:none!important}
-  .sub-frame>.bgwrap .media>img{object-position:62% 50%}
-  .panel{background:#86817b}
-  .panel{width:100%;height:auto;padding:24px}
-  .hot,.ttip{display:none}
-  .pp{padding:24px 16px}
-  .pcards{flex-direction:column;height:auto}
-  .scard{flex:none!important;height:380px}
+  .switch{width:32px;height:20px}
+  .switch i{width:12px;height:12px}
+  .switch[aria-checked="true"] i{transform:translateX(12px)}
+  .cards4{display:flex;gap:8px;margin:0 -20px;padding:8px 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .cards4::-webkit-scrollbar,.how-cards::-webkit-scrollbar,.pmed::-webkit-scrollbar,.cards3::-webkit-scrollbar{display:none}
+  .pcard{flex:none;width:240px;padding:4px 4px 20px;gap:12px;scroll-snap-align:start}
+  .pcard:hover{transform:none}
+  .pcard .media{aspect-ratio:1;border-radius:12px}
+  .pcard .chip{left:8px;top:8px}
+  .pcard .tx{padding:0 8px}
+  .pcard .nm h3{font-size:20px}
+  .pcard .sub{white-space:normal}
+  .pcard .pr .v .num{font-size:20px}
+  .prod .btn-o{align-self:stretch;margin-top:8px}
+  .rx-slot{display:flex;justify-content:center;padding-top:4px}
+  /* how it works */
+  .how{padding:12px 4px 40px;gap:8px}
+  .how-panel{height:414px;padding:24px 28px 0 24px}
+  .how-panel .t{width:auto}
+  .body{left:50%;bottom:-11px;width:298px;height:227px;transform:translateX(-50%)}
+  .body .glow{width:180px;height:136px;margin:-68px 0 0 -90px}
+  .marker .line{width:82px}
+  .marker .chip{left:110px;top:0;height:20px;font-size:10px}
+  .how-cards{width:auto;flex-direction:row;gap:8px;margin:0 -4px;padding:0 4px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 4px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .hcard{flex:none;width:280px;min-height:0;padding:20px;gap:20px;justify-content:flex-start;scroll-snap-align:start}
+  .hcard .chip{height:20px;font-size:10px}
+  .illu{height:120px}
+  .illu .box{transform:scale(.46)}
+  .hcard .tx{gap:8px;padding-right:0}
+  .hcard h3{font-size:20px}
+  .hcard p{font-size:14px}
+  /* membership: photo, then panel overlapping it */
+  .subsec{padding:0 0 20px}
+  .sub-frame{display:block;height:auto;padding:0;border-radius:0;clip-path:none!important;overflow:visible}
+  .sub-frame>.bgwrap{position:relative;inset:auto;height:565px;overflow:hidden;transform:none!important}
+  .sub-frame>.bgwrap::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(0deg,var(--n100),rgba(245,239,229,0) 21.2%)}
+  .sub-frame>.bgwrap .media>img{object-position:50% 10%}
+  .panel{width:auto;height:auto;margin:-104px 4px 0;padding:24px;gap:32px}
+  .panel .lay{gap:16px}
+  .big-price .v .num{font-size:40px}
+  .big-price .scrib{top:38px;width:70px}
+  .panel .btn{height:40px;font-size:12px}
+  .ttip{width:159px}
+  /* journey */
+  .jour{padding:0;gap:0}
+  .jour .sec-head{padding:56px 20px 20px;gap:8px}
+  .sec-head p{font-size:14px}
+  .jour>.wrap-16{padding:0}
+  .pbox{display:flex;flex-direction:column;border-radius:0;background:none;overflow:visible}
+  .tabs{order:-1;display:flex;gap:16px;padding:24px 20px 0;border-top:0;border-bottom:1px solid var(--k10)}
+  .tab{flex:0 1 80px;padding:0 0 16px;gap:0;border-top:0}
+  .tab span:last-child{display:none}
+  .tab i{top:auto;bottom:-1px}
+  .pstage{background:var(--n0)}
+  .pp{padding:0;row-gap:0}
+  .pw{padding:24px 20px 8px;gap:16px}
+  .pw .ttl .chip{display:none}
+  .pw h3{font-size:24px}
+  .pw .copy{order:1}.pw .li{order:2}.pw .fx{order:3;margin-top:16px;padding-top:0}.pw .fine{order:4;margin-top:-4px}
+  .pmed{max-width:none;padding:20px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 12px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .pcards{flex-direction:row;height:315px;gap:8px;width:max-content}
+  .scard{flex:none!important;width:280px;height:315px;scroll-snap-align:start}
+  .scard.mhide{display:none}
+  .scard .top{left:16px;right:16px;top:16px}
+  .scard .tt{padding:0 24px 16px 16px}
+  .scard h4{font-size:20px}
+  .fxcard{display:flex;width:min(343px,calc(100vw - 40px));justify-content:center;align-items:center}
+  .fxcard .shade{background:rgba(0,0,0,.2)}
+  .fxcard .in{position:relative;z-index:3;width:100%;padding:7px 11px 0;display:flex;flex-direction:column;gap:11px}
+  .fxcard .in>p{font-size:12.8px;color:var(--rev);padding:0 7px}
+  .fxrow{display:flex;align-items:center;gap:11px;padding:11px;border-radius:11px;background:var(--n0);border:.9px solid var(--n200);color:var(--g700);font-size:14.6px;line-height:1.2;text-shadow:none}
+  .fxrow .ic{width:36px;height:36px;border-radius:7px;background:var(--n200);border-color:var(--n300)}
+  .fxrow .ic svg{width:18px;height:18px}
+  .fxrow span:nth-child(2){flex:1;min-width:0}
+  .fxrow button{height:22px;padding:0 11px;border-radius:7px;border:.5px solid var(--g700);font-size:11px;font-weight:500;color:var(--g700);white-space:nowrap}
   .pchart{aspect-ratio:auto;height:300px}
   .pchart .hd small{display:none}
   .pchart svg{width:auto;height:100%;left:auto;right:0}
-  .tabs{display:grid;grid-template-columns:1fr 1fr;padding:0 16px 16px;border-top:0}
-  .tab{border-top:1px solid var(--k10)}
-  .tab span:last-child{font-size:16px}
-  .tcard{width:300px;height:380px}
-  .cards3 .acard{height:400px}
-  .cta-card{height:auto;min-height:560px;padding:24px 24px 280px}
-  .cta-card::after{background:linear-gradient(180deg,rgba(236,233,220,.95) 0%,rgba(236,233,220,.85) 38%,rgba(236,233,220,0) 60%)}
-  .cta-card .bgwrap .media>img{object-position:62% 100%}
-  .col{flex:1 1 100%}
+  /* testimonials */
+  .testi{padding:56px 0;gap:40px}
+  .testi .sec-head{padding:0 20px;gap:8px}
+  .testi .sec-head p{font-size:14px}
+  .testi .sec-head br{display:none}
+  .tmarq{scroll-snap-type:x mandatory}
+  .ttrack{padding:0 calc(50vw - 140px)}
+  .tcard{width:280px;height:274px;scroll-snap-align:center}
+  .tcard .chip{left:16px;top:16px}
+  .tcard .stat{padding:0 56px 16px 16px;gap:4px;font-size:13px}
+  .tcard .stat .num{font-size:40px}
+  .tcard .quote{padding:16px 16px 56px}
+  .tcard .quote q{font-size:19px}
+  .tcard .quote .who{gap:8px}
+  .tcard .quote .who b{font-size:18px}
+  .tcard .flip{position:absolute;z-index:6;right:8px;bottom:8px;width:32px;height:32px;border-radius:8px;background:var(--y100);color:var(--g800);display:grid;place-items:center;transition:transform .5s var(--spring)}
+  .tcard .flip svg{width:16px;height:16px;transition:transform .6s var(--ease)}
+  .tcard.peek .flip svg{transform:rotate(180deg)}
+  .btn-g,.btn-y{height:40px;font-size:12px;padding:0 16px}
+  /* FAQ */
+  .faq{padding:40px 20px 56px;gap:48px}
+  .faq .l p{font-size:13px}
+  .qa>button{padding:24px 0;gap:16px}
+  .qa>button span:first-child{font-size:20px}
+  .pm{width:32px;height:32px}
+  .ans p{padding-bottom:24px;font-size:14px}
+  /* guides */
+  .guides{padding:40px 0 56px;gap:40px}
+  .guides .head{padding:0 20px;flex-direction:column;align-items:flex-start;gap:24px}
+  .guides .head .t{gap:12px}
+  .guides .head p{font-size:13px}
+  .cards3{display:flex;gap:12px;padding:0 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .cards3 .acard{flex:none;width:280px;height:320px;scroll-snap-align:start}
+  .acard .chip{left:16px;top:16px}
+  .acard .tt{padding:0 24px 16px 16px}
+  .acard h3{font-size:20px}
+  /* CTA */
+  .cta{padding:0 4px 20px}
+  .cta-card{height:563px;min-height:0;padding:24px 24px 0;gap:24px}
+  .cta-card .t{width:auto}
+  .cta-card .t p{width:auto}
+  .cta-card::after{display:none}
+  .cta-card .bgwrap{inset:-2% 0}
+  .cta-card .bgwrap .media>img{object-position:50% 50%}
+  /* footer */
+  .foot-top{padding-top:16px;flex-direction:column;gap:0}
+  .col{flex:none;padding:0;gap:0}
+  .grp{gap:0}
+  .gh{display:flex;justify-content:space-between;align-items:center;width:100%;height:52px;font-size:14px;color:var(--dark);cursor:pointer;pointer-events:auto}
+  .gh svg{display:block;width:14px;height:14px;transition:transform .4s var(--ease)}
+  .grp.open .gh svg{transform:rotate(180deg)}
+  .grp ul{display:none;padding:0 0 16px}
+  .grp.open ul{display:flex}
+  .news{margin-top:32px;gap:32px}
+  .nl{gap:16px}
+  .sub-form{display:contents}
+  .sub-form input{order:1;flex:none;height:48px;padding:0 16px;border-radius:12px;background:var(--n0);border:.5px solid var(--n300)}
+  .sub-form input:focus{border-color:var(--g700);box-shadow:0 0 0 3px rgba(28,83,78,.12)}
+  .sub-form.err input{border-color:#b3402a}
+  .news .fine{order:2}
+  .sub-form .btn{order:3;width:100%;height:40px}
+  .form-msg{order:4}
+  .app{background:none;border:0;padding:0}
+  .app .l{padding:0;gap:16px}
   .app .qr{display:none}
+  .social{width:100%}
   .wordmark{height:auto}
+  .more{padding-block:32px}
+  .seals{flex-direction:row;align-items:center;justify-content:space-between;width:100%;gap:16px}
+  .seals img:nth-child(1){width:48px;height:auto}
+  .seals img:nth-child(2){width:120px;height:auto}
+  .seals img:nth-child(3){width:64px;height:auto}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
@@ -621,6 +777,10 @@ p,h1,h2,h3,ul{margin:0}
   <symbol id="i-clip" viewBox="0 0 16 16"><path d="M10.3333 2.99935H11C12.1046 2.99935 13 3.89478 13 4.99935V12.3327C13 13.4373 12.1046 14.3327 11 14.3327H5C3.89543 14.3327 3 13.4373 3 12.3327V4.99935C3 3.89478 3.89543 2.99935 5 2.99935H5.66667M6.33333 4.33268H9.66667C10.0349 4.33268 10.3333 4.03421 10.3333 3.66602C10.3333 2.56145 9.4379 1.66602 8.33333 1.66602H7.66667C6.5621 1.66602 5.66667 2.56145 5.66667 3.66602C5.66667 4.03421 5.96514 4.33268 6.33333 4.33268Z" fill="none" stroke="#1C534E" stroke-linejoin="round"/></symbol>
   <symbol id="i-logo" viewBox="0 0 110 24"><path d="M39.6425 17.5017C40.8186 17.5017 41.9947 17.2077 43.0742 16.3947V13.6377H39.7888V11.1747H45.8622V17.6727C44.4463 19.0767 42.454 20.2077 39.6455 20.2077C34.5814 20.2077 31.3633 16.5387 31.3633 11.9847C31.3633 7.43072 34.5784 3.76172 39.4056 3.76172C41.7577 3.76172 43.8231 4.67372 45.2391 6.32072L43.2 8.38772C42.2872 7.22972 40.9678 6.54272 39.4085 6.54272C36.4566 6.54272 34.2479 9.05372 34.2479 11.9817C34.242 14.9907 36.4508 17.5017 39.6425 17.5017Z"/><path d="M53.4455 20.2354C50.0841 20.2354 47.4219 17.5024 47.4219 14.1304C47.4219 10.7584 50.087 8.02539 53.4455 8.02539C56.8041 8.02539 59.4692 10.7584 59.4692 14.1304C59.4692 17.5024 56.807 20.2354 53.4455 20.2354ZM53.4455 17.5744C55.3647 17.5744 56.7836 15.9484 56.7836 14.1274C56.7836 12.3064 55.3676 10.6804 53.4455 10.6804C51.5264 10.6804 50.1075 12.3064 50.1075 14.1274C50.1075 15.9514 51.5235 17.5744 53.4455 17.5744Z"/><path d="M66.4534 20.2354C63.0919 20.2354 60.4297 17.5024 60.4297 14.1304C60.4297 10.7584 63.0948 8.02539 66.4534 8.02539C69.8148 8.02539 72.477 10.7584 72.477 14.1304C72.477 17.5024 69.8119 20.2354 66.4534 20.2354ZM66.4534 17.5744C68.3725 17.5744 69.7914 15.9484 69.7914 14.1274C69.7914 12.3064 68.3754 10.6804 66.4534 10.6804C64.5342 10.6804 63.1153 12.3064 63.1153 14.1274C63.1153 15.9514 64.5313 17.5744 66.4534 17.5744Z"/><path d="M82.7992 4.00977H85.4878V19.9848H82.7992V18.7788C81.9596 19.6908 80.7104 20.2308 79.2944 20.2308C76.0295 20.2308 73.4375 17.3988 73.4375 14.1258C73.4375 10.8528 76.0295 8.02077 79.2944 8.02077C80.7104 8.02077 81.9596 8.56077 82.7992 9.47276V4.00977ZM79.4612 10.6818C77.542 10.6818 76.1231 12.3078 76.1231 14.1288C76.1231 15.9498 77.5391 17.5758 79.4612 17.5758C81.3832 17.5758 82.7992 15.9498 82.7992 14.1288C82.7992 12.3078 81.3832 10.6818 79.4612 10.6818Z"/><path d="M96.7212 19.9878L93.0965 13.6608H90.0247V19.9878H88.1289V4.00977H92.9765C96.7212 4.00977 98.4005 6.12777 98.4005 8.78577C98.4005 10.9998 97.2975 12.7968 95.1121 13.4148L98.8802 19.9878H96.7212ZM90.0217 12.0618H93.0701C95.3755 12.0618 96.5018 10.8318 96.5018 8.93577C96.5018 7.03977 95.3725 5.80977 93.0701 5.80977H90.0217V12.0618Z"/><path d="M103.443 13.9319L99.4585 8.29492H101.594L104.523 12.4289L107.451 8.29492H109.587L105.602 13.9559L109.9 19.9859H107.741L104.499 15.4559L101.307 19.9859H99.1484L103.443 13.9319Z"/></symbol>
   <symbol id="i-mark" viewBox="0 0 24 24"><path fill="#FDDB00" d="M19.4246 7.371H16.2153V4.08C16.2153 1.827 14.4336 0 12.2365 0C10.0395 0 8.25781 1.827 8.25781 4.08V15.528H19.4246C21.6216 15.528 23.4033 13.701 23.4033 11.448C23.4033 9.195 21.6216 7.371 19.4246 7.371Z"/><path fill="#FDDB00" d="M8.26172 16.5781V19.9201C8.26172 22.1731 10.0434 24.0001 12.2404 24.0001C14.4375 24.0001 16.2192 22.1731 16.2192 19.9201V16.5781H8.26172Z"/><path fill="#FDDB00" d="M7.18511 7.37109H3.97872C1.78165 7.37109 0 9.19509 0 11.4481C0 13.7011 1.78165 15.5281 3.97872 15.5281H7.18511V7.37109Z"/></symbol>
+  <symbol id="i-nausea" viewBox="0 0 19 19"><path d="M2.27734 12.9111C3.43179 12.9111 4.56725 11.3921 5.69493 11.3921C6.83822 11.3921 7.97352 12.9111 9.11252 12.9111C10.2442 12.9111 11.3796 11.3921 12.5301 11.3921C13.6514 11.3921 14.7871 12.9111 15.9477 12.9111M2.27734 6.83534C3.43179 6.83534 4.56725 5.31641 5.69493 5.31641C6.83822 5.31641 7.97352 6.83534 9.11252 6.83534C10.2442 6.83534 11.3796 5.31641 12.5301 5.31641C13.6514 5.31641 14.7871 6.83534 15.9477 6.83534" fill="none" stroke="#1C534E" stroke-width=".911" stroke-linecap="round"/></symbol>
+  <symbol id="i-gut" viewBox="0 0 19 19"><g fill="none" stroke-width=".911" stroke-linecap="round" stroke-linejoin="round"><path d="M6.45665 2.2793V4.55769C6.45665 5.69689 6.45665 6.83608 8.35531 6.83608C8.73505 7.21582 9.11478 7.97528 8.81099 8.73474C8.35531 9.87394 7.59585 10.4815 6.07692 10.4815H5.31746C4.17826 10.4815 3.03906 11.241 3.03906 12.3802V15.9497H4.93772V13.2915C4.93772 12.9118 5.16556 12.5321 5.5453 12.5321C5.92503 12.5321 6.22881 12.9118 6.45665 13.6713C6.83638 14.8105 7.97558 15.5699 9.49451 15.5699C12.5324 15.5699 15.1905 13.2915 15.1905 10.2537C15.1905 7.59555 13.6716 5.69689 11.3932 5.69689H9.87424C8.96289 5.69689 8.35531 5.31715 8.35531 4.55769V2.2793H6.45665Z" stroke="#1C534E"/><path d="M14.0312 1.48438L13.8966 3.23547L12.8081 2.53288L12.6916 4.04733M17.2109 3.54688L16.2392 5.00983L15.6317 3.86552L14.7913 5.13077" stroke="#12110F"/></g></symbol>
+  <symbol id="i-head" viewBox="0 0 19 19"><g fill="none" stroke="#1C534E" stroke-width=".911" stroke-linejoin="round"><path d="M13.6722 11.6461V12.2272C13.6722 13.2339 12.8561 14.0499 11.8495 14.0499C11.5139 14.0499 11.2419 14.322 11.2419 14.6575V15.0372C11.2419 15.5406 10.8339 15.9486 10.3305 15.9486H7.29267C6.78934 15.9486 6.38596 15.5405 6.39314 15.0372C6.41025 13.8368 6.36993 12.7853 5.51818 11.7189C4.91704 10.9662 4.55859 10.0176 4.55859 8.98685C4.55859 6.54011 6.57813 4.55664 9.06935 4.55664C10.9058 4.55664 12.5966 5.42233 13.2937 7.17223C13.6599 8.09173 14.1229 8.74417 14.6472 9.4781C14.9477 9.89862 14.8268 10.4803 14.3885 10.7542L14.0488 10.9666C13.8145 11.113 13.6722 11.3698 13.6722 11.6461Z" stroke-linecap="square"/><path d="M5.31641 0.847656L5.45106 2.59875L6.53959 1.89616L6.65605 3.41061M2.27734 2.9082L3.24906 4.37115L3.85659 3.22684L4.69699 4.4921" stroke-linecap="round"/></g></symbol>
+  <symbol id="i-flip" viewBox="0 0 16 16"><path d="M13.2 6.4A5.33 5.33 0 0 0 3.3 5.1M2.8 9.6a5.33 5.33 0 0 0 9.9 1.3M3.3 2.6v2.8h2.8M12.7 13.4v-2.8H9.9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -644,7 +804,7 @@ p,h1,h2,h3,ul{margin:0}
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-  <div class="bg" data-par="0.18"><div class="media grain eager" style="--lq:url({{lq:hero}})"><img data-src="img/hero.webp" alt="A woman relaxing on a green sofa, looking at her phone" fetchpriority="high"><div class="d-light" aria-hidden="true"><span><i></i><i></i><i></i><i></i><b></b></span></div></div></div>
+  <div class="bg" data-par="0.18"><div class="media grain eager" style="--lq:url({{lq:hero}})"><img data-src="img/hero.webp" data-src-m="img/hero-m.webp" alt="A woman relaxing on a green sofa, looking at her phone" fetchpriority="high"><div class="d-light" aria-hidden="true"><span><i></i><i></i><i></i><i></i><b></b></span></div></div></div>
   <div class="shade"></div>
   <div class="wrap hero-in">
     <div class="hero-copy">
@@ -655,18 +815,19 @@ p,h1,h2,h3,ul{margin:0}
       <a href="#products" class="btn btn-y">Get started</a>
     </div>
   </div>
-  <button class="quiz" data-toast="The 3-minute quiz isn’t part of this prototype">
+  <button class="quiz" id="quiz" data-toast="The 3-minute quiz isn’t part of this prototype">
     <div class="media eager" style="--lq:url({{lq:quiz}})"><img data-src="img/quiz.webp" alt=""></div>
     <div><p class="q1">Don’t know where to start?</p><p class="q2">Find a GLP-1 that fits your routine in 3 minutes.</p></div>
     <svg class="arr" viewBox="0 0 14 14"><use href="#i-chev"/></svg>
   </button>
 </section>
+<div class="quiz-slot" id="quizSlot"></div>
 
 <!-- PRODUCTS -->
 <section class="wrap prod" id="products">
   <div class="row-between">
     <h2 class="h-xl split" style="color:var(--dark)">Lose weight with GoodRx</h2>
-    <a href="#" class="tlink" data-r data-toast><span>I already have a prescription</span><svg><use href="#i-chev"/></svg></a>
+    <a href="#" class="tlink" id="rxLink" data-r data-toast><span>I already have a prescription</span><svg><use href="#i-chev"/></svg></a>
   </div>
   <div class="prod-body">
     <div class="price-line" data-r>
@@ -688,26 +849,27 @@ p,h1,h2,h3,ul{margin:0}
     <div class="cards4">
       <a href="#" class="pcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype">
         <div class="media grain" style="--lq:url({{lq:p1}})"><img data-src="img/p1.webp" alt="A pink Foundayo pill held between two fingers"><span class="swap" aria-hidden="true"><i></i><img data-src2="img/h1.webp" alt=""></span><span class="chip sm">Daily pill</span></div>
-        <div class="tx"><div class="nm"><h3>Foundayo™</h3><span class="sub" data-sub>Membership + Medication</span></div>
+        <div class="tx"><div class="nm"><h3>Foundayo™</h3><span class="sub" data-sub>Membership <span class="nb">+ Medication</span></span></div>
         <div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div>
       </a>
       <a href="#" class="pcard" data-r style="--i:1" data-toast="Product pages aren’t part of this prototype">
         <div class="media grain" style="--lq:url({{lq:p2}})"><img data-src="img/p2.webp" alt="A Wegovy pen held in a hand by a bedside"><span class="swap" aria-hidden="true"><i></i><img data-src2="img/h2.webp" alt=""></span><span class="chip sm">Weekly pen</span></div>
-        <div class="tx"><div class="nm"><h3>Wegovy® &amp;<br>Wegovy® HD</h3><span class="sub" data-sub>Membership + Medication</span></div>
+        <div class="tx"><div class="nm"><h3>Wegovy® &amp;<br>Wegovy® HD</h3><span class="sub" data-sub>Membership <span class="nb">+ Medication</span></span></div>
         <div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="199">$238</span><small>/mo</small></span></div></div>
       </a>
       <a href="#" class="pcard" data-r style="--i:2" data-toast="Product pages aren’t part of this prototype">
         <div class="media grain" style="--lq:url({{lq:p3}})"><img data-src="img/p3.webp" alt="A white Wegovy pill resting in an open palm"><span class="swap" aria-hidden="true"><i></i><img data-src2="img/h3.webp" alt=""></span><span class="chip sm">Daily pill</span></div>
-        <div class="tx"><div class="nm"><h3>Wegovy®</h3><span class="sub" data-sub>Membership + Medication</span></div>
+        <div class="tx"><div class="nm"><h3>Wegovy®</h3><span class="sub" data-sub>Membership <span class="nb">+ Medication</span></span></div>
         <div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div>
       </a>
       <a href="#" class="pcard" data-r style="--i:3" data-toast="Product pages aren’t part of this prototype">
         <div class="media grain" style="--lq:url({{lq:p4}})"><img data-src="img/p4.webp" alt="A Zepbound KwikPen held upright"><span class="swap" aria-hidden="true"><i></i><img data-src2="img/h4.webp" alt=""></span><span class="chip sm">Weekly pen</span></div>
-        <div class="tx"><div class="nm"><h3>Zepbound®<br>KwikPen</h3><span class="sub" data-sub>Membership + Medication</span></div>
+        <div class="tx"><div class="nm"><h3>Zepbound®<br>KwikPen</h3><span class="sub" data-sub>Membership <span class="nb">+ Medication</span></span></div>
         <div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$338</span><small>/mo</small></span></div></div>
       </a>
     </div>
     <a href="#" class="btn btn-o" data-r data-toast="Medication comparison isn’t part of this prototype">Compare medications</a>
+    <div class="rx-slot m-only" id="rxSlot"></div>
   </div>
 </section>
 
@@ -756,7 +918,7 @@ p,h1,h2,h3,ul{margin:0}
 <!-- SUBSCRIPTION -->
 <section class="wrap-16 subsec">
   <div class="sub-frame pre" id="subFrame">
-    <div class="bgwrap" data-par="0.035"><div class="media grain" style="--lq:url({{lq:subscription}})"><img data-src="img/subscription.webp" alt="Wegovy pens, a Zepbound KwikPen and GLP-1 pills laid out on a table"></div></div>
+    <div class="bgwrap" data-par="0.035"><div class="media grain" style="--lq:url({{lq:subscription}})"><img data-src="img/subscription.webp" data-src-m="img/sub-m.webp" alt="Wegovy pens, a Zepbound KwikPen and GLP-1 pills laid out on a table"></div></div>
     <div class="panel pre" id="memPanel">
       <div class="lay">
         <span class="chip dark" style="align-self:flex-start">GoodRx weight loss membership</span>
@@ -803,8 +965,8 @@ p,h1,h2,h3,ul{margin:0}
 <!-- TESTIMONIALS -->
 <section class="testi">
   <div class="wrap sec-head">
-    <h2 class="display split">No two journeys look the same.<br><span class="em-wrap"><em>Yours shouldn’t either.</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
-    <p data-r>Everyone's body responds differently — and that's normal.<br>We pay attention to how you're doing and shape your treatment around it.</p>
+    <h2 class="display split">No two journeys look the same. <br><span class="em-wrap"><em>Yours shouldn’t either.</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
+    <p data-r>Everyone's body responds differently — and that's normal. <br>We pay attention to how you're doing and shape your treatment around it.</p>
   </div>
   <div class="tmarq" id="tmarq" data-lenis-prevent>
     <div class="ttrack" id="ttrack"></div>
@@ -857,7 +1019,7 @@ p,h1,h2,h3,ul{margin:0}
 <!-- CTA -->
 <section class="wrap-16 cta">
   <div class="cta-card">
-    <div class="bgwrap" data-par="0.05"><div class="media grain" style="--lq:url({{lq:cta}})"><img data-src="img/cta.webp" alt="A person on a sofa smiling at a laptop"></div></div>
+    <div class="bgwrap" data-par="0.05"><div class="media grain" style="--lq:url({{lq:cta}})"><img data-src="img/cta.webp" data-src-m="img/cta-m.webp" alt="A person on a sofa smiling at a laptop"></div></div>
     <div class="t"><h2 class="h-xl split">Find a GLP-1 treatment that fits your life</h2>
     <p data-r>Pill or injection, weekly or daily, pickup or delivery. Tell us how you live and we'll show you options that work with it.</p></div>
     <a href="#" class="btn btn-g" data-r data-toast="The treatment finder isn’t part of this prototype">Find my best fit</a>
@@ -869,17 +1031,17 @@ p,h1,h2,h3,ul{margin:0}
 <footer class="foot">
   <div class="wrap">
     <div class="foot-top">
-      <div class="col"><div class="grp"><span>Prices &amp; Discounts</span><ul>
+      <div class="col"><div class="grp"><button class="gh" type="button" aria-expanded="false">Prices &amp; Discounts<svg><use href="#i-down"/></svg></button><ul>
         <li><a href="#" data-toast>Insurance</a></li><li><a href="#" data-toast>Mobile apps</a></li><li><a href="#" data-toast>GoodRx prescription savings card</a></li><li><a href="#" data-toast>Medications A-Z</a></li><li><a href="#" data-toast>Medications by health conditions</a></li><li><a href="#" data-toast>Classes of medications</a></li><li><a href="#" data-toast>Out-of-pocket costs</a></li><li><a href="#" data-toast>Brand-name medications</a></li><li><a href="#" data-toast>GoodRx for pets</a></li><li><a href="#" data-toast>GoodRx Companion</a></li><li><a href="#" data-toast>GoodRx Care</a></li></ul></div></div>
       <div class="col">
-        <div class="grp"><span>Tools &amp; Info</span><ul><li><a href="#" data-toast>How GoodRx works</a></li><li><a href="#" data-toast>Pharmacies near you</a></li><li><a href="#" data-toast>GoodRx for healthcare professionals</a></li></ul></div>
-        <div class="grp"><span>Health</span><ul><li><a href="#" data-toast>Latest health news</a></li><li><a href="#" data-toast>Video</a></li><li><a href="#" data-toast>Newsletters</a></li><li><a href="#" data-toast>Allergies</a></li><li><a href="#" data-toast>UTI</a></li><li><a href="#" data-toast>Covid-19</a></li><li><a href="#" data-toast>Seasonal flu</a></li><li><a href="#" data-toast>Health questions and answers</a></li></ul></div>
+        <div class="grp"><button class="gh" type="button" aria-expanded="false">Tools &amp; Info<svg><use href="#i-down"/></svg></button><ul><li><a href="#" data-toast>How GoodRx works</a></li><li><a href="#" data-toast>Pharmacies near you</a></li><li><a href="#" data-toast>GoodRx for healthcare professionals</a></li></ul></div>
+        <div class="grp"><button class="gh" type="button" aria-expanded="false">Health<svg><use href="#i-down"/></svg></button><ul><li><a href="#" data-toast>Latest health news</a></li><li><a href="#" data-toast>Video</a></li><li><a href="#" data-toast>Newsletters</a></li><li><a href="#" data-toast>Allergies</a></li><li><a href="#" data-toast>UTI</a></li><li><a href="#" data-toast>Covid-19</a></li><li><a href="#" data-toast>Seasonal flu</a></li><li><a href="#" data-toast>Health questions and answers</a></li></ul></div>
       </div>
       <div class="col">
-        <div class="grp"><span>Support</span><ul><li><a href="#" data-toast>Help &amp; FAQs</a></li><li><a href="#" data-toast>Accessibility</a></li></ul></div>
-        <div class="grp"><span>Company</span><ul><li><a href="#" data-toast>About GoodRx</a></li><li><a href="#" data-toast>Press</a></li><li><a href="#" data-toast>Research</a></li><li><a href="#" data-toast>The GoodRx Effect</a></li><li><a href="#" data-toast>GoodRx Helps</a></li><li><a href="#" data-toast>Jobs</a></li><li><a href="#" data-toast>Investors</a></li><li><a href="#" data-toast>Corporate news</a></li></ul></div>
+        <div class="grp"><button class="gh" type="button" aria-expanded="false">Support<svg><use href="#i-down"/></svg></button><ul><li><a href="#" data-toast>Help &amp; FAQs</a></li><li><a href="#" data-toast>Accessibility</a></li></ul></div>
+        <div class="grp"><button class="gh" type="button" aria-expanded="false">Company<svg><use href="#i-down"/></svg></button><ul><li><a href="#" data-toast>About GoodRx</a></li><li><a href="#" data-toast>Press</a></li><li><a href="#" data-toast>Research</a></li><li><a href="#" data-toast>The GoodRx Effect</a></li><li><a href="#" data-toast>GoodRx Helps</a></li><li><a href="#" data-toast>Jobs</a></li><li><a href="#" data-toast>Investors</a></li><li><a href="#" data-toast>Corporate news</a></li></ul></div>
       </div>
-      <div class="col"><div class="grp"><span>Legal</span><ul><li><a href="#" data-toast>Privacy Policy</a></li><li><a href="#" data-toast>Privacy Center</a></li><li><a href="#" data-toast>Terms of Use</a></li><li><a href="#" data-toast>Site Disclaimer</a></li><li><a href="#" data-toast>Collection Notice</a></li><li><a href="#" data-toast>Cookie Preferences</a></li><li><a href="#" data-toast>Consumer Health Data Privacy Notice</a></li><li><a href="#" data-toast>Your Privacy Choices</a></li></ul></div></div>
+      <div class="col"><div class="grp"><button class="gh" type="button" aria-expanded="false">Legal<svg><use href="#i-down"/></svg></button><ul><li><a href="#" data-toast>Privacy Policy</a></li><li><a href="#" data-toast>Privacy Center</a></li><li><a href="#" data-toast>Terms of Use</a></li><li><a href="#" data-toast>Site Disclaimer</a></li><li><a href="#" data-toast>Collection Notice</a></li><li><a href="#" data-toast>Cookie Preferences</a></li><li><a href="#" data-toast>Consumer Health Data Privacy Notice</a></li><li><a href="#" data-toast>Your Privacy Choices</a></li></ul></div></div>
       <div class="news">
         <div class="nl">
           <p>Sign up for our newsletter for tips and discounts.</p>
@@ -891,7 +1053,7 @@ p,h1,h2,h3,ul{margin:0}
           <p class="fine">By providing your email, you consent to receive marketing communications from GoodRx, which may include content and/or data related to men's health, women's health, reproductive care, or sexual health. You agree to the GoodRx Terms of Use and acknowledge the Privacy Policy. You can unsubscribe at any time.</p>
         </div>
         <div class="app">
-          <div class="l"><p style="font-size:16px;color:var(--dark)">Scan to download<br>the GoodRx app</p>
+          <div class="l"><p style="font-size:16px;color:var(--dark)"><span class="d-only">Scan to download<br>the GoodRx app</span><span class="m-only">Download the GoodRx app</span></p>
             <div class="badges"><a href="#" data-toast aria-label="Download on the App Store"><img src="img/appstore.webp" alt="Download on the App Store" loading="lazy"></a><a href="#" data-toast aria-label="Get it on Google Play"><img src="img/gplay.webp" alt="Get it on Google Play" loading="lazy"></a></div></div>
           <img class="qr" src="img/qr.webp" alt="QR code to download the GoodRx app" loading="lazy">
         </div>
@@ -932,6 +1094,11 @@ p,h1,h2,h3,ul{margin:0}
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let hotsReady=false;
+const MQ=matchMedia('(max-width:720px)'),isM=()=>MQ.matches;
+/* mobile layout moves a couple of elements; placeholders remember where they came from */
+const MOVES=[['#quiz','#quizSlot'],['#rxLink','#rxSlot']].map(([a,b])=>{const el=$(a),ph=document.createComment('slot');el.before(ph);return {el,ph,to:$(b)}});
+function relayout(){MOVES.forEach(m=>{if(isM()){if(m.el.parentElement!==m.to)m.to.appendChild(m.el)}else if(m.el.previousSibling!==m.ph)m.ph.after(m.el)});$$('.gh').forEach(b=>b.tabIndex=isM()?0:-1)}
+relayout();MQ.addEventListener('change',relayout);
 const root=document.documentElement;
 if(!RM) root.classList.add('intro');
 
@@ -940,7 +1107,7 @@ const LQ={{lqjson}};
 const ILLU={{illu}};
 const PHASES=[
  {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['This is when habits take shape: when and how you take your medication, and the small lifestyle changes that make the rest easier. You’ll start at a low dose to let your body adjust to the medication.','You may not see any weight loss yet, but you’re laying the foundation for your body and brain.'],fx:['Mild nausea','Decreased appetite'],
-  media:{type:'cards',cards:[{img:'ph-inject',dim:1,chip:'2 mins',title:'How to give yourself an injection',sub:'We’ll walk you through it, step by step'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
+  media:{type:'cards',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head'],cards:[{img:'ph-inject',dim:1,mhide:1,chip:'2 mins',title:'How to give yourself an injection',sub:'We’ll walk you through it, step by step'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Sept 12',title:'Monthly check-in',sub:'Complete a quick check-in so your provider can approve your next refill.'}]}},
  {n:2,t:'Building tolerance',w:'-3% body weight*',k:'Week 5-8*',p:['The dose is small on purpose: your body is adjusting to the medication. It’s also when the habits take shape, like when and how you take it, and the small lifestyle shifts that make the rest easier.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176,sumT:'Steady Progress',sumP:'Your weight trend is moving in the right direction, consistent with where you are in treatment.'}},
  {n:3,t:'Noticing changes',w:'-6% body weight*',k:'Week 9-16*',p:['Your dose steps up as your body adjusts, and the changes start to show. Cravings are quieter, portions feel smaller, and clothes begin to fit differently.','Regular check-ins let your care team tune the dose so it keeps working for you.'],fx:['Constipation','Fatigue'],
@@ -1008,7 +1175,8 @@ function chartHTML(m,i){
    <span class="bub" style="left:${(638/781*100).toFixed(2)}%;top:${(116/393*100).toFixed(2)}%" data-v="${m.val}">${m.val}</span>
   </div><div class="psum"><b>${m.sumT}</b><p>${m.sumP}</p></div></div>`;
 }
-function cardsHTML(m){return `<div class="pcards">${m.cards.map(c=>`<a href="#" class="scard" data-toast="Treatment content isn’t part of this prototype">
+function fxHTML(m){if(!m.fx)return '';return `<div class="scard fxcard"><div class="media grain" style="--lq:url(${LQ['ph-fx']})"><img data-src="img/ph-fx.webp" alt=""></div><div class="shade"></div><div class="in"><p>Last reported side effects</p>${m.fx.map(x=>{const [t,ic]=x.split('|');return `<div class="fxrow"><span class="ic"><svg viewBox="0 0 19 19"><use href="#${ic}"/></svg></span><span>${t}</span><button type="button" data-toast="Side-effect tips aren’t part of this prototype">What helps</button></div>`}).join('')}</div></div>`}
+function cardsHTML(m){return `<div class="pcards">${fxHTML(m)}${m.cards.map(c=>`<a href="#" class="scard${c.mhide?' mhide':''}" data-toast="Treatment content isn’t part of this prototype">
    <div class="media grain" style="--lq:url(${LQ[c.img]})"><img data-src="img/${c.img}.webp" alt=""></div><div class="shade${c.dim?' dim':''}"></div>
    <div class="top"><span class="chip sm">${c.chip}</span>${c.meta?`<span>${c.meta}</span>`:''}</div>
    <div class="tt"><h4>${c.title}</h4><p>${c.sub}</p></div></a>`).join('')}</div>`}
@@ -1030,7 +1198,7 @@ PEOPLE.forEach((p,i)=>{
    <div class="media grain" style="--lq:url(${LQ[p.id]})"><img data-src="img/${p.id}.webp" alt=""></div><div class="shade"></div>
    <span class="chip">${p.nm}</span>
    <div class="stat"><div class="v"><span class="num" data-count="${p.lbs}">${p.lbs}</span><span>&nbsp;lbs</span></div><span>lost in 3 months</span></div>
-   <div class="quote grain"><q>${p.q}</q><div class="who"><b>${p.nm} ${p.age}</b><span class="label">Real customer</span></div></div></article>`);
+   <button class="flip" type="button" aria-label="Flip to read ${p.nm}’s story"><svg><use href="#i-flip"/></svg></button><div class="quote grain"><q>${p.q}</q><div class="who"><b>${p.nm} ${p.age}</b><span class="label">Real customer</span></div></div></article>`);
 });
 
 /* ---------- build FAQ ---------- */
@@ -1062,7 +1230,8 @@ function checkWatch(){const vh=innerHeight;for(const w of watchers){const r=w.el
   if(inZone&&!w.on){w.on=true;w.enter(w.el)}
   else if(w.on&&w.leave&&(r.top>vh||r.bottom<0)){w.on=false;w.leave(w.el)}}}
 // illustrations draw when the card is ~30% into view, and reset once fully off-screen so they draw again next time
-$$('.hcard').forEach(c=>watch(c,.72,el=>{el.classList.remove('pre');el.classList.add('drawn')},RM?null:el=>{el.classList.add('noanim');el.classList.remove('drawn');el.classList.add('pre');void el.offsetWidth;el.classList.remove('noanim')}));
+const drawCard=el=>{el.classList.remove('pre');el.classList.add('drawn')};
+$$('.hcard').forEach(c=>watch(c,.72,el=>{if(isM()&&el.getBoundingClientRect().left>innerWidth-60){el.dataset.pend=1;return}delete el.dataset.pend;drawCard(el)},RM?null:el=>{el.classList.add('noanim');el.classList.remove('drawn');el.classList.add('pre');void el.offsetWidth;el.classList.remove('noanim')}));
 watch($('#how'),.65,el=>el.classList.remove('pre'));
 // membership: frame opens out, then the panel wipes up and its content follows
 $$('#memPanel .lay>*').forEach((el,i)=>el.style.setProperty('--k',i));$('#memPanel>.btn').style.setProperty('--k',6);
@@ -1081,7 +1250,7 @@ function split(el){
 $$('.split').forEach(split);
 
 /* ---------- lazy loading ---------- */
-function load(m){if(m.dataset.l)return;m.dataset.l=1;$$('img[data-src2]',m).forEach(i=>{i.decoding='async';i.src=i.dataset.src2});const img=$('img',m);if(!img||!img.dataset.src)return;const done=()=>{m.classList.add('loaded')};img.decoding='async';img.onload=()=>{(img.decode?img.decode():Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(done))};img.onerror=done;img.src=img.dataset.src;if(img.complete&&img.naturalWidth)done()}
+function load(m){if(m.dataset.l)return;m.dataset.l=1;$$('img[data-src2]',m).forEach(i=>{i.decoding='async';i.src=i.dataset.src2});const img=$('img',m);if(!img||!img.dataset.src)return;const done=()=>{m.classList.add('loaded')};const src=(img.dataset.srcM&&isM())?img.dataset.srcM:img.dataset.src;img.decoding='async';img.onload=()=>{(img.decode?img.decode():Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(done))};img.onerror=done;img.src=src;if(img.complete&&img.naturalWidth)done()}
 $$('.media.eager').forEach(load);
 const lazyIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){load(e.target);lazyIO.unobserve(e.target)}}),{rootMargin:'600px 0px 600px 0px'});
 $$('.media:not(.eager)').forEach(m=>lazyIO.observe(m));
@@ -1130,7 +1299,7 @@ function onScroll(){
   hdr.classList.toggle('scrolled',y>40);lastY=y;
   if(!RM)pars.forEach(el=>{const r=el.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;const c=(r.top+r.height/2-vh/2);el.style.transform=`translate3d(0,${(-c*+el.dataset.par).toFixed(1)}px,0) scale(${el.dataset.sc||1})`});
   // active organ = card whose centre is nearest the viewport centre
-  let best=0,bd=1e9;hcards.forEach((c,k)=>{const r=c.getBoundingClientRect();const d=Math.abs(r.top+r.height/2-vh/2);if(d<bd){bd=d;best=k}
+  let best=0,bd=1e9;hcards.forEach((c,k)=>{const r=c.getBoundingClientRect();const d=isM()?Math.abs(r.left-8):Math.abs(r.top+r.height/2-vh/2);if(d<bd){bd=d;best=k}
     // as a card leaves the top, its content fades away (the card itself stays)
     const kids=[c.querySelector('.chip'),c.querySelector('.illu'),c.querySelector('.tx')];
     const f=innerWidth>1024&&!RM?Math.min(1,Math.max(0,(r.bottom-vh*.12)/(vh*.38))):1;
@@ -1140,29 +1309,31 @@ function onScroll(){
   checkWatch();if(hotsReady)placeHots();
   const wr=wm.getBoundingClientRect();if(wr.top<vh){const k=Math.min(1,Math.max(0,(vh-wr.top)/(wr.height+120)));wm.style.setProperty('--wy',`${(1-k)*40}%`)}
 }
+const hc=$('.how-cards');hc.addEventListener('scroll',()=>{onScroll();if(!isM())return;hcards.forEach(c=>{if(c.dataset.pend&&c.getBoundingClientRect().left<innerWidth-60){delete c.dataset.pend;drawCard(c)}})},{passive:true});
 if(lenis)lenis.on('scroll',onScroll);else addEventListener('scroll',onScroll,{passive:true});
 addEventListener('resize',onScroll);onScroll();
 
 /* ---------- price toggle ---------- */
 const sw=$('#totalSwitch');
 function animNum(el,to){const from=+el.textContent.replace(/\D/g,'')||0,t0=performance.now(),d=RM?1:650;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent='$'+Math.round(from+(to-from)*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-sw.addEventListener('click',()=>{const on=sw.getAttribute('aria-checked')!=='true';sw.setAttribute('aria-checked',on);$$('[data-med]').forEach(el=>animNum(el,+el.dataset.med+(on?39:0)));$$('[data-sub]').forEach(s=>{s.style.transition='opacity .2s';s.style.opacity=0;setTimeout(()=>{s.textContent=on?'Membership + Medication':'Medication only';s.style.opacity=1},200)})});
+sw.addEventListener('click',()=>{const on=sw.getAttribute('aria-checked')!=='true';sw.setAttribute('aria-checked',on);$$('[data-med]').forEach(el=>animNum(el,+el.dataset.med+(on?39:0)));$$('[data-sub]').forEach(s=>{s.style.transition='opacity .2s';s.style.opacity=0;setTimeout(()=>{s.innerHTML=on?'Membership <span class="nb">+ Medication</span>':'Medication only';s.style.opacity=1},200)})});
 
 /* ---------- hotspots ---------- */
 const frame=$('#subFrame'),tip=$('#ttip'),hots=$$('.hot');let tipHold=false,curHot=null;
 const subImg=$('#subFrame .bgwrap img'),IW=1971,IH=1089;
 hots.forEach(h=>{h.dataset.u=parseFloat(h.style.left)/100;h.dataset.v=parseFloat(h.style.top)/100});
-function placeHots(){if(innerWidth<=720)return;const fr=frame.getBoundingClientRect(),ir=subImg.getBoundingClientRect(),pr=$('#memPanel').getBoundingClientRect();
-  const sc=Math.max(ir.width/IW,ir.height/IH),dw=IW*sc,dh=IH*sc,ox=ir.left+(ir.width-dw)/2-fr.left,oy=ir.top+(ir.height-dh)/2-fr.top;
-  hots.forEach(h=>{const x=ox+h.dataset.u*dw,y=oy+h.dataset.v*dh;h.style.left=x+'px';h.style.top=y+'px';
-    const off=x<16||y<16||x>fr.width-16||y>fr.height-16||(x>pr.left-fr.left-16&&x<pr.right-fr.left+16);h.classList.toggle('off',off);
+function placeHots(){const m=isM(),fr=frame.getBoundingClientRect(),ir=subImg.getBoundingClientRect(),pr=$('#memPanel').getBoundingClientRect();
+  // on mobile the photo is the same shot rotated 90° counter-clockwise, anchored 10% from the top
+  const W=m?IH:IW,H=m?IW:IH,sc=Math.max(ir.width/W,ir.height/H),dw=W*sc,dh=H*sc,ox=ir.left+(ir.width-dw)/2-fr.left,oy=ir.top+(ir.height-dh)*(m?.1:.5)-fr.top;
+  hots.forEach(h=>{const u=m?+h.dataset.v:+h.dataset.u,v=m?1-h.dataset.u:+h.dataset.v,x=ox+u*dw,y=oy+v*dh;h.style.left=x+'px';h.style.top=y+'px';
+    const off=m?(x<16||y<16||x>fr.width-16||y>pr.top-fr.top-16):(x<16||y<16||x>fr.width-16||y>fr.height-16||(x>pr.left-fr.left-16&&x<pr.right-fr.left+16));h.classList.toggle('off',off);
     if(off&&h===curHot)tip.classList.remove('show')});
   if(curHot&&tip.classList.contains('show'))placeTip(curHot)}
 subImg.addEventListener('load',placeHots);hotsReady=true;
 function showTip(h){if(h.classList.contains('off'))return;curHot=h;const d=JSON.parse(h.dataset.hot);hots.forEach(x=>x.classList.toggle('on',x===h));$('#tnm').textContent=d.nm;$('#tm').textContent='$'+d.m;animNum($('#tt'),d.t);placeTip(h);tip.classList.add('show')}
 function placeTip(h){
   const fr=frame.getBoundingClientRect(),hr=h.getBoundingClientRect();const cx=hr.left-fr.left+11,cy=hr.top-fr.top+11;const tw=170,th=tip.offsetHeight||150;
-  let left=cx-17,top=cy-th-22;if(top<16)top=cy+22;if(left+tw>fr.width-16)left=fr.width-16-tw;tip.style.left=left+'px';tip.style.top=top+'px';tip.style.transformOrigin=`${cx-left}px ${top<cy?'100%':'0%'}`}
+  let left=cx-17,top=cy-th-22;if(top<16)top=cy+22;if(left<12)left=12;if(left+tw>fr.width-16)left=fr.width-16-tw;tip.style.left=left+'px';tip.style.top=top+'px';tip.style.transformOrigin=`${cx-left}px ${top<cy?'100%':'0%'}`}
 hots.forEach(h=>{h.addEventListener('mouseenter',()=>showTip(h));h.addEventListener('focus',()=>showTip(h));h.addEventListener('click',()=>showTip(h))});
 const subIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>showTip(hots[0]),RM?0:2000);subIO.disconnect()}}),{threshold:.45});subIO.observe(frame);
 // gentle auto-tour until the visitor interacts
@@ -1176,12 +1347,13 @@ function bubCount(p){const b=$('.bub',p);if(!b)return;const to=+b.dataset.v;if(R
 function go(i){const n=(i+PHASES.length)%PHASES.length;const changed=n!==cur;cur=n;
   phases.forEach((p,k)=>{if(k===cur&&changed){p.classList.remove('on');void p.offsetWidth;$$('.media',p).forEach(load)}p.classList.toggle('on',k===cur);p.setAttribute('aria-hidden',k!==cur)});
   if(changed)bubCount(phases[cur]);
-  tabs.forEach((t,k)=>{t.classList.toggle('on',k===cur);t.setAttribute('aria-selected',k===cur);$('i',t).getAnimations().forEach(a=>a.cancel())});
+  tabs.forEach((t,k)=>{t.classList.toggle('on',k===cur);t.setAttribute('aria-selected',k===cur);const bi=$('i',t);bi.getAnimations().forEach(a=>a.cancel());bi.style.transform=''});
   const bar=$('i',tabs[cur]);
+  if(isM()){bar.style.transform='scaleX(1)';clearTimeout(auto);return}bar.style.transform='';
   if(!RM){bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:DUR,easing:'linear',fill:'forwards'});if(paused)bar.getAnimations().forEach(a=>a.pause())}else bar.style.transform='scaleX(1)';
   clearTimeout(auto);if(!RM&&!paused)auto=setTimeout(()=>go(cur+1),DUR);
 }
-tabs.forEach(t=>t.addEventListener('click',()=>{go(+t.dataset.i);if(innerWidth<=1024){const y=stage.getBoundingClientRect().top+scrollY-84;lenis?lenis.scrollTo(y):scrollTo({top:y,behavior:RM?'auto':'smooth'})}}));
+tabs.forEach(t=>t.addEventListener('click',()=>{go(+t.dataset.i);if(innerWidth<=1024){const y=stage.getBoundingClientRect().top+scrollY-(isM()?56:84);lenis?lenis.scrollTo(y):scrollTo({top:y,behavior:RM?'auto':'smooth'})}}));
 stage.addEventListener('mouseenter',()=>{paused=true;clearTimeout(auto);$('i',tabs[Math.max(cur,0)]).getAnimations().forEach(a=>a.pause())});
 stage.addEventListener('mouseleave',()=>{paused=false;if(cur<0)return;const a=$('i',tabs[cur]).getAnimations()[0];if(a){a.play();clearTimeout(auto);auto=setTimeout(()=>go(cur+1),Math.max(300,DUR-(a.currentTime||0)))}});
 addEventListener('keydown',e=>{const r=stage.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!stage.contains(document.activeElement))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
@@ -1203,6 +1375,9 @@ mq.addEventListener('pointerup',rel);mq.addEventListener('pointercancel',rel);
 mq.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation()}},true);
 // Peek the first quote once so people learn cards flip on hover
 const peekIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!RM){const c=ttrack.children[1];setTimeout(()=>{c.classList.add('peek');setTimeout(()=>c.classList.remove('peek'),2200)},900);peekIO.disconnect()}}),{threshold:.5});peekIO.observe(mq);
+
+ttrack.addEventListener('click',e=>{const b=e.target.closest('.flip');if(!b)return;e.stopPropagation();b.closest('.tcard').classList.toggle('peek')});
+$$('.gh').forEach(b=>b.addEventListener('click',()=>{if(!isM())return;const g=b.parentElement,o=g.classList.toggle('open');b.setAttribute('aria-expanded',o)}));
 
 /* ---------- newsletter ---------- */
 const form=$('#subForm'),msg=$('#formMsg');
