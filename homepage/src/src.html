@@ -412,6 +412,18 @@ p,h1,h2,h3,ul{margin:0}
 .nzt b{font-weight:400;font-size:20px;line-height:1.2;color:var(--g700)}
 .nzt p{font-size:14px;color:var(--soft)}
 
+.plbg{position:absolute;inset:0;--grain:.35;background:radial-gradient(60% 55% at 22% 18%,#2f7a6c,rgba(47,122,108,0) 70%),radial-gradient(55% 60% at 85% 90%,#2a7064,rgba(42,112,100,0) 70%),radial-gradient(40% 40% at 70% 25%,#1f5e55,rgba(31,94,85,0) 70%),#184844}
+.plp{width:337px;max-width:calc(100% - 32px);height:364px;border-radius:16px;background:var(--n0);border:1px solid var(--n200);box-shadow:var(--elev);overflow:hidden}
+.plat{position:absolute;left:-28px;top:4px;width:337px;height:100px;overflow:visible}
+.plat .pl-l{fill:none;stroke:var(--g700);stroke-width:1.1;stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.55,.05,.25,1) .7s}
+.plat .pl-d{fill:none;stroke:var(--g700);stroke-width:1.2;stroke-dasharray:1 4;stroke-linecap:round;opacity:0;transition:opacity .6s var(--ease) 2.1s}
+.plat circle{fill:var(--g700);transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s var(--spring) 2s}
+.pp.on .plat .pl-l{stroke-dashoffset:0}.pp.on .plat .pl-d{opacity:.7}.pp.on .plat circle{transform:scale(1)}
+.plt{position:absolute;left:18px;right:18px;bottom:17px;display:flex;flex-direction:column;gap:9px}
+.plt b{font-weight:400;font-size:25px;line-height:1.2;letter-spacing:-.01em;color:var(--dark);padding-bottom:4px}
+.plt .label{font-size:11px;color:var(--soft);padding-top:4px}
+.plt p{font-size:14.5px;color:var(--soft)}
+.plt .btn{margin-top:7px;width:128px;height:36px}
 /* tabs live inside the container */
 .tabs{display:flex;gap:12px;padding:0 40px 32px;border-top:1px solid var(--k10)}
 .tab{flex:1;min-width:0;position:relative;padding-top:24px;display:flex;flex-direction:column;gap:12px;text-align:left;color:rgba(18,17,15,.3);transition:color .4s var(--ease)}
@@ -730,6 +742,10 @@ p,h1,h2,h3,ul{margin:0}
   .pfr{padding:9px;font-size:14px;gap:10px}
   .pfr .ic{width:34px;height:34px}
   .chp{width:calc(100% - 24px)}
+  .plp{height:320px;max-width:calc(100% - 24px)}
+  .plt b{font-size:21px}
+  .plt p{font-size:13px}
+  .plat{top:-6px}
   .chp .pchart{height:250px}
   .pchart .hd small{display:none}
   .pchart svg{width:auto;height:100%;left:auto;right:0}
@@ -1157,8 +1173,8 @@ const PHASES=[
   media:{type:'panel',kind:'chart',bg:'jr-chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176}},
  {n:3,t:'Seeing progress',w:'-10% body weight*',k:'Week 13-23*',p:['You might reach your top dose during this time, depending on which medication you take and how you respond. You’ll likely see real change, both on the scale and in your habits.','Many people lose at least 10% of their body weight by the end of 24 weeks, depending on their medication and dose.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'noise',bg:'jr-noise',title:'Less food noise',sub:'Fewer intrusive thoughts about food this week'}},
- {n:4,t:'Maintenance',w:'Holding steady*',k:'Week 24+*',p:['You’ve reached a dose that works for you. Weight loss slows and steadies, and the habits you built early now carry more of the load.','From here, your care team plans with you for the long term, including how to maintain your results.'],fx:['Occasional nausea','Heartburn'],
-  media:{type:'cards',cards:[{img:'a2',dim:1,chip:'5 mins',title:'Finding your maintenance dose',sub:'How your provider decides what comes next'},{img:'ph-doctor',chip:'4 mins',meta:'Complete by Dec 12',title:'Dose review',sub:'Review how you’re feeling so your provider can confirm your ongoing dose.'}]}}
+ {n:4,t:'Maintenance',w:'-11–20% body weight*',k:'Weeks 25+*',p:['Once you reach your maintenance dose, side effects may ease, and you establish a new baseline of habits. Weight drops off, whether steadily or in bursts. Plateaus and setbacks are normal, but keep at it—you’re on your way.'],fx:['Mild nausea','Decreased appetite'],
+  media:{type:'panel',kind:'plateau',title:'Why plateaus happen',kicker:'Bodies are built to hold on to weight',sub:'As you lose, it adapts in a few ways that slow things down. A plateau doesn’t mean your treatment has stopped working. It may also mean your body is adjusting to a new normal.'}}
 ];
 const PEOPLE=[
  {id:'t1',nm:'Jane',lbs:18,age:32,q:'I kept waiting to feel deprived. It wasn\'t that. I\'d get halfway through my plate and realize I was done.'},
@@ -1226,8 +1242,10 @@ function panelHTML(m,i){
   let inner='';
   if(m.kind==='fx')inner=`<div class="pf fxp"><p class="pf-t">Last reported side effects</p>${m.fx.map((x,k)=>{const [t,ic]=x.split('|');return `<div class="pfr" style="--k:${k}"><span class="ic"><svg viewBox="0 0 19 19"><use href="#${ic}"/></svg></span><span class="nm">${t}</span><button type="button" data-toast="Side-effect tips aren’t part of this prototype">What helps</button></div>`}).join('')}</div>`;
   else if(m.kind==='chart')inner=`<div class="pf chp">${chartHTML(m,'p'+i,true)}</div>`;
+  else if(m.kind==='plateau')inner=`<div class="pf plp"><svg class="plat" viewBox="0 0 337 100" aria-hidden="true"><path class="pl-l" d="M0 30 L18 26 L32 47 L66 50 L88 70 L145 70" pathLength="1"/><path class="pl-d" d="M150 70 L232 70"/><circle cx="145" cy="70" r="4.5"/></svg><div class="plt"><b>${m.title}</b><span class="label">${m.kicker}</span><p>${m.sub}</p><a href="#" class="btn btn-o btn-sm" data-toast="Articles aren’t part of this prototype">Learn more</a></div></div>`;
   else inner=`<div class="pf nzp"><span class="nzb b1"></span><span class="nzb b2"></span><div class="nzc"><svg class="wave" viewBox="0 0 96 72" aria-hidden="true"><line x1="2" x2="94" y1="36" y2="36"/><path d="${WAVE}" pathLength="1"/><circle cx="16.5" cy="12" r="4"/><circle cx="29.5" cy="60" r="4"/></svg><div class="nzt"><b>${m.title}</b><p>${m.sub}</p></div></div></div>`;
-  return `<div class="ppanel ${m.kind}"><div class="media grain" style="--lq:url(${LQ[m.bg]})"><img data-src="img/${m.bg}.webp" alt=""></div>${m.kind==='noise'?'<span class="tint"></span>':''}${inner}</div>`;
+  const bgEl=m.bg?`<div class="media grain" style="--lq:url(${LQ[m.bg]})"><img data-src="img/${m.bg}.webp" alt=""></div>`:'<div class="plbg grain"></div>';
+  return `<div class="ppanel ${m.kind}">${bgEl}${m.kind==='noise'?'<span class="tint"></span>':''}${inner}</div>`;
 }
 function fxHTML(m){if(!m.fx)return '';return `<div class="scard fxcard"><div class="media grain" style="--lq:url(${LQ['ph-fx']})"><img data-src="img/ph-fx.webp" alt=""></div><div class="shade"></div><div class="in"><p>Last reported side effects</p>${m.fx.map(x=>{const [t,ic]=x.split('|');return `<div class="fxrow"><span class="ic"><svg viewBox="0 0 19 19"><use href="#${ic}"/></svg></span><span>${t}</span><button type="button" data-toast="Side-effect tips aren’t part of this prototype">What helps</button></div>`}).join('')}</div></div>`}
 function cardsHTML(m){return `<div class="pcards">${fxHTML(m)}${m.cards.map(c=>`<a href="#" class="scard${c.mhide?' mhide':''}" data-toast="Treatment content isn’t part of this prototype">
