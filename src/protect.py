@@ -48,6 +48,9 @@ async function open(raw){
   const key=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']);
   const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(P.i)},key,b(P.c));
   const html=new TextDecoder().decode(pt);
+  // document.open() is ignored while this gate page is still loading, which would append the
+  // prototype under the hidden gate; wait for the page to finish loading first
+  if(document.readyState!=='complete')await new Promise(r=>addEventListener('load',()=>setTimeout(r,0),{once:true}));
   document.open(); document.write(html); document.close();
 }
 async function derive(pw){
