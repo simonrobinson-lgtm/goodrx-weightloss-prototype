@@ -51,7 +51,7 @@
 .thumb:hover{transform:translateY(-2px)}
 .thumb:hover img{transform:scale(1.08)}
 .intro .gal-main{clip-path:inset(100% 0 0 0 round 16px)}
-.gal-main{transition:clip-path 1.3s var(--ease-io) .15s}
+.gal-main{transition:clip-path 1.1s var(--ease-io) .05s}
 .intro .thumb{opacity:0;transform:translateY(12px)}
 .thumb{transition:transform .45s var(--spring),opacity .8s var(--ease)}
 .ready .thumb{transition:transform .45s var(--spring)}
@@ -530,6 +530,10 @@ const LQ={{lqjson}};
 let lenis=null;
 
 /* ---------- toast ---------- */
+// content the visitor can already see when the page opens (including a restored scroll position) appears at once, without a reveal animation
+const T0=performance.now();let settled=false;addEventListener('load',()=>setTimeout(()=>settled=true,900));
+function instant(el){if(settled)return;el.classList.add('instant');void el.offsetWidth;requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('instant')))}
+
 const toastEl=$('#toast'); let tt;
 function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),2400)}
 document.addEventListener('click',e=>{const a=e.target.closest('[data-toast]');if(!a)return;e.preventDefault();toast(a.dataset.toast||`“${a.textContent.trim()||a.getAttribute('aria-label')}” isn’t part of this prototype`)});
@@ -607,18 +611,18 @@ $$('.media:not(.eager)').forEach(m=>watch(m,1.7,load));
 /* ---------- reveal on scroll ---------- */
 const counters=new WeakSet();
 function countUp(el){if(counters.has(el)||RM)return;counters.add(el);const to=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.querySelector('small')?el.querySelector('small').outerHTML:'',t0=performance.now(),d=1400;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,4);el.innerHTML=pre+Math.round(to*e)+suf;if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-const rev=el=>watch(el,.88,el=>{el.classList.remove('r-wait','s-wait');if(el.classList.contains('split'))setTimeout(()=>el.classList.add('split-done'),1800);$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)});
+const rev=el=>watch(el,1,el=>{instant(el);el.classList.remove('r-wait','s-wait');if(el.classList.contains('r-in'))setTimeout(()=>el.classList.remove('r-in'),1250+(+getComputedStyle(el).getPropertyValue('--i')||0)*90);if(el.classList.contains('split'))setTimeout(()=>el.classList.add('split-done'),1800);$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)});
 function arm(){const vh=innerHeight;
-  $$('[data-r]').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM){el.classList.add('r-wait');requestAnimationFrame(()=>el.classList.add('r-in'))}rev(el)});
-  $$('.split:not([data-intro])').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM)el.classList.add('s-wait');rev(el)});}
+  $$('[data-r]').forEach(el=>{if(el.getBoundingClientRect().top>vh-1&&!RM){el.classList.add('r-wait');requestAnimationFrame(()=>el.classList.add('r-in'))}rev(el)});
+  $$('.split:not([data-intro])').forEach(el=>{if(el.getBoundingClientRect().top>vh-1&&!RM)el.classList.add('s-wait');rev(el)});}
 arm();
-watch($('#cmpCard'),.8,el=>el.classList.remove('pre'));
+watch($('#cmpCard'),.95,el=>{instant(el);el.classList.remove('pre')});
 if(RM)$('#cmpCard').classList.remove('pre');
 
 /* ---------- intro ---------- */
 const h1=$('[data-intro]');
 if(!RM){h1.classList.add('s-wait');$$('.w>span',h1).forEach(s=>s.style.setProperty('--d',350))}
-$$('.thumb').forEach((t,i)=>t.style.transitionDelay=RM?'0s':(.9+i*.08)+'s');
+$$('.thumb').forEach((t,i)=>t.style.transitionDelay=RM?'0s':(.5+i*.06)+'s');
 const start=()=>{requestAnimationFrame(()=>{root.classList.remove('intro');h1.classList.remove('s-wait');setTimeout(()=>h1.classList.add('split-done'),2400);setTimeout(()=>{root.classList.add('ready');$$('.thumb').forEach(t=>t.style.transitionDelay='')},2200)})};
 const fontsReady=document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,700))]):Promise.resolve();
 fontsReady.then(()=>setTimeout(start,80));

@@ -75,7 +75,9 @@ p,h1,h2,h3,ul{margin:0}
 
 /* ---------- reveal on scroll ---------- */
 .r-wait{opacity:0;transform:translate3d(0,28px,0)}
-.r-in{transition:opacity 1s var(--ease) calc(var(--i,0)*90ms),transform 1.1s var(--ease) calc(var(--i,0)*90ms)}
+.instant,.instant *,.instant *::before,.instant *::after{transition:none!important}
+
+[data-r].r-in,.r-in.r-in{transition:opacity 1s var(--ease) calc(var(--i,0)*90ms),transform 1.1s var(--ease) calc(var(--i,0)*90ms)}
 .split .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .18em .14em .06em;margin:0 -.18em -.14em -.06em}
 .split.split-done .w{overflow:visible}
 .split .w>span{display:inline-block;transition:transform 1.1s var(--ease) calc(var(--d,0)*1ms + var(--wi)*45ms),opacity .8s var(--ease) calc(var(--d,0)*1ms + var(--wi)*45ms)}
@@ -140,8 +142,8 @@ p,h1,h2,h3,ul{margin:0}
 .intro .hero-copy p,.intro .hero-copy .btn{opacity:0;transform:translate3d(0,18px,0)}
 .intro .quiz{opacity:0;transform:translate3d(0,40px,0) scale(.96)}
 .hero-copy p,.hero-copy .btn{transition:opacity 1s var(--ease),transform 1.1s var(--ease)}
-.hero-copy p{transition-delay:.55s}.hero-copy .btn{transition-delay:.7s}
-.quiz{transition:opacity 1s var(--ease) .9s,transform 1.2s var(--spring) .9s,box-shadow .5s var(--ease)}
+.hero-copy p{transition-delay:.35s}.hero-copy .btn{transition-delay:.45s}
+.quiz{transition:opacity 1s var(--ease) .5s,transform 1.2s var(--spring) .5s,box-shadow .5s var(--ease)}
 .ready .quiz{transition:transform .6s var(--spring),box-shadow .5s var(--ease)}
 
 /* ---------- product section ---------- */
@@ -1205,6 +1207,10 @@ const FAQ={
 };
 
 /* ---------- toast ---------- */
+// content the visitor can already see when the page opens (including a restored scroll position) appears at once, without a reveal animation
+const T0=performance.now();let settled=false;addEventListener('load',()=>setTimeout(()=>settled=true,900));
+function instant(el){if(settled)return;el.classList.add('instant');void el.offsetWidth;requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('instant')))}
+
 const toastEl=$('#toast'); let tt;
 function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),2400)}
 document.addEventListener('click',e=>{const a=e.target.closest('[data-toast]');if(!a)return;e.preventDefault();toast(a.dataset.toast||`“${a.textContent.trim()||a.getAttribute('aria-label')}” isn’t part of this prototype`)});
@@ -1307,12 +1313,11 @@ function checkWatch(){const vh=innerHeight,fire=[];for(const w of watchers){if(w
 // illustrations draw when the card is ~30% into view, and reset once fully off-screen so they draw again next time
 const drawCard=el=>{el.classList.remove('pre');el.classList.add('drawn')};
 $$('.hcard').forEach(c=>watch(c,.72,el=>{if(isM()&&el.getBoundingClientRect().left>innerWidth-60){el.dataset.pend=1;return}delete el.dataset.pend;drawCard(el)},RM?null:el=>{el.classList.add('noanim');el.classList.remove('drawn');el.classList.add('pre');void el.offsetWidth;el.classList.remove('noanim')}));
-watch($('#how'),.65,el=>el.classList.remove('pre'));
+watch($('#how'),.9,el=>{instant(el);el.classList.remove('pre')});
 // membership: frame opens out, then the panel wipes up and its content follows
 $$('#memPanel .lay>*').forEach((el,i)=>el.style.setProperty('--k',i));$('#memPanel>.btn').style.setProperty('--k',6);
 $$('#subFrame .hot').forEach((h,i)=>h.style.setProperty('--hk',i));
-const memIO=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const p=$('#memPanel');p.classList.remove('pre');p.classList.add('in');setTimeout(()=>p.classList.add('done'),2200);e.target.classList.remove('pre');memIO.disconnect()}),{threshold:.4});
-memIO.observe($('#subFrame'));
+watch($('#subFrame'),.95,fr=>{const p=$('#memPanel');instant(fr);p.classList.remove('pre');p.classList.add('in');setTimeout(()=>p.classList.add('done'),settled?2200:50);fr.classList.remove('pre')});
 
 /* ---------- split headings into words ---------- */
 function split(el){
@@ -1336,11 +1341,11 @@ $$('.media:not(.eager)').forEach(m=>watch(m,1.7,load));
 /* ---------- reveal on scroll ---------- */
 const counters=new WeakSet();
 function countUp(el){if(counters.has(el)||RM)return;counters.add(el);const to=+el.dataset.count,pre=el.dataset.prefix||'',t0=performance.now(),d=1400;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,4);el.textContent=pre+Math.round(to*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-const revIO={observe:el=>watch(el,.88,el=>{el.classList.remove('r-wait','s-wait');if(el.classList.contains('split'))setTimeout(()=>el.classList.add('split-done'),1800);$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)})};
+const revIO={observe:el=>watch(el,1,el=>{instant(el);el.classList.remove('r-wait','s-wait');if(el.classList.contains('r-in'))setTimeout(()=>el.classList.remove('r-in'),1250+(+getComputedStyle(el).getPropertyValue('--i')||0)*90);if(el.classList.contains('split'))setTimeout(()=>el.classList.add('split-done'),1800);$$('.scrib',el.closest('section')||el).forEach(s=>setTimeout(()=>s.classList.add('drawn'),300));$$('[data-count]',el).forEach(countUp)})};
 function arm(){
   const vh=innerHeight;
-  $$('[data-r]').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM){el.classList.add('r-wait');requestAnimationFrame(()=>el.classList.add('r-in'))}revIO.observe(el)});
-  $$('.split:not([data-intro])').forEach(el=>{if(el.getBoundingClientRect().top>vh*.92&&!RM)el.classList.add('s-wait');revIO.observe(el)});
+  $$('[data-r]').forEach(el=>{if(el.getBoundingClientRect().top>vh-1&&!RM){el.classList.add('r-wait');requestAnimationFrame(()=>el.classList.add('r-in'))}revIO.observe(el)});
+  $$('.split:not([data-intro])').forEach(el=>{if(el.getBoundingClientRect().top>vh-1&&!RM)el.classList.add('s-wait');revIO.observe(el)});
   $$('.tcard,.big-price').forEach(el=>revIO.observe(el));
 }
 arm();
