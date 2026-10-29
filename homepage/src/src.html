@@ -725,6 +725,9 @@ p,h1,h2,h3,ul{margin:0}
   .jour>.wrap-16{padding:0}
   .pbox{display:flex;flex-direction:column;border-radius:0;background:none;overflow:visible}
   .tabs{order:-1;display:flex;gap:16px;padding:24px 20px 0;border-top:0;border-bottom:1px solid var(--k10)}
+  .jour{overflow:visible;overflow:clip}
+  .tabs{position:sticky;z-index:6;top:calc(64px + env(safe-area-inset-top,0px));background:var(--n100);transition:top .7s var(--ease)}
+  body:has(.hdr.hide) .tabs{top:0}
   .tab{flex:0 1 80px;padding:0 0 16px;gap:0;border-top:0}
   .tab span:last-child{display:none}
   .tab i{top:auto;bottom:-1px}
