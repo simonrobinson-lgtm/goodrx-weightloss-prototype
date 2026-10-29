@@ -293,6 +293,7 @@
   .pd-price .row>span:first-child{display:none}
   .pd-price .tot{gap:8px}
   .pd-price .tot .switch{order:-1}
+  .pd-price .tot.off .lt-on,.pd-price .tot:not(.off) .lt-off{display:none}
   .pd-price .tot .lb{height:26px;padding-bottom:0;gap:0}
   .pd-price .tot .tip{left:0!important;right:auto!important}
   .pd-cta .btn{height:48px;font-size:14px}
@@ -382,7 +383,7 @@
         <span class="from">starting at</span>
         <span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span>
         <div class="row"><span data-sub>Includes membership + medication price</span>
-          <span class="tot"><span class="dash soft lb" tabindex="0">Total price<span class="m-only">: membership + medication</span><span class="tip" role="tooltip" style="left:auto;right:0"><b>Total price</b>Shows medication plus the $39/mo membership. Turn it off to see the medication price on its own.</span></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
+          <span class="tot"><span class="dash soft lb" tabindex="0"><span class="lt-on">Total price<span class="m-only">: membership + medication</span></span><span class="lt-off m-only">Medication price only</span><span class="tip" role="tooltip" style="left:auto;right:0"><b>Total price</b>Shows medication plus the $39/mo membership. Turn it off to see the medication price on its own.</span></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
       </div>
     </div>
     <div class="pd-body">
@@ -661,7 +662,7 @@ addEventListener('resize',onScroll);onScroll();
 
 /* ---------- price toggle (both switches stay in sync) ---------- */
 function animNum(el,to){const from=+el.textContent.replace(/\D/g,'')||0,t0=performance.now(),d=RM?1:650;const f=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent='$'+Math.round(from+(to-from)*e);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-$$('[data-sw]').forEach(sw=>sw.addEventListener('click',()=>{const on=sw.getAttribute('aria-checked')!=='true';$$('[data-sw]').forEach(s=>s.setAttribute('aria-checked',on));$$('[data-med]').forEach(el=>animNum(el,+el.dataset.med+(on?39:0)));
+$$('[data-sw]').forEach(sw=>sw.addEventListener('click',()=>{const on=sw.getAttribute('aria-checked')!=='true';$$('[data-sw]').forEach(s=>s.setAttribute('aria-checked',on));$$('.tot').forEach(t=>t.classList.toggle('off',!on));$$('[data-med]').forEach(el=>animNum(el,+el.dataset.med+(on?39:0)));
   $$('[data-sub]').forEach(s=>{const hero=!!s.closest('.pd-price');s.style.opacity=0;setTimeout(()=>{s.textContent=hero?(on?'Includes membership + medication price':'Medication price only, membership is $39/mo'):(on?'Membership + Medication':'Medication only');s.style.opacity=1},200)})}));
 
 /* ---------- gallery ---------- */
@@ -709,7 +710,7 @@ const wEnd=e=>{if(!wd||e.pointerId!==wd.id)return;const dx=e.clientX-wd.x,v=Math
   if(Math.abs(dx)>vp.clientWidth*.12||v>.5)wGo(wi+(dx<0?1:-1));else wGo(wi)};
 vp.addEventListener('pointerup',wEnd);vp.addEventListener('pointercancel',wEnd);
 vp.addEventListener('dragstart',e=>e.preventDefault());
-wcards.forEach((c,k)=>c.addEventListener('click',e=>{if(wMoved){e.preventDefault();e.stopPropagation();wMoved=false;return}const f=e.target.closest('.flip');if(f){e.stopPropagation();const on=c.classList.toggle('peek');if(on)wPause();else{wPaused=!wVis;if(wVis)wGo(wi)}return}if(k!==wi)wGo(k)}));
+wcards.forEach((c,k)=>c.addEventListener('click',e=>{if(wMoved){e.preventDefault();e.stopPropagation();wMoved=false;return}const f=e.target.closest('.flip');if(f){e.stopPropagation();const on=c.classList.toggle('peek');if(on)wPause();else{f.blur();wPaused=!wVis;if(wVis)wGo(wi)}return}if(k!==wi)wGo(k)}));
 dots.forEach((d,k)=>d.addEventListener('click',()=>wGo(k+1)));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)wPause();else if(wStarted&&wVis){wPaused=false;wGo(wi)}});
 addEventListener('keydown',e=>{const r=vp.getBoundingClientRect();if(r.top>innerHeight||r.bottom<0||!$('#stories').contains(document.activeElement))return;if(e.key==='ArrowRight')wGo(wi+1);if(e.key==='ArrowLeft')wGo(wi-1)});

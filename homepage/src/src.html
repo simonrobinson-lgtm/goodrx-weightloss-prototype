@@ -468,8 +468,9 @@ p,h1,h2,h3,ul{margin:0}
 .tcard .quote q{font-size:24px;line-height:1.2;letter-spacing:-.01em;font-weight:300;quotes:"“" "”";opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease) .2s,transform .7s var(--ease) .2s}
 .tcard .quote .who{display:flex;flex-direction:column;gap:18px;opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease) .3s,transform .7s var(--ease) .3s}
 .tcard .quote .who b{font-weight:400;font-size:24px;line-height:1.2}
-.tcard:hover .quote,.tcard:focus-visible .quote,.tcard.peek .quote{clip-path:inset(0 0 0 0)}
-.tcard:hover .quote q,.tcard:hover .quote .who,.tcard:focus-visible .quote q,.tcard:focus-visible .quote .who,.tcard.peek .quote q,.tcard.peek .quote .who{opacity:1;transform:none}
+@media (hover:hover) and (pointer:fine){.tcard:hover .quote{clip-path:inset(0 0 0 0)}.tcard:hover .quote q,.tcard:hover .quote .who{opacity:1;transform:none}}
+.tcard:focus-visible .quote,.tcard.peek .quote{clip-path:inset(0 0 0 0)}
+.tcard:focus-visible .quote q,.tcard:focus-visible .quote .who,.tcard.peek .quote q,.tcard.peek .quote .who{opacity:1;transform:none}
 
 /* ---------- FAQ ---------- */
 .faq{padding-block:80px 56px;display:flex;justify-content:space-between;gap:48px}
@@ -1480,7 +1481,7 @@ mq.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation()
 // Peek the first quote once so people learn cards flip on hover
 const peekIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!RM){const c=ttrack.children[1];setTimeout(()=>{c.classList.add('peek');setTimeout(()=>c.classList.remove('peek'),2200)},900);peekIO.disconnect()}}),{threshold:.5});peekIO.observe(mq);
 
-ttrack.addEventListener('click',e=>{const b=e.target.closest('.flip');if(!b)return;e.stopPropagation();b.closest('.tcard').classList.toggle('peek')});
+ttrack.addEventListener('click',e=>{const b=e.target.closest('.flip');if(!b)return;e.stopPropagation();const c=b.closest('.tcard');if(!c.classList.toggle('peek'))b.blur()});
 $$('.gh').forEach(b=>b.addEventListener('click',()=>{if(!isM())return;const g=b.parentElement,o=g.classList.toggle('open');b.setAttribute('aria-expanded',o)}));
 
 /* ---------- newsletter ---------- */
