@@ -25,6 +25,12 @@
 .tot{display:flex;align-items:center;gap:12px}
 .tot .lb{font-size:14px;color:var(--soft);line-height:1.4;padding-bottom:2px;align-items:center}
 .tot .lb .tip{text-align:left;font-size:13px}
+.pd-price .row{margin-top:12px;justify-content:flex-start}
+.pd-price .row>span:first-child{display:none}
+.pd-price .tot .switch{order:-1}
+.pd-price .tot .lb{gap:0;padding-bottom:1px}
+.pd-price .tot .tip{left:0!important;right:auto!important}
+.pd-price .tot.off .lt-on,.pd-price .tot:not(.off) .lt-off{display:none}
 .pd-desc{font-size:18px;line-height:1.4;color:var(--dark)}
 .pd-perks{display:flex;flex-direction:column;gap:12px;padding-bottom:8px}
 .pd-perks div{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--dark)}
@@ -290,14 +296,13 @@
   .pd-price{gap:4px}
   .pd-price .from{font-size:13px}
   .pd-price .row{margin-top:8px}
-  .pd-price .row>span:first-child{display:none}
   .pd-price .tot{gap:8px}
-  .pd-price .tot .switch{order:-1}
-  .pd-price .tot.off .lt-on,.pd-price .tot:not(.off) .lt-off{display:none}
-  .pd-price .tot .lb{height:26px;padding-bottom:0;gap:0}
-  .pd-price .tot .tip{left:0!important;right:auto!important}
-  .pd-cta .btn{height:48px;font-size:14px}
-  .pd-cta{gap:16px}
+  .pd-price .tot .lb{height:26px;padding-bottom:0}
+  .pd-cta .btn-g{display:none}
+  .pd-cta .tlink{align-self:stretch;justify-content:center;height:48px;border:1px solid var(--g700);border-radius:8px;transition:background-color .3s,color .3s}
+  .pd-cta .tlink:active{background:var(--g700);color:var(--y100)!important}
+  .pd-cta .tlink span{background:none;padding:0}
+  .pd-cta .tlink svg{display:none}
   .rit{padding:40px 12px;gap:24px}
   .rit h2{padding:0 8px}
   .duo{padding:0 0 16px;gap:16px;flex-direction:column}
@@ -383,7 +388,7 @@
         <span class="from">starting at</span>
         <span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span>
         <div class="row"><span data-sub>Includes membership + medication price</span>
-          <span class="tot"><span class="dash soft lb" tabindex="0"><span class="lt-on">Total price<span class="m-only">: membership + medication</span></span><span class="lt-off m-only">Medication price only</span><span class="tip" role="tooltip" style="left:auto;right:0"><b>Total price</b>Shows medication plus the $39/mo membership. Turn it off to see the medication price on its own.</span></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
+          <span class="tot"><span class="dash soft lb" tabindex="0"><span class="lt-on">Total price: membership + medication</span><span class="lt-off">Medication price only</span><span class="tip" role="tooltip" style="left:auto;right:0"><b>Total price</b>Shows medication plus the $39/mo membership. Turn it off to see the medication price on its own.</span></span><button class="switch" data-sw role="switch" aria-checked="true" aria-label="Show total price including membership"><i></i></button></span></div>
       </div>
     </div>
     <div class="pd-body">
