@@ -634,12 +634,12 @@ p,h1,h2,h3,ul{margin:0}
   /* header: full-width bar, icon logo + menu */
   .hdr{top:0;padding:0}
   .hdr.hide{transform:translate3d(0,-100%,0)}
-  .nav,.hdr.scrolled .nav{width:100%;height:calc(60px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 20px 0;border-radius:0;border:0;border-bottom:.5px solid var(--n200);background:rgba(255,255,251,.96);filter:none}
+  .nav,.hdr.scrolled .nav{width:100%;height:calc(64px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 20px 0;border-radius:0;border:0;border-bottom:.5px solid var(--n200);background:rgba(255,255,251,.96);filter:none}
   a.logo{width:24px;overflow:hidden}
   a.logo svg{width:110px;height:24px}
   .nav-r .icon-btn:first-child{display:none}
   .icon-btn,.icon-btn svg{width:24px;height:24px}
-  main{padding-top:calc(60px + env(safe-area-inset-top,0px))}
+  main{padding-top:calc(64px + env(safe-area-inset-top,0px))}
   body::before{display:none}
   /* hero */
   .hero{height:555px;min-height:0;max-height:none}
@@ -652,7 +652,7 @@ p,h1,h2,h3,ul{margin:0}
   .hero-copy h1,.display{font-size:28px}
   .h-xl,.display{text-wrap:wrap}
   .hero-copy p{font-size:14px}
-  .hero-copy .btn{height:40px;font-size:12px;padding:0 16px}
+  .hero-copy .btn{height:48px;font-size:14px;padding:0 20px;min-width:141px}
   /* quiz card sits below the hero */
   .quiz-slot{display:block;padding:16px 12px;background:var(--n100)}
   .quiz{position:relative;left:auto;right:auto;bottom:auto;width:100%;gap:16px;padding:8px 16px 8px 8px;border:1px solid var(--n300);box-shadow:none}
@@ -660,16 +660,19 @@ p,h1,h2,h3,ul{margin:0}
   .quiz .media{width:64px;height:64px}
   .quiz .q1{font-size:14px;color:var(--n900)}
   .quiz .q2{font-size:13px;margin-top:2px}
-  .quiz .arr{display:none}
+  .quiz>div:nth-child(2){flex:1;min-width:0}
+  .quiz .arr{position:static;flex:none;width:14px;height:14px;margin:0;color:var(--g700)}
   .h-xl{font-size:24px}
   /* products */
-  .prod{padding:32px 20px 56px;gap:28px}
+  .prod{padding:24px 20px 56px;gap:28px}
   .row-between{display:block}
   .prod-body{gap:24px}
-  .price-line{gap:16px}
-  .price-row{flex-direction:column;align-items:flex-start;gap:24px}
-  .pl{gap:4px}
-  .dash .num{font-size:24px}
+  .price-line{gap:12px}
+  .price-line .dash{font-size:14px;gap:4px}
+  .pl{gap:8px}
+  .price-row .right{gap:8px}
+  .price-row{flex-direction:column;align-items:flex-start;gap:16px}
+  .dash .num{font-size:20px}
   .tip{width:min(240px,calc(100vw - 48px))}
   .switch{width:32px;height:20px}
   .switch i{width:12px;height:12px}
