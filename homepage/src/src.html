@@ -243,10 +243,12 @@ p,h1,h2,h3,ul{margin:0}
 .how.pre .how-panel .t p{opacity:0}
 .how-panel .t p{transition:opacity 1s var(--ease) .5s}
 /* progress rail */
-.how-rail{position:sticky;top:50vh;align-self:flex-start;width:0;margin-left:-16px;height:0}
-.how-rail div{position:absolute;left:8px;top:-22px;display:flex;flex-direction:column;gap:10px;transform:translateX(-50%)}
-.how-rail i{width:4px;height:4px;border-radius:50%;background:var(--k20);transition:background-color .4s,transform .5s var(--spring)}
-.how-rail i.on{background:var(--ink);transform:scale(1.25)}
+.how-panel{order:0}.how-rail{order:1}.how-cards{order:2}
+/* pagination sits in the gap between panel and cards, centred both ways */
+.how-rail{position:sticky;top:50vh;align-self:flex-start;width:0;height:0;margin:0 -8px}
+.how-rail div{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:4px;transform:translate(-50%,-50%)}
+.how-rail i{display:block;width:5px;height:5px;border-radius:3px;background:#bfb6ae;transition:height .5s var(--ease),background-color .4s var(--ease)}
+.how-rail i.on{height:12px;background:var(--g700)}
 .hcard h3{font-size:24px;line-height:1.2;font-weight:400;color:var(--n900)}
 .hcard p{color:var(--soft)}
 
