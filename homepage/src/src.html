@@ -593,11 +593,7 @@ p,h1,h2,h3,ul{margin:0}
   .news .social{grid-column:2}
 }
 @media (max-width:1180px){
-  .cards4{display:flex;gap:16px;margin:-12px calc(-1*var(--gut)) -40px;padding:12px var(--gut) 40px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gut);scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
-  .cards4::-webkit-scrollbar{display:none}
-  .cards4.dragging{cursor:grabbing;scroll-snap-type:none}
-  .cards4.dragging .pcard{pointer-events:none}
-  .cards4 .pcard{flex:none;width:300px;scroll-snap-align:start}
+  .cards4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cta-card::after{opacity:1}
   .hero-copy{width:400px}
 }
@@ -684,7 +680,7 @@ p,h1,h2,h3,ul{margin:0}
   .switch[aria-checked="true"] i{transform:translateX(12px)}
   .cards4{display:flex;gap:8px;margin:0 -20px;padding:8px 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none;overscroll-behavior-x:contain}
   .cards4::-webkit-scrollbar,.how-cards::-webkit-scrollbar,.pmed::-webkit-scrollbar,.cards3::-webkit-scrollbar{display:none}
-  .pcard,.cards4 .pcard{flex:none;width:240px;padding:4px 4px 20px;gap:12px;scroll-snap-align:start}
+  .pcard{flex:none;width:240px;padding:4px 4px 20px;gap:12px;scroll-snap-align:start}
   @media (hover:hover){.pcard:hover{transform:none}}
   .pcard .media{aspect-ratio:1;border-radius:12px}
   .pcard .chip{left:8px;top:8px}
@@ -1458,14 +1454,6 @@ hots.forEach(h=>{h.addEventListener('mouseenter',()=>{clearTimeout(tipT);showTip
 document.addEventListener('click',e=>{if(!e.target.closest('.hot'))hideTip()});
 addEventListener('keydown',e=>{if(e.key==='Escape')hideTip()});
 addEventListener('resize',placeHots);setTimeout(placeHots,50);
-
-/* ---------- product carousel: mouse drag (overflow layout ≤1180px) ---------- */
-(()=>{const el=$('.cards4');if(!el||!matchMedia('(pointer:fine)').matches)return;let d=null,moved=false;
-  el.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button||el.scrollWidth<=el.clientWidth+2)return;d={x:e.clientX,s:el.scrollLeft};moved=false});
-  addEventListener('pointermove',e=>{if(!d)return;const dx=e.clientX-d.x;if(!moved&&Math.abs(dx)>5){moved=true;el.classList.add('dragging')}if(moved){el.scrollLeft=d.s-dx;e.preventDefault()}});
-  addEventListener('pointerup',()=>{if(!d)return;d=null;if(moved){const x=el.scrollLeft;el.classList.remove('dragging');el.scrollLeft=x;const c=[...el.children],w=c[1].offsetLeft-c[0].offsetLeft;el.scrollTo({left:Math.round(x/w)*w,behavior:'smooth'})}});
-  el.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
-  el.addEventListener('dragstart',e=>e.preventDefault())})();
 
 /* ---------- journey: tabbed phases ---------- */
 const stage=$('#stage'),phases=$$('.pp'),tabs=$$('.tab');let cur=-1,auto=null,paused=false,started=false;const DUR=8000;
