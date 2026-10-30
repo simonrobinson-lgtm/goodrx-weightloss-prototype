@@ -649,6 +649,11 @@ if(!RM&&window.Lenis&&matchMedia('(pointer:fine)').matches){
   if(!location.hash)lenis.scrollTo(0,{immediate:true,force:true});
   const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
 }
+/* always open at the top: some browsers restore an old scroll position late (after the gate swaps the page in) */
+(()=>{if(location.hash)return;let user=false;const mark=()=>{user=true};['wheel','touchstart','keydown','pointerdown'].forEach(t=>addEventListener(t,mark,{passive:true,once:true}));
+  const top=()=>{if(user||scrollY<1)return;if(lenis)lenis.scrollTo(0,{immediate:true,force:true});scrollTo(0,0)};
+  requestAnimationFrame(()=>requestAnimationFrame(top));const onLoad=()=>{top();setTimeout(top,60);setTimeout(top,350);setTimeout(top,900)};
+  if(document.readyState==='complete')onLoad();else addEventListener('load',onLoad,{once:true});addEventListener('pageshow',e=>{if(e.persisted)onLoad()})})();
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.hasAttribute('data-toast'))return;const id=a.getAttribute('href');const t=id==='#top'?document.body:$(id);if(!t)return;e.preventDefault();if(lenis)lenis.scrollTo(id==='#top'?0:t,{offset:-90});else (id==='#top'?scrollTo({top:0,behavior:'smooth'}):t.scrollIntoView({behavior:'smooth'}))});
 
 /* ---------- header + wordmark ---------- */

@@ -51,7 +51,10 @@ async function open(raw){
   // document.open() is ignored while this gate page is still loading, which would append the
   // prototype under the hidden gate; wait for the page to finish loading first
   if(document.readyState!=='complete')await new Promise(r=>addEventListener('load',()=>setTimeout(r,0),{once:true}));
+  try{if(!location.hash)history.scrollRestoration='manual'}catch(e){}
+  if(document.activeElement)document.activeElement.blur();
   document.open(); document.write(html); document.close();
+  if(!location.hash)scrollTo(0,0);
 }
 async function derive(pw){
   const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']);
