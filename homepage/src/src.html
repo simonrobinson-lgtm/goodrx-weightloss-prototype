@@ -618,10 +618,11 @@ p,h1,h2,h3,ul{margin:0}
 .cj-card{--cjIn:1;--cjOut:0;position:relative;max-width:1408px;margin:0 auto;background:var(--g700);border-radius:16px;overflow:hidden;isolation:isolate;
   clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc(16px + (1 - var(--cjIn)) * 24px));
   transform:scale(calc(1 - var(--cjOut) * .06));transform-origin:50% 100%;will-change:transform,clip-path}
+.cj-sun::after{content:"";position:absolute;inset:0;background:url(img/grain.png) 0 0/256px;mix-blend-mode:soft-light;opacity:.22}
 .cj-card::after{content:"";position:absolute;inset:0;background:#0b1f1d;opacity:calc(var(--cjOut) * .55);pointer-events:none;z-index:9}
 /* dappled sunlight drifting across the green, standing in for the Figma light video */
-.cj-sun{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.cj-sun i{position:absolute;left:-12%;width:124%;height:46%;background:url(img/quote-pat.webp) center/cover;filter:grayscale(1) brightness(.74) contrast(2.1);mix-blend-mode:soft-light;opacity:.42;will-change:transform;animation:cjSway 19s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+.cj-sun{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.cj-sun i{position:absolute;left:-12%;width:124%;height:46%;background:url(img/cj-sun.webp) center/cover;mix-blend-mode:soft-light;opacity:.8;will-change:transform;animation:cjSway 19s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
 .cj-sun i:nth-child(1){top:-10%;transform-origin:20% 30%}
 .cj-sun i:nth-child(2){top:27%;transform:scaleX(-1);animation-duration:23s;animation-delay:-7s;opacity:.6}
 .cj-sun i:nth-child(3){top:62%;animation-duration:21s;animation-delay:-13s}
