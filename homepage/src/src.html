@@ -1549,7 +1549,7 @@ function cjCurve(P){let d=`M ${P[0][0].toFixed(1)} ${P[0][1].toFixed(1)}`;for(le
 function cjStackPath(W){const R=el=>{let l=0,t=0,e=el;while(e&&e!==cjBox){l+=e.offsetLeft;t+=e.offsetTop;e=e.offsetParent}const w=el.offsetWidth,h=el.offsetHeight;return {l,t,r:l+w,b:t+h,w,h}};
   const hb=R($('.cj-mbtn',cjBox)),p1=R(cjPhs[0]),t1=R($('.cj-t1',cjBox)),p2=R(cjPhs[1]),t2=R($('.cj-t2',cjBox));
   const P=[[W*.58,hb.b+34],[W*.82,hb.b+66],[p1.r+(W-p1.r)*.45,p1.t+p1.h*.35],[p1.l+p1.w*.72,p1.b+1],[W+34,(p1.b+t1.t)/2],[W+34,t1.b+4],[W*.56,t1.b+(p2.t-t1.b)*.55],[p2.l+p2.w*.28,p2.t+p2.h*.52],[W*.14,p2.b+6],[-34,p2.b+12]];
-  return {d:cjCurve(P),dots:[P[0],P[3],P[7]]}}
+  return {d:cjCurve(P),dots:[P[0],P[3],P[6]]}}
 // the Figma line is a multi-strand "stretch" brush: rebuild it as a few thin strands that drift apart and pinch together,
 // tapering and fading out towards both ends of every stroke. A mask of short chunks reveals it as you scroll.
 const CJ_STR=[[-1.5,.9,.85,1.0,0],[-.55,1.25,1,.8,1.7],[.35,.8,.7,1.3,3.1],[1.15,1.1,.95,.9,4.4],[1.9,.6,.55,1.6,.9],[-2.2,.35,.5,.7,2.4],[.8,.3,.45,2.1,5.2],[2.5,.3,.4,1.15,3.7]];
@@ -1569,7 +1569,7 @@ function cjBuild(){
       // normals from neighbouring samples
       const N=P.map((q,k)=>{const a=P[Math.max(0,k-1)],b=P[Math.min(n,k+1)];const dx=b[1]-a[1],dy=b[2]-a[2],m=Math.hypot(dx,dy)||1;return [-dy/m,dx/m]});
       const F=Math.min(len*.22,190*sc),ss=t=>t<=0?0:t>=1?1:t*t*(3-2*t);
-      const taper=L=>Math.min(1,.18+.82*ss(L/(F*.9)))*Math.min(1,.18+.82*ss((len-L)/(F*.9)));
+      const taper=L=>Math.min(1,.35+.65*ss(L/(F*.9)))*Math.min(1,.35+.65*ss((len-L)/(F*.9)));
       const id='cjm'+(cjMaskN++),g=document.createElementNS(NS,'g'),mk=document.createElementNS(NS,'mask');
       mk.id=id;mk.setAttribute('maskUnits','userSpaceOnUse');mk.setAttribute('x',-50);mk.setAttribute('y',-50);mk.setAttribute('width',vw+100);mk.setAttribute('height',vh+300);
       // reveal mask: short chunks, each carrying the fade for its stretch of the line
@@ -1577,7 +1577,7 @@ function cjBuild(){
       for(let k=0;k<n;k+=CH){const e=Math.min(n,k+CH),pts=P.slice(k,e+1);const mid=(pts[0][0]+pts[pts.length-1][0])/2;
         const f=ss(Math.min(1,mid/F))*ss(Math.min(1,(len-mid)/F));const c=document.createElementNS(NS,'path');
         c.setAttribute('d','M'+pts.map(q=>q[1].toFixed(1)+' '+q[2].toFixed(1)).join(' L'));c.setAttribute('pathLength','1');
-        c.setAttribute('stroke-opacity',Math.max(.02,f).toFixed(3));c.style.strokeDasharray='1 1.02';c.style.strokeDashoffset=1;
+        c.setAttribute('stroke-opacity',Math.max(.35,f).toFixed(3));c.style.strokeDasharray='1 1.02';c.style.strokeDashoffset=1;
         mk.appendChild(c);sg.chunks.push({el:c,a:pts[0][0],b:pts[pts.length-1][0],v:-1})}
       // strands: offset along the normal by a drifting amount that pinches to nothing at the tapered ends
       CJ_STR.forEach(([base,w,op,fr,ph])=>{let d='';for(let k=0;k<=n;k++){const [L,x,y]=P[k],t=taper(L),o=sc*t*(base+.95*Math.sin(L/(41*fr)+ph+seed)+.35*Math.sin(L/(9.5*fr)+ph*2));
@@ -1587,8 +1587,9 @@ function cjBuild(){
     cj.segs.push(sg);cj.tot+=len});
   meas.remove();
   // each marker pops when the pen passes the nearest point of the route
-  cj.dotLen=dots.map(([x,y],i)=>{let best=0,bd=1e18;for(const q of cj.samp){const dd=(q[2]-x)**2+(q[3]-y)**2;if(dd<bd){bd=dd;best=q[0]}}
-    const el=cjDots[i];el.style.left=(x/vw*100)+'%';el.style.top=(y/vh*100)+'%';return best});
+  cj.dotLen=dots.map(([x,y],i)=>{let best=cj.samp[0],bd=i===0?-1:1e18;for(const q of cj.samp){const dd=(q[2]-x)**2+(q[3]-y)**2;if(dd<bd){bd=dd;best=q}}
+    // snap the marker onto the line itself
+    const el=cjDots[i];el.style.left=(best[2]/vw*100)+'%';el.style.top=(best[3]/vh*100)+'%';return best[0]});
   cj.draw=-1;cjTick(innerHeight,true);
 }
 function cjApply(){const D=cj.draw;cj.segs.forEach(sg=>{if(D<sg.o-2&&sg.done===0)return;let any=0;
