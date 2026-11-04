@@ -587,28 +587,24 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
-.stick-in{pointer-events:auto;width:min(560px,100%);height:64px;display:flex;align-items:center;gap:16px;padding:0 8px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
-.stick .sq{flex:1;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;border-radius:10px;padding:4px 8px 4px 4px;transition:background-color .3s}
-@media (hover:hover){.stick .sq:hover{background:var(--n100)}.stick .sq:hover .arr{transform:translateX(3px);color:var(--g700)}}
-.stick .sq img{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none}
-.stick .sq b{display:block;font-weight:400;font-size:16px;line-height:1.2;color:var(--n900)}
-.stick .sq small{display:block;margin-top:2px;font-size:12px;line-height:1.3;color:var(--soft)}
-.stick .sq .arr{width:14px;height:14px;flex:none;margin-left:auto;color:var(--soft);transition:transform .45s var(--spring),color .3s}
+.stick-in{pointer-events:auto;width:min(520px,100%);height:64px;display:flex;align-items:center;gap:12px;padding:0 8px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
 .stick .btn{height:48px;padding:0 24px;flex:none}
+.stick .sdiv{width:1px;height:32px;background:var(--k10);flex:none}
+.stick .sq{flex:1;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;border-radius:10px;padding:4px 10px 4px 4px;transition:background-color .3s}
+@media (hover:hover){.stick .sq:hover{background:var(--n100)}.stick .sq:hover .arr{transform:translateX(3px)}.stick .sq:hover b{background-size:100% 1px}}
+.stick .sq img{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none}
+.stick .sq small{display:block;font-size:12px;line-height:1.3;color:var(--soft)}
+.stick .sq b{display:inline;font-weight:500;font-size:14px;line-height:1.3;color:var(--g700);background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .45s var(--ease)}
+.stick .sq .arr{width:14px;height:14px;flex:none;margin-left:auto;color:var(--g700);transition:transform .45s var(--spring)}
+.stick .sq-m{display:none}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
-@media (max-width:380px){.stick .sq img{display:none}.stick .sq{padding-left:10px}}
 @media (max-width:720px){
   .stick{padding:0 12px;transition-delay:.2s}
-  .stick-in{height:60px;gap:8px;padding:0 6px 0 4px}
-  .stick .sq{gap:10px;padding-right:4px}
-  .stick .sq img{width:36px;height:36px}
-  .stick .sq b{font-size:14px}
-  .stick .sq small{display:none}
-  .stick .sq b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .stick .sq>span{min-width:0}
-  .stick .sq .arr{display:none}
-  .stick .btn{height:44px;padding:0 18px;font-size:14px}
-  .has-stick .toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .stick-in{height:auto;gap:8px;padding:6px}
+  .stick .sdiv,.stick .sq{display:none}
+  .stick .btn,.stick .sq-m{display:inline-flex;flex:1 1 0;min-width:0;height:44px;padding:0 12px;font-size:14px}
+  .stick .sq-m{background:var(--n0)}
+  .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
 .toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -980,8 +976,10 @@ p,h1,h2,h3,ul{margin:0}
 
 <div class="stick" id="stick" aria-hidden="true">
   <div class="stick-in">
-    <button type="button" class="sq" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype"><img src="img/quiz.webp" alt="" loading="lazy"><span><b>Don’t know where to start?</b><small>Find a GLP-1 that fits your routine in 3 minutes</small></span><svg class="arr" viewBox="0 0 14 14"><use href="#i-chev"/></svg></button>
     <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+    <span class="sdiv" aria-hidden="true"></span>
+    <button type="button" class="sq" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype"><img src="img/quiz.webp" alt="" loading="lazy"><span><small>Don’t know where to start?</small><b>Take the 3-minute quiz</b></span><svg class="arr" viewBox="0 0 14 14"><use href="#i-chev"/></svg></button>
+    <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Take the quiz</button>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
