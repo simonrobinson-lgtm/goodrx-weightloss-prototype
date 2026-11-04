@@ -108,7 +108,7 @@ p,h1,h2,h3,ul{margin:0}
 .hero{position:relative;height:790px;max-height:calc(100svh + 40px);min-height:620px;overflow:hidden;background:#6a4a2d}
 .hero .bg{position:absolute;inset:-6% 0 0 0;will-change:transform}
 .hero .bg .media{position:absolute;inset:0}
-.hero .bg .media>img{object-position:50% 49%}
+.hero .bg .media>img{object-position:50% 56%}
 /* living light: soft window light drifting across the scene */
 .d-light{position:absolute;inset:-18%;z-index:1;pointer-events:none;mix-blend-mode:soft-light;opacity:0;will-change:transform,opacity;transition:opacity 2.5s var(--ease) .8s}
 .media.loaded .d-light{opacity:1}
@@ -124,7 +124,7 @@ p,h1,h2,h3,ul{margin:0}
 .hero.off .d-light,.hero.off .d-light>span,.how.off .marker .pulse,.subsec.off .hot .wave{animation-play-state:paused}
 @keyframes lightDrift{0%{transform:translate3d(-4%,-2%,0)}100%{transform:translate3d(5%,3%,0)}}
 @keyframes lightBreathe{0%,100%{opacity:.55}45%{opacity:1}70%{opacity:.7}}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.5) 15.4%,rgba(0,0,0,0) 47.7%);mix-blend-mode:multiply;pointer-events:none;z-index:2}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.4) 15.4%,rgba(0,0,0,0) 47.7%);mix-blend-mode:multiply;pointer-events:none;z-index:2}
 .hero .grain::after{opacity:.4}
 .hero-in{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:center}
 .hero-copy{width:429px;max-width:100%;display:flex;flex-direction:column;gap:32px;color:var(--y100)}
@@ -752,7 +752,7 @@ p,h1,h2,h3,ul{margin:0}
   body::before{display:none}
   /* hero */
   .hero{height:555px;min-height:0;max-height:none}
-  .hero .bg .media>img{top:auto;bottom:0;height:118%;object-position:53% 100%}
+  .hero .bg .media>img{top:auto;bottom:0;height:118%;object-position:51.5% 100%}
   .hero .shade{background:linear-gradient(0deg,rgba(0,0,0,.4) 26.9%,rgba(0,0,0,0) 46.4%)}
   .hero-in{justify-content:flex-end;padding:0 20px 20px}
   .hero-in::before{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;z-index:-1;background:linear-gradient(0deg,rgba(0,0,0,.2) 27.9%,rgba(0,0,0,0));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask:linear-gradient(0deg,#000 60%,transparent);mask:linear-gradient(0deg,#000 60%,transparent)}
@@ -1005,7 +1005,7 @@ p,h1,h2,h3,ul{margin:0}
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-  <div class="bg" data-par="0.18"><div class="media grain eager" style="--lq:url({{lq:hero2}})"><img data-src="img/hero2.webp" alt="A smiling woman kneeling on a rug in her living room, playing with her shaggy dog" fetchpriority="high"></div></div>
+  <div class="bg" data-par="0.18"><div class="media grain eager" style="--lq:url({{lq:hero3}})"><img data-src="img/hero3.webp" alt="A smiling woman kneeling on a rug in her living room, playing with her shaggy dog" fetchpriority="high"></div></div>
   <div class="shade"></div>
   <div class="wrap hero-in">
     <div class="hero-copy">
