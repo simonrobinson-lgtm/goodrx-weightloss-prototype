@@ -619,7 +619,7 @@ p,h1,h2,h3,ul{margin:0}
 .cj{position:relative;z-index:1;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
 .cj-card{--cjIn:1;--cjOut:0;position:relative;max-width:1408px;margin:0 auto;background:var(--g700);border-radius:16px;overflow:hidden;isolation:isolate;
   clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc(16px + (1 - var(--cjIn)) * 24px));
-  transform:translate3d(0,calc(var(--cjOut) * 26vh),0) scale(calc(1 - var(--cjOut) * .07));transform-origin:50% 100%;will-change:transform,clip-path}
+  transform:scale(calc(1 - var(--cjOut) * .06));transform-origin:50% 100%;will-change:transform,clip-path}
 .cj-card::after{content:"";position:absolute;inset:0;background:#0b1f1d;opacity:calc(var(--cjOut) * .55);pointer-events:none;z-index:9}
 /* dappled sunlight drifting across the green, standing in for the Figma light video */
 .cj-sun{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
