@@ -487,7 +487,9 @@ p,h1,h2,h3,ul{margin:0}
 .faq{padding-block:80px 56px;display:flex;justify-content:space-between;gap:48px}
 .faq .l{width:432px;flex:none;display:flex;flex-direction:column;gap:24px;align-self:flex-start;position:sticky;top:120px}
 .faq .l .t{display:flex;flex-direction:column;gap:12px}
+.faq .l h2,.guides .head h2{text-wrap:wrap}
 .faq .l h2{color:var(--dark)}
+.faq .acc .qa:first-child>button{padding-top:0}
 .faq .l p{color:var(--soft);width:420px;max-width:100%}
 .faq .r{width:768px;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
 .dd{position:relative}
@@ -510,7 +512,6 @@ p,h1,h2,h3,ul{margin:0}
 .pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:11.3px;height:1px;margin:-.5px 0 0 -5.65px;background:var(--n900);border-radius:1px;transition:transform .5s var(--ease)}
 .pm::after{transform:rotate(90deg)}
 .qa.open .pm::after{transform:rotate(0)}
-.qa.open .pm{background:var(--n0)}
 .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
 .qa.open .ans{grid-template-rows:1fr}
 .ans>div{overflow:hidden}
@@ -884,7 +885,6 @@ p,h1,h2,h3,ul{margin:0}
   .testi{padding:56px 0;gap:40px}
   .testi .sec-head{padding:0 20px;gap:8px}
   .testi .sec-head p{font-size:14px}
-  .testi .sec-head br{display:none}
   .tmarq{scroll-snap-type:x mandatory}
   .ttrack{padding:0 calc(50vw - 140px)}
   .tcard{width:280px;height:274px;scroll-snap-align:center}
@@ -902,6 +902,10 @@ p,h1,h2,h3,ul{margin:0}
   /* FAQ */
   .faq{padding:40px 20px 56px;gap:48px}
   .faq .l p{font-size:13px}
+  .faq .l .t{max-width:333px}
+  .guides .head h2{max-width:300px}
+  .cta-card .t h2{max-width:320px}
+  .faq .acc .qa:first-child>button{padding-top:24px}
   .qa>button{padding:24px 0;gap:16px}
   .qa>button span:first-child{font-size:20px}
   .pm{width:32px;height:32px}
@@ -1173,13 +1177,8 @@ p,h1,h2,h3,ul{margin:0}
   <div class="l">
     <div class="t"><h2 class="h-xl split">Honest answers to real questions</h2>
     <p data-r>No hidden costs, no glossing over the hard parts.<br>Just what you need to know to decide.</p></div>
-    <a href="#" class="tlink" data-r style="color:var(--g700)" data-toast><span>View all FAQs</span><svg><use href="#i-chev"/></svg></a>
   </div>
   <div class="r">
-    <div class="dd" id="dd" data-r>
-      <button class="dd-btn label" aria-haspopup="listbox" aria-expanded="false" id="ddBtn"><span id="ddLabel">Most popular</span><svg><use href="#i-down"/></svg></button>
-      <div class="dd-menu" role="listbox" id="ddMenu"></div>
-    </div>
     <div class="acc" id="acc"></div>
   </div>
 </section>
@@ -1193,19 +1192,19 @@ p,h1,h2,h3,ul{margin:0}
   </div>
   <div class="cards3">
     <a href="#" class="acard" data-r style="--i:0" data-toast="Articles aren’t part of this prototype">
+      <div class="media grain" style="--lq:url({{lq:a3}})"><img data-src="img/a3.webp" alt="A hand picking up a pink pill among white and pink GLP-1 pills"></div><div class="shade"></div>
+      <span class="chip sm">7 min</span>
+      <div class="tt"><h3>Considering <span style="white-space:nowrap">GLP-1</span> Pills for Weight Loss?</h3><div><span>8 Things to Know Before You Start</span></div></div>
+    </a>
+    <a href="#" class="acard" data-r style="--i:1" data-toast="Articles aren’t part of this prototype">
       <div class="media grain" style="--lq:url({{lq:a1}})"><img data-src="img/a1.webp" alt="Close-up of a face in dappled sunlight"></div><div class="shade"></div>
       <span class="chip sm">7 min</span>
       <div class="tt"><h3>How to Start a <span style="white-space:nowrap">GLP-1</span>: What to Expect in the First Weeks</h3><div><span>From dosing to side effects</span></div></div>
     </a>
-    <a href="#" class="acard" data-r style="--i:1" data-toast="Articles aren’t part of this prototype">
+    <a href="#" class="acard" data-r style="--i:2" data-toast="Articles aren’t part of this prototype">
       <div class="media grain" style="--lq:url({{lq:a2}})"><img data-src="img/a2.webp" alt="Wegovy, Wegovy HD and Zepbound injection pens"></div><div class="shade"></div>
       <span class="chip sm">9 min</span>
       <div class="tt"><h3><span style="white-space:nowrap">GLP-1</span> Injections: What to Consider Before Using GLP-1s</h3><div><span>The key things to know before your first injection</span></div></div>
-    </a>
-    <a href="#" class="acard" data-r style="--i:2" data-toast="Articles aren’t part of this prototype">
-      <div class="media grain" style="--lq:url({{lq:a3}})"><img data-src="img/a3.webp" alt="A hand picking up a pink pill among white and pink GLP-1 pills"></div><div class="shade"></div>
-      <span class="chip sm">7 min</span>
-      <div class="tt"><h3>Considering <span style="white-space:nowrap">GLP-1</span> Pills for Weight Loss?</h3><div><span>8 Things to Know Before You Start</span></div></div>
     </a>
   </div>
 </section>
@@ -1413,16 +1412,11 @@ PEOPLE.forEach((p,i)=>{
 /* ---------- build FAQ ---------- */
 const acc=$('#acc'), ddMenu=$('#ddMenu');
 function renderFaq(cat){
-  acc.innerHTML=FAQ[cat].map(([q,a],i)=>`<div class="qa${i===0?' open':''}"><button aria-expanded="${i===0}" aria-controls="ans${i}" id="q${i}"><span>${q}</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="ans${i}" role="region" aria-labelledby="q${i}"><div><p>${a}</p></div></div></div>`).join('');
+  const o0=!isM();acc.innerHTML=FAQ[cat].map(([q,a],i)=>`<div class="qa${i===0&&o0?' open':''}"><button aria-expanded="${i===0&&o0}" aria-controls="ans${i}" id="q${i}"><span>${q}</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="ans${i}" role="region" aria-labelledby="q${i}"><div><p>${a}</p></div></div></div>`).join('');
   $$('.qa',acc).forEach((el,i)=>{el.style.opacity=0;el.style.transform='translateY(14px)';el.style.transition=`opacity .6s var(--ease) ${i*60}ms,transform .7s var(--ease) ${i*60}ms`;requestAnimationFrame(()=>requestAnimationFrame(()=>{el.style.opacity=1;el.style.transform='none'}))});
 }
-Object.keys(FAQ).forEach(c=>ddMenu.insertAdjacentHTML('beforeend',`<button role="option" aria-selected="${c==='Most popular'}" data-c="${c}">${c}</button>`));
 renderFaq('Most popular');
 acc.addEventListener('click',e=>{const b=e.target.closest('.qa>button');if(!b)return;const qa=b.parentElement,open=!qa.classList.contains('open');$$('.qa',acc).forEach(x=>{x.classList.remove('open');x.firstElementChild.setAttribute('aria-expanded','false')});if(open){qa.classList.add('open');b.setAttribute('aria-expanded','true')}});
-const dd=$('#dd'),ddBtn=$('#ddBtn');
-ddBtn.addEventListener('click',e=>{e.stopPropagation();const o=dd.classList.toggle('open');ddBtn.setAttribute('aria-expanded',o)});
-ddMenu.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('button',ddMenu).forEach(x=>x.setAttribute('aria-selected',x===b));$('#ddLabel').textContent=b.dataset.c;dd.classList.remove('open');ddBtn.setAttribute('aria-expanded','false');renderFaq(b.dataset.c)});
-document.addEventListener('click',()=>{dd.classList.remove('open');ddBtn.setAttribute('aria-expanded','false')});
 
 /* ---------- line illustrations that draw themselves ---------- */
 const NS='http://www.w3.org/2000/svg';
