@@ -182,7 +182,7 @@ p,h1,h2,h3,ul{margin:0}
 .cards4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .pcard{background:var(--n0);border-radius:16px;padding:8px 8px 24px;display:flex;flex-direction:column;gap:20px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
 @media (hover:hover){.pcard:hover{transform:translateY(-4px)}}
-.pcard .media{height:auto;aspect-ratio:304/340;max-width:100%;border-radius:8px;background:var(--n400)}
+.pcard .media{height:auto;aspect-ratio:1;max-width:100%;border-radius:8px;background:var(--n400)}
 .pcard .media>img{transition:opacity .9s var(--ease),transform 1.6s var(--ease),filter .9s var(--ease)}
 .pcard .swap{position:absolute;inset:0;z-index:2;pointer-events:none}
 .pcard .swap i,.pcard .swap img{position:absolute;inset:0;width:100%;height:100%;clip-path:inset(100% 0 0 0);transition:clip-path .55s cubic-bezier(.7,0,.25,1)}
@@ -588,13 +588,17 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
-.stick-in{pointer-events:auto;display:flex;align-items:center;gap:8px;padding:8px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
-.stick .btn{height:48px;padding:0 24px;min-width:176px;flex:none}
+.stick-in{pointer-events:auto;width:min(560px,100%);height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
+.stick-label{font-size:16px;color:var(--n900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stick-btns{display:flex;align-items:center;gap:8px;flex:none}
+.stick .btn{height:48px;padding:0 24px;flex:none}
 .stick .sq-m{background:var(--n0)}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 @media (max-width:720px){
   .stick{padding:0 12px;transition-delay:.2s}
-  .stick-in{width:100%;padding:6px}
+  .stick-in{width:100%;height:auto;padding:6px}
+  .stick-label{display:none}
+  .stick-btns{width:100%;gap:8px}
   .stick .btn{flex:1 1 0;min-width:0;height:44px;padding:0 12px;font-size:14px}
   .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
@@ -607,7 +611,7 @@ p,h1,h2,h3,ul{margin:0}
 .cj{position:relative;z-index:1;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
 .cj-card{--cjIn:1;--cjOut:0;position:relative;max-width:1408px;margin:0 auto;background:var(--g700);border-radius:16px;overflow:hidden;isolation:isolate;
   clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc(16px + (1 - var(--cjIn)) * 24px));
-  transform:scale(calc(1 - var(--cjOut) * .06));transform-origin:50% 100%;will-change:transform,clip-path}
+  will-change:clip-path}
 .cj-sun::after{content:"";position:absolute;inset:0;background:url(img/grain.png) 0 0/256px;mix-blend-mode:soft-light;opacity:.22}
 .cj-card::after{content:"";position:absolute;inset:0;background:#0b1f1d;opacity:calc(var(--cjOut) * .55);pointer-events:none;z-index:9}
 /* dappled sunlight drifting across the green, standing in for the Figma light video */
@@ -791,7 +795,7 @@ p,h1,h2,h3,ul{margin:0}
   .cards4::-webkit-scrollbar,.how-cards::-webkit-scrollbar,.pmed::-webkit-scrollbar,.cards3::-webkit-scrollbar{display:none}
   .pcard{flex:none;width:240px;padding:4px 4px 20px;gap:12px;scroll-snap-align:start}
   @media (hover:hover){.pcard:hover{transform:none}}
-  .pcard .media{aspect-ratio:1;border-radius:12px}
+  .pcard .media{border-radius:12px}
   .pcard .chip{left:8px;top:8px}
   .pcard .tx{padding:0 8px}
   .pcard .nm h3{font-size:20px}
@@ -975,8 +979,11 @@ p,h1,h2,h3,ul{margin:0}
 
 <div class="stick" id="stick" aria-hidden="true">
   <div class="stick-in">
-    <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
-    <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Take the quiz</button>
+    <span class="stick-label">A plan built for you</span>
+    <div class="stick-btns">
+      <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Find your best fit</button>
+      <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
