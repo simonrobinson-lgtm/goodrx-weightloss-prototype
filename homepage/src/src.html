@@ -20,11 +20,12 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{background:var(--n100);-webkit-text-size-adjust:100%}
+html{background:var(--n100);-webkit-text-size-adjust:100%;min-height:100%}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{margin:0;background:var(--n100);color:var(--ink);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+body{margin:0;background:var(--n100);color:var(--ink);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip;min-height:100dvh}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--n100)}
+body::after{content:"";position:fixed;inset:auto 0 0;height:env(safe-area-inset-bottom,0px);z-index:10;background:var(--n100)}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0}
 input{-webkit-appearance:none;appearance:none;border-radius:0}
@@ -393,13 +394,16 @@ p,h1,h2,h3,ul{margin:0}
 .psum b{font-weight:400;font-size:16.8px;line-height:1.2;color:var(--g700)}
 .psum p{font-size:14.7px;color:var(--soft)}
 /* phase panels: photo with a floating UI card */
-.ppanel{position:relative;height:480px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;opacity:0;transform:translateY(36px) scale(.98);transition:opacity .5s var(--ease),transform .7s var(--ease)}
-.pp.on .ppanel{opacity:1;transform:none;transition-duration:.9s,1.1s;transition-delay:.12s}
+.ppanel{position:relative;height:480px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;opacity:0;clip-path:inset(100% 0 0 0);transition:opacity .4s var(--ease),clip-path .9s cubic-bezier(.65,0,.35,1)}
+.pp.on .ppanel{opacity:1;clip-path:inset(0 0 0 0);transition-duration:.5s,1.15s;transition-delay:.12s}
+.ppanel::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 48%,transparent 66%);transform:translateX(-120%);mix-blend-mode:soft-light}
+.pp.on .ppanel::after{animation:panelSheen 1.1s ease-out .6s 1}
+@keyframes panelSheen{from{transform:translateX(-120%)}to{transform:translateX(120%)}}
 .ppanel>.media{position:absolute;inset:0}
 .ppanel.app{height:auto;aspect-ratio:760/542}
 .ppanel.app>.media>img{object-position:50% 0}
 .ppanel>.media>img{transform:scale(1.08)}
-.ppanel>.media.loaded>img{transform:scale(1.08);transition:opacity .9s var(--ease),transform 1.8s var(--ease)}
+.ppanel>.media.loaded>img{transform:scale(1.08);transition:opacity .9s var(--ease),transform 2.1s var(--ease)}
 .pp.on .ppanel>.media.loaded>img{transform:none}
 .ppanel .tint{position:absolute;inset:0;z-index:2;background:#b4801f;mix-blend-mode:color;opacity:.55;pointer-events:none}
 .pf{position:relative;z-index:3;opacity:0;transform:translateY(22px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
@@ -595,11 +599,12 @@ p,h1,h2,h3,ul{margin:0}
 .stick .sq-m{background:var(--n0)}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 @media (max-width:720px){
-  .stick{padding:0 12px;transition-delay:.2s}
-  .stick-in{width:100%;height:auto;padding:6px}
+  .stick{left:0;right:0;bottom:0;padding:0;transition-delay:.2s}
+  .stick::before{content:"";position:absolute;left:0;right:0;bottom:0;top:-56px;z-index:-1;background:linear-gradient(to bottom,transparent,var(--n100) 56px);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 56px);mask-image:linear-gradient(to bottom,transparent,#000 56px)}
+  .stick-in{width:100%;height:auto;padding:0 var(--gut) calc(16px + env(safe-area-inset-bottom,0px));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
   .stick-label{display:none}
   .stick-btns{width:100%;gap:8px}
-  .stick .btn{flex:1 1 0;min-width:0;height:44px;padding:0 12px;font-size:14px}
+  .stick .btn{flex:1 1 0;min-width:0;height:48px;padding:0 16px;font-size:14px}
   .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
 .toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
@@ -608,9 +613,9 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- responsive ---------- */
 
 /* ---------- care journey (green membership story) ---------- */
-.cj{position:relative;z-index:1;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
-.cj-card{--cjIn:1;--cjOut:0;position:relative;max-width:1408px;margin:0 auto;background:var(--g700);border-radius:16px;overflow:hidden;isolation:isolate;
-  clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc(16px + (1 - var(--cjIn)) * 24px));
+.cj{position:relative;z-index:1;padding:0}
+.cj-card{--cjIn:1;--cjOut:0;position:relative;background:var(--g700);overflow:hidden;isolation:isolate;
+  clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc((1 - var(--cjIn)) * 24px));
   will-change:clip-path}
 .cj-sun::after{content:"";position:absolute;inset:0;background:url(img/grain.png) 0 0/256px;mix-blend-mode:soft-light;opacity:.22}
 .cj-card::after{content:"";position:absolute;inset:0;background:#0b1f1d;opacity:calc(var(--cjOut) * .55);pointer-events:none;z-index:9}
@@ -648,9 +653,6 @@ p,h1,h2,h3,ul{margin:0}
 .cj-t1{left:59.66%;top:45.06%}
 .cj-t2{left:12.003%;top:78.62%}
 .cj-t2 .cj-p{font-size:max(13px,.994cqw);line-height:1.5}
-.cj-t2 .btn{margin-top:max(8px,.852cqw)}
-.btn-yo{border:1px solid var(--y100);color:var(--y100)}
-@media (hover:hover){.btn-yo:hover{background:var(--y100);color:var(--g800)}.btn-yo:hover::before{opacity:0}}
 .cj-box .em-wrap .scrib{top:calc(100% - .06em);height:.3em}
 .cj-ph{position:absolute;z-index:2;margin:0;width:38.636%;height:26.12%;border-radius:16px;overflow:hidden;background:var(--g800);transform-origin:50% 60%;transform:translate3d(0,calc((1 - var(--p)) * 80px),0) scale(calc(.9 + var(--p) * .1))}
 .cj-ph .media{position:absolute;inset:-9% 0;background:var(--g800);transform:translate3d(0,var(--py,0px),0);will-change:transform}
@@ -724,7 +726,6 @@ p,h1,h2,h3,ul{margin:0}
   .cj-mbtn{display:inline-flex;align-self:stretch}
   .cj-box .btn{height:40px;font-size:12px;padding:0 16px}
   .cj-t{gap:20px}
-  .cj-t2 .btn{align-self:stretch;margin-top:12px;border-width:.5px}
   .cj-ph{position:relative;left:auto;top:auto;width:clamp(204px,52%,320px);height:auto;aspect-ratio:204/203;border-radius:12px;margin-bottom:-48px}
   .cj-ph2{align-self:flex-end}
   .cj-ph1 .media>img{object-position:50% 30%}
@@ -1096,7 +1097,6 @@ p,h1,h2,h3,ul{margin:0}
       <div class="cj-t cj-t2 cj-r">
         <h3 class="display">Someone in your corner, <span class="em-wrap"><em>at every step</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
         <p class="cj-p">A question about your dose, a tough week, a plateau—your healthcare team is just a message away, 7 days a week.</p>
-        <a href="#" class="btn btn-yo" data-toast="Membership details aren’t part of this prototype">See membership details</a>
       </div>
       <div class="cj-dots" aria-hidden="true"><span class="cj-dot"></span><span class="cj-dot"></span><span class="cj-dot"></span><span class="cj-dot"></span></div>
       <div class="cj-lines" id="cjLines" aria-hidden="true"></div>
@@ -1167,7 +1167,6 @@ p,h1,h2,h3,ul{margin:0}
   <div class="tmarq" id="tmarq" data-lenis-prevent>
     <div class="ttrack" id="ttrack"></div>
   </div>
-  <a href="#" class="btn btn-g m-only" data-r data-toast="Sign-up isn’t part of this prototype">Start your journey</a>
 </section>
 
 <!-- FAQ -->
