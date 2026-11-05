@@ -27,6 +27,8 @@ html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 body{margin:0;background:var(--n100);color:var(--ink);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip;min-height:100dvh}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--n100)}
+:root{--sab:env(safe-area-inset-bottom,0px)}
+html.ios-tb{--sab:calc(env(safe-area-inset-bottom,0px) + 58px)}
 body::after{content:"";position:fixed;inset:auto 0 0;height:env(safe-area-inset-bottom,0px);z-index:10;background:var(--n100)}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0}
@@ -591,22 +593,22 @@ p,h1,h2,h3,ul{margin:0}
 
 /* toast */
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
-.stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
+.stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + var(--sab));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
 .stick-in{pointer-events:auto;width:min(588px,100%);height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
 .stick-label{font-size:14px;line-height:1.4;color:var(--n900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stick-btns{display:flex;align-items:center;gap:8px;flex:none}
 .stick .btn{height:48px;padding:0 20px;flex:none;min-width:156px}
 .stick .sq-m{background:var(--n0)}
-.has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.has-stick .toast{bottom:calc(96px + var(--sab))}
 @media (max-width:720px){
   .stick{left:0;right:0;bottom:0;padding:0;transition-delay:.2s}
   .stick::before{content:"";position:absolute;left:0;right:0;bottom:0;top:-56px;z-index:-1;background:linear-gradient(to bottom,transparent,var(--n100) 56px);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 56px);mask-image:linear-gradient(to bottom,transparent,#000 56px)}
-  .stick-in{width:100%;height:auto;padding:0 var(--gut) calc(16px + env(safe-area-inset-bottom,0px));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .stick-in{width:100%;height:auto;padding:0 var(--gut) calc(16px + var(--sab));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
   .stick-label{display:none}
   .stick-btns{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .stick .btn{flex:1 1 0;width:auto;min-width:0;height:48px;padding:0 16px;font-size:14px}
-  .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .has-stick .toast{bottom:calc(84px + var(--sab))}
 }
 /* ---------- compare medications (modal on desktop, sheet on phones) ---------- */
 .cmpm{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:24px 12px;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;pointer-events:none;transition:visibility 0s .55s}
@@ -691,7 +693,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 }
 @media (max-width:720px){
   .cmpm{padding:max(56px,env(safe-area-inset-top,0px)) 0 0;align-items:stretch}
-  .cmpm-p{border-radius:16px 16px 0 0;padding:32px 20px calc(24px + env(safe-area-inset-bottom,0px));min-height:100%;transform:translate3d(0,100%,0)}
+  .cmpm-p{border-radius:16px 16px 0 0;padding:32px 20px calc(24px + var(--sab));min-height:100%;transform:translate3d(0,100%,0)}
   .cmpm-hd h2{font-size:28px}
   .cmpm-hd p{margin-top:8px;font-size:14px;max-width:270px}
   .cmpm-tabs{margin:44px -20px 0;padding:0 20px}
@@ -706,7 +708,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   .cmpm-ft{font-size:13px}
 }
 @media (prefers-reduced-motion:reduce){.cmpm-p,.cmpm-bg,.cmpc,.cmpa,.cmpc .tp>div,.cmpc .ck svg{transition:none;animation:none}}
-.toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
+.toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + var(--sab));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- responsive ---------- */
@@ -1062,6 +1064,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   .scrib{clip-path:none}
 }
 </style>
+<script>(()=>{const u=navigator.userAgent,v=+(u.match(/Version\/(\d+)/)||[])[1];if(/iPhone|iPod/.test(u)&&/Safari/.test(u)&&!/CriOS|FxiOS|EdgiOS|OPiOS|GSA/.test(u)&&v>=26&&!navigator.standalone&&!matchMedia("(display-mode: standalone)").matches)document.documentElement.classList.add("ios-tb")})()</script>
 <script>try{var d=document.documentElement,u=navigator.userAgent;if(/AppleWebKit/.test(u)&&!/(Chrome|Chromium|Edg)\//.test(u))d.classList.add("webkit");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("intro")}catch(e){}</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">

@@ -376,7 +376,7 @@
 .rcard:not(.on) .tt{transition:padding .4s var(--ease)}
 @media (hover:hover){.rcard:not(.on):hover .tt{padding-right:72px}}
 /* sticky get-started */
-.stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
+.stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + var(--sab));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
 .stick-in{pointer-events:auto;width:min(560px,100%);height:64px;display:flex;align-items:center;gap:20px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n100);box-shadow:0 3px 6px rgba(36,36,36,.08),-1px 12px 24px rgba(36,36,36,.12)}
 .stick .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;line-height:1.2}
@@ -387,7 +387,7 @@
 .stick .pr .num{font-size:22px;line-height:1}
 .stick .pr small{font-size:12px}
 .stick .btn{height:48px;padding:0 20px}
-.has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.has-stick .toast{bottom:calc(96px + var(--sab))}
 .wcard .wchip,.wcard .flip,.wcard .wq{display:none}
 @media (max-width:860px){
   .rcards{flex-direction:column;height:auto;gap:8px}
@@ -473,17 +473,18 @@
   .xcard .nm b{font-size:20px}
   .xcard .pr .v .num{font-size:20px}
   .stick{padding:0 20px;transition-delay:.6s}
-  .foot{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  .foot{padding-bottom:calc(80px + var(--sab))}
   .stick-in{width:100%;height:auto;padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
   .stick .nm,.stick .pr{display:none}
   .stick .btn{width:100%;height:48px;font-size:14px;box-shadow:0 10px 24px -8px rgba(18,17,15,.35)}
-  .has-stick .toast{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  .has-stick .toast{bottom:calc(80px + var(--sab))}
 }
 @media (prefers-reduced-motion:reduce){
   .intro .gal-main{clip-path:none}
   .dcard.pre .crow{opacity:1;transform:none}
 }
 </style>
+<script>(()=>{const u=navigator.userAgent,v=+(u.match(/Version\/(\d+)/)||[])[1];if(/iPhone|iPod/.test(u)&&/Safari/.test(u)&&!/CriOS|FxiOS|EdgiOS|OPiOS|GSA/.test(u)&&v>=26&&!navigator.standalone&&!matchMedia("(display-mode: standalone)").matches)document.documentElement.classList.add("ios-tb")})()</script>
 <script>try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro")}catch(e){}</script>
 
 {{svgdefs}}
