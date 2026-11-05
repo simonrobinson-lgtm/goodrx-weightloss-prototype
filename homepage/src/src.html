@@ -20,11 +20,12 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{background:var(--n100);-webkit-text-size-adjust:100%}
+html{background:var(--n100);-webkit-text-size-adjust:100%;min-height:100%}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{margin:0;background:var(--n100);color:var(--ink);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+body{margin:0;background:var(--n100);color:var(--ink);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip;min-height:100dvh}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--n100)}
+body::after{content:"";position:fixed;inset:auto 0 0;height:env(safe-area-inset-bottom,0px);z-index:10;background:var(--n100)}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0}
 input{-webkit-appearance:none;appearance:none;border-radius:0}
@@ -182,7 +183,7 @@ p,h1,h2,h3,ul{margin:0}
 .cards4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .pcard{background:var(--n0);border-radius:16px;padding:8px 8px 24px;display:flex;flex-direction:column;gap:20px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
 @media (hover:hover){.pcard:hover{transform:translateY(-4px)}}
-.pcard .media{height:auto;aspect-ratio:304/340;max-width:100%;border-radius:8px;background:var(--n400)}
+.pcard .media{height:auto;aspect-ratio:1;max-width:100%;border-radius:8px;background:var(--n400)}
 .pcard .media>img{transition:opacity .9s var(--ease),transform 1.6s var(--ease),filter .9s var(--ease)}
 .pcard .swap{position:absolute;inset:0;z-index:2;pointer-events:none}
 .pcard .swap i,.pcard .swap img{position:absolute;inset:0;width:100%;height:100%;clip-path:inset(100% 0 0 0);transition:clip-path .55s cubic-bezier(.7,0,.25,1)}
@@ -393,13 +394,16 @@ p,h1,h2,h3,ul{margin:0}
 .psum b{font-weight:400;font-size:16.8px;line-height:1.2;color:var(--g700)}
 .psum p{font-size:14.7px;color:var(--soft)}
 /* phase panels: photo with a floating UI card */
-.ppanel{position:relative;height:480px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;opacity:0;transform:translateY(36px) scale(.98);transition:opacity .5s var(--ease),transform .7s var(--ease)}
-.pp.on .ppanel{opacity:1;transform:none;transition-duration:.9s,1.1s;transition-delay:.12s}
+.ppanel{position:relative;height:480px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;opacity:0;clip-path:inset(100% 0 0 0);transition:opacity .4s var(--ease),clip-path .9s cubic-bezier(.65,0,.35,1)}
+.pp.on .ppanel{opacity:1;clip-path:inset(0 0 0 0);transition-duration:.5s,1.15s;transition-delay:.12s}
+.ppanel::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 48%,transparent 66%);transform:translateX(-120%);mix-blend-mode:soft-light}
+.pp.on .ppanel::after{animation:panelSheen 1.1s ease-out .6s 1}
+@keyframes panelSheen{from{transform:translateX(-120%)}to{transform:translateX(120%)}}
 .ppanel>.media{position:absolute;inset:0}
 .ppanel.app{height:auto;aspect-ratio:760/542}
 .ppanel.app>.media>img{object-position:50% 0}
 .ppanel>.media>img{transform:scale(1.08)}
-.ppanel>.media.loaded>img{transform:scale(1.08);transition:opacity .9s var(--ease),transform 1.8s var(--ease)}
+.ppanel>.media.loaded>img{transform:scale(1.08);transition:opacity .9s var(--ease),transform 2.1s var(--ease)}
 .pp.on .ppanel>.media.loaded>img{transform:none}
 .ppanel .tint{position:absolute;inset:0;z-index:2;background:#b4801f;mix-blend-mode:color;opacity:.55;pointer-events:none}
 .pf{position:relative;z-index:3;opacity:0;transform:translateY(22px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
@@ -588,14 +592,19 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
-.stick-in{pointer-events:auto;display:flex;align-items:center;gap:8px;padding:8px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
-.stick .btn{height:48px;padding:0 24px;min-width:176px;flex:none}
+.stick-in{pointer-events:auto;width:min(560px,100%);height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
+.stick-label{font-size:16px;color:var(--n900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stick-btns{display:flex;align-items:center;gap:8px;flex:none}
+.stick .btn{height:48px;padding:0 24px;flex:none}
 .stick .sq-m{background:var(--n0)}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 @media (max-width:720px){
-  .stick{padding:0 12px;transition-delay:.2s}
-  .stick-in{width:100%;padding:6px}
-  .stick .btn{flex:1 1 0;min-width:0;height:44px;padding:0 12px;font-size:14px}
+  .stick{left:0;right:0;bottom:0;padding:0;transition-delay:.2s}
+  .stick::before{content:"";position:absolute;left:0;right:0;bottom:0;top:-56px;z-index:-1;background:linear-gradient(to bottom,transparent,var(--n100) 56px);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 56px);mask-image:linear-gradient(to bottom,transparent,#000 56px)}
+  .stick-in{width:100%;height:auto;padding:0 var(--gut) calc(16px + env(safe-area-inset-bottom,0px));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .stick-label{display:none}
+  .stick-btns{width:100%;gap:8px}
+  .stick .btn{flex:1 1 0;min-width:0;height:48px;padding:0 16px;font-size:14px}
   .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
 .toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
@@ -604,10 +613,10 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- responsive ---------- */
 
 /* ---------- care journey (green membership story) ---------- */
-.cj{position:relative;z-index:1;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
-.cj-card{--cjIn:1;--cjOut:0;position:relative;max-width:1408px;margin:0 auto;background:var(--g700);border-radius:16px;overflow:hidden;isolation:isolate;
-  clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc(16px + (1 - var(--cjIn)) * 24px));
-  transform:scale(calc(1 - var(--cjOut) * .06));transform-origin:50% 100%;will-change:transform,clip-path}
+.cj{position:relative;z-index:1;padding:0}
+.cj-card{--cjIn:1;--cjOut:0;position:relative;background:var(--g700);overflow:hidden;isolation:isolate;
+  clip-path:inset(0 calc((1 - var(--cjIn)) * 5%) round calc((1 - var(--cjIn)) * 24px));
+  will-change:clip-path}
 .cj-sun::after{content:"";position:absolute;inset:0;background:url(img/grain.png) 0 0/256px;mix-blend-mode:soft-light;opacity:.22}
 .cj-card::after{content:"";position:absolute;inset:0;background:#0b1f1d;opacity:calc(var(--cjOut) * .55);pointer-events:none;z-index:9}
 /* dappled sunlight drifting across the green, standing in for the Figma light video */
@@ -639,14 +648,11 @@ p,h1,h2,h3,ul{margin:0}
 .cj-h .display{margin-top:calc(max(12px,.852cqw) - max(18px,1.705cqw))}
 .cj-p{font-size:max(14px,1.136cqw);line-height:1.4;color:#f0ece3;opacity:.7}
 .cj-h .cj-p{max-width:max(300px,25.92cqw)}
-.cj-mbtn{display:none}
+.cj-mbtn{display:inline-flex}
 .cj-t{position:absolute;z-index:4;width:29.83%;display:flex;flex-direction:column;align-items:flex-start;gap:max(16px,1.42cqw)}
 .cj-t1{left:59.66%;top:45.06%}
 .cj-t2{left:12.003%;top:78.62%}
 .cj-t2 .cj-p{font-size:max(13px,.994cqw);line-height:1.5}
-.cj-t2 .btn{margin-top:max(8px,.852cqw)}
-.btn-yo{border:1px solid var(--y100);color:var(--y100)}
-@media (hover:hover){.btn-yo:hover{background:var(--y100);color:var(--g800)}.btn-yo:hover::before{opacity:0}}
 .cj-box .em-wrap .scrib{top:calc(100% - .06em);height:.3em}
 .cj-ph{position:absolute;z-index:2;margin:0;width:38.636%;height:26.12%;border-radius:16px;overflow:hidden;background:var(--g800);transform-origin:50% 60%;transform:translate3d(0,calc((1 - var(--p)) * 80px),0) scale(calc(.9 + var(--p) * .1))}
 .cj-ph .media{position:absolute;inset:-9% 0;background:var(--g800);transform:translate3d(0,var(--py,0px),0);will-change:transform}
@@ -720,7 +726,6 @@ p,h1,h2,h3,ul{margin:0}
   .cj-mbtn{display:inline-flex;align-self:stretch}
   .cj-box .btn{height:40px;font-size:12px;padding:0 16px}
   .cj-t{gap:20px}
-  .cj-t2 .btn{align-self:stretch;margin-top:12px;border-width:.5px}
   .cj-ph{position:relative;left:auto;top:auto;width:clamp(204px,52%,320px);height:auto;aspect-ratio:204/203;border-radius:12px;margin-bottom:-48px}
   .cj-ph2{align-self:flex-end}
   .cj-ph1 .media>img{object-position:50% 30%}
@@ -791,7 +796,7 @@ p,h1,h2,h3,ul{margin:0}
   .cards4::-webkit-scrollbar,.how-cards::-webkit-scrollbar,.pmed::-webkit-scrollbar,.cards3::-webkit-scrollbar{display:none}
   .pcard{flex:none;width:240px;padding:4px 4px 20px;gap:12px;scroll-snap-align:start}
   @media (hover:hover){.pcard:hover{transform:none}}
-  .pcard .media{aspect-ratio:1;border-radius:12px}
+  .pcard .media{border-radius:12px}
   .pcard .chip{left:8px;top:8px}
   .pcard .tx{padding:0 8px}
   .pcard .nm h3{font-size:20px}
@@ -975,8 +980,11 @@ p,h1,h2,h3,ul{margin:0}
 
 <div class="stick" id="stick" aria-hidden="true">
   <div class="stick-in">
-    <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
-    <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Take the quiz</button>
+    <span class="stick-label">A plan built for you</span>
+    <div class="stick-btns">
+      <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Find your best fit</button>
+      <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1023,13 +1031,13 @@ p,h1,h2,h3,ul{margin:0}
 <section class="wrap prod" id="products">
   <div class="prod-head">
     <div class="ph-t">
-      <h2 class="h-xl split" style="color:var(--dark)">GoodRx Weight Loss Plan</h2>
-      <p data-r>One simple monthly price for clinical care, support, and treatment built around your life.<br>Cancel any time.</p>
+      <h2 class="h-xl split" style="color:var(--dark)">Your GoodRx weight loss plan</h2>
+      <p data-r>One simple monthly price for clinical care, support, and treatment built around your lifestyle and goals.<br>Cancel any time.</p>
     </div>
     <ul class="ph-perks">
       <li data-r style="--i:0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.4968 9.98987C18.677 8.17259 18.4702 5.71715 16.8765 4.12345C15.0453 2.29218 12.0762 2.29218 10.2449 4.12345L4.12345 10.2449C2.29218 12.0762 2.29218 15.0453 4.12345 16.8765C5.71715 18.4702 8.17259 18.677 9.98987 17.4968"/><path d="M7.5 7.5L11 11"/><path d="M15.5 21.25C18.6756 21.25 21.25 18.6756 21.25 15.5C21.25 12.3244 18.6756 9.75 15.5 9.75C12.3244 9.75 9.75 12.3244 9.75 15.5C9.75 18.6756 12.3244 21.25 15.5 21.25Z"/><path d="M16.5 21L14.5 10"/></svg></span>Medication + monthly prescription renewal</li>
-      <li data-r style="--i:1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 11.5H15L13.5 14.5L10.5 8.5L9 11.5H6.5M12 5.37552C18.5042 -1.25346 29.6544 11.0575 12 21C-5.65441 11.0576 5.4957 -1.25346 12 5.37552Z"/></svg></span>7 days a week physician support</li>
-      <li data-r style="--i:2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E"><path d="M9.5 16.5H14.5M8.5 6.5V15M8.5 6.5H6.3541C5.21779 6.5 4.179 7.14201 3.67082 8.15836L2.81672 9.86656C2.60844 10.2831 2.5 10.7425 2.5 11.2082V14.5C2.5 15.6046 3.39543 16.5 4.5 16.5M8.5 6.5C8.5 5.39543 9.39543 4.5 10.5 4.5H18.5C20.1569 4.5 21.5 5.84315 21.5 7.5V14C21.5 15.3807 20.3807 16.5 19 16.5M9.3999 17C9.3999 18.3807 8.28061 19.5 6.8999 19.5C5.51919 19.5 4.3999 18.3807 4.3999 17C4.3999 15.6193 5.51919 14.5 6.8999 14.5C8.28061 14.5 9.3999 15.6193 9.3999 17ZM19.5 17C19.5 18.3807 18.3807 19.5 17 19.5C15.6193 19.5 14.5 18.3807 14.5 17C14.5 15.6193 15.6193 14.5 17 14.5C18.3807 14.5 19.5 15.6193 19.5 17Z"/></svg></span>Same day pharmacy pickup or mail delivery</li>
+      <li data-r style="--i:1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 11.5H15L13.5 14.5L10.5 8.5L9 11.5H6.5M12 5.37552C18.5042 -1.25346 29.6544 11.0575 12 21C-5.65441 11.0576 5.4957 -1.25346 12 5.37552Z"/></svg></span>Unlimited support from real healthcare providers</li>
+      <li data-r style="--i:2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E"><path d="M9.5 16.5H14.5M8.5 6.5V15M8.5 6.5H6.3541C5.21779 6.5 4.179 7.14201 3.67082 8.15836L2.81672 9.86656C2.60844 10.2831 2.5 10.7425 2.5 11.2082V14.5C2.5 15.6046 3.39543 16.5 4.5 16.5M8.5 6.5C8.5 5.39543 9.39543 4.5 10.5 4.5H18.5C20.1569 4.5 21.5 5.84315 21.5 7.5V14C21.5 15.3807 20.3807 16.5 19 16.5M9.3999 17C9.3999 18.3807 8.28061 19.5 6.8999 19.5C5.51919 19.5 4.3999 18.3807 4.3999 17C4.3999 15.6193 5.51919 14.5 6.8999 14.5C8.28061 14.5 9.3999 15.6193 9.3999 17ZM19.5 17C19.5 18.3807 18.3807 19.5 17 19.5C15.6193 19.5 14.5 18.3807 14.5 17C14.5 15.6193 15.6193 14.5 17 14.5C18.3807 14.5 19.5 15.6193 19.5 17Z"/></svg></span>Same-day pharmacy pickup or mail delivery</li>
     </ul>
   </div>
   <div class="prod-body">
@@ -1056,7 +1064,7 @@ p,h1,h2,h3,ul{margin:0}
       </a>
       <a href="wegovy-pill.html" class="pcard" data-r style="--i:2">
         <div class="media grain" style="--lq:url({{lq:p3}})"><img data-src="img/p3.webp" alt="A white Wegovy pill resting in an open palm"><span class="swap" aria-hidden="true"><i></i><img data-src2="img/h3.webp" alt=""></span><span class="chip sm">Daily pill</span></div>
-        <div class="tx"><div class="nm"><h3>Wegovy®</h3><span class="sub" data-sub>Membership <span class="nb">+ Medication</span></span></div>
+        <div class="tx"><div class="nm"><h3>Wegovy® Pill</h3><span class="sub" data-sub>Membership <span class="nb">+ Medication</span></span></div>
         <div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div>
       </a>
       <a href="#" class="pcard" data-r style="--i:3" data-toast="Product pages aren’t part of this prototype">
@@ -1076,20 +1084,19 @@ p,h1,h2,h3,ul{margin:0}
     <div class="cj-box" id="cjBox">
       <div class="cj-h cj-r">
         <p class="label">GoodRx weight loss membership</p>
-        <h2 class="display">One membership,<br>built to keep up <span class="em-wrap"><em>with you</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
-        <p class="cj-p">Your plan evolves with you, and includes 7-day-a-week access to licensed healthcare providers who'll be managing your care.</p>
-        <a href="#" class="btn btn-y cj-mbtn" data-toast="Membership details aren’t part of this prototype">See membership details</a>
+        <h2 class="display">A weight loss membership<br>built to keep up <span class="em-wrap"><em>with you</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h2>
+        <p class="cj-p">Your plan evolves with you, and includes 7-day-a-week access to licensed healthcare providers who help you manage your care.</p>
+        <a href="#" class="btn btn-y cj-mbtn" data-toast="Membership details aren’t part of this prototype">Membership details</a>
       </div>
       <figure class="cj-ph cj-ph1 cj-r" data-cjp><div class="media grain" style="--lq:url({{lq:cj-couple}})"><img data-src="img/cj-couple.webp" alt="A smiling man leaning back as his partner rests her arms on his shoulders, in warm window light"></div></figure>
       <div class="cj-t cj-t1 cj-r">
         <h3 class="display">Care that adjusts<br><span class="em-wrap"><em>as you do</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
-        <p class="cj-p">From your first dose to steady state, your care follows what’s actually happening for you, with prescription renewals handled along the way.</p>
+        <p class="cj-p">From your first dose to maintaining your goal weight, your treatment plan adapts to your current needs.</p>
       </div>
       <figure class="cj-ph cj-ph2 cj-r" data-cjp><div class="media" style="--lq:url({{lq:cj-phone}})"><img data-src="img/cj-phone.webp" alt="A hand holding a phone showing a chat with a GoodRx clinician about mild nausea"></div></figure>
       <div class="cj-t cj-t2 cj-r">
-        <h3 class="display">Someone in your corner, <span class="em-wrap"><em>every step</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
-        <p class="cj-p">A tough first week, a plateau, a question about your dose. Your care team is a message away 7 days a week.</p>
-        <a href="#" class="btn btn-yo" data-toast="Membership details aren’t part of this prototype"><span class="d-only">Membership details</span><span class="m-only">See membership details</span></a>
+        <h3 class="display">Someone in your corner, <span class="em-wrap"><em>at every step</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
+        <p class="cj-p">A question about your dose, a tough week, a plateau—your healthcare team is just a message away, 7 days a week.</p>
       </div>
       <div class="cj-dots" aria-hidden="true"><span class="cj-dot"></span><span class="cj-dot"></span><span class="cj-dot"></span><span class="cj-dot"></span></div>
       <div class="cj-lines" id="cjLines" aria-hidden="true"></div>
@@ -1160,7 +1167,6 @@ p,h1,h2,h3,ul{margin:0}
   <div class="tmarq" id="tmarq" data-lenis-prevent>
     <div class="ttrack" id="ttrack"></div>
   </div>
-  <a href="#" class="btn btn-g m-only" data-r data-toast="Sign-up isn’t part of this prototype">Start your journey</a>
 </section>
 
 <!-- FAQ -->
