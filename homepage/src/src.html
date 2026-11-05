@@ -52,18 +52,23 @@ p,h1,h2,h3,ul{margin:0}
 .chip.dark{background:var(--g700);border-color:var(--g800);color:var(--y100)}
 
 /* buttons */
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:48px;padding:0 20px;border-radius:8px;font-weight:500;font-size:14px;line-height:1;letter-spacing:.01em;white-space:nowrap;overflow:hidden;border:1px solid transparent;transition:background-color .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),transform .2s var(--ease)}
-.btn:active{transform:scale(.98);transition-duration:.1s}
-/* hover states from the UI kit "Button - Text" component */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:48px;padding:0 20px;border-radius:8px;font-weight:500;font-size:14px;line-height:1;letter-spacing:.01em;white-space:nowrap;overflow:hidden;transition:transform .5s var(--spring),box-shadow .4s var(--ease),background-color .3s,color .3s}
+.btn::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .3s}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+@media (hover:hover){.btn:hover::before{opacity:.06}}
+.btn:active{transform:translateY(0) scale(.97);transition-duration:.12s}
 .btn-y{background:var(--y100);color:var(--g800)}
-@media (hover:hover){.btn-y:hover{background:var(--y200)}}
+@media (hover:hover){.btn-y:hover{box-shadow:0 10px 24px -10px rgba(253,219,0,.6)}}
 .btn-g{background:var(--g700);color:var(--y100)}
-@media (hover:hover){.btn-g:hover{background:var(--g800)}}
-.btn-o{border-color:var(--g700);color:var(--g700)}
+@media (hover:hover){.btn-g:hover{box-shadow:0 12px 26px -12px rgba(28,83,78,.7)}}
+.btn-o{border:1px solid var(--g700);color:var(--g700)}
 @media (hover:hover){.btn-o:hover{background:var(--g700);color:var(--y100)}}
-.tlink{display:inline-flex;align-items:center;gap:8px;color:var(--g700);font-weight:500;font-size:14px;line-height:1;letter-spacing:.01em;white-space:nowrap;transition:color .25s var(--ease)}
-.tlink svg{width:14px;height:14px}
-@media (hover:hover){.tlink:hover{color:var(--g800)!important}}
+@media (hover:hover){.btn-o:hover::before{opacity:0}}
+.tlink{display:inline-flex;align-items:center;gap:8px;color:var(--g800);font-weight:500;font-size:14px;line-height:1;letter-spacing:.01em;white-space:nowrap}
+.tlink svg{width:14px;height:14px;transition:transform .45s var(--spring)}
+.tlink span{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .45s var(--ease)}
+@media (hover:hover){.tlink:hover span{background-size:100% 1px}}
+@media (hover:hover){.tlink:hover svg{transform:translateX(4px)}}
 
 /* ---------- lazy media with blur-up ---------- */
 .media{position:relative;overflow:hidden;background:var(--n300)}
@@ -583,19 +588,13 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
-.stick-in{pointer-events:auto;width:min(880px,100%);display:flex;align-items:center;gap:24px;padding:8px 8px 8px 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
-.stick .ss{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.stick .ss p{font-size:16px;line-height:1.2;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stick .sdiv{width:1px;height:32px;background:var(--k10);flex:none}
-.stick .btn{height:48px;padding:0 24px;min-width:148px;flex:none}
-.stick .btn-o{background:var(--n0)}
-@media (hover:hover){.stick .btn-o:hover{background:var(--g700)}}
+.stick-in{pointer-events:auto;display:flex;align-items:center;gap:8px;padding:8px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
+.stick .btn{height:48px;padding:0 24px;min-width:176px;flex:none}
+.stick .sq-m{background:var(--n0)}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 @media (max-width:720px){
   .stick{padding:0 12px;transition-delay:.2s}
-  .stick-in{width:100%;gap:8px;padding:6px}
-  .stick .ss{display:contents}
-  .stick .ss p,.stick .sdiv{display:none}
+  .stick-in{width:100%;padding:6px}
   .stick .btn{flex:1 1 0;min-width:0;height:44px;padding:0 12px;font-size:14px}
   .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
@@ -976,9 +975,8 @@ p,h1,h2,h3,ul{margin:0}
 
 <div class="stick" id="stick" aria-hidden="true">
   <div class="stick-in">
-    <div class="ss"><p>Ready to lose weight?</p><a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a></div>
-    <span class="sdiv" aria-hidden="true"></span>
-    <div class="ss"><p>Don’t know where to start?</p><button type="button" class="btn btn-o" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Take the quiz</button></div>
+    <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+    <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Take the quiz</button>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
