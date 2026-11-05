@@ -32,6 +32,7 @@ def pdp_source():
     P = P.replace('{{svgdefs}}', home[i:j])
     P = P.replace('{{header}}', between('<header class="hdr"', '</header>', inc=True))
     P = P.replace('{{footer}}', between('<!-- FOOTER -->', '</footer>', inc=True))
+    P = P.replace('{{compare}}', between('<!-- COMPARE -->', '<!-- /COMPARE -->', inc=True))
     P = P.replace('{{js:journeyBuild}}', between('/* ---------- build journey ---------- */', '/* ---------- build testimonials ---------- */').strip())
     P = P.replace('{{js:journeyTabs}}', between('/* ---------- journey: tabbed phases ---------- */', '/* ---------- testimonial drag-scroll').strip())
     return P
