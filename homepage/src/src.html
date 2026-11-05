@@ -3,7 +3,9 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: 1440 desktop frame, 56px gutters, full-bleed hero, floating pill nav. Single light look from the GoodRx UI kit. */
-@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Regular.woff2) format("woff2");font-weight:300 400;font-display:swap}
+@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Light.woff2) format("woff2");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-LightItalic.woff2) format("woff2");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Bolton";src:url(fonts/GoodRxBolton-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
 @font-face{font-family:"Moon";src:url(fonts/GoodRxMoon-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 :root{
@@ -607,12 +609,12 @@ p,h1,h2,h3,ul{margin:0}
   .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
 /* ---------- compare medications (modal on desktop, sheet on phones) ---------- */
-.cmpm{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:24px 12px;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;pointer-events:none}
-.cmpm.open{visibility:visible;pointer-events:auto}
-.cmpm-bg{position:fixed;inset:0;background:rgba(18,17,15,.32);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .45s var(--ease)}
+.cmpm{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:24px 12px;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;pointer-events:none;transition:visibility 0s .55s}
+.cmpm.open{visibility:visible;pointer-events:auto;transition:none}
+.cmpm-bg{position:fixed;inset:0;background:rgba(18,17,15,.32);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .5s cubic-bezier(.4,0,.2,1)}
 .cmpm.open .cmpm-bg{opacity:1}
-.cmpm-p{position:relative;width:min(1416px,100%);background:var(--n100);border-radius:12px;padding:32px 24px;box-shadow:var(--elev);overflow:hidden;isolation:isolate;opacity:0;transform:translate3d(0,40px,0) scale(.985);transition:opacity .45s var(--ease),transform .7s var(--ease)}
-.cmpm.open .cmpm-p{opacity:1;transform:none}
+.cmpm-p{position:relative;width:min(1416px,100%);background:var(--n100);border-radius:12px;padding:32px 24px;box-shadow:var(--elev);overflow:hidden;isolation:isolate;opacity:0;transform:translate3d(0,28px,0) scale(.98);transition:opacity .35s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);will-change:transform,opacity}
+.cmpm.open .cmpm-p{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .85s cubic-bezier(.16,1,.3,1)}
 .cmpm-p::before{content:"";position:absolute;inset:-6% -2%;z-index:-1;background:url(img/cmp-bg.webp) center/cover;mix-blend-mode:overlay;opacity:.55;transform:rotate(180deg) scaleY(-1);pointer-events:none}
 .cmpm-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
 .cmpm-hd h2{font-size:40px;line-height:1.2;letter-spacing:-.01em;font-weight:300;color:#000}
@@ -620,16 +622,20 @@ p,h1,h2,h3,ul{margin:0}
 .cmpm-x{width:40px;height:40px;margin:-8px -8px 0 0;display:grid;place-items:center;border-radius:8px;flex:none;transition:background-color .25s}
 .cmpm-x svg{width:24px;height:24px}
 @media (hover:hover){.cmpm-x:hover{background:rgba(18,17,15,.06)}}
-.cmpm-tabs{margin-top:72px;display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.cmpm-tabs{position:relative;margin-top:72px;display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.cmpm-ind{position:absolute;left:0;bottom:0;height:1px;width:1px;background:var(--g700);transform-origin:0 0;transition:transform .5s cubic-bezier(.16,1,.3,1);pointer-events:none}
 .cmpm-tabs::-webkit-scrollbar{display:none}
 .cmpm-tabs button{flex:none;padding:12px 8px;font-size:12px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
 @media (hover:hover){.cmpm-tabs button:hover{color:var(--g700)}}
-.cmpm-tabs button[aria-selected="true"]{color:var(--g700);border-color:var(--g700)}
+.cmpm-tabs button[aria-selected="true"]{color:var(--g700)}
+.cmpm-tabs:not(.ind) button[aria-selected="true"]{border-color:var(--g700)}
 .cmpm-row{margin-top:24px;display:flex;gap:13px;align-items:stretch}
-.cmpc{position:relative;flex:1 1 0;min-width:0;min-height:495px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:24px 20px;background:var(--n0);border:.5px solid var(--n400);border-radius:16px;animation:cmpIn .55s var(--ease) both}
-@keyframes cmpIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.cmpc .top{position:relative;min-height:127px;padding-right:104px}
-.cmpc .top:has(.pen){padding-right:72px}
+.cmpc{position:relative;flex:1 1 0;min-width:0;min-height:495px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:24px 20px;background:var(--n0);border:.5px solid var(--n400);border-radius:16px;animation:cmpIn .7s cubic-bezier(.16,1,.3,1) both}
+@keyframes cmpIn{from{opacity:0;transform:translate3d(0,18px,0) scale(.985)}to{opacity:1;transform:none}}
+.cmpc.stay,.cmpa.stay{animation:none}
+.cmpc.out,.cmpa.out{opacity:0;transform:scale(.96);transition:opacity .22s cubic-bezier(.4,0,1,1),transform .26s cubic-bezier(.4,0,1,1);pointer-events:none}
+.cmpc .top{position:relative;min-height:127px;padding-right:92px}
+.cmpc .top:has(.pen){padding-right:56px}
 .cmpc .chip{height:20px;font-size:10px}
 .cmpc h3{margin-top:8px;font-size:24px;line-height:1.2;font-weight:400;color:var(--dark);text-wrap:balance}
 .cmpc h3 a{transition:color .25s}
@@ -637,16 +643,21 @@ p,h1,h2,h3,ul{margin:0}
 .cmpc .st{margin-top:16px;font-size:13px;line-height:1.4;color:var(--soft)}
 .cmpc .sp{margin-top:4px;color:var(--dark);font-size:13px}
 .cmpc .sp .num,.cmpc .pr .num{font-size:24px;line-height:1}
-.cmpc .pi{position:absolute;right:0;top:0;width:132px;height:132px;object-fit:contain;pointer-events:none}
-.cmpc .pi.pen{right:30px;width:56px;height:150px;top:4px}
-.cmpc .pi.pill{right:-14px;top:0;width:150px;height:150px}
+.cmpc .pi{position:absolute;object-fit:contain;pointer-events:none}
+.cmpc .pi-foundayo{right:-24px;top:-5px;width:139px;height:143px}
+.cmpc .pi-wpill{right:-28px;top:0;width:145px;height:132px}
+.cmpc .pi-wpen{right:11px;top:40px;width:46.5px;height:157px}
+.cmpc .pi-zep{right:-3px;top:35px;width:48px;height:162px}
 .cmpc .ck,.cmpa .ck{position:absolute;right:0;top:0;width:20px;height:20px;border-radius:4px;background:var(--g700);display:grid;place-items:center;z-index:2;transition:transform .2s var(--ease)}
-.cmpc .ck svg{width:12px;height:12px}
+.cmpc .ck::before{content:"";position:absolute;inset:-10px}
+.cmpc .ck svg{width:12px;height:12px;stroke-dasharray:14;stroke-dashoffset:0;animation:ckDraw .45s var(--ease) .3s both}
+@keyframes ckDraw{from{stroke-dashoffset:14}to{stroke-dashoffset:0}}
 @media (hover:hover){.cmpc .ck:hover{transform:scale(1.08)}}
 .cmpc .bot{display:flex;flex-direction:column;gap:20px}
 .cmpc .tp{display:grid}
-.cmpc .tp>div{grid-area:1/1;align-self:end;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .3s var(--ease),transform .4s var(--ease),visibility 0s .3s}
-.cmpc .tp>div.on{opacity:1;visibility:visible;transform:none;transition-delay:.05s,.05s,0s}
+.cmpc .tp>div{grid-area:1/1;align-self:end;opacity:0;visibility:hidden;transform:translate3d(0,-4px,0);transition:opacity .2s cubic-bezier(.4,0,1,1),transform .2s cubic-bezier(.4,0,1,1),visibility 0s .2s}
+.cmpc .tp>div.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s var(--ease) .12s,transform .6s cubic-bezier(.16,1,.3,1) .12s,visibility 0s}
+.cmpc .tp>div:not(.on){transform:translate3d(0,8px,0)}
 .cmpc .dr{display:flex;justify-content:space-between;align-items:flex-end;padding:20px 0;border-bottom:.5px solid var(--n300)}
 .cmpc .dr:last-child{border-bottom:0;padding-bottom:0}
 .cmpc .dr .label{color:var(--soft);padding-bottom:4px}
@@ -659,7 +670,7 @@ p,h1,h2,h3,ul{margin:0}
 .cmpc .ir svg{width:24px;height:24px;flex:none}
 .cmpc .btn{height:40px;font-size:12px;width:100%}
 .cmpa-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:13px}
-.cmpa{position:relative;flex:0 1 241px;min-height:140px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;padding:24px 20px;border:.5px solid var(--n400);border-radius:16px;text-align:left;transition:background-color .3s var(--ease),border-color .3s;animation:cmpIn .5s var(--ease) both}
+.cmpa{position:relative;flex:1 1 0;min-height:140px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;padding:24px 20px;border:.5px solid var(--n400);border-radius:16px;text-align:left;transition:background-color .3s var(--ease),border-color .3s;animation:cmpIn .7s cubic-bezier(.16,1,.3,1) both}
 @media (hover:hover){.cmpa:hover{background:rgba(255,255,251,.6);border-color:var(--g700)}}
 .cmpa b{display:block;font-weight:400;font-size:20px;line-height:1.2;color:var(--ink)}
 .cmpa .f{display:block;margin-top:4px;font-size:16px;line-height:1.4;color:var(--soft)}
@@ -667,7 +678,7 @@ p,h1,h2,h3,ul{margin:0}
 .cmpa .add svg{width:14px;height:14px}
 .cmpa .pi{position:absolute;right:53px;top:14px;width:42px;height:104px;object-fit:contain;pointer-events:none}
 .cmpa .pi.pill{width:64px;height:64px;right:44px;top:18px}
-.cmpa .ck{right:23px;top:24px;border-radius:50%;background:none;border:1px solid var(--k20)}
+.cmpa .ck{right:23px;top:24px;border-radius:4px;background:none;border:1px solid var(--k20)}
 .cmpm-ft{margin-top:24px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.4;color:var(--soft)}
 .cmpm-ft .eff{display:none}
 .cmpm[data-tab="eff"] .cmpm-ft .eff,.cmpm[data-tab="fx"] .cmpm-ft .eff{display:block}
@@ -679,15 +690,13 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 }
 @media (max-width:720px){
   .cmpm{padding:max(56px,env(safe-area-inset-top,0px)) 0 0;align-items:stretch}
-  .cmpm-p{border-radius:16px 16px 0 0;padding:32px 20px calc(24px + env(safe-area-inset-bottom,0px));min-height:100%;transform:translate3d(0,60%,0)}
+  .cmpm-p{border-radius:16px 16px 0 0;padding:32px 20px calc(24px + env(safe-area-inset-bottom,0px));min-height:100%;transform:translate3d(0,100%,0)}
   .cmpm-hd h2{font-size:28px}
   .cmpm-hd p{margin-top:8px;font-size:14px;max-width:270px}
   .cmpm-tabs{margin:44px -20px 0;padding:0 20px}
   .cmpm-row{margin:24px -20px 0;padding:0 20px 4px;scroll-padding:0 20px;gap:8px}
   .cmpc{min-height:416px;padding:24px 20px 20px}
-  .cmpc .top{padding-right:96px;min-height:120px}
-  .cmpc .pi,.cmpc .pi.pill{width:118px;height:118px;right:-10px}
-  .cmpc .pi.pen{width:44px;height:120px;right:26px}
+  .cmpc .top{min-height:120px}
   .cmpc h3{font-size:22px}
   .cmpc .dr{padding:16px 0}
   .cmpc .tx,.cmpc .ir{font-size:14px}
@@ -695,7 +704,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   .cmpa .add{margin-top:16px}
   .cmpm-ft{font-size:13px}
 }
-@media (prefers-reduced-motion:reduce){.cmpm-p,.cmpm-bg,.cmpc,.cmpa,.cmpc .tp>div{transition:none;animation:none}}
+@media (prefers-reduced-motion:reduce){.cmpm-p,.cmpm-bg,.cmpc,.cmpa,.cmpc .tp>div,.cmpc .ck svg{transition:none;animation:none}}
 .toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -1397,16 +1406,16 @@ const I={
  plus:'<svg viewBox="0 0 14 14" fill="none"><path d="M7.0013 2.04199V7.00033M7.0013 7.00033V11.9587M7.0013 7.00033H2.04297M7.0013 7.00033H11.9596" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
 const FX_C='Gastrointestinal such as nausea, diarrhea, constipation, vomiting, stomach pain or bloating';
 const M=[
- {k:'foundayo',nm:'Foundayo™',form:'Pill',chip:'Daily pill',img:'cut-foundayo',type:'pill',from:188,doses:[['0.8 mg',188],['2.5 mg',238],['5.5 mg',338]],
+ {k:'foundayo',nm:'Foundayo™',form:'Pill',chip:'Daily pill',img:'cmp-foundayo',type:'pill',from:188,doses:[['0.8 mg',188],['2.5 mg',238],['5.5 mg',338]],
   eff:'In ATTAIN-1 trial, people lost an average of 11% over 72 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache'],
   rt:[['pill','Daily pill'],['clock','Anytime, with or without food']],ab:[['trend','Weight management only']]},
- {k:'wpill',nm:'Wegovy® Pill',short:'Wegovy®',form:'Pill',chip:'Daily pill',img:'cut-wpill',type:'pill',from:238,href:'wegovy-pill.html',doses:[['4 mg',238],['5–10 mg',338]],
+ {k:'wpill',nm:'Wegovy® Pill',short:'Wegovy®',form:'Pill',chip:'Daily pill',img:'cmp-wpill',type:'pill',from:238,href:'wegovy-pill.html',doses:[['4 mg',238],['5–10 mg',338]],
   eff:'In OASIS 4 trial, people lost an average of 14% over 64 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache'],
   rt:[['pill','Daily pill'],['clock','AM, empty stomach, 4oz water, wait 30 min before eating/drinking']],ab:[['heart','Cardiovascular risk reduction in adults with heart disease']]},
- {k:'wpen',nm:'Wegovy® Pen',short:'Wegovy®',form:'Pen',chip:'Weekly pen',img:'cut-wpen',type:'pen',from:238,doses:[['4 mg',238],['5.5 mg',338]],
+ {k:'wpen',nm:'Wegovy® Pen',short:'Wegovy®',form:'Pen',chip:'Weekly pen',img:'cmp-wpen',type:'pen',from:238,doses:[['4 mg',238],['5.5 mg',338]],
   eff:'In STEP 1 trial, people lost an average of 15% over 68 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache, injection site pain, swelling or itching'],
   rt:[['inj','Weekly injection'],['clock','Anytime'],['snow','Leave out in room temp ~30 min before injecting']],ab:[['kid','Approved for ages 12+'],['heart','Cardiovascular risk reduction and MASH']]},
- {k:'zep',nm:'Zepbound® KwikPen',form:'Pen',chip:'Weekly pen',img:'cut-zep',type:'pen',from:338,doses:[['2.5 mg',338],['5 mg',438],['7.5+ mg',738]],
+ {k:'zep',nm:'Zepbound® KwikPen',form:'Pen',chip:'Weekly pen',img:'cmp-zep',type:'pen',from:338,doses:[['2.5 mg',338],['5 mg',438],['7.5+ mg',738]],
   eff:'In SURMOUNT-1 trial, people lost an average of 21% over 72 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache, injection site pain, swelling or itching'],
   rt:[['inj','Weekly injection'],['clock','Anytime'],['snow','Inject straight from fridge']],ab:[['sleep','Can treat moderate to severe obstructive sleep apnea']]}];
 const root=document.getElementById('cmpm'),row=document.getElementById('cmpmRow'),tabs=[...root.querySelectorAll('[role=tab]')];
@@ -1415,7 +1424,7 @@ const money=v=>`<span class="num">$${v}</span><small>/mo</small>`;
 function card(m,i){const nm=m.href?`<a href="${m.href}">${m.nm}</a>`:m.nm;
   return `<article class="cmpc" style="animation-delay:${i*50}ms">
    <div class="top"><span class="chip sm">${m.chip}</span><h3>${nm}</h3><p class="st">starts at</p><p class="sp">${money(m.from)}</p>
-    <img class="pi ${m.type}" src="img/${m.img}.webp" alt=""><button type="button" class="ck" data-cmp-off="${i}" aria-label="Remove ${m.nm} from comparison">${I.check}</button></div>
+    <img class="pi ${m.type} pi-${m.k}" src="img/${m.img}.webp" alt="" decoding="async"><button type="button" class="ck" data-cmp-off="${i}" aria-label="Remove ${m.nm} from comparison">${I.check}</button></div>
    <div class="bot"><div class="tp">
     <div data-p="cost">${m.doses.map(([d,v])=>`<div class="dr"><span class="label">${d}</span><span class="pr">${money(v)}</span></div>`).join('')}</div>
     <div data-p="eff"><p class="lb">Clinical trial results*</p><p class="tx">${m.eff}</p></div>
@@ -1424,12 +1433,27 @@ function card(m,i){const nm=m.href?`<a href="${m.href}">${m.nm}</a>`:m.nm;
     <div data-p="ab">${m.ab.map(([ic,t])=>`<div class="ir">${I[ic]}<span>${t}</span></div>`).join('')}</div>
    </div><a href="#" class="btn btn-g" data-toast="Sign-up isn’t part of this prototype">Get started</a></div></article>`}
 function addCard(m,i){return `<button type="button" class="cmpa" data-cmp-on="${i}" style="animation-delay:${i*50}ms" aria-label="Add ${m.nm} to comparison"><span><b>${m.short||m.nm}</b><span class="f">${m.form}</span></span>
-  <img class="pi ${m.type}" src="img/${m.img}.webp" alt=""><span class="ck"></span><span class="add">${I.plus}Add to Compare</span></button>`}
-function render(){const on=M.map((m,i)=>sel[i]?card(m,i):'').join(''),off=M.map((m,i)=>sel[i]?'':addCard(m,i)).join('');
-  row.innerHTML=on+(off?`<div class="cmpa-col">${off}</div>`:'');setTab(tab)}
-function setTab(t){tab=t;root.dataset.tab=t;tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));row.querySelectorAll('.tp>div').forEach(p=>p.classList.toggle('on',p.dataset.p===t))}
+  <img class="pi ${m.type} pi-${m.k}" src="img/${m.img}.webp" alt="" decoding="async"><span class="ck"></span><span class="add">${I.plus}Add to Compare</span></button>`}
+const RM=matchMedia('(prefers-reduced-motion:reduce)');
+function render(flip){const keyOf=el=>el.matches('.cmpc')?'c'+el.querySelector('[data-cmp-off]').dataset.cmpOff:'a'+el.dataset.cmpOn;
+  const before={};if(flip)row.querySelectorAll('.cmpc,.cmpa').forEach(el=>before[keyOf(el)]=el.getBoundingClientRect());
+  const on=M.map((m,i)=>sel[i]?card(m,i):'').join(''),off=M.map((m,i)=>sel[i]?'':addCard(m,i)).join('');
+  row.innerHTML=on+(off?`<div class="cmpa-col">${off}</div>`:'');setTab(tab);
+  if(!flip)return;let n=0;
+  row.querySelectorAll('.cmpc,.cmpa').forEach(el=>{const k=keyOf(el),r0=before[k];
+    if(!r0){el.style.animationDelay=(120+n++*60)+'ms';return}
+    el.classList.add('stay');el.querySelectorAll('.tp>div').forEach(p=>p.style.transition='none');
+    if(RM.matches)return;const r1=el.getBoundingClientRect(),dx=r0.left-r1.left,dy=r0.top-r1.top,sx=r0.width/r1.width;
+    if(Math.abs(dx)<1&&Math.abs(dy)<1)return;
+    el.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'none'}],{duration:620,easing:'cubic-bezier(.16,1,.3,1)'})});
+  requestAnimationFrame(()=>row.querySelectorAll('.tp>div').forEach(p=>p.style.transition=''))}
+function leave(el,fn){if(RM.matches||!el){fn();return}el.classList.add('out');setTimeout(fn,200)}
+const tabBar=root.querySelector('.cmpm-tabs'),ind=document.createElement('span');ind.className='cmpm-ind';tabBar.appendChild(ind);tabBar.classList.add('ind');
+function moveInd(){const b=tabs.find(x=>x.dataset.t===tab);if(!b||!b.offsetWidth)return;ind.style.transform=`translateX(${b.offsetLeft}px) scaleX(${b.offsetWidth})`}
+addEventListener('resize',moveInd);
+function setTab(t){tab=t;root.dataset.tab=t;tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));row.querySelectorAll('.tp>div').forEach(p=>p.classList.toggle('on',p.dataset.p===t));moveInd()}
 function say(msg){const el=document.getElementById('toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>el.classList.remove('show'),2400)}
-function open(s){if(s)sel=s;tab='cost';render();last=document.activeElement;row.scrollLeft=0;root.scrollTop=0;
+function open(s){if(s)sel=s;tab='cost';render();requestAnimationFrame(moveInd);last=document.activeElement;row.scrollLeft=0;root.scrollTop=0;
   root.setAttribute('aria-hidden','false');document.documentElement.classList.add('cmp-lock');requestAnimationFrame(()=>root.classList.add('open'));
   setTimeout(()=>root.querySelector('.cmpm-x').focus({preventScroll:true}),60)}
 function close(){if(!root.classList.contains('open'))return;root.classList.remove('open');root.setAttribute('aria-hidden','true');document.documentElement.classList.remove('cmp-lock');
@@ -1439,8 +1463,8 @@ tabs.forEach(b=>b.addEventListener('click',()=>{setTab(b.dataset.t);b.scrollInto
 root.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft'||!e.target.matches('[role=tab]'))return;const i=tabs.indexOf(e.target),n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];n.focus();n.click()});
 root.addEventListener('click',e=>{
   if(e.target.closest('[data-cmp-close]')){close();return}
-  const off=e.target.closest('[data-cmp-off]');if(off){const i=+off.dataset.cmpOff;if(sel.filter(Boolean).length<=1){say('Keep at least one medication to compare');return}sel[i]=false;render();return}
-  const on=e.target.closest('[data-cmp-on]');if(on){sel[+on.dataset.cmpOn]=true;render()}});
+  const off=e.target.closest('[data-cmp-off]');if(off){const i=+off.dataset.cmpOff;if(sel.filter(Boolean).length<=1){say('Keep at least one medication to compare');return}sel[i]=false;leave(off.closest('.cmpc'),()=>render(true));return}
+  const on=e.target.closest('[data-cmp-on]');if(on){sel[+on.dataset.cmpOn]=true;leave(on,()=>render(true))}});
 addEventListener('keydown',e=>{if(e.key==='Escape')close();if(e.key==='Tab'&&root.classList.contains('open')){const f=[...root.querySelectorAll('button,a[href]')].filter(x=>x.offsetParent);if(!f.length)return;const a=f[0],z=f[f.length-1];
   if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
 // openers: anything with data-compare; on the PDP the selection comes from the compare card's rows

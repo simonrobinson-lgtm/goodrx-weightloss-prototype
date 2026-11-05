@@ -55,6 +55,7 @@ def document(s, title):
 <meta name="theme-color" content="#f5efe5">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preload" href="fonts/GoodRxBolton-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/GoodRxBolton-Light.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GoodRxMoon-Regular.woff2" as="font" type="font/woff2" crossorigin>
 {s[:cut].strip()}
 </head>
