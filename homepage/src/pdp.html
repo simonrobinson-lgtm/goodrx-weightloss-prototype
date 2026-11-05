@@ -245,19 +245,21 @@
 .xp-vis{position:relative;aspect-ratio:657/480;border-radius:16px;overflow:hidden;background:#4b2a3c}
 .xp-vis .media{position:absolute;inset:0;opacity:0;transform:scale(1.04);transition:opacity .7s var(--ease),transform 1.1s var(--ease)}
 .xp-vis .media.on{opacity:1;transform:none;z-index:1}
-.xp-vis .media.dose-stage{display:flex;align-items:center;justify-content:center;padding:40px}
-.dose-card{width:100%;max-width:340px;background:var(--n0);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:20px;box-shadow:var(--elev)}
+.xp-vis .media.dose-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px}
+.dose-shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(102,102,102,0) 18%,rgba(34,15,15,.45) 82%);pointer-events:none}
+.dose-grain{position:absolute;inset:0;background:url(img/grain.png) 0 0/256px;mix-blend-mode:soft-light;opacity:.35;pointer-events:none}
+.dose-card{position:relative;z-index:1;width:100%;max-width:340px;background:var(--n0);border:.5px solid var(--n400);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--elev)}
+.dose-card .top{position:relative;min-height:90px;padding-right:76px}
 .dose-card .chip{align-self:flex-start}
-.dc-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.dc-head h4{margin:0;font-weight:400;font-size:28px;line-height:1.1;color:var(--dark)}
-.dc-pill{width:48px;height:48px;object-fit:contain;flex:none}
+.dose-card h3{margin:8px 0 0;font-weight:400;font-size:24px;line-height:1.2;color:var(--dark)}
+.dc-pill{position:absolute;right:-16px;top:-8px;width:108px;height:98px;object-fit:contain;pointer-events:none}
 .dc-rows{display:flex;flex-direction:column}
-.dc-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid var(--n200)}
+.dc-row{display:flex;justify-content:space-between;align-items:flex-end;padding:16px 0;border-top:.5px solid var(--n300)}
 .dc-row:first-child{border-top:0}
-.dc-row>span:first-child{font-size:13px;color:var(--soft)}
-.dc-row .v{font-size:20px;color:var(--dark)}
-.dc-row .v small{font-size:13px;color:var(--soft)}
-.dc-note{margin:0;font-size:12px;line-height:1.4;color:var(--soft)}
+.dc-row .label{color:var(--soft);padding-bottom:4px}
+.dc-row .pr{color:var(--dark);font-size:16px}
+.dc-row .pr .num{font-size:24px;line-height:1}
+.dose-stage .dc-note{position:relative;z-index:1;margin:0;max-width:340px;padding-bottom:0;font-size:14px;line-height:1.4;color:var(--rev-soft)}
 /* membership card */
 .msec{padding-block:56px}
 .mcard{display:flex;gap:18px;padding:8px;border-radius:16px;background:var(--n0)}
@@ -313,7 +315,7 @@
   .xp-vis{display:none}
   .xp-vm{display:block;position:relative;aspect-ratio:657/480;border-radius:12px;overflow:hidden;background:#4b2a3c}
   .xp-vm .media{position:absolute;inset:0}
-  .xp-vm.dose-stage{display:flex;align-items:center;justify-content:center;padding:24px}
+  .xp-vm.dose-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;aspect-ratio:auto}
   .mcard{flex-direction:column;gap:8px}
   .mc-l{width:auto}
   .mc-l .btn{order:3}
@@ -558,34 +560,38 @@
         <div class="xp-note"><span class="ic"><svg viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.9369 5.65684C19.2155 8.86003 17.6306 13.6811 10.2049 17.8631C10.0779 17.9346 9.92287 17.9346 9.79594 17.8631C2.37012 13.6811 0.785278 8.86005 2.06379 5.65685C2.69355 4.07904 4.01103 2.95752 5.55373 2.6119C7.00209 2.28741 8.6142 2.65411 10.0004 3.90269C11.3865 2.65411 12.9986 2.28741 14.447 2.6119C15.9897 2.95751 17.3072 4.07903 17.9369 5.65684ZM9.12333 6.89699C9.05275 6.75583 8.90847 6.66667 8.75065 6.66667C8.59283 6.66667 8.44855 6.75583 8.37797 6.89699L7.24314 9.16667H5.41732C5.1872 9.16667 5.00065 9.35321 5.00065 9.58333C5.00065 9.81345 5.1872 10 5.41732 10H7.50065C7.65847 10 7.80275 9.91083 7.87333 9.76967L8.75065 8.01503L10.878 12.2697C10.9486 12.4108 11.0928 12.5 11.2507 12.5C11.4085 12.5 11.5527 12.4108 11.6233 12.2697L12.7582 10H14.584C14.8141 10 15.0007 9.81345 15.0007 9.58333C15.0007 9.35321 14.8141 9.16667 14.584 9.16667H12.5007C12.3428 9.16667 12.1986 9.25583 12.128 9.39699L11.2507 11.1516L9.12333 6.89699Z" fill="#FFF6BF"/></svg></span><div><b>Your GoodRx care team has your back</b><p>They’ll help you tell what’s normal, adjust your dose if needed, and share simple habits that make things easier.</p></div></div>
         <div class="xp-vm"><div class="media" style="--lq:url({{lq:exp-fx}})"><img data-src="img/exp-fx.webp" alt="A phone showing tips for managing mild nausea"></div></div>
       </div></div></div>
-      <div class="qa" data-v="1"><button aria-expanded="false" aria-controls="xa1" id="xq1"><span>Gradual steps up in dose and price</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="xa1" role="region" aria-labelledby="xq1"><div>
+      <div class="qa" data-v="1"><button aria-expanded="false" aria-controls="xa1" id="xq1"><span>Gradual step-ups in dose and price</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="xa1" role="region" aria-labelledby="xq1"><div>
         <div class="xp-copy"><p>Every GLP-1 starts low and increases gradually so your body can adjust. Everyone starts at the same dose, but where you land depends how your body responds and adjusts.</p></div>
         <div class="xp-note dose"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.4968 9.98987C18.677 8.17259 18.4702 5.71715 16.8765 4.12345C15.0453 2.29218 12.0762 2.29218 10.2449 4.12345L4.12345 10.2449C2.29218 12.0762 2.29218 15.0453 4.12345 16.8765C5.71715 18.4702 8.17259 18.677 9.98987 17.4968"/><path d="M7.5 7.5L11 11"/><path d="M15.5 21.25C18.6756 21.25 21.25 18.6756 21.25 15.5C21.25 12.3244 18.6756 9.75 15.5 9.75C12.3244 9.75 9.75 12.3244 9.75 15.5C9.75 18.6756 12.3244 21.25 15.5 21.25Z"/><path d="M16.5 21L14.5 10"/></svg></span><div><b>Wegovy’s highest dose: 10 mg</b></div></div>
-        <div class="xp-vm dose-stage">
+        <div class="xp-vm dose-stage media" style="--lq:url({{lq:dose-bg}})">
+          <img data-src="img/dose-bg.webp" alt="">
+          <div class="dose-shade"></div>
+          <div class="dose-grain"></div>
           <div class="dose-card">
-            <span class="chip sm">Daily pill</span>
-            <div class="dc-head"><h4>Wegovy®</h4><img class="dc-pill" src="img/cut-wpill.webp" alt=""></div>
+            <div class="top"><span class="chip sm">Daily pill</span><h3>Wegovy®</h3><img class="dc-pill" src="img/cmp-wpill.webp" alt="" decoding="async"></div>
             <div class="dc-rows">
-              <div class="dc-row"><span>4 mg</span><span class="v">$238<small>/mo</small></span></div>
-              <div class="dc-row"><span>5–10 mg</span><span class="v">$338<small>/mo</small></span></div>
+              <div class="dc-row"><span class="label">4 mg</span><span class="pr"><span class="num">$238</span><small>/mo</small></span></div>
+              <div class="dc-row"><span class="label">5–10 mg</span><span class="pr"><span class="num">$338</span><small>/mo</small></span></div>
             </div>
-            <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
           </div>
+          <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
         </div>
       </div></div></div>
     </div>
     <div class="xp-vis" aria-hidden="true">
       <div class="media on" data-v="0" style="--lq:url({{lq:exp-fx}})"><img data-src="img/exp-fx.webp" alt=""></div>
-      <div class="media dose-stage" data-v="1">
+      <div class="media dose-stage" data-v="1" style="--lq:url({{lq:dose-bg}})">
+        <img data-src="img/dose-bg.webp" alt="">
+        <div class="dose-shade"></div>
+        <div class="dose-grain"></div>
         <div class="dose-card">
-          <span class="chip sm">Daily pill</span>
-          <div class="dc-head"><h4>Wegovy®</h4><img class="dc-pill" src="img/cut-wpill.webp" alt=""></div>
+          <div class="top"><span class="chip sm">Daily pill</span><h3>Wegovy®</h3><img class="dc-pill" src="img/cmp-wpill.webp" alt="" decoding="async"></div>
           <div class="dc-rows">
-            <div class="dc-row"><span>4 mg</span><span class="v">$238<small>/mo</small></span></div>
-            <div class="dc-row"><span>5–10 mg</span><span class="v">$338<small>/mo</small></span></div>
+            <div class="dc-row"><span class="label">4 mg</span><span class="pr"><span class="num">$238</span><small>/mo</small></span></div>
+            <div class="dc-row"><span class="label">5–10 mg</span><span class="pr"><span class="num">$338</span><small>/mo</small></span></div>
           </div>
-          <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
         </div>
+        <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
       </div>
     </div>
   </div>
