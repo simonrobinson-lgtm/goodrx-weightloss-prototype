@@ -63,7 +63,7 @@ p,h1,h2,h3,ul{margin:0}
 .btn-g{background:var(--g700);color:var(--y100)}
 @media (hover:hover){.btn-g:hover{box-shadow:0 12px 26px -12px rgba(28,83,78,.7)}}
 .btn-o{border:1px solid var(--g700);color:var(--g700)}
-@media (hover:hover){.btn-o:hover{background:var(--g700);color:var(--y100)}}
+@media (hover:hover){.btn-o:hover,.stick .btn-o:hover{background:var(--g100);color:var(--g700)}}
 @media (hover:hover){.btn-o:hover::before{opacity:0}}
 .tlink{display:inline-flex;align-items:center;gap:8px;color:var(--g800);font-weight:500;font-size:14px;line-height:1;letter-spacing:.01em;white-space:nowrap}
 .tlink svg{width:14px;height:14px;transition:transform .45s var(--spring)}
@@ -324,7 +324,7 @@ p,h1,h2,h3,ul{margin:0}
 .jour{position:relative;z-index:2;background:var(--n100);padding-block:96px;display:flex;flex-direction:column;gap:48px;overflow:hidden}
 .sec-head{width:100%;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .sec-head .display{color:var(--n900)}
-.sec-head p{width:428px;max-width:100%;font-size:14px;color:var(--k50)}
+.sec-head p{width:428px;max-width:100%;font-size:16px;line-height:1.4;color:var(--soft)}
 .em-wrap{position:relative;display:inline-block}
 .em-wrap .scrib{left:2px;top:calc(100% - 1px);width:calc(100% - 6px);height:10px}
 .jour>.wrap-16{width:100%}
@@ -461,7 +461,6 @@ p,h1,h2,h3,ul{margin:0}
 
 /* ---------- testimonials ---------- */
 .testi{padding-block:96px 56px;display:flex;flex-direction:column;align-items:center;gap:56px}
-.testi .sec-head p{font-size:16px;color:var(--soft)}
 .tmarq{-webkit-user-select:none;user-select:none;width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch}
 .tmarq::-webkit-scrollbar{display:none}
 .tmarq.dragging{cursor:grabbing}
@@ -592,10 +591,10 @@ p,h1,h2,h3,ul{margin:0}
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
 .stick.show{transform:none}
-.stick-in{pointer-events:auto;width:min(560px,100%);height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
-.stick-label{font-size:16px;color:var(--n900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stick-in{pointer-events:auto;width:min(588px,100%);height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
+.stick-label{font-size:14px;line-height:1.4;color:var(--n900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stick-btns{display:flex;align-items:center;gap:8px;flex:none}
-.stick .btn{height:48px;padding:0 24px;flex:none}
+.stick .btn{height:48px;padding:0 20px;flex:none;width:156px}
 .stick .sq-m{background:var(--n0)}
 .has-stick .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 @media (max-width:720px){
@@ -603,10 +602,100 @@ p,h1,h2,h3,ul{margin:0}
   .stick::before{content:"";position:absolute;left:0;right:0;bottom:0;top:-56px;z-index:-1;background:linear-gradient(to bottom,transparent,var(--n100) 56px);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 56px);mask-image:linear-gradient(to bottom,transparent,#000 56px)}
   .stick-in{width:100%;height:auto;padding:0 var(--gut) calc(16px + env(safe-area-inset-bottom,0px));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
   .stick-label{display:none}
-  .stick-btns{width:100%;gap:8px}
-  .stick .btn{flex:1 1 0;min-width:0;height:48px;padding:0 16px;font-size:14px}
+  .stick-btns{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stick .btn{flex:1 1 0;width:auto;min-width:0;height:48px;padding:0 16px;font-size:14px}
   .has-stick .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
+/* ---------- compare medications (modal on desktop, sheet on phones) ---------- */
+.cmpm{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:24px 12px;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;pointer-events:none}
+.cmpm.open{visibility:visible;pointer-events:auto}
+.cmpm-bg{position:fixed;inset:0;background:rgba(18,17,15,.32);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .45s var(--ease)}
+.cmpm.open .cmpm-bg{opacity:1}
+.cmpm-p{position:relative;width:min(1416px,100%);background:var(--n100);border-radius:12px;padding:32px 24px;box-shadow:var(--elev);overflow:hidden;isolation:isolate;opacity:0;transform:translate3d(0,40px,0) scale(.985);transition:opacity .45s var(--ease),transform .7s var(--ease)}
+.cmpm.open .cmpm-p{opacity:1;transform:none}
+.cmpm-p::before{content:"";position:absolute;inset:-6% -2%;z-index:-1;background:url(img/cmp-bg.webp) center/cover;mix-blend-mode:overlay;opacity:.55;transform:rotate(180deg) scaleY(-1);pointer-events:none}
+.cmpm-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.cmpm-hd h2{font-size:40px;line-height:1.2;letter-spacing:-.01em;font-weight:300;color:#000}
+.cmpm-hd p{margin-top:12px;font-size:18px;line-height:1.4;color:var(--soft)}
+.cmpm-x{width:40px;height:40px;margin:-8px -8px 0 0;display:grid;place-items:center;border-radius:8px;flex:none;transition:background-color .25s}
+.cmpm-x svg{width:24px;height:24px}
+@media (hover:hover){.cmpm-x:hover{background:rgba(18,17,15,.06)}}
+.cmpm-tabs{margin-top:72px;display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.cmpm-tabs::-webkit-scrollbar{display:none}
+.cmpm-tabs button{flex:none;padding:12px 8px;font-size:12px;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+@media (hover:hover){.cmpm-tabs button:hover{color:var(--g700)}}
+.cmpm-tabs button[aria-selected="true"]{color:var(--g700);border-color:var(--g700)}
+.cmpm-row{margin-top:24px;display:flex;gap:13px;align-items:stretch}
+.cmpc{position:relative;flex:1 1 0;min-width:0;min-height:495px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:24px 20px;background:var(--n0);border:.5px solid var(--n400);border-radius:16px;animation:cmpIn .55s var(--ease) both}
+@keyframes cmpIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cmpc .top{position:relative;min-height:127px;padding-right:104px}
+.cmpc .top:has(.pen){padding-right:72px}
+.cmpc .chip{height:20px;font-size:10px}
+.cmpc h3{margin-top:8px;font-size:24px;line-height:1.2;font-weight:400;color:var(--dark);text-wrap:balance}
+.cmpc h3 a{transition:color .25s}
+@media (hover:hover){.cmpc h3 a:hover{color:var(--g700)}}
+.cmpc .st{margin-top:16px;font-size:13px;line-height:1.4;color:var(--soft)}
+.cmpc .sp{margin-top:4px;color:var(--dark);font-size:13px}
+.cmpc .sp .num,.cmpc .pr .num{font-size:24px;line-height:1}
+.cmpc .pi{position:absolute;right:0;top:0;width:132px;height:132px;object-fit:contain;pointer-events:none}
+.cmpc .pi.pen{right:30px;width:56px;height:150px;top:4px}
+.cmpc .pi.pill{right:-14px;top:0;width:150px;height:150px}
+.cmpc .ck,.cmpa .ck{position:absolute;right:0;top:0;width:20px;height:20px;border-radius:4px;background:var(--g700);display:grid;place-items:center;z-index:2;transition:transform .2s var(--ease)}
+.cmpc .ck svg{width:12px;height:12px}
+@media (hover:hover){.cmpc .ck:hover{transform:scale(1.08)}}
+.cmpc .bot{display:flex;flex-direction:column;gap:20px}
+.cmpc .tp{display:grid}
+.cmpc .tp>div{grid-area:1/1;align-self:end;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .3s var(--ease),transform .4s var(--ease),visibility 0s .3s}
+.cmpc .tp>div.on{opacity:1;visibility:visible;transform:none;transition-delay:.05s,.05s,0s}
+.cmpc .dr{display:flex;justify-content:space-between;align-items:flex-end;padding:20px 0;border-bottom:.5px solid var(--n300)}
+.cmpc .dr:last-child{border-bottom:0;padding-bottom:0}
+.cmpc .dr .label{color:var(--soft);padding-bottom:4px}
+.cmpc .dr .pr{color:var(--dark);font-size:16px}
+.cmpc .lb{font-size:13px;line-height:1.4;color:var(--soft)}
+.cmpc .tx{margin-top:4px;font-size:16px;line-height:1.4;color:var(--dark)}
+.cmpc .lb+.tx+.lb{margin-top:16px}
+.cmpc .ir{display:flex;align-items:center;gap:12px;font-size:16px;line-height:1.4;color:var(--dark)}
+.cmpc .ir+.ir{margin-top:16px}
+.cmpc .ir svg{width:24px;height:24px;flex:none}
+.cmpc .btn{height:40px;font-size:12px;width:100%}
+.cmpa-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:13px}
+.cmpa{position:relative;flex:0 1 241px;min-height:140px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;padding:24px 20px;border:.5px solid var(--n400);border-radius:16px;text-align:left;transition:background-color .3s var(--ease),border-color .3s;animation:cmpIn .5s var(--ease) both}
+@media (hover:hover){.cmpa:hover{background:rgba(255,255,251,.6);border-color:var(--g700)}}
+.cmpa b{display:block;font-weight:400;font-size:20px;line-height:1.2;color:var(--ink)}
+.cmpa .f{display:block;margin-top:4px;font-size:16px;line-height:1.4;color:var(--soft)}
+.cmpa .add{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-weight:500;font-size:14px;line-height:1;color:var(--g700)}
+.cmpa .add svg{width:14px;height:14px}
+.cmpa .pi{position:absolute;right:53px;top:14px;width:42px;height:104px;object-fit:contain;pointer-events:none}
+.cmpa .pi.pill{width:64px;height:64px;right:44px;top:18px}
+.cmpa .ck{right:23px;top:24px;border-radius:50%;background:none;border:1px solid var(--k20)}
+.cmpm-ft{margin-top:24px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.4;color:var(--soft)}
+.cmpm-ft .eff{display:none}
+.cmpm[data-tab="eff"] .cmpm-ft .eff,.cmpm[data-tab="fx"] .cmpm-ft .eff{display:block}
+html.cmp-lock,html.cmp-lock body{overflow:hidden}
+@media (max-width:1180px){
+  .cmpm-row{overflow-x:auto;scroll-snap-type:x mandatory;margin:24px -24px 0;padding:0 24px 4px;scroll-padding:0 24px;scrollbar-width:none}
+  .cmpm-row::-webkit-scrollbar{display:none}
+  .cmpc,.cmpa-col{flex:0 0 min(331px,calc(100% - 40px));scroll-snap-align:start}
+}
+@media (max-width:720px){
+  .cmpm{padding:max(56px,env(safe-area-inset-top,0px)) 0 0;align-items:stretch}
+  .cmpm-p{border-radius:16px 16px 0 0;padding:32px 20px calc(24px + env(safe-area-inset-bottom,0px));min-height:100%;transform:translate3d(0,60%,0)}
+  .cmpm-hd h2{font-size:28px}
+  .cmpm-hd p{margin-top:8px;font-size:14px;max-width:270px}
+  .cmpm-tabs{margin:44px -20px 0;padding:0 20px}
+  .cmpm-row{margin:24px -20px 0;padding:0 20px 4px;scroll-padding:0 20px;gap:8px}
+  .cmpc{min-height:416px;padding:24px 20px 20px}
+  .cmpc .top{padding-right:96px;min-height:120px}
+  .cmpc .pi,.cmpc .pi.pill{width:118px;height:118px;right:-10px}
+  .cmpc .pi.pen{width:44px;height:120px;right:26px}
+  .cmpc h3{font-size:22px}
+  .cmpc .dr{padding:16px 0}
+  .cmpc .tx,.cmpc .ir{font-size:14px}
+  .cmpa{flex-basis:200px}
+  .cmpa .add{margin-top:16px}
+  .cmpm-ft{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.cmpm-p,.cmpm-bg,.cmpc,.cmpa,.cmpc .tp>div{transition:none;animation:none}}
 .toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -980,7 +1069,7 @@ p,h1,h2,h3,ul{margin:0}
 
 <div class="stick" id="stick" aria-hidden="true">
   <div class="stick-in">
-    <span class="stick-label">A plan built for you</span>
+    <span class="stick-label">A weight loss plan built for you</span>
     <div class="stick-btns">
       <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Find your best fit</button>
       <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
@@ -1073,7 +1162,7 @@ p,h1,h2,h3,ul{margin:0}
         <div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$338</span><small>/mo</small></span></div></div>
       </a>
     </div>
-    <a href="#" class="btn btn-o" data-r data-toast="Medication comparison isn’t part of this prototype">Compare medications</a>
+    <a href="#compare" class="btn btn-o" data-r data-compare>Compare medications</a>
   </div>
 </section>
 
@@ -1093,7 +1182,7 @@ p,h1,h2,h3,ul{margin:0}
         <h3 class="display">Care that adjusts<br><span class="em-wrap"><em>as you do</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
         <p class="cj-p">From your first dose to maintaining your goal weight, your treatment plan adapts to your current needs.</p>
       </div>
-      <figure class="cj-ph cj-ph2 cj-r" data-cjp><div class="media" style="--lq:url({{lq:cj-phone}})"><img data-src="img/cj-phone.webp" alt="A hand holding a phone showing a chat with a GoodRx clinician about mild nausea"></div></figure>
+      <figure class="cj-ph cj-ph2 cj-r" data-cjp><div class="media" style="--lq:url({{lq:cj-phone2}})"><img data-src="img/cj-phone2.webp" alt="A hand holding a phone open to the GoodRx Care Center, with an active chat with Dr. Brooke"></div></figure>
       <div class="cj-t cj-t2 cj-r">
         <h3 class="display">Someone in your corner, <span class="em-wrap"><em>at every step</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
         <p class="cj-p">A question about your dose, a tough week, a plateau—your healthcare team is just a message away, 7 days a week.</p>
@@ -1278,6 +1367,90 @@ p,h1,h2,h3,ul{margin:0}
   </div>
 </footer>
 
+<!-- COMPARE -->
+<div class="cmpm" id="cmpm" data-tab="cost" role="dialog" aria-modal="true" aria-labelledby="cmpmT" aria-hidden="true" data-lenis-prevent>
+  <div class="cmpm-bg" data-cmp-close></div>
+  <div class="cmpm-p">
+    <div class="cmpm-hd">
+      <div><h2 id="cmpmT">Compare Medications</h2><p>See how your options stack up based on what matters most to you.</p></div>
+      <button type="button" class="cmpm-x" data-cmp-close aria-label="Close comparison"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 4.5L19.5 19.5M19.5 4.5L4.5 19.5" stroke="#12110F" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="cmpm-tabs" role="tablist" aria-label="Compare by">
+      <button role="tab" data-t="cost" aria-selected="true">Cost</button><button role="tab" data-t="eff" aria-selected="false">Efficacy</button><button role="tab" data-t="fx" aria-selected="false">Side effects</button><button role="tab" data-t="rt" aria-selected="false">Routine</button><button role="tab" data-t="ab" aria-selected="false">Additional benefits</button>
+    </div>
+    <div class="cmpm-row" id="cmpmRow" data-lenis-prevent-horizontal></div>
+    <div class="cmpm-ft"><p>Prices include $39/mo GoodRx membership cost.</p><p class="eff">*Results come from separate trials with different designs and aren’t directly comparable.</p></div>
+  </div>
+</div>
+<script>
+(()=>{
+const I={
+ pill:'<svg viewBox="0 0 24 24" fill="none"><path d="M12.3635 4.60573C14.5058 2.46345 17.9791 2.46345 20.1214 4.60573C22.2637 6.74801 22.2637 10.2213 20.1214 12.3636L16.2425 16.2426L8.48461 8.48467L12.3635 4.60573Z" stroke="#1C534E"/><path d="M12.3646 20.1213C10.2223 22.2636 6.74899 22.2636 4.60671 20.1213C2.46443 17.979 2.46443 14.5057 4.60671 12.3634L8.48565 8.48447L16.2435 16.2424L12.3646 20.1213Z" stroke="#1C534E"/></svg>',
+ clock:'<svg viewBox="0 0 24 24" fill="none"><path d="M12 7.5V12L15 15M2 5.25L5 2.25M22 5.25L19 2.25M21.5 12C21.5 17.2467 17.2467 21.5 12 21.5C6.75329 21.5 2.5 17.2467 2.5 12C2.5 6.75329 6.75329 2.5 12 2.5C17.2467 2.5 21.5 6.75329 21.5 12Z" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ inj:'<svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round"><path d="M17.75 2.75L21.25 6.25"/><path d="M19.5 4.5L17 7"/><path d="M12.75 3.75L20.25 11.25"/><path d="M14.3459 5.5L6.66391 13.1819C5.88286 13.963 5.88286 15.2293 6.66391 16.0104L7.98933 17.3358C8.77038 18.1168 10.0367 18.1168 10.8178 17.3358L18.4997 9.65385" stroke-linejoin="round"/><path d="M3 20.9996L7.27107 16.7285"/></svg>',
+ snow:'<svg viewBox="0 0 24 24" fill="none"><path d="M11.9961 5.5V18.5M11.9961 5.5L9.49609 3M11.9961 5.5L14.4961 3M11.9961 18.5L9.49609 21M11.9961 18.5L14.4961 21M6.36819 8.74998L17.6265 15.25M6.36819 8.74998L2.95312 9.66504M6.36819 8.74998L5.45312 5.33491M17.6265 15.25L18.5416 18.665M17.6265 15.25L21.0416 14.3349M6.36819 15.25L17.6265 8.74998M6.36819 15.25L5.45312 18.665M6.36819 15.25L2.95312 14.3349M17.6265 8.74998L21.0416 9.66504M17.6265 8.74998L18.5416 5.33491" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ trend:'<svg viewBox="0 0 24 24" fill="none"><path d="M16 17H21V12M20.5 16.5L15 11C13.8954 9.89543 12.1046 9.89543 11 11C9.89543 12.1046 8.10457 12.1046 7 11L3 7" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ heart:'<svg viewBox="0 0 24 24" fill="none"><path d="M17.5 11.5H15L13.5 14.5L10.5 8.5L9 11.5H6.5M12 5.37552C18.5042 -1.25346 29.6544 11.0575 12 21C-5.65441 11.0576 5.4957 -1.25346 12 5.37552Z" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ kid:'<svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 2C14 2 15.5 3.26953 15.5 4.71181C15.5 5.64505 15.0282 7 13.5 7C12.6809 7 12.1578 6.39447 12 6"/><path d="M15.625 10.387V10.9165M8.375 10.387V10.9165M8.75 10.75C8.75 10.3358 8.58211 10 8.375 10C8.16789 10 8 10.3358 8 10.75C8 11.1642 8.16789 11.5 8.375 11.5C8.58211 11.5 8.75 11.1642 8.75 10.75ZM16 10.75C16 10.3358 15.8321 10 15.625 10C15.4179 10 15.25 10.3358 15.25 10.75C15.25 11.1642 15.4179 11.5 15.625 11.5C15.8321 11.5 16 11.1642 16 10.75Z"/><path d="M8 16C8.91212 17.2144 10.3643 18 12 18C13.6357 18 15.0879 17.2144 16 16"/></svg>',
+ sleep:'<svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3.51A9 9 0 1 0 20.78 10"/><path d="M19 2h3l-3 4h3"/><path d="M12 8v4l2.5 2.5"/></svg>',
+ check:'<svg viewBox="0 0 12 12" fill="none"><path d="M2.25 6.25L5 9.625L9.75 2.25" stroke="#FFF6BF" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ plus:'<svg viewBox="0 0 14 14" fill="none"><path d="M7.0013 2.04199V7.00033M7.0013 7.00033V11.9587M7.0013 7.00033H2.04297M7.0013 7.00033H11.9596" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
+const FX_C='Gastrointestinal such as nausea, diarrhea, constipation, vomiting, stomach pain or bloating';
+const M=[
+ {k:'foundayo',nm:'Foundayo™',form:'Pill',chip:'Daily pill',img:'cut-foundayo',type:'pill',from:188,doses:[['0.8 mg',188],['2.5 mg',238],['5.5 mg',338]],
+  eff:'In ATTAIN-1 trial, people lost an average of 11% over 72 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache'],
+  rt:[['pill','Daily pill'],['clock','Anytime, with or without food']],ab:[['trend','Weight management only']]},
+ {k:'wpill',nm:'Wegovy® Pill',short:'Wegovy®',form:'Pill',chip:'Daily pill',img:'cut-wpill',type:'pill',from:238,href:'wegovy-pill.html',doses:[['4 mg',238],['5–10 mg',338]],
+  eff:'In OASIS 4 trial, people lost an average of 14% over 64 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache'],
+  rt:[['pill','Daily pill'],['clock','AM, empty stomach, 4oz water, wait 30 min before eating/drinking']],ab:[['heart','Cardiovascular risk reduction in adults with heart disease']]},
+ {k:'wpen',nm:'Wegovy® Pen',short:'Wegovy®',form:'Pen',chip:'Weekly pen',img:'cut-wpen',type:'pen',from:238,doses:[['4 mg',238],['5.5 mg',338]],
+  eff:'In STEP 1 trial, people lost an average of 15% over 68 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache, injection site pain, swelling or itching'],
+  rt:[['inj','Weekly injection'],['clock','Anytime'],['snow','Leave out in room temp ~30 min before injecting']],ab:[['kid','Approved for ages 12+'],['heart','Cardiovascular risk reduction and MASH']]},
+ {k:'zep',nm:'Zepbound® KwikPen',form:'Pen',chip:'Weekly pen',img:'cut-zep',type:'pen',from:338,doses:[['2.5 mg',338],['5 mg',438],['7.5+ mg',738]],
+  eff:'In SURMOUNT-1 trial, people lost an average of 21% over 72 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache, injection site pain, swelling or itching'],
+  rt:[['inj','Weekly injection'],['clock','Anytime'],['snow','Inject straight from fridge']],ab:[['sleep','Can treat moderate to severe obstructive sleep apnea']]}];
+const root=document.getElementById('cmpm'),row=document.getElementById('cmpmRow'),tabs=[...root.querySelectorAll('[role=tab]')];
+let sel=[true,true,true,true],tab='cost',last=null;
+const money=v=>`<span class="num">$${v}</span><small>/mo</small>`;
+function card(m,i){const nm=m.href?`<a href="${m.href}">${m.nm}</a>`:m.nm;
+  return `<article class="cmpc" style="animation-delay:${i*50}ms">
+   <div class="top"><span class="chip sm">${m.chip}</span><h3>${nm}</h3><p class="st">starts at</p><p class="sp">${money(m.from)}</p>
+    <img class="pi ${m.type}" src="img/${m.img}.webp" alt=""><button type="button" class="ck" data-cmp-off="${i}" aria-label="Remove ${m.nm} from comparison">${I.check}</button></div>
+   <div class="bot"><div class="tp">
+    <div data-p="cost">${m.doses.map(([d,v])=>`<div class="dr"><span class="label">${d}</span><span class="pr">${money(v)}</span></div>`).join('')}</div>
+    <div data-p="eff"><p class="lb">Clinical trial results*</p><p class="tx">${m.eff}</p></div>
+    <div data-p="fx"><p class="lb">Common</p><p class="tx">${m.fx[0]}</p><p class="lb">Less common</p><p class="tx">${m.fx[1]}</p></div>
+    <div data-p="rt">${m.rt.map(([ic,t])=>`<div class="ir">${I[ic]}<span>${t}</span></div>`).join('')}</div>
+    <div data-p="ab">${m.ab.map(([ic,t])=>`<div class="ir">${I[ic]}<span>${t}</span></div>`).join('')}</div>
+   </div><a href="#" class="btn btn-g" data-toast="Sign-up isn’t part of this prototype">Get started</a></div></article>`}
+function addCard(m,i){return `<button type="button" class="cmpa" data-cmp-on="${i}" style="animation-delay:${i*50}ms" aria-label="Add ${m.nm} to comparison"><span><b>${m.short||m.nm}</b><span class="f">${m.form}</span></span>
+  <img class="pi ${m.type}" src="img/${m.img}.webp" alt=""><span class="ck"></span><span class="add">${I.plus}Add to Compare</span></button>`}
+function render(){const on=M.map((m,i)=>sel[i]?card(m,i):'').join(''),off=M.map((m,i)=>sel[i]?'':addCard(m,i)).join('');
+  row.innerHTML=on+(off?`<div class="cmpa-col">${off}</div>`:'');setTab(tab)}
+function setTab(t){tab=t;root.dataset.tab=t;tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));row.querySelectorAll('.tp>div').forEach(p=>p.classList.toggle('on',p.dataset.p===t))}
+function say(msg){const el=document.getElementById('toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>el.classList.remove('show'),2400)}
+function open(s){if(s)sel=s;tab='cost';render();last=document.activeElement;row.scrollLeft=0;root.scrollTop=0;
+  root.setAttribute('aria-hidden','false');document.documentElement.classList.add('cmp-lock');requestAnimationFrame(()=>root.classList.add('open'));
+  setTimeout(()=>root.querySelector('.cmpm-x').focus({preventScroll:true}),60)}
+function close(){if(!root.classList.contains('open'))return;root.classList.remove('open');root.setAttribute('aria-hidden','true');document.documentElement.classList.remove('cmp-lock');
+  if(location.hash==='#compare')history.replaceState(null,'',location.pathname+location.search);if(last&&last.focus)last.focus({preventScroll:true})}
+window.openCompare=open;
+tabs.forEach(b=>b.addEventListener('click',()=>{setTab(b.dataset.t);b.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}));
+root.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft'||!e.target.matches('[role=tab]'))return;const i=tabs.indexOf(e.target),n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];n.focus();n.click()});
+root.addEventListener('click',e=>{
+  if(e.target.closest('[data-cmp-close]')){close();return}
+  const off=e.target.closest('[data-cmp-off]');if(off){const i=+off.dataset.cmpOff;if(sel.filter(Boolean).length<=1){say('Keep at least one medication to compare');return}sel[i]=false;render();return}
+  const on=e.target.closest('[data-cmp-on]');if(on){sel[+on.dataset.cmpOn]=true;render()}});
+addEventListener('keydown',e=>{if(e.key==='Escape')close();if(e.key==='Tab'&&root.classList.contains('open')){const f=[...root.querySelectorAll('button,a[href]')].filter(x=>x.offsetParent);if(!f.length)return;const a=f[0],z=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
+// openers: anything with data-compare; on the PDP the selection comes from the compare card's rows
+document.addEventListener('click',e=>{const t=e.target.closest('[data-compare]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();
+  const rows=[...document.querySelectorAll('.cmp-list .crow')];let s=null;if(rows.length===4){s=rows.map(r=>r.classList.contains('on'));if(!s.some(Boolean))s=[true,true,true,true]}
+  open(s||[true,true,true,true])},true);
+if(location.hash==='#compare')addEventListener('load',()=>open());
+})();
+</script>
+<!-- /COMPARE -->
 <script src="lenis.min.js"></script>
 <script>
 (()=>{
