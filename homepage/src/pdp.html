@@ -41,7 +41,7 @@
 .qa.sm>button span:first-child{font-size:16px}
 .qa.sm .ans p{padding-bottom:20px;font-size:14px}
 /* gallery */
-.gal{width:656px;flex:none;display:flex;flex-direction:column;align-items:center;gap:20px}
+.gal{width:656px;flex:none;display:flex;flex-direction:column;align-items:center;gap:20px;position:sticky;align-self:flex-start;top:120px}
 .gal-main{position:relative;width:100%;height:560px;border-radius:16px;overflow:hidden;background:#ece5da;isolation:isolate}
 .gal-main .slide{position:absolute;inset:0;clip-path:inset(0 0 0 100%);transition:clip-path .9s var(--ease-io)}
 .gal-main .slide.on{clip-path:inset(0 0 0 0);z-index:2}
@@ -245,6 +245,19 @@
 .xp-vis{position:relative;aspect-ratio:657/480;border-radius:16px;overflow:hidden;background:#4b2a3c}
 .xp-vis .media{position:absolute;inset:0;opacity:0;transform:scale(1.04);transition:opacity .7s var(--ease),transform 1.1s var(--ease)}
 .xp-vis .media.on{opacity:1;transform:none;z-index:1}
+.xp-vis .media.dose-stage{display:flex;align-items:center;justify-content:center;padding:40px}
+.dose-card{width:100%;max-width:340px;background:var(--n0);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:20px;box-shadow:var(--elev)}
+.dose-card .chip{align-self:flex-start}
+.dc-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dc-head h4{margin:0;font-weight:400;font-size:28px;line-height:1.1;color:var(--dark)}
+.dc-pill{width:48px;height:48px;object-fit:contain;flex:none}
+.dc-rows{display:flex;flex-direction:column}
+.dc-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid var(--n200)}
+.dc-row:first-child{border-top:0}
+.dc-row>span:first-child{font-size:13px;color:var(--soft)}
+.dc-row .v{font-size:20px;color:var(--dark)}
+.dc-row .v small{font-size:13px;color:var(--soft)}
+.dc-note{margin:0;font-size:12px;line-height:1.4;color:var(--soft)}
 /* membership card */
 .msec{padding-block:56px}
 .mcard{display:flex;gap:18px;padding:8px;border-radius:16px;background:var(--n0)}
@@ -300,11 +313,12 @@
   .xp-vis{display:none}
   .xp-vm{display:block;position:relative;aspect-ratio:657/480;border-radius:12px;overflow:hidden;background:#4b2a3c}
   .xp-vm .media{position:absolute;inset:0}
+  .xp-vm.dose-stage{display:flex;align-items:center;justify-content:center;padding:24px}
   .mcard{flex-direction:column;gap:8px}
   .mc-l{width:auto}
   .mc-l .btn{order:3}
   .pd{flex-direction:column;align-items:stretch;padding-top:32px}
-  .gal{width:100%;order:-1}
+  .gal{width:100%;order:-1;position:static}
   .gal-main{aspect-ratio:656/520}
   .rel-row{grid-template-columns:minmax(0,1fr)}
   .rel-row .rart:nth-child(3){display:flex}
@@ -547,12 +561,32 @@
       <div class="qa" data-v="1"><button aria-expanded="false" aria-controls="xa1" id="xq1"><span>Gradual steps up in dose and price</span><span class="pm" aria-hidden="true"></span></button><div class="ans" id="xa1" role="region" aria-labelledby="xq1"><div>
         <div class="xp-copy"><p>Every GLP-1 starts low and increases gradually so your body can adjust. Everyone starts at the same dose, but where you land depends how your body responds and adjusts.</p></div>
         <div class="xp-note dose"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.4968 9.98987C18.677 8.17259 18.4702 5.71715 16.8765 4.12345C15.0453 2.29218 12.0762 2.29218 10.2449 4.12345L4.12345 10.2449C2.29218 12.0762 2.29218 15.0453 4.12345 16.8765C5.71715 18.4702 8.17259 18.677 9.98987 17.4968"/><path d="M7.5 7.5L11 11"/><path d="M15.5 21.25C18.6756 21.25 21.25 18.6756 21.25 15.5C21.25 12.3244 18.6756 9.75 15.5 9.75C12.3244 9.75 9.75 12.3244 9.75 15.5C9.75 18.6756 12.3244 21.25 15.5 21.25Z"/><path d="M16.5 21L14.5 10"/></svg></span><div><b>Wegovy’s highest dose: 10 mg</b></div></div>
-        <div class="xp-vm"><div class="media" style="--lq:url({{lq:exp-dose}})"><img data-src="img/exp-dose.webp" alt="Wegovy pill pricing: $238/mo at 4 mg and $338/mo at 5–10 mg, including the $39 membership"></div></div>
+        <div class="xp-vm dose-stage">
+          <div class="dose-card">
+            <span class="chip sm">Daily pill</span>
+            <div class="dc-head"><h4>Wegovy®</h4><img class="dc-pill" src="img/cut-wpill.webp" alt=""></div>
+            <div class="dc-rows">
+              <div class="dc-row"><span>4 mg</span><span class="v">$238<small>/mo</small></span></div>
+              <div class="dc-row"><span>5–10 mg</span><span class="v">$338<small>/mo</small></span></div>
+            </div>
+            <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
+          </div>
+        </div>
       </div></div></div>
     </div>
     <div class="xp-vis" aria-hidden="true">
       <div class="media on" data-v="0" style="--lq:url({{lq:exp-fx}})"><img data-src="img/exp-fx.webp" alt=""></div>
-      <div class="media" data-v="1" style="--lq:url({{lq:exp-dose}})"><img data-src="img/exp-dose.webp" alt=""></div>
+      <div class="media dose-stage" data-v="1">
+        <div class="dose-card">
+          <span class="chip sm">Daily pill</span>
+          <div class="dc-head"><h4>Wegovy®</h4><img class="dc-pill" src="img/cut-wpill.webp" alt=""></div>
+          <div class="dc-rows">
+            <div class="dc-row"><span>4 mg</span><span class="v">$238<small>/mo</small></span></div>
+            <div class="dc-row"><span>5–10 mg</span><span class="v">$338<small>/mo</small></span></div>
+          </div>
+          <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
