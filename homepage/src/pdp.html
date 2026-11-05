@@ -280,7 +280,6 @@
 .mc-perks .ic{width:40px;height:40px;flex:none;border-radius:8px;background:rgba(0,0,0,.12);border:.5px solid rgba(255,246,191,.2);display:grid;place-items:center}
 .mc-perks .ic svg{width:18px;height:18px}
 .btn-more{height:40px;font-size:12px;padding:0 16px;margin-top:24px}
-.gal{position:relative}
 .gal-chips{position:absolute;z-index:6;left:18px;top:15px;display:flex;gap:8px;pointer-events:none}
 .chip.grey{background:var(--n100);border-color:var(--n300);color:var(--soft)}
 /* PDP responsive */
@@ -313,12 +312,12 @@
   .xp-vis{display:none}
   .xp-vm{display:block;position:relative;aspect-ratio:657/480;border-radius:12px;overflow:hidden;background:#4b2a3c}
   .xp-vm .media{position:absolute;inset:0}
-  .xp-vm.dose-stage{display:flex;align-items:center;justify-content:center;padding:24px}
+  .xp-vm.dose-stage{display:flex;align-items:center;justify-content:center;padding:28px 20px;aspect-ratio:auto}
   .mcard{flex-direction:column;gap:8px}
   .mc-l{width:auto}
   .mc-l .btn{order:3}
   .pd{flex-direction:column;align-items:stretch;padding-top:32px}
-  .gal{width:100%;order:-1;position:static}
+  .gal{width:100%;order:-1;position:relative;top:auto;align-self:stretch}
   .gal-main{aspect-ratio:656/520}
   .rel-row{grid-template-columns:minmax(0,1fr)}
   .rel-row .rart:nth-child(3){display:flex}

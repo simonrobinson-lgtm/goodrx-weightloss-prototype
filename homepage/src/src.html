@@ -614,6 +614,7 @@ p,h1,h2,h3,ul{margin:0}
 .cmpm-bg{position:fixed;inset:0;background:rgba(18,17,15,.32);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .5s cubic-bezier(.4,0,.2,1)}
 .cmpm.open .cmpm-bg{opacity:1}
 .cmpm-p{position:relative;width:min(1416px,100%);background:var(--n100);border-radius:12px;padding:32px 24px;box-shadow:var(--elev);overflow:hidden;isolation:isolate;opacity:0;transform:translate3d(0,28px,0) scale(.98);transition:opacity .35s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);will-change:transform,opacity}
+.cmpm-p:focus{outline:none}
 .cmpm.open .cmpm-p{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .85s cubic-bezier(.16,1,.3,1)}
 .cmpm-p::before{content:"";position:absolute;inset:-6% -2%;z-index:-1;background:url(img/cmp-bg.webp) center/cover;mix-blend-mode:overlay;opacity:.55;transform:rotate(180deg) scaleY(-1);pointer-events:none}
 .cmpm-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
@@ -1379,7 +1380,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 <!-- COMPARE -->
 <div class="cmpm" id="cmpm" data-tab="cost" role="dialog" aria-modal="true" aria-labelledby="cmpmT" aria-hidden="true" data-lenis-prevent>
   <div class="cmpm-bg" data-cmp-close></div>
-  <div class="cmpm-p">
+  <div class="cmpm-p" tabindex="-1">
     <div class="cmpm-hd">
       <div><h2 id="cmpmT">Compare Medications</h2><p>See how your options stack up based on what matters most to you.</p></div>
       <button type="button" class="cmpm-x" data-cmp-close aria-label="Close comparison"><svg viewBox="0 0 24 24" fill="none"><path d="M4.5 4.5L19.5 19.5M19.5 4.5L4.5 19.5" stroke="#12110F" stroke-linecap="round"/></svg></button>
@@ -1418,7 +1419,7 @@ const M=[
  {k:'zep',nm:'Zepbound® KwikPen',form:'Pen',chip:'Weekly pen',img:'cmp-zep',type:'pen',from:338,doses:[['2.5 mg',338],['5 mg',438],['7.5+ mg',738]],
   eff:'In SURMOUNT-1 trial, people lost an average of 21% over 72 weeks.',fx:[FX_C,'Heartburn, burping, tiredness, headache, injection site pain, swelling or itching'],
   rt:[['inj','Weekly injection'],['clock','Anytime'],['snow','Inject straight from fridge']],ab:[['sleep','Can treat moderate to severe obstructive sleep apnea']]}];
-const root=document.getElementById('cmpm'),row=document.getElementById('cmpmRow'),tabs=[...root.querySelectorAll('[role=tab]')];
+const root=document.getElementById('cmpm'),panel=root.querySelector('.cmpm-p'),row=document.getElementById('cmpmRow'),tabs=[...root.querySelectorAll('[role=tab]')];
 let sel=[true,true,true,true],tab='cost',last=null;
 const money=v=>`<span class="num">$${v}</span><small>/mo</small>`;
 function card(m,i){const nm=m.href?`<a href="${m.href}">${m.nm}</a>`:m.nm;
@@ -1455,7 +1456,7 @@ function setTab(t){tab=t;root.dataset.tab=t;tabs.forEach(b=>b.setAttribute('aria
 function say(msg){const el=document.getElementById('toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>el.classList.remove('show'),2400)}
 function open(s){if(s)sel=s;tab='cost';render();requestAnimationFrame(moveInd);last=document.activeElement;row.scrollLeft=0;root.scrollTop=0;
   root.setAttribute('aria-hidden','false');document.documentElement.classList.add('cmp-lock');requestAnimationFrame(()=>root.classList.add('open'));
-  setTimeout(()=>root.querySelector('.cmpm-x').focus({preventScroll:true}),60)}
+  setTimeout(()=>panel.focus({preventScroll:true}),60)}
 function close(){if(!root.classList.contains('open'))return;root.classList.remove('open');root.setAttribute('aria-hidden','true');document.documentElement.classList.remove('cmp-lock');
   if(location.hash==='#compare')history.replaceState(null,'',location.pathname+location.search);if(last&&last.focus)last.focus({preventScroll:true})}
 window.openCompare=open;
@@ -1688,7 +1689,7 @@ let organ=0;
 function setOrgan(i){if(i===organ)return;organ=i;hcards.forEach((c,k)=>c.classList.toggle('active',k===i));$$('[data-ring]').forEach(r=>r.classList.toggle('on',+r.dataset.ring===i));bmark.classList.add('moving');bmark.style.top=ORG[i].top;bglow.style.top=ORG[i].top;clearTimeout(bmark._t);bmark._t=setTimeout(()=>{bchip.textContent=ORG[i].lbl;bmark.classList.remove('moving')},700)}
 const wm=$('#wordmark');
 const railDots=$$('.how-rail i'),heroEl=$('.hero'),howEl=$('#how');
-const stickEl=$('#stick'),heroBtn=$('.hero-copy .btn'),footEl=$('.foot');let stickOn=false;
+const stickEl=$('#stick'),heroBtn=$('.hero-copy .btn'),footEl=$('section.cta')||$('.foot');let stickOn=false;
 const hkids=hcards.map(c=>[c.querySelector('.chip'),c.querySelector('.illu'),c.querySelector('.tx')]);
 let parOS=[];const measurePar=()=>{parOS=pars.map(el=>{const pr=el.parentElement.getBoundingClientRect(),er=el.getBoundingClientRect();return Math.max(0,Math.min(pr.top-er.top,er.bottom-pr.bottom))})};
 pars.forEach(el=>el.style.transform='');measurePar();let lastW=innerWidth;addEventListener('resize',()=>{if(innerWidth===lastW)return;lastW=innerWidth;pars.forEach(el=>el.style.transform='');measurePar()});
