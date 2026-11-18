@@ -26,10 +26,8 @@ html{background:var(--n100);-webkit-text-size-adjust:100%;min-height:100%}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 body{margin:0;background:var(--n100);color:var(--ink);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip;min-height:100dvh}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--n100)}
+.sbar{position:fixed;left:0;right:0;top:0;height:env(safe-area-inset-top,0px);z-index:10;background-color:var(--n100);pointer-events:none}
 :root{--sab:env(safe-area-inset-bottom,0px)}
-html.ios-tb{--sab:calc(env(safe-area-inset-bottom,0px) + 58px)}
-body::after{content:"";position:fixed;inset:auto 0 0;height:env(safe-area-inset-bottom,0px);z-index:10;background:var(--n100)}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0}
 input{-webkit-appearance:none;appearance:none;border-radius:0}
@@ -594,6 +592,7 @@ p,h1,h2,h3,ul{margin:0}
 /* toast */
 /* ---------- sticky get-started (same pop-up as the PDP) ---------- */
 .stick{position:fixed;z-index:45;left:0;right:0;bottom:calc(16px + var(--sab));display:flex;justify-content:center;padding:0 16px;pointer-events:none;transform:translate3d(0,calc(100% + 32px),0);transition:transform .7s var(--ease)}
+.stick:not(.show){visibility:hidden;transition:transform .7s var(--ease),visibility 0s .7s}
 .stick.show{transform:none}
 .stick-in{pointer-events:auto;width:min(588px,100%);height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 8px 0 24px;border-radius:16px;background:rgba(255,255,251,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border:.5px solid var(--n300);box-shadow:var(--elev)}
 .stick-label{font-size:14px;line-height:1.4;color:var(--n900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -602,13 +601,15 @@ p,h1,h2,h3,ul{margin:0}
 .stick .sq-m{background:var(--n0)}
 .has-stick .toast{bottom:calc(96px + var(--sab))}
 @media (max-width:720px){
-  .stick{left:0;right:0;bottom:0;padding:0;transition-delay:.2s}
-  .stick::before{content:"";position:absolute;left:0;right:0;bottom:0;top:-56px;z-index:-1;background:linear-gradient(to bottom,transparent,var(--n100) 56px);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 56px);mask-image:linear-gradient(to bottom,transparent,#000 56px)}
-  .stick-in{width:100%;height:auto;padding:0 var(--gut) calc(16px + var(--sab));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-  .stick-label{display:none}
-  .stick-btns{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stick{left:0;right:0;bottom:0;padding:0}
+  .stick:not(.show){opacity:0;transform:translate3d(0,24px,0);transition:transform .5s var(--ease),opacity .35s var(--ease),visibility 0s .5s}
+  .stick.show{opacity:1;transition:transform .5s var(--ease) .1s,opacity .35s var(--ease) .1s}
+  .stick::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(245,239,229,0) 5%,var(--n100) 75%);-webkit-backdrop-filter:blur(3.5px);backdrop-filter:blur(3.5px);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 24px);mask-image:linear-gradient(to bottom,transparent,#000 24px)}
+  .stick-in{width:100%;height:auto;padding:20px 20px calc(12px + var(--sab));border-radius:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .stick-label,.stick .sq-m{display:none}
+  .stick-btns{width:100%;display:flex}
   .stick .btn{flex:1 1 0;width:auto;min-width:0;height:48px;padding:0 16px;font-size:14px}
-  .has-stick .toast{bottom:calc(84px + var(--sab))}
+  .has-stick .toast{bottom:calc(92px + var(--sab))}
 }
 /* ---------- compare medications (modal on desktop, sheet on phones) ---------- */
 .cmpm{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:24px 12px;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;pointer-events:none;transition:visibility 0s .55s}
@@ -709,6 +710,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 }
 @media (prefers-reduced-motion:reduce){.cmpm-p,.cmpm-bg,.cmpc,.cmpa,.cmpc .tp>div,.cmpc .ck svg{transition:none;animation:none}}
 .toast{position:fixed;z-index:80;left:50%;bottom:calc(24px + var(--sab));transform:translate(-50%,24px);opacity:0;background:var(--g800);color:var(--y100);font-size:14px;padding:12px 18px;border-radius:10px;box-shadow:var(--elev);pointer-events:none;transition:opacity .35s var(--ease),transform .5s var(--spring);max-width:calc(100% - 32px)}
+.toast:not(.show){visibility:hidden;transition:opacity .35s var(--ease),transform .5s var(--spring),visibility 0s .5s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- responsive ---------- */
@@ -847,7 +849,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   .nav-r .icon-btn:first-child{display:none}
   .icon-btn,.icon-btn svg{width:24px;height:24px}
   main{padding-top:calc(64px + env(safe-area-inset-top,0px))}
-  body::before{display:none}
+  .sbar{display:none}
   /* hero */
   .hero{height:555px;min-height:0;max-height:none}
   .hero .bg .media>img{top:auto;bottom:0;height:118%;object-position:51.5% 100%}
@@ -1085,11 +1087,12 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   <div class="stick-in">
     <span class="stick-label">A weight loss plan built for you</span>
     <div class="stick-btns">
-      <button type="button" class="btn btn-o sq-m" tabindex="-1" data-toast="The 3-minute quiz isn’t part of this prototype">Find your best fit</button>
-      <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started</a>
+      <a href="intake.html?from=quiz" class="btn btn-o sq-m" tabindex="-1">Find your best fit</a>
+      <a href="intake.html" class="btn btn-g" tabindex="-1">Get started</a>
     </div>
   </div>
 </div>
+<div class="sbar" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <header class="hdr" id="hdr">
@@ -1119,10 +1122,10 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
         <h1 class="split" data-intro>Lose weight with a plan built for you—and no surprises</h1>
         <p>Get FDA-approved GLP-1 medication with support from licensed clinicians. Affordable and transparent pricing at every step of the way.</p>
       </div>
-      <a href="#products" class="btn btn-y">Get started</a>
+      <a href="intake.html" class="btn btn-y">Get started</a>
     </div>
   </div>
-  <button class="quiz" id="quiz" data-toast="The 3-minute quiz isn’t part of this prototype">
+  <button class="quiz" id="quiz" data-href="intake.html?from=quiz">
     <div class="media eager" style="--lq:url({{lq:quiz}})"><img data-src="img/quiz.webp" alt=""></div>
     <div><p class="q1">Don’t know where to start?</p><p class="q2">Find a GLP-1 that fits your routine in 3 minutes.</p></div>
     <svg class="arr" viewBox="0 0 14 14"><use href="#i-chev"/></svg>
@@ -1315,7 +1318,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
     <div class="bgwrap" data-par="0.05"><div class="media grain" style="--lq:url({{lq:cta}})"><img data-src="img/cta.webp" data-src-m="img/cta-m.webp" alt="A person on a sofa smiling at a laptop"></div></div>
     <div class="t"><h2 class="h-xl split">Find a GLP-1 treatment that fits your life</h2>
     <p data-r>Pill or injection, weekly or daily, pickup or delivery. Tell us how you live and we'll show you options that work with it.</p></div>
-    <a href="#" class="btn btn-g" data-r data-toast="The treatment finder isn’t part of this prototype">Find my best fit</a>
+    <a href="intake.html?from=quiz" class="btn btn-g" data-r>Find my best fit</a>
   </div>
 </section>
 </main>
@@ -1436,7 +1439,7 @@ function card(m,i){const nm=m.href?`<a href="${m.href}">${m.nm}</a>`:m.nm;
     <div data-p="fx"><p class="lb">Common</p><p class="tx">${m.fx[0]}</p><p class="lb">Less common</p><p class="tx">${m.fx[1]}</p></div>
     <div data-p="rt">${m.rt.map(([ic,t])=>`<div class="ir">${I[ic]}<span>${t}</span></div>`).join('')}</div>
     <div data-p="ab">${m.ab.map(([ic,t])=>`<div class="ir">${I[ic]}<span>${t}</span></div>`).join('')}</div>
-   </div><a href="#" class="btn btn-g" data-toast="Sign-up isn’t part of this prototype">Get started</a></div></article>`}
+   </div><a href="intake.html?from=pdp&med=${m.k}&ret=${encodeURIComponent(location.pathname.split('/').pop()||'index.html')}" class="btn btn-g">Get started</a></div></article>`}
 function addCard(m,i){return `<button type="button" class="cmpa" data-cmp-on="${i}" style="animation-delay:${i*50}ms" aria-label="Add ${m.nm} to comparison"><span><b>${m.short||m.nm}</b><span class="f">${m.form}</span></span>
   <img class="pi ${m.type} pi-${m.k}" src="img/${m.img}.webp" alt="" decoding="async"><span class="ck"></span><span class="add">${I.plus}Add to Compare</span></button>`}
 const RM=matchMedia('(prefers-reduced-motion:reduce)');
@@ -1540,6 +1543,7 @@ function instant(el){if(settled)return;el.classList.add('instant');void el.offse
 
 const toastEl=$('#toast'); let tt;
 function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),2400)}
+document.addEventListener('click',e=>{const h=e.target.closest('[data-href]');if(h){location.href=h.dataset.href}});
 document.addEventListener('click',e=>{const a=e.target.closest('[data-toast]');if(!a)return;e.preventDefault();toast(a.dataset.toast||`“${a.textContent.trim()||a.getAttribute('aria-label')}” isn’t part of this prototype`)});
 
 /* ---------- build journey ---------- */

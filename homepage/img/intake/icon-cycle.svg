@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Iconography">
+<path id="Ellipse 22973" d="M103.301 85C109.932 73.5158 111.728 59.868 108.296 47.0591C104.864 34.2501 96.4842 23.3291 85 16.6987" stroke="#1C534E"/>
+<path id="Ellipse 22998" d="M16.6987 85C23.3291 96.4842 34.2501 104.864 47.059 108.296C59.868 111.728 73.5158 109.932 85 103.301" stroke="#1C534E"/>
+<path id="Ellipse 22999" d="M60 10C53.4339 10 46.9321 11.2933 40.8658 13.806C34.7996 16.3188 29.2876 20.0017 24.6447 24.6447C20.0017 29.2876 16.3188 34.7995 13.806 40.8658C11.2933 46.9321 10 53.4339 10 60" stroke="#1C534E"/>
+<circle id="Ellipse 22995" cx="16" cy="84" r="6" fill="#DEDB7C" stroke="#1C534E"/>
+<circle id="Ellipse 22997" cx="104" cy="84" r="6" fill="#DEDB7C" stroke="#1C534E"/>
+<circle id="Ellipse 22996" cx="60" cy="10" r="6" fill="#DEDB7C" stroke="#1C534E"/>
+</g>
+</svg>
