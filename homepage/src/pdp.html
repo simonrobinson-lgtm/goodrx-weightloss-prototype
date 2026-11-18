@@ -179,7 +179,7 @@
 .ex-row.dragging{cursor:grabbing;scroll-snap-type:none}
 .ex-row.dragging .xcard{pointer-events:none}
 .ex-track{display:flex;gap:16px;width:max-content;padding:0 max(var(--gut),calc((100vw - 1328px)/2))}
-.xcard{width:420px;flex:none;display:flex;gap:16px;padding:8px 24px 8px 8px;border-radius:16px;background:var(--n0);scroll-snap-align:start;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.xcard{width:432px;flex:none;display:flex;gap:16px;padding:8px 24px 8px 8px;border-radius:16px;background:var(--n0);scroll-snap-align:start;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
 @media (hover:hover){.xcard:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(36,36,36,.04),0 16px 28px -16px rgba(36,36,36,.28)}}
 .xcard .media{width:120px;height:120px;flex:none;border-radius:8px;background:var(--n400)}
 .xcard .media>img{transition:opacity .9s var(--ease),transform 1.4s var(--ease),filter .9s var(--ease)}
@@ -420,6 +420,7 @@
   .pd-name{gap:12px}
   .pd-price{gap:4px}
   .pd-price .from{font-size:13px}
+  .pd-price .pd-tot{font-size:14px}
   .pd-price .row{margin-top:8px}
   .pd-price .tot{gap:8px}
   .pd-price .tot .lb{height:26px;padding-bottom:0}
@@ -502,13 +503,13 @@
   <div class="pd-info">
     <div class="pd-top">
       <div class="pd-name">
-        <p class="pd-kick" data-r>Weight loss plan:</p>
+        <p class="pd-kick" data-r>Weight loss plan</p>
         <h1 class="split" data-intro>Wegovy®</h1>
       </div>
       <div class="pd-price" data-r style="--i:1">
-        <span class="from">Starting at</span>
-        <span class="v"><span class="num">$188</span><small>/mo.</small></span>
-        <span class="dash pd-tot" tabindex="0">Total price: $39 membership + $149* medication<span class="tip" role="tooltip"><b>What’s included</b>$39/mo membership for your care team and monthly renewals, plus $149/mo for the medication at the starting dose.</span></span>
+        <span class="from">Medication starting at</span>
+        <span class="v"><span class="num">$149</span><small>/mo</small></span>
+        <span class="dash pd-tot" tabindex="0">Total price: $188/mo (membership + medication)<span class="tip" role="tooltip"><b>How your price adds up</b>$39/mo membership + $149/mo medication = $188/mo at the starting dose. Your medication price changes as your dose changes.</span></span>
       </div>
       <p class="pd-desc" data-r style="--i:2">A small daily tablet with the same active ingredient as Wegovy injections—minus the needles. Take it with a sip of water when you wake up. A daily step towards a goal you can achieve.</p>
       <div class="pd-cta" data-r style="--i:3">
@@ -519,9 +520,9 @@
       <div class="pd-get" data-r style="--i:4">
         <p class="label">What you get</p>
         <ul>
-          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 11.5H15L13.5 14.5L10.5 8.5L9 11.5H6.5M12 5.37552C18.5042 -1.25346 29.6544 11.0575 12 21C-5.65441 11.0576 5.4957 -1.25346 12 5.37552Z"/></svg></span>7 days a week physician support</li>
-          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.4968 9.98987C18.677 8.17259 18.4702 5.71715 16.8765 4.12345C15.0453 2.29218 12.0762 2.29218 10.2449 4.12345L4.12345 10.2449C2.29218 12.0762 2.29218 15.0453 4.12345 16.8765C5.71715 18.4702 8.17259 18.677 9.98987 17.4968"/><path d="M7.5 7.5L11 11"/><path d="M15.5 21.25C18.6756 21.25 21.25 18.6756 21.25 15.5C21.25 12.3244 18.6756 9.75 15.5 9.75C12.3244 9.75 9.75 12.3244 9.75 15.5C9.75 18.6756 12.3244 21.25 15.5 21.25Z"/><path d="M16.5 21L14.5 10"/></svg></span>Wegovy Pills &amp; monthly prescription renewal</li>
-          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E"><path d="M9.5 16.5H14.5M8.5 6.5V15M8.5 6.5H6.3541C5.21779 6.5 4.179 7.14201 3.67082 8.15836L2.81672 9.86656C2.60844 10.2831 2.5 10.7425 2.5 11.2082V14.5C2.5 15.6046 3.39543 16.5 4.5 16.5M8.5 6.5C8.5 5.39543 9.39543 4.5 10.5 4.5H18.5C20.1569 4.5 21.5 5.84315 21.5 7.5V14C21.5 15.3807 20.3807 16.5 19 16.5M9.3999 17C9.3999 18.3807 8.28061 19.5 6.8999 19.5C5.51919 19.5 4.3999 18.3807 4.3999 17C4.3999 15.6193 5.51919 14.5 6.8999 14.5C8.28061 14.5 9.3999 15.6193 9.3999 17ZM19.5 17C19.5 18.3807 18.3807 19.5 17 19.5C15.6193 19.5 14.5 18.3807 14.5 17C14.5 15.6193 15.6193 14.5 17 14.5C18.3807 14.5 19.5 15.6193 19.5 17Z"/></svg></span>Same day pharmacy pickup or mail delivery</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 11.5H15L13.5 14.5L10.5 8.5L9 11.5H6.5M12 5.37552C18.5042 -1.25346 29.6544 11.0575 12 21C-5.65441 11.0576 5.4957 -1.25346 12 5.37552Z"/></svg></span>Unlimited support from real healthcare providers</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"><path d="M17.4968 9.98987C18.677 8.17259 18.4702 5.71715 16.8765 4.12345C15.0453 2.29218 12.0762 2.29218 10.2449 4.12345L4.12345 10.2449C2.29218 12.0762 2.29218 15.0453 4.12345 16.8765C5.71715 18.4702 8.17259 18.677 9.98987 17.4968"/><path d="M7.5 7.5L11 11"/><path d="M15.5 21.25C18.6756 21.25 21.25 18.6756 21.25 15.5C21.25 12.3244 18.6756 9.75 15.5 9.75C12.3244 9.75 9.75 12.3244 9.75 15.5C9.75 18.6756 12.3244 21.25 15.5 21.25Z"/><path d="M16.5 21L14.5 10"/></svg></span>Wegovy Pills with monthly prescription renewal</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1C534E"><path d="M9.5 16.5H14.5M8.5 6.5V15M8.5 6.5H6.3541C5.21779 6.5 4.179 7.14201 3.67082 8.15836L2.81672 9.86656C2.60844 10.2831 2.5 10.7425 2.5 11.2082V14.5C2.5 15.6046 3.39543 16.5 4.5 16.5M8.5 6.5C8.5 5.39543 9.39543 4.5 10.5 4.5H18.5C20.1569 4.5 21.5 5.84315 21.5 7.5V14C21.5 15.3807 20.3807 16.5 19 16.5M9.3999 17C9.3999 18.3807 8.28061 19.5 6.8999 19.5C5.51919 19.5 4.3999 18.3807 4.3999 17C4.3999 15.6193 5.51919 14.5 6.8999 14.5C8.28061 14.5 9.3999 15.6193 9.3999 17ZM19.5 17C19.5 18.3807 18.3807 19.5 17 19.5C15.6193 19.5 14.5 18.3807 14.5 17C14.5 15.6193 15.6193 14.5 17 14.5C18.3807 14.5 19.5 15.6193 19.5 17Z"/></svg></span>Same-day pharmacy pickup or mail delivery</li>
         </ul>
       </div>
       <div class="pd-note" data-r style="--i:5"><b>GoodRx is NOT health insurance. Cancel anytime.</b><p>*Introductory price for lowest dose of Wegovy pill (1.5 mg dose only).</p></div>
@@ -570,11 +571,11 @@
           <div class="dose-card">
             <div class="top"><span class="chip sm">Daily pill</span><h3>Wegovy®</h3><img class="dc-pill" src="img/cmp-wpill.webp" alt="" decoding="async"></div>
             <div class="dc-rows">
-              <div class="dc-row"><span class="label">4 mg</span><span class="pr"><span class="num">$238</span><small>/mo</small></span></div>
-              <div class="dc-row"><span class="label">5–10 mg</span><span class="pr"><span class="num">$338</span><small>/mo</small></span></div>
+              <div class="dc-row"><span class="label">4 mg</span><span class="pr"><span class="num">$199</span><small>/mo</small></span></div>
+              <div class="dc-row"><span class="label">5–10 mg</span><span class="pr"><span class="num">$299</span><small>/mo</small></span></div>
             </div>
           </div>
-          <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
+          <p class="dc-note">Prices shown are medication only. Membership is $39/mo.</p>
         </div>
       </div></div></div>
     </div>
@@ -587,11 +588,11 @@
         <div class="dose-card">
           <div class="top"><span class="chip sm">Daily pill</span><h3>Wegovy®</h3><img class="dc-pill" src="img/cmp-wpill.webp" alt="" decoding="async"></div>
           <div class="dc-rows">
-            <div class="dc-row"><span class="label">4 mg</span><span class="pr"><span class="num">$238</span><small>/mo</small></span></div>
-            <div class="dc-row"><span class="label">5–10 mg</span><span class="pr"><span class="num">$338</span><small>/mo</small></span></div>
+            <div class="dc-row"><span class="label">4 mg</span><span class="pr"><span class="num">$199</span><small>/mo</small></span></div>
+            <div class="dc-row"><span class="label">5–10 mg</span><span class="pr"><span class="num">$299</span><small>/mo</small></span></div>
           </div>
         </div>
-        <p class="dc-note">All-in pricing: includes your $39/mo GoodRx membership and medication.</p>
+        <p class="dc-note">Prices shown are medication only. Membership is $39/mo.</p>
       </div>
     </div>
   </div>
@@ -664,20 +665,20 @@
 <section class="wrap msec" id="membership">
   <div class="mcard" data-r>
     <div class="mc-l">
-      <div><h2>Your membership unlocks support at every step</h2><p>Membership required for treatment</p></div>
+      <div><h2>Members get support at every step of the way</h2><p>Membership required for treatment.</p></div>
       <a href="#" class="btn btn-o" data-toast="Membership details aren’t part of this prototype">Membership details</a>
     </div>
     <div class="mc-r grain">
       <span class="chip">GoodRx weight loss membership</span>
       <div class="mc-p">
-        <div><span class="v"><span class="num" data-count="39" data-prefix="$">$39</span><small>/mo</small></span><span class="s">Cancel any time</span></div>
+        <div><span class="v"><span class="num" data-count="39" data-prefix="$">$39</span><small>/mo.</small></span><span class="s">Cancel any time</span></div>
         <svg class="mc-plus" viewBox="0 0 40 40" aria-hidden="true"><path d="M20.6 6.5C20.2 13.6 19.6 26.4 19.4 34.2"/><path d="M6.4 20.9C13.2 20.2 26.8 19.4 34.1 19.6"/></svg>
-        <div><span class="v"><span class="num" data-count="149" data-prefix="$">$149</span><small>/mo</small></span><span class="s">for Wegovy pills</span></div>
+        <div><span class="v"><span class="num" data-count="149" data-prefix="$">$149</span><small>/mo.</small></span><span class="s">for Wegovy pills</span></div>
       </div>
       <ul class="mc-perks">
-        <li><span class="ic"><svg viewBox="0 0 16 16" fill="none"><path d="M4 1.83398H2.5V6.50065C2.5 7.78932 3.54467 8.83398 4.83333 8.83398H6.5C7.78867 8.83398 8.83333 7.78932 8.83333 6.50065V1.83398H7.33333" stroke="#FFF6BF" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.66602 9V11.5C5.66602 12.9727 6.86002 14.1667 8.33282 14.1667C8.72502 14.1667 9.10702 14.1667 9.49922 14.1667C10.972 14.1667 12.166 12.9727 12.166 11.5V9.16667" stroke="#FFF6BF" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.1673 8.83268C12.9037 8.83268 13.5007 8.23573 13.5007 7.49935C13.5007 6.76297 12.9037 6.16602 12.1673 6.16602C11.4309 6.16602 10.834 6.76297 10.834 7.49935C10.834 8.23573 11.4309 8.83268 12.1673 8.83268Z" stroke="#FFF6BF" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Expert care from licensed healthcare providers</li>
-        <li><span class="ic"><svg viewBox="0 0 16 16" fill="none"><path d="M8.24237 3.07114C9.67055 1.64295 11.9861 1.64295 13.4143 3.07114C14.8425 4.49933 14.8425 6.81487 13.4143 8.24306L10.8283 10.829L5.6564 5.6571L8.24237 3.07114Z" stroke="#FFF6BF"/><path d="M8.24306 13.4148C6.81487 14.843 4.49933 14.843 3.07114 13.4148C1.64295 11.9867 1.64295 9.67111 3.07114 8.24292L5.6571 5.65696L10.829 10.8289L8.24306 13.4148Z" stroke="#FFF6BF"/></svg></span>Monthly prescription renewal</li>
-        <li><span class="ic"><svg viewBox="0 0 16 16" fill="none"><path d="M6.33268 11H9.66602M5.66602 4.33333V10M5.66602 4.33333H4.23542C3.47787 4.33333 2.78535 4.76134 2.44656 5.43891L1.87716 6.57771C1.73831 6.85542 1.66602 7.16165 1.66602 7.47214V9.66667C1.66602 10.403 2.26297 11 2.99935 11M5.66602 4.33333C5.66602 3.59695 6.26297 3 6.99935 3H12.3327C13.4373 3 14.3327 3.89543 14.3327 5V9.33333C14.3327 10.2538 13.5865 11 12.666 11M6.26595 11.3333C6.26595 12.2538 5.51976 13 4.59928 13C3.67881 13 2.93262 12.2538 2.93262 11.3333C2.93262 10.4129 3.67881 9.66667 4.59928 9.66667C5.51976 9.66667 6.26595 10.4129 6.26595 11.3333ZM12.9993 11.3333C12.9993 12.2538 12.2532 13 11.3327 13C10.4122 13 9.66602 12.2538 9.66602 11.3333C9.66602 10.4129 10.4122 9.66667 11.3327 9.66667C12.2532 9.66667 12.9993 10.4129 12.9993 11.3333Z" stroke="#FFF6BF"/></svg></span>Track your progress</li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M17.5 11.5H15L13.5 14.5L10.5 8.5L9 11.5H6.5M12 5.37552C18.5042 -1.25346 29.6544 11.0575 12 21C-5.65441 11.0576 5.4957 -1.25346 12 5.37552Z" stroke="#FFF6BF" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unlimited support from real healthcare providers</li>
+        <li><span class="ic"><svg viewBox="0 0 16 16" fill="none"><path d="M8.24237 3.07114C9.67055 1.64295 11.9861 1.64295 13.4143 3.07114C14.8425 4.49933 14.8425 6.81487 13.4143 8.24306L10.8283 10.829L5.6564 5.6571L8.24237 3.07114Z" stroke="#FFF6BF"/><path d="M8.24306 13.4148C6.81487 14.843 4.49933 14.843 3.07114 13.4148C1.64295 11.9867 1.64295 9.67111 3.07114 8.24292L5.6571 5.65696L10.829 10.8289L8.24306 13.4148Z" stroke="#FFF6BF"/></svg></span>Medication monthly prescription renewal</li>
+        <li><span class="ic"><svg viewBox="0 0 16 16" fill="none"><path d="M6.33268 11H9.66602M5.66602 4.33333V10M5.66602 4.33333H4.23542C3.47787 4.33333 2.78535 4.76134 2.44656 5.43891L1.87716 6.57771C1.73831 6.85542 1.66602 7.16165 1.66602 7.47214V9.66667C1.66602 10.403 2.26297 11 2.99935 11M5.66602 4.33333C5.66602 3.59695 6.26297 3 6.99935 3H12.3327C13.4373 3 14.3327 3.89543 14.3327 5V9.33333C14.3327 10.2538 13.5865 11 12.666 11M6.26595 11.3333C6.26595 12.2538 5.51976 13 4.59928 13C3.67881 13 2.93262 12.2538 2.93262 11.3333C2.93262 10.4129 3.67881 9.66667 4.59928 9.66667C5.51976 9.66667 6.26595 10.4129 6.26595 11.3333ZM12.9993 11.3333C12.9993 12.2538 12.2532 13 11.3327 13C10.4122 13 9.66602 12.2538 9.66602 11.3333C9.66602 10.4129 10.4122 9.66667 11.3327 9.66667C12.2532 9.66667 12.9993 10.4129 12.9993 11.3333Z" stroke="#FFF6BF"/></svg></span>Same-day pharmacy pickup or mail delivery</li>
       </ul>
     </div>
   </div>
@@ -697,10 +698,9 @@
   <div class="head"><h2 class="h-xl split">Explore our FDA-approved GLP-1s</h2></div>
   <div class="ex-row" id="exRow" data-lenis-prevent-horizontal>
     <div class="ex-track">
-      <a href="#" class="xcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex1}})"><img data-src="img/ex1.webp" data-src-m="img/p1.webp" alt="A pink Foundayo tablet"></div><div class="c"><span class="chip sm">Daily pill</span><div class="row"><div class="nm"><b>Foundayo™</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
-      <a href="#" class="xcard" data-r style="--i:1" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex2}})"><img data-src="img/ex2.webp" data-src-m="img/p2.webp" alt="A Wegovy HD pen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="199">$238</span><small>/mo</small></span></div></div></div></a>
-      <a href="#top" class="xcard here" data-r style="--i:2" aria-current="page"><div class="media grain" style="--lq:url({{lq:ex3}})"><img data-src="img/ex3.webp" data-src-m="img/p3.webp" alt="A white Wegovy tablet"></div><div class="c"><span class="chip sm now">You’re viewing</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></div></div></div></a>
-      <a href="#" class="xcard" data-r style="--i:3" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex4}})"><img data-src="img/ex4.webp" data-src-m="img/p4.webp" alt="A Zepbound KwikPen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Zepbound® KwikPen</b><span data-sub>Membership + Medication</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$338</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:0" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex1}})"><img data-src="img/ex1.webp" data-src-m="img/p1.webp" alt="A pink Foundayo tablet"></div><div class="c"><span class="chip sm">Daily pill</span><div class="row"><div class="nm"><b>Foundayo™</b><span data-sub>Medication price</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="149">$149</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:1" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex2}})"><img data-src="img/ex2.webp" data-src-m="img/p2.webp" alt="A Wegovy HD pen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Wegovy®</b><span data-sub>Medication price</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="199">$199</span><small>/mo</small></span></div></div></div></a>
+      <a href="#" class="xcard" data-r style="--i:2" data-toast="Product pages aren’t part of this prototype"><div class="media grain" style="--lq:url({{lq:ex4}})"><img data-src="img/ex4.webp" data-src-m="img/p4.webp" alt="A Zepbound KwikPen"></div><div class="c"><span class="chip sm">Weekly pen</span><div class="row"><div class="nm"><b>Zepbound® KwikPen®</b><span data-sub>Medication price</span></div><div class="pr"><span class="from">from</span><span class="v"><span class="num" data-med="299">$299</span><small>/mo</small></span></div></div></div></a>
     </div>
   </div>
 </section>
@@ -709,7 +709,7 @@
 <div class="stick" id="stick" aria-hidden="true">
   <div class="stick-in">
     <span class="nm"><b>Wegovy®</b><span>Daily pill</span></span>
-    <span class="pr"><span>from</span><span class="v"><span class="num" data-med="149">$188</span><small>/mo</small></span></span>
+    <span class="pr"><span>from</span><span class="v"><span class="num" data-med="149">$149</span><small>/mo</small></span></span>
     <a href="#" class="btn btn-g" tabindex="-1" data-toast="Sign-up isn’t part of this prototype">Get started on Wegovy</a>
   </div>
 </div>
@@ -748,9 +748,9 @@ $$('.links a').forEach(a=>{if(a.textContent.trim()==='Online care')a.setAttribut
 const PHASES=[
  {n:1,t:'Establishing habits',w:'-1% body weight*',k:'Week 1-4*',p:['This is when habits take shape: when and how you take your medication, and the small lifestyle changes that make the rest easier. You’ll start at a low dose to let your body adjust to the medication.','You may not see any weight loss yet, but you’re laying the foundation for your body and brain.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'fx',bg:'jr-fx',fx:['Mild nausea|i-nausea','Moderate constipation|i-gut','Mild headaches|i-head']}},
- {n:2,t:'Building momentum',w:'-5% body weight*',k:'Week 5-12*',p:['You may move up to the next dose at week 5, and start stepping up every 4 weeks if you’re ready. You may begin to see change start to happen.','Many people lose about 5 percent of their body weight by the end of 12 weeks.'],fx:['Mild nausea','Decreased appetite'],
+ {n:2,t:'Building tolerance',w:'-5% body weight*',k:'Week 5-12*',p:['You may move up to the next dose at week 5, and start stepping up every 4 weeks if you’re ready. You may begin to see change start to happen.','Many people lose about 5 percent of their body weight by the end of 12 weeks.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'chart',bg:'jr-chart',week:'Week 12',dose:'Dose: 0.5mg',last:'Last entry: Oct 27, 8:23am',val:176}},
- {n:3,t:'Seeing progress',w:'-10% body weight*',k:'Week 13-23*',p:['You might reach your top dose during this time, depending on which medication you take and how you respond. You’ll likely see real change, both on the scale and in your habits.','Many people lose at least 10% of their body weight by the end of 24 weeks, depending on their medication and dose.'],fx:['Mild nausea','Decreased appetite'],
+ {n:3,t:'Seeing progress habits',w:'-10% body weight*',k:'Week 13-23*',p:['You might reach your top dose during this time, depending on which medication you take and how you respond. You’ll likely see real change, both on the scale and in your habits.','Many people lose at least 10% of their body weight by the end of 24 weeks, depending on their medication and dose.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'noise',bg:'jr-noise',title:'Less food noise',sub:'Fewer intrusive thoughts about food this week'}},
  {n:4,t:'Maintenance',w:'-11–20% body weight*',k:'Weeks 25+*',p:['Once you reach your maintenance dose, side effects may ease, and you establish a new baseline of habits. Weight drops off, whether steadily or in bursts. Plateaus and setbacks are normal, but keep at it—you’re on your way.'],fx:['Mild nausea','Decreased appetite'],
   media:{type:'panel',kind:'plateau',title:'Why plateaus happen',kicker:'Bodies are built to hold on to weight',sub:'As you lose, it adapts in a few ways that slow things down. A plateau doesn’t mean your treatment has stopped working. It may also mean your body is adjusting to a new normal.'}}
