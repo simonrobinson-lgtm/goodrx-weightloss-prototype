@@ -1,6 +1,6 @@
 """Build the homepage prototype and the Wegovy pill product page.
 
-  python3 homepage/src/build.py            -> homepage/index.html + homepage/wegovy-pill.html (password protected)
+  python3 homepage/src/build.py            -> homepage/index.html, wegovy-pill.html, intake.html (password protected)
   NO_PASS=1 python3 homepage/src/build.py  -> unprotected, for local preview
 
 The password is read from src/.proto-pass (git-ignored) or PROTO_PASS, same as the mobile prototype.
@@ -68,7 +68,8 @@ def document(s, title):
 pw = protect.password()
 salt = os.urandom(16)
 for name, src, title, heading in [('index.html', home, 'GoodRx Weight Loss Home', 'Weight loss homepage'),
-                                  ('wegovy-pill.html', pdp_source(), 'Wegovy Pill · GoodRx', 'Wegovy pill page')]:
+                                  ('wegovy-pill.html', pdp_source(), 'Wegovy Pill · GoodRx', 'Wegovy pill page'),
+                                  ('intake.html', open(os.path.join(HERE, 'intake.html')).read(), 'Get started · GoodRx', 'Get started')]:
     doc = document(src, title)
     if pw:
         out = protect.gate(doc, pw, salt=salt)

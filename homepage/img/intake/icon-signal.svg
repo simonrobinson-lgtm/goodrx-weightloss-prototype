@@ -1,0 +1,26 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Iconography" clip-path="url(#clip0_0_113)">
+<g id="Group 2147231583">
+<path id="Ellipse 22974" d="M36 60C36 32.3858 30.6274 10 24 10C17.3726 10 12 32.3858 12 60" stroke="#1C534E"/>
+<path id="Ellipse 22987" d="M36 60C36 32.3858 30.6274 10 24 10C17.3726 10 12 32.3858 12 60" stroke="#1C534E"/>
+<path id="Ellipse 22982" d="M60 60C60 87.6142 54.6274 110 48 110C41.3726 110 36 87.6142 36 60" stroke="#1C534E"/>
+<path id="Ellipse 22988" d="M60 60C60 87.6142 54.6274 110 48 110C41.3726 110 36 87.6142 36 60" stroke="#1C534E"/>
+<path id="Ellipse 22986" d="M12 60C12 87.6142 6.62742 110 0 110" stroke="#1C534E"/>
+<path id="Ellipse 22989" d="M12 60C12 87.6142 6.62742 110 0 110" stroke="#1C534E"/>
+<path id="Ellipse 22983" d="M84 60C84 32.3858 78.6274 10 72 10C65.3726 10 60 32.3858 60 60" stroke="#1C534E"/>
+<path id="Ellipse 22990" d="M84 60C84 32.3858 78.6274 10 72 10C65.3726 10 60 32.3858 60 60" stroke="#1C534E"/>
+<path id="Ellipse 22984" d="M108 60C108 87.6142 102.627 110 96 110C89.3726 110 84 87.6142 84 60" stroke="#1C534E"/>
+<path id="Ellipse 22991" d="M108 60C108 87.6142 102.627 110 96 110C89.3726 110 84 87.6142 84 60" stroke="#1C534E"/>
+<path id="Ellipse 22985" d="M108 60C108 32.3858 113.373 10 120 10" stroke="#1C534E"/>
+<path id="Ellipse 22992" d="M108 60C108 32.3858 113.373 10 120 10" stroke="#1C534E"/>
+</g>
+<line id="Line 1730" x1="-1" y1="59.5" x2="121" y2="59.5" stroke="#1C534E"/>
+<circle id="Ellipse 22981" cx="72" cy="10" r="6" fill="#DEDB7C" stroke="#1C534E"/>
+<circle id="Ellipse 22982_2" cx="48" cy="110" r="6" fill="#DEDB7C" stroke="#1C534E"/>
+</g>
+<defs>
+<clipPath id="clip0_0_113">
+<rect width="120" height="120" fill="white"/>
+</clipPath>
+</defs>
+</svg>
