@@ -86,8 +86,10 @@ html.dark .prog b{background:var(--y400)}
 /* ---------- screen + transitions ---------- */
 .stage{position:relative;z-index:1;max-width:var(--col);margin:0 auto}
 .scr{min-height:calc(100dvh - var(--hh,74px) - env(safe-area-inset-top,0px));display:flex;flex-direction:column;padding:8px 0 0}
-.scr.enter{animation:scrIn .5s var(--ease) both}
-.scr.enter.back{animation-name:scrBack}
+.scr.enter>:not(.foot){animation:scrIn .5s var(--ease) backwards}
+.scr.enter.back>:not(.foot){animation-name:scrBack}
+.scr.enter>.foot{animation:footIn .5s var(--ease) backwards}
+@keyframes footIn{from{opacity:0}}
 @keyframes scrIn{from{opacity:0;transform:translate3d(24px,0,0)}to{opacity:1;transform:none}}
 @keyframes scrBack{from{opacity:0;transform:translate3d(-24px,0,0)}to{opacity:1;transform:none}}
 .body{flex:1;padding:0 20px 24px}
@@ -520,7 +522,17 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 
 /* desktop: CTA stays pinned in the same place on every screen, lifted up from the bottom edge of the window */
 @media (min-width:768px){
-  .foot:not(.solid){padding-bottom:clamp(32px,10vh,120px)}
+  .foot:not(.solid){position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:var(--col);padding:24px 20px 40px}
+  .scr:has(.foot:not(.solid)){padding-bottom:136px}
+  .scr:has(.foot:not(.solid) .alt){padding-bottom:176px}
+  /* no-scroll screens keep a fixed height (the CTA's space is reserved at the bottom); on short windows the
+     space above the heading, the results graph and the photo cards all scale down so nothing runs under the CTA */
+  .scr{padding-top:clamp(24px,5vh,64px)}
+  /* results: graph, card size and overlap all follow the window height so the -13.6% stays clear and nothing reaches the CTA */
+  .rs{--gh:clamp(130px,calc(100dvh - 500px),300px);--ch:clamp(110px,calc(30dvh - 70px),200px)}
+  .rs-graph{flex:none;height:var(--gh);min-height:0;max-height:none;margin-top:16px}
+  .rs-row{margin-top:calc(-1 * clamp(24px,calc(var(--gh) - 120px),64px))}
+  .rs .rs-card{height:var(--ch);width:calc(var(--ch) * 1.4)}
 }
 
 /* medication pill + dropdown */
