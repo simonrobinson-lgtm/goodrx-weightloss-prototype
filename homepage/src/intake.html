@@ -211,7 +211,7 @@ html.dark .foot .alt b{color:var(--y100)}
 .loc-cur p{margin:0;font-size:14px;color:var(--soft)}
 .loc-act{display:flex;gap:16px;margin-top:-16px}
 .loc-act .btn{flex:1}
-.sv-exit{display:block;margin:24px auto 0;padding:12px 0;font-weight:500;font-size:14px;color:var(--g700)}
+.sv-exit{display:block;margin:0 auto;padding:12px 0;font-weight:500;font-size:14px;color:var(--g700)}
 .sheet .alt{display:flex;justify-content:center;align-items:center;gap:10px;font-size:14px;line-height:1.4;color:var(--dark);margin:0;padding:32px 0 20px}
 .sheet .alt b{font-weight:500;color:var(--g700);margin-left:0;letter-spacing:.01em}
 /* Continue with Google: secondary-contrast button (white, 2px soft border, dark label) */
@@ -241,7 +241,7 @@ html.dark .foot .alt b{color:var(--y100)}
 @media (min-width:768px){
   :root{--hh:78px}
   .ih-row{height:60px;padding:0 32px}
-  .prog{max-width:none;height:auto;padding:2px 32px 14px}
+  .prog{max-width:var(--col);height:auto;padding:2px 20px 14px}
   .ih-btn{width:40px;height:40px;margin:0 -8px}
   .ih-btn svg{width:24px;height:24px}
   .ih.intro .ih-mid{left:32px;transform:translateY(-50%)}
@@ -1109,6 +1109,7 @@ function saveSheet(){
   openSheet(`<h2>Save your progress</h2><p class="sub">Enter your email to log in or create an account. We’ll save your ${picked()?'answers and treatment preference':'answers'} for later.</p>
    <div class="stack">${fld('email','Email',{type:'email',mode:'email',ac:'email'})}<button type="button" class="btn btn-g" data-go disabled>Continue</button><div class="or">OR</div>
    <button type="button" class="btn btn-o" data-google>${GOOGLE}Continue with Google</button></div>
+   <p class="alt">Already have an account?<b data-toast="Log in isn’t part of this prototype" role="button" tabindex="0">Log In</b></p>
    <button type="button" class="link sv-exit" data-exit>Exit without saving</button>`,
   sh=>{const b=$('[data-go]',sh);wireFields(sh,['email'],b);
     const ok=()=>String(S.a.email||'').trim().length>0;
