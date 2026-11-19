@@ -195,6 +195,13 @@ html.dark .foot .alt b{color:var(--y100)}
 .sheet .stack{display:flex;flex-direction:column;gap:16px}
 .or{display:flex;align-items:center;gap:16px;color:var(--soft);font-size:12px;letter-spacing:.1em;padding:0 24px}
 .or::before,.or::after{content:"";flex:1;height:.5px;background:var(--n400)}
+.sheet .loc-s{gap:32px}
+.loc-cur{display:flex;flex-direction:column;align-items:center;gap:12px}
+.loc-cur .btn{width:100%;gap:12px}
+.loc-cur .btn svg{width:16px;height:16px}
+.loc-cur p{margin:0;font-size:14px;color:var(--soft)}
+.loc-act{display:flex;gap:16px;margin-top:-16px}
+.loc-act .btn{flex:1}
 .sv-exit{display:block;margin:24px auto 0;padding:12px 0;font-weight:500;font-size:14px;color:var(--g700)}
 .sheet .alt{text-align:center;font-size:14px;color:var(--dark);margin-top:24px}
 .sheet .alt b{font-weight:500;color:var(--g700);margin-left:8px}
@@ -249,7 +256,7 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .gn-card p{margin:0;font-size:14px;color:var(--soft)}
 
 /* code input */
-.code{display:flex;gap:6px}
+.code{display:flex;justify-content:center;gap:6px}
 .code input{flex:1;min-width:0;max-width:56px;height:auto;aspect-ratio:54/56;padding:0;border-radius:8px;border:1px solid var(--n300);background:var(--n0);text-align:center;font:400 24px/1 var(--num);color:var(--dark);outline:0;transition:border-color .2s}
 .code input:focus{border-color:var(--g700)}
 
@@ -284,7 +291,7 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .rs{padding-left:0;padding-right:0;display:flex;flex-direction:column;min-height:0}
 .rs .ttl{padding-left:20px;padding-right:40px}
 .rs-graph{position:relative;flex:1 1 300px;min-height:220px;max-height:300px;margin-top:24px}
-.rs-graph>img{position:absolute;left:-3px;top:0;width:calc(100% + 6px);height:153%;max-width:none;-webkit-mask-image:linear-gradient(#000 40%,transparent 66%);mask-image:linear-gradient(#000 40%,transparent 66%)}
+.rs-graph>img{position:absolute;left:-3px;top:0;width:calc(100% + 6px);height:459px;max-width:none;-webkit-mask-image:linear-gradient(#000 40%,transparent 66%);mask-image:linear-gradient(#000 40%,transparent 66%)}
 .rs-stat{position:absolute;right:22px;top:28px;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
 .rs-stat .num{font-size:40px;color:var(--g700)}
 .rs-stat span:last-child{font-size:13px;color:var(--soft)}
@@ -314,6 +321,7 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 
 /* loaders */
 .ld{display:flex;flex-direction:column;justify-content:space-between;min-height:calc(100dvh - 120px)}
+@media (min-width:768px){.ld{justify-content:center;gap:56px}.ld-mid{padding-top:0}}
 .ld-mid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px;padding-top:40px}
 .ld-mid h1{margin:0;max-width:309px;font-weight:400;font-size:24px;line-height:1.2;color:var(--dark)}
 .orb{width:180px;height:180px}
@@ -576,7 +584,6 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .fc.c{z-index:2;animation:pop .8s var(--spring) both}
 @keyframes fanL{from{transform:translate(0,0) rotate(0)}}
 @keyframes fanR{from{transform:translate(0,0) rotate(0)}}
-.fw-card.tr{background:none}
 .ir{display:flex;flex-direction:column;padding-bottom:8px}
 .ir .h20{margin-top:auto}
 
@@ -808,16 +815,30 @@ SCR.step4=Object.assign(stepIntro(4,'1 min','Review & checkout','Choose pickup o
 SCR.fulfill=single('ful','Delivery or pickup?',['Pick up at pharmacy<small>Get your medication sooner by picking it up from a local pharmacy.</small>','Home delivery<small>Get your medication shipped to your home. Usually arrives in 5-7 days.</small>'],{prog:[4,10]});
 const PHARM=[['Albertsons','albertsons'],['Costco','costco'],['CVS','cvs'],['Safeway','safeway'],['Target','target'],['Vons'],['Walgreens'],['Walmart']];
 const plogo=(p,s=40)=>p[1]?`<span class="plogo" style="--s:${s}px"><img src="img/intake/pharmacy-${p[1]}.svg" alt=""></span>`:`<span class="plogo ph" style="--s:${s}px">${p[0][0]}</span>`;
+function wireLoc(el){const b=$('[data-loc]',el);b&&b.addEventListener('click',locSheet)}
+function locSheet(){
+  const setLoc=v=>{S.a.loc=v;closeSheet();show(cur)};
+  openSheet(`<h2>Set your location</h2><p class="sub">Find a location near you</p>
+   <div class="stack loc-s"><div class="loc-cur"><button type="button" class="btn btn-g" data-here>${PIN}Use my current location</button><p>Your browser will ask for permission first</p></div>
+   <div class="or">OR</div>
+   ${fld('lzip','Enter zip code',{mode:'numeric',ac:'postal-code'})}
+   <div class="loc-act"><button type="button" class="btn btn-o" data-sx>Cancel</button><button type="button" class="btn btn-g" data-set disabled>Set location</button></div></div>`,
+  sh=>{const z=$('#f-lzip',sh),set=$('[data-set]',sh);wireFields(sh,[],null);
+    z.addEventListener('input',()=>{z.value=z.value.replace(/\D/g,'').slice(0,5);S.a.lzip=z.value;set.disabled=z.value.length<5});set.disabled=String(S.a.lzip||'').length<5;
+    set.addEventListener('click',()=>setLoc(S.a.lzip));
+    // prototype: the browser's location prompt only works over https, so stand in with the default area
+    $('[data-here]',sh).addEventListener('click',()=>{setLoc('Santa Monica, CA');toast('Using your current location')})});
+}
 const PIN='<svg viewBox="0 0 14 14" fill="none"><path d="M7 12.5s4-3.6 4-6.6a4 4 0 1 0-8 0c0 3 4 6.6 4 6.6z" stroke="currentColor"/><circle cx="7" cy="5.9" r="1.4" stroke="currentColor"/></svg>';
 const medPrice=()=>MEDS[S.med||'wpill'].price;
-SCR.pharmacy={prog:[4,25],render:()=>`<div class="body">${T('What’s your preferred pharmacy?','You’ll choose a store location in the next step.',1)}<button type="button" class="loc" data-toast="Changing location isn’t part of this prototype">${PIN}Santa Monica, CA</button>
+SCR.pharmacy={prog:[4,25],render:()=>`<div class="body">${T('What’s your preferred pharmacy?','You’ll choose a store location in the next step.',1)}<button type="button" class="loc" data-loc>${PIN}${esc(S.a.loc||'Santa Monica, CA')}</button>
   <div class="plist">${PHARM.map((p,i)=>`<button type="button" class="prow" data-i="${i}"><span class="pl">${plogo(p)}<span>${p[0]}</span></span><span class="num">$${medPrice()}</span></button>`).join('')}</div></div>`,
-  mount:el=>$$('.prow',el).forEach(b=>b.addEventListener('click',()=>{S.a.pharm=+b.dataset.i;S.a.store=0;next()}))};
+  mount:el=>{wireLoc(el);$$('.prow',el).forEach(b=>b.addEventListener('click',()=>{S.a.pharm=+b.dataset.i;S.a.store=0;next()}))}};
 SCR.store={prog:[4,25],render:()=>{const p=PHARM[S.a.pharm??3];const sel=S.a.store??0;
-  return `<div class="body">${T('Select a location')}<div class="st-ph">${plogo(p,24)}<span>${p[0]}</span></div><button type="button" class="loc" data-toast="Changing location isn’t part of this prototype">${PIN}Santa Monica, CA</button>
+  return `<div class="body">${T('Select a location')}<div class="st-ph">${plogo(p,24)}<span>${p[0]}</span></div><button type="button" class="loc" data-loc>${PIN}${esc(S.a.loc||'Santa Monica, CA')}</button>
   <p class="sec-l">Nearby locations</p><div class="opts" role="radiogroup" aria-label="Store location">${STORES.map((s,i)=>`<button type="button" class="opt st" role="radio" aria-checked="${sel===i}" data-i="${i}"><span class="ol"><small>${s[2]}</small>${s[0]}<br>${s[1]}</span><span class="ic"></span></button>`).join('')}</div>
   <button type="button" class="link more" data-toast="More locations aren’t part of this prototype">Show more locations</button></div>${foot('Next')}`},
-  mount:el=>{$$('.opt',el).forEach(x=>x.addEventListener('click',()=>{$$('.opt',el).forEach(y=>y.setAttribute('aria-checked',y===x));S.a.store=+x.dataset.i}));wireNext(el)}};
+  mount:el=>{wireLoc(el);$$('.opt',el).forEach(x=>x.addEventListener('click',()=>{$$('.opt',el).forEach(y=>y.setAttribute('aria-checked',y===x));S.a.store=+x.dataset.i}));wireNext(el)}};
 const STORES=[['420 Broadway','Santa Monica, CA 90401','0.2 mi'],['1311 Wilshire Blvd','Santa Monica, CA 90403','0.8 mi'],['2627 Lincoln Blvd','Santa Monica, CA 90405','1.6 mi'],['11666 National Blvd','Los Angeles, CA 90064','2.9 mi'],['4365 Glencoe Ave','Marina Del Rey, CA 90292','3.4 mi']];
 SCR.phone={prog:[4,50],render:()=>`<div class="body">${T('What is the best number to reach you?','We only need it in case your healthcare team has to contact you.',1)}<div class="fields">${fld('phone','Phone number',{type:'tel',mode:'tel',ac:'tel'})}</div></div>${foot('Next',{dis:1})}`,
   mount:el=>{const i=$('#f-phone',el),b=$('[data-next]',el);i.addEventListener('input',()=>{const d=i.value.replace(/\D/g,'').slice(0,10);i.value=d.length>6?`(${d.slice(0,3)}) ${d.slice(3,6)} ${d.slice(6)}`:d.length>3?`(${d.slice(0,3)}) ${d.slice(3)}`:d;S.a.phone=i.value;b.disabled=d.length<10});
@@ -843,8 +864,9 @@ SCR.checkout={prog:[4,75],render:()=>{if(S.a.szip==null&&S.a.zip)S.a.szip=S.a.zi
     const brand=()=>cc.closest('.fld').classList.toggle('has-cc',cc.value.replace(/\D/g,'').length>=4);
     cc.addEventListener('input',()=>{cc.value=cc.value.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim();S.a.pcc=cc.value;brand()});brand();
     ex.addEventListener('input',()=>{const d=ex.value.replace(/\D/g,'').slice(0,4);ex.value=d.length>2?`${d.slice(0,2)} / ${d.slice(2)}`:d;S.a.pexp=ex.value});
+    const cv=$('#f-pcvc',el);cv.addEventListener('input',()=>{cv.value=cv.value.replace(/\D/g,'').slice(0,4);S.a.pcvc=cv.value});
     const filled=k=>String(S.a[k]??'').trim()!=='';
-    const cardOK=()=>desk.matches?(String(S.a.pcc||'').replace(/\D/g,'').length>=15&&String(S.a.pexp||'').replace(/\D/g,'').length===4&&String(S.a.pcvc||'').length>=3&&filled('pname')):!!S.a.card;
+    const cardOK=()=>desk.matches?(String(S.a.pcc||'').replace(/\D/g,'').length>=12&&String(S.a.pexp||'').replace(/\D/g,'').length===4&&String(S.a.pcvc||'').length>=3&&filled('pname')):!!S.a.card;
     const addrOK=()=>pick||['street','city','state','szip'].every(filled);
     const chk=()=>{btn.disabled=!(cardOK()&&addrOK())};
     wireFields(el,[],null);el.addEventListener('input',chk);el.addEventListener('click',()=>setTimeout(chk));desk.addEventListener('change',chk);chk();
