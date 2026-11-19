@@ -165,6 +165,12 @@ html.dark .foot .alt b{color:var(--y100)}
 .fld .chev{width:20px;height:20px;color:var(--soft);flex:none}
 .fld.err{border-color:#b3402a}
 .fhelp{font-size:13px;line-height:1.4;color:var(--soft);padding-left:16px}
+.li-rows{display:flex;flex-direction:column;gap:16px}
+.li-row{display:grid;grid-template-columns:1fr 20px;column-gap:13px;align-items:start}
+.li-row .fhelp{grid-column:1;margin:8px 0 0}
+.li-x{width:20px;height:20px;margin-top:18px;padding:0;border-radius:50%;display:grid;place-items:center}
+.li-add{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:32px;padding:8px 0;font-weight:500;font-size:14px;letter-spacing:.01em;color:var(--g700)}
+.body.li{display:flex;flex-direction:column}
 
 /* ---------- dark screens: overview + step intro ---------- */
 .dk{color:var(--rev-soft)}
@@ -250,6 +256,20 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .gn-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .gn-hero .sh{mix-blend-mode:multiply}
 .gn-hero .pen{transform:none}
+/* mobile: fits the viewport -- the image shrinks to whatever room is left (pill or pen, aspect kept)
+   and the card sits just above the CTA */
+@media (max-width:767px){
+  /* mfit = fit the viewport on mobile only; desktop keeps its centred, scrollable layout */
+  html.mfit,html.mfit body{height:100%;overflow:hidden;overscroll-behavior:none}
+  html.mfit .scr{height:calc(100dvh - var(--hh,74px) - env(safe-area-inset-top,0px));min-height:0;overflow:visible clip}
+  html.mfit .scr>.body{min-height:0}
+  .gn-tx{padding-top:16px}
+  /* image sits a fixed distance under the copy for every medication; the card is pushed down to just above the CTA */
+  .gn-hero{flex:0 1 200px;height:auto;min-height:72px;margin:32px auto 16px}
+  .gn-hero:has(.pen){flex-basis:240px}
+  .gn-card{flex:none;margin-top:auto}
+  .body.gn{padding-bottom:4px}
+}
 @keyframes pop{from{opacity:0;transform:scale(.8) translateY(12px)}to{opacity:1;transform:none}}
 .gn-card{width:100%;text-align:left;background:var(--g100);border:1px solid #b7c073;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
 .gn-card b{font-weight:400;font-size:16px;line-height:1.2;color:var(--g700)}
@@ -701,7 +721,7 @@ SCR.hw={prog:[1,50],render:()=>`<div class="body">${T('What’s your current hei
   mount:el=>{wireFields(el,['ft','in','lbs'],$('[data-next]',el));wireNext(el)}};
 /* ---------- eligibility result + account ---------- */
 const medShort=()=>S.med?MEDS[S.med].nm.replace(/®|™/g,'').trim():'GLP-1 treatment';
-SCR.goodnews={mid:1,noprog:1,logo:1,blank:1,noMid:1,render:()=>{const m=MEDS[S.med]||MEDS.wpill;return `<div class="body gn">
+SCR.goodnews={mfit:1,mid:1,noprog:1,logo:1,blank:1,noMid:1,render:()=>{const m=MEDS[S.med]||MEDS.wpill;return `<div class="body gn">
   <div class="gn-tx"><h1>Good news!</h1><p>Based on the information you shared, you may be eligible for ${medShort()}.</p></div>
   <div class="gn-hero"><img class="pi ${m.type}" src="img/${m.img}.webp" alt=""></div>
   <div class="gn-card"><b>Proven treatment</b><p>${GOODNEWS_NOTE[S.med]||GOODNEWS_NOTE.wpill}</p></div></div>${foot('Next')}`},
@@ -769,6 +789,23 @@ SCR.drugs=multi('drugs','Do you use any of the following recreational drugs?',['
 SCR.conditions=multi('cond','Are you currently being treated for any of the following conditions?',['Eating disorder in the last 12 months','Suicidal thoughts or suicide attempts in the last 12 months','Active gallbladder disease','Allergy or hypersensitivity to GLP-1 medication','Bowel obstruction','Current use of diabetic drugs like sulfonylureas, meglitinides, insulin, or DPP-4 inhibitors','Gastroparesis','Heart rate greater than 100','Kidney disease requiring hemodialysis','Kidney transplant','Medullary thyroid cancer either personally or in your family','Multiple endocrine neoplasia (MEN) either personally or in your family','Severe liver disease including cirrhosis, fibrosis, or transplantation','None of the above'],{prog:[2,50],none:13,sub:'Select all that apply'});
 SCR.otherConditions=single('othercond','Do you have any other medical conditions to share with your healthcare team?',['No','Yes'],{prog:[2,50]});
 SCR.surgeries=single('surg','Have you ever had any surgeries or hospitalizations?',['No, I’ve never had surgery or been hospitalized','Yes'],{prog:[2,50]});
+const LIST_SRC={condList:'othercond',surgList:'surg',medList:'meds'};
+const RMV='<svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="8" fill="#1C534E"/><path d="M7.5 7.5l5 5m0-5-5 5" stroke="#FFFFFB" stroke-width="1.4" stroke-linecap="round"/></svg>';
+const PLUS='<svg viewBox="0 0 14 14" width="14" height="14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+function listScr(id,h,sub,label,ex,add,prog){
+  const rows=()=>{const a=S.a[id]||(S.a[id]=['']);return a.length?a:(S.a[id]=[''])};
+  const save=el=>{S.a[id]=$$('.li-row input',el).map(i=>i.value)};
+  return {prog,render:()=>`<div class="body li">${T(h,sub)}<div class="li-rows">${rows().map((v,i)=>{S.a[id+'-'+i]=v;return `<div class="li-row">${fld(id+'-'+i,label)}<button type="button" class="li-x" data-x="${i}" aria-label="Remove ${esc(label.toLowerCase())} ${i+1}">${RMV}</button><p class="fhelp">${ex}</p></div>`}).join('')}</div>
+   <button type="button" class="li-add" data-add>${PLUS}${add}</button></div>${foot('Next',{dis:1})}`,
+  mount:el=>{const b=$('[data-next]',el);wireFields(el,[],null);
+    const chk=()=>{b.disabled=!$$('.li-row input',el).some(i=>i.value.trim())};el.addEventListener('input',()=>{save(el);chk()});chk();
+    $('[data-add]',el).addEventListener('click',()=>{save(el);S.a[id].push('');show(cur);const ins=$$('.scr .li-row input');ins[ins.length-1].focus()});
+    $$('[data-x]',el).forEach(x=>x.addEventListener('click',()=>{save(el);S.a[id].splice(+x.dataset.x,1);show(cur)}));
+    wireNext(el,()=>{save(el);next()})}};
+}
+SCR.condList=listScr('condlist','List any and all of your medical conditions, even if you’ve already provided them','For your safety, we need a complete list to share with your healthcare team. Enter each condition on its own line.','Condition','Example: Diabetes','Add condition',[2,50]);
+SCR.surgList=listScr('surglist','List any surgeries or hospitalizations you’ve had','Include roughly when it happened. Enter each one on its own line.','Surgery or hospitalization','Example: Appendix removal, 2019','Add surgery or hospitalization',[2,50]);
+SCR.medList=listScr('medlist','List all medications, herbal remedies, and supplements you take','Include the dose if you know it. Enter each one on its own line.','Medication or supplement','Example: Metformin 500 mg','Add medication or supplement',[2,75]);
 SCR.medications=single('meds','Do you currently take any medications, herbal remedies, or supplements?',['No, I’m not taking any medications, herbal remedies, or supplements','Yes'],{prog:[2,75]});
 SCR.allergies=single('allergy','Do you have any allergies or reactions to any medications?',['No, I don’t have any allergies or medication reactions','Yes'],{prog:[2,75]});
 
@@ -997,7 +1034,7 @@ function changeSheet(){let pick=S.med;
 
 
 /* ---------- flow: the path depends on the entry point (FROM) and answers so far ---------- */
-const POST=['profile','legal','plan','step2','results','pastMethods','bariatric','glp1Now','glp1Before','pregnancy','ethnicity','tobacco','alcohol','drugs','conditions','otherConditions','surgeries','medications','allergies','loadSend','step3','idIntro','idUpload','selfie','firstWeek','step4','fulfill','pharmacy','store','phone','checkout','allDone','nextSteps'];
+const POST=['profile','legal','plan','step2','results','pastMethods','bariatric','glp1Now','glp1Before','pregnancy','ethnicity','tobacco','alcohol','drugs','conditions','otherConditions','condList','surgeries','surgList','medications','medList','allergies','loadSend','step3','idIntro','idUpload','selfie','firstWeek','step4','fulfill','pharmacy','store','phone','checkout','allDone','nextSteps'];
 function quizPart(){const p=S.a.prefer;
   const mid=p===0?['injComfort','injReassure']:p===1?['meals']:p==null?[]:['matters'];
   return ['prefer',...mid,'consistent','loadQuiz','align','bestfit']}
@@ -1006,7 +1043,7 @@ function SEQ(){
   if(FROM==='quiz')pre=['overview','step1','bringing','motivationQ','hw','quizElig',...quizPart()];
   else{pre=['overview','step1','goal','motivation','hw','choose'];
     if(S.help)pre.push(...quizPart(),'goodnews');else if(FROM==='pdp')pre.push('goodnews');else pre.push('picker','goodnews')}
-  const post=POST.filter(k=>!(S.a.ful===1&&(k==='pharmacy'||k==='store')));
+  const post=POST.filter(k=>!(S.a.ful===1&&(k==='pharmacy'||k==='store'))&&!(LIST_SRC[k]&&S.a[LIST_SRC[k]]!==1));
   return [...pre,...post];
 }
 function NEXT(k){const s=SEQ(),i=s.indexOf(k);return i<0?null:s[i+1]}
@@ -1017,7 +1054,7 @@ function AFTER_AUTH(){return 'profile'}
 const stage=$('#stage'),ih=$('#ih'),hMid=$('#hMid'),hBack=$('#hBack');
 let hist=[],cur=null;
 function setHeader(sc){
-  const dark=!!sc.dark,R=document.documentElement;R.classList.toggle('dark',dark);R.classList.toggle('blank',!!sc.blank);R.classList.toggle('fit',!!sc.fit);R.classList.toggle('herotop',!!sc.herotop);R.classList.toggle('mid',!!sc.mid);
+  const dark=!!sc.dark,R=document.documentElement;R.classList.toggle('dark',dark);R.classList.toggle('blank',!!sc.blank);R.classList.toggle('fit',!!sc.fit);R.classList.toggle('mfit',!!sc.mfit);R.classList.toggle('herotop',!!sc.herotop);R.classList.toggle('mid',!!sc.mid);
   const tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=dark?'#184844':sc.blank?'#fffffb':'#f5efe5';
   ih.classList.toggle('hide',!!sc.hideHead);ih.classList.toggle('intro',!!sc.intro&&!(S.med&&!sc.logo));
   hMid.innerHTML=sc.noMid?'':(S.med&&!sc.logo&&typeof medPill==='function')?medPill():`<img class="ih-logo" src="img/intake/logo-mark.svg" alt="GoodRx">`;
