@@ -36,8 +36,10 @@ html.dark{--bg:var(--g800)}
 
 /* page texture for dark screens */
 .tex{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity .6s var(--ease);overflow:hidden}
-.tex img{position:absolute;left:50%;top:10%;width:max(834px,120vw);max-width:none;transform:translateX(-45%);filter:blur(50px);mix-blend-mode:overlay;opacity:.2}
+.tex img{position:absolute;left:50%;top:10%;width:max(834px,120vw);max-width:none;transform:translateX(-45%);filter:blur(50px);mix-blend-mode:overlay;opacity:.5}
 html.dark .tex{opacity:1}
+/* overlay needs the green inside the same layer to blend against (Figma 3023:171142) */
+.tex{background:var(--g800)}
 
 /* ---------- header ---------- */
 .ih{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px)}
@@ -53,18 +55,21 @@ html.dark .tex{opacity:1}
 .sbar{top:0;height:max(env(safe-area-inset-top,0px),6px)}
 /* solid header on every screen: iOS Safari tints the status bar from it, and keeps a stale colour if it ever goes see-through */
 .ih{background-color:var(--bg)}
+html.herotop .ih{background-color:transparent}
+html.herotop .ih::before{background:none}
+html.herotop .sbar{background-color:transparent}
 .bbar{bottom:0;height:env(safe-area-inset-bottom,0px)}
 html.blank .sbar,html.blank .bbar{background-color:var(--n0)}
 /* the light texture fades out at the edges so the page meets Safari's bars in a flat colour */
 .tex{-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
 /* breaker screens fit the viewport and don't scroll */
 html.fit,html.fit body{height:100%;overflow:hidden;overscroll-behavior:none}
-html.fit .scr{height:calc(100dvh - var(--hh,74px) - env(safe-area-inset-top,0px));min-height:0;overflow:hidden}
+html.fit .scr{height:calc(100dvh - var(--hh,74px) - env(safe-area-inset-top,0px));min-height:0;overflow:visible clip}
 .prog{max-width:var(--col);margin:0 auto}
 [tabindex="-1"]:focus{outline:none}
 .ih-row{position:relative;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-.ih-btn{width:32px;height:32px;margin:0 -8px;display:grid;place-items:center;border-radius:8px;color:var(--dark);transition:background-color .2s,opacity .25s}
-.ih-btn svg{width:16px;height:16px}
+.ih-btn{width:36px;height:36px;margin:0 -8px;display:grid;place-items:center;border-radius:8px;color:var(--dark);transition:background-color .2s,opacity .25s}
+.ih-btn svg{width:20px;height:20px}
 @media (hover:hover){.ih-btn:hover{background:var(--k10)}}
 html.dark .ih-btn{color:var(--n0)}
 .ih-btn[hidden]{display:grid;visibility:hidden}
@@ -190,6 +195,7 @@ html.dark .foot .alt b{color:var(--y100)}
 .sheet .stack{display:flex;flex-direction:column;gap:16px}
 .or{display:flex;align-items:center;gap:16px;color:var(--soft);font-size:12px;letter-spacing:.1em;padding:0 24px}
 .or::before,.or::after{content:"";flex:1;height:.5px;background:var(--n400)}
+.sv-exit{display:block;margin:24px auto 0;padding:12px 0;font-weight:500;font-size:14px;color:var(--g700)}
 .sheet .alt{text-align:center;font-size:14px;color:var(--dark);margin-top:24px}
 .sheet .alt b{font-weight:500;color:var(--g700);margin-left:8px}
 .open .sheet-bg{opacity:1}
@@ -221,7 +227,7 @@ html.dark .foot .alt b{color:var(--y100)}
   .ih-btn svg{width:24px;height:24px}
   .ih.intro .ih-mid{left:32px;transform:translateY(-50%)}
   .ih.intro.hasback .ih-mid{left:76px}
-  .scr{padding-top:24px;min-height:calc(100dvh - var(--hh))}
+  .scr{padding-top:64px;min-height:calc(100dvh - var(--hh))}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 .ih.hide .ih-row{visibility:hidden}
@@ -438,8 +444,9 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .foot.solid{background:none;padding-top:16px;gap:8px}
 /* white bottom bar spans the full window width even though its content stays in the column */
 .foot.solid::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;background:var(--n0);border-top:.5px solid #a1938c}
-.due{width:100%;display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--soft)}
-.due .num{font-size:14px;color:var(--dark)}
+.due{width:100%;display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--soft)}
+.due .num{font-size:20px;color:var(--dark)}
+.foot:has(.due){padding-top:16px}
 .sec-row{display:flex;justify-content:space-between;align-items:center}
 .cap.dk2{color:var(--dark)}
 .link.sm{display:inline-flex;align-items:center;gap:4px}
@@ -461,6 +468,27 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .ns-i img{width:24px;height:24px}
 .ns-c b{display:block;font-weight:400;color:var(--rev)}
 .ns-c span span{font-size:14px;color:var(--rev-soft)}
+
+/* desktop: these screens sit in the vertical middle of the page; green screens read a size up */
+@media (min-width:768px){
+  html.mid .scr>.body{display:flex;flex-direction:column}
+  html.mid .scr>.body::before,html.mid .scr>.body::after{content:"";flex:1 1 0}
+  html.mid .ch{justify-content:flex-start}
+  html.mid .rm{margin-top:40px}
+  html.mid .gn-tx{padding-top:0;max-width:480px}
+  .gn h1{font-size:48px}
+  .gn-tx p{font-size:18px}
+  .ns h1{font-size:44px;padding-top:0}
+  .dk .lead{font-size:20px}
+  .ns .lead{margin:20px 0 24px}
+  .ns-c{gap:20px;padding:20px;margin-bottom:12px}
+  .ns-i{width:72px;height:72px}
+  .ns-i img{width:28px;height:28px}
+  .ns-c b{font-size:20px}
+  .ns-c span span{font-size:16px}
+}
+
+@media (max-width:767px){.foot{padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}}
 
 /* medication pill + dropdown */
 .mpill{display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:8px;background:var(--n0);border:1px solid var(--n200);filter:drop-shadow(0 8px 6px rgba(0,0,0,.05));font-size:13px;color:var(--g700);white-space:nowrap}
@@ -567,8 +595,8 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 
 /* best fit */
 .bf{position:relative;isolation:isolate;padding-left:0;padding-right:0}
-.bf::before{content:"";position:absolute;inset:0 0 auto;height:384px;background:url(img/intake/bestfit-hero-bg.png) 30% 0/150% auto no-repeat;opacity:.5;transform:scaleX(-1);-webkit-mask-image:linear-gradient(#000 50%,transparent);mask-image:linear-gradient(#000 50%,transparent);pointer-events:none;z-index:-1}
-@media (min-width:768px){.bf::before{left:calc(50% - 50vw);right:auto;width:100vw;top:-110px;height:620px;background-position:50% 30%;background-size:cover;opacity:.6;-webkit-mask-image:linear-gradient(#000 35%,transparent 92%);mask-image:linear-gradient(#000 35%,transparent 92%)}}
+.bf::before{content:"";position:absolute;inset:0 0 auto;top:calc(-8px - var(--hh,74px) - env(safe-area-inset-top,0px));height:466px;background:url(img/intake/bestfit-hero-bg.png) 30% 0/150% auto no-repeat;opacity:.5;transform:scaleX(-1);-webkit-mask-image:linear-gradient(#000 50%,transparent);mask-image:linear-gradient(#000 50%,transparent);pointer-events:none;z-index:-1}
+@media (min-width:768px){.bf::before{left:calc(50% - 50vw);right:auto;width:100vw;top:-150px;height:660px;background-position:50% 30%;background-size:cover;opacity:.6;-webkit-mask-image:linear-gradient(#000 35%,transparent 92%);mask-image:linear-gradient(#000 35%,transparent 92%)}}
 .bf-hero{position:relative;padding:24px 20px 12px;display:flex;flex-direction:column;align-items:flex-start}
 .bf-hero h1{margin:6px 0 12px;font-weight:400;font-size:32px;line-height:1.2;letter-spacing:-.01em;color:#111112;max-width:60%}
 .bf-p{margin:0;display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--soft)}
@@ -666,7 +694,7 @@ SCR.hw={prog:[1,50],render:()=>`<div class="body">${T('What’s your current hei
   mount:el=>{wireFields(el,['ft','in','lbs'],$('[data-next]',el));wireNext(el)}};
 /* ---------- eligibility result + account ---------- */
 const medShort=()=>S.med?MEDS[S.med].nm.replace(/®|™/g,'').trim():'GLP-1 treatment';
-SCR.goodnews={noprog:1,logo:1,blank:1,noMid:1,render:()=>{const m=MEDS[S.med]||MEDS.wpill;return `<div class="body gn">
+SCR.goodnews={mid:1,noprog:1,logo:1,blank:1,noMid:1,render:()=>{const m=MEDS[S.med]||MEDS.wpill;return `<div class="body gn">
   <div class="gn-tx"><h1>Good news!</h1><p>Based on the information you shared, you may be eligible for ${medShort()}.</p></div>
   <div class="gn-hero"><img class="pi ${m.type}" src="img/${m.img}.webp" alt=""></div>
   <div class="gn-card"><b>Proven treatment</b><p>${GOODNEWS_NOTE[S.med]||GOODNEWS_NOTE.wpill}</p></div></div>${foot('Next')}`},
@@ -674,11 +702,12 @@ SCR.goodnews={noprog:1,logo:1,blank:1,noMid:1,render:()=>{const m=MEDS[S.med]||M
 const GOODNEWS_NOTE={wpill:'Semaglutide, the ingredient in Wegovy, is one of the most studied weight-loss medications available.',wpen:'Semaglutide, the ingredient in Wegovy, is one of the most studied weight-loss medications available.',foundayo:'Foundayo is a once-daily pill you can take any time of day, with or without food.',zep:'Tirzepatide, the ingredient in Zepbound, helped people lose an average of 21% of their body weight in clinical trials.'};
 
 /* email + code sheets (shared by "save your plan" and "save your best fit") */
+const GOOGLE='<svg width="16" height="16" viewBox="0 0 16 16"><path fill="#4285F4" d="M15.68 8.18c0-.57-.05-1.11-.14-1.64H8v3.1h4.3a3.68 3.68 0 0 1-1.6 2.41v2h2.58c1.51-1.39 2.4-3.44 2.4-5.87z"/><path fill="#34A853" d="M8 16c2.16 0 3.97-.72 5.29-1.94l-2.58-2c-.72.48-1.63.76-2.71.76-2.08 0-3.85-1.4-4.48-3.3H.86v2.07A8 8 0 0 0 8 16z"/><path fill="#FBBC05" d="M3.52 9.52a4.8 4.8 0 0 1 0-3.04V4.41H.86a8 8 0 0 0 0 7.18l2.66-2.07z"/><path fill="#EA4335" d="M8 3.18c1.17 0 2.23.4 3.06 1.2l2.29-2.3A8 8 0 0 0 .86 4.41l2.66 2.07C4.15 4.58 5.92 3.18 8 3.18z"/></svg>';
 function authSheet(kind){
   const bf=kind==='bestfit';
   openSheet(`<h2>Save your ${bf?'best fit':'plan'} to continue</h2><p class="sub">An account keeps your goals and treatment preference saved, so you can pick up where you left off.</p>
    <div class="stack">${fld('email','Email',{type:'email',mode:'email',ac:'email'})}<button type="button" class="btn btn-g" data-go disabled>Continue</button><div class="or">OR</div>
-   <button type="button" class="btn btn-o" data-google><svg width="16" height="16" viewBox="0 0 16 16"><path fill="#4285F4" d="M15.68 8.18c0-.57-.05-1.11-.14-1.64H8v3.1h4.3a3.68 3.68 0 0 1-1.6 2.41v2h2.58c1.51-1.39 2.4-3.44 2.4-5.87z"/><path fill="#34A853" d="M8 16c2.16 0 3.97-.72 5.29-1.94l-2.58-2c-.72.48-1.63.76-2.71.76-2.08 0-3.85-1.4-4.48-3.3H.86v2.07A8 8 0 0 0 8 16z"/><path fill="#FBBC05" d="M3.52 9.52a4.8 4.8 0 0 1 0-3.04V4.41H.86a8 8 0 0 0 0 7.18l2.66-2.07z"/><path fill="#EA4335" d="M8 3.18c1.17 0 2.23.4 3.06 1.2l2.29-2.3A8 8 0 0 0 .86 4.41l2.66 2.07C4.15 4.58 5.92 3.18 8 3.18z"/></svg>Continue with Google</button></div>
+   <button type="button" class="btn btn-o" data-google>${GOOGLE}Continue with Google</button></div>
    <p class="alt">Already have an account?<b data-toast="Log in isn’t part of this prototype" role="button" tabindex="0">Log In</b></p>`,
   sh=>{const b=$('[data-go]',sh);wireFields(sh,['email'],b);
     const ok=()=>String(S.a.email||'').trim().length>0;
@@ -717,7 +746,7 @@ SCR.plan={prog:[2,0],render:()=>`<div class="body">${T(`${esc(S.name)}, your pla
 /* ---------- step 2: health history ---------- */
 SCR.step2=Object.assign(stepIntro(2,'6 min','Help your clinician get to know you',''),{prog:[2,0]});
 SCR.step2.render=(r=>()=>r().replace('<p></p>',`<p style="font-size:14px">A few questions about your health so your clinician can confirm ${medShort()} is right for you.</p>`))(SCR.step2.render);
-SCR.results={fit:1,prog:[2,10],render:()=>`<div class="body rs">${T('Real results, real timelines',`In a <span class="dot-u" data-toast="OASIS 4 trial, 64 weeks">64-week trial,</span> people taking the Wegovy pill lost 13.6% of their body weight on average, compared with 2.2% on placebo.`)}
+SCR.results={mid:1,fit:1,prog:[2,10],render:()=>`<div class="body rs">${T('Real results, real timelines',`In a <span class="dot-u" data-toast="OASIS 4 trial, 64 weeks">64-week trial,</span> people taking the Wegovy pill lost 13.6% of their body weight on average, compared with 2.2% on placebo.`)}
   <div class="rs-graph"><img src="img/intake/results-graph.svg" alt=""><div class="rs-stat"><span class="num">-13.6%</span><span>avg body weight loss</span></div></div>
   <div class="rs-row" tabindex="0" aria-label="Member results"><div class="rs-track">${[0,1].map(d=>[['Jane','jane'],['Sarah','sarah'],['Caleb','caleb']].map(([n,k])=>`<article class="rs-card${d?' dup':''}"${d?' aria-hidden="true"':''}><img class="ph rs-${k}" src="img/intake/results-${k}.jpg" alt=""><span class="chip">${n}</span><div class="rs-b"><span class="v"><span class="num">35</span> lbs</span><span>lost in 3 months</span></div></article>`).join('')).join('')}</div></div></div>${foot('Next')}`,
   mount:el=>wireNext(el)};
@@ -839,7 +868,7 @@ function cardSheet(){
 }
 SCR.allDone={auto:1,dark:1,fit:1,logo:1,noBack:1,noClose:1,render:()=>`<div class="body dk done"><h1>You’re all done,<br>${esc(S.name)}!</h1><svg class="rings" viewBox="0 0 231 231" fill="none" aria-hidden="true"><circle cx="115.5" cy="115.5" r="114" stroke="#FFF6BF" stroke-opacity=".08"/><circle cx="115.5" cy="115.5" r="96" stroke="#FFF6BF" stroke-opacity=".14"/><circle cx="115.5" cy="115.5" r="78" stroke="#FFF6BF" stroke-opacity=".24"/><circle class="c" cx="115.5" cy="115.5" r="60" stroke="#FFF6BF"/><path class="ck" d="M88 117l19 19 37-41" stroke="#FFF6BF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle class="dt" cx="144" cy="95" r="4" fill="#B7C073"/></svg></div>`,
   mount:el=>{const k=cur;setTimeout(()=>{if(cur===k)next()},2600)}};
-SCR.nextSteps={dark:1,logo:1,noClose:1,render:()=>{const pick=S.a.ful!==1;return `<div class="body dk ns"><h1>Your clinician will take it from here</h1><p class="lead">Here’s what happens next:</p>
+SCR.nextSteps={mid:1,dark:1,logo:1,noClose:1,render:()=>{const pick=S.a.ful!==1;return `<div class="body dk ns"><h1>Your clinician will take it from here</h1><p class="lead">Here’s what happens next:</p>
   <div class="ns-c"><span class="ns-i"><img src="img/intake/confirm-icon-doctor.svg" alt=""></span><span><b>Health info review</b><span>Your healthcare team will review your info and follow up if needed.</span></span></div>
   <div class="ns-c"><span class="ns-i">${pick?'<img src="img/intake/confirm-icon-store.svg" alt="">':'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#FFF6BF"><path d="M9.5 16.5H14.5M8.5 6.5V15M8.5 6.5H6.3541C5.21779 6.5 4.179 7.14201 3.67082 8.15836L2.81672 9.86656C2.60844 10.2831 2.5 10.7425 2.5 11.2082V14.5C2.5 15.6046 3.39543 16.5 4.5 16.5M8.5 6.5C8.5 5.39543 9.39543 4.5 10.5 4.5H18.5C20.1569 4.5 21.5 5.84315 21.5 7.5V14C21.5 15.3807 20.3807 16.5 19 16.5M9.3999 17C9.3999 18.3807 8.28061 19.5 6.8999 19.5C5.51919 19.5 4.3999 18.3807 4.3999 17C4.3999 15.6193 5.51919 14.5 6.8999 14.5C8.28061 14.5 9.3999 15.6193 9.3999 17ZM19.5 17C19.5 18.3807 18.3807 19.5 17 19.5C15.6193 19.5 14.5 18.3807 14.5 17C14.5 15.6193 15.6193 14.5 17 14.5C18.3807 14.5 19.5 15.6193 19.5 17Z"/></svg>'}</span><span><b>${pick?'Pick up':'Delivery'}</b><span>If prescribed, your medication will be ${pick?'sent to your pharmacy for pickup':'shipped to your home'}.</span></span></div></div>${foot('Done',{cls:'btn-y'})}`},
   mount:el=>wireNext(el,()=>{location.href='index.html'})};
@@ -848,14 +877,15 @@ SCR.nextSteps={dark:1,logo:1,noClose:1,render:()=>{const pick=S.a.ful!==1;return
 const GOAL_LBL=['Lose 1-15 lbs','Lose 16-50 lbs','Lose 51+ lbs','Maintain my weight','Get started'];
 const MOT_LBL=[['More confidence','center'],['More energy','energy'],['Improve my health','synergy'],['Be more active','signal'],['Feel good every day','globe']];
 const GOAL_IC=['chain','chain','chain','cycle','path'];
-SCR.choose={prog:[1,75],blank:1,render:()=>{
+SCR.choose={mid:1,prog:[1,75],blank:1,render:()=>{
   const goals=[[GOAL_LBL[S.a.goal??0],GOAL_IC[S.a.goal??0]],...(S.a.motivation||[1,2]).map(i=>MOT_LBL[i])];
   const pdp=FROM==='pdp';
   return `<div class="body ch"><div class="gstack" aria-hidden="true"><span class="gc g3"></span><span class="gc g2"></span><span class="gc g1">${stackGoals(goals).map((g,i)=>`<span class="gf f${i}">${gface(g)}</span>`).join('')}</span></div>
   <div class="ttl" style="padding-right:0"><h1>With that in mind, now let’s ${pdp?'check your fit for '+medShort():'choose your treatment'}</h1><p class="lg">GLP-1s work with your body to help you reach your goals. ${pdp?'Continue with your preference, or get help deciding.':'Select your treatment preference, or get help deciding.'}</p></div>
   <button type="button" class="help" data-help><img src="img/intake/choose-help-pens.jpg" alt=""><span><b>Need help choosing?</b><small>Answer a few questions to find a GLP-1 that fits your routine.</small></span><svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M5.25 2.33 8.68 5.76c.68.68.68 1.8 0 2.48L5.25 11.67" stroke="#1C534E" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
   ${foot(pdp?`Continue with ${medShort()}`:'Select your treatment')}`},
-  mount:el=>{wireNext(el);$('[data-help]',el).addEventListener('click',()=>{S.help=true;go('prefer')});}};
+  // back on the choice screen: forget an earlier 'help me choose' so 'Select your treatment' goes straight to the meds
+  mount:el=>{S.help=false;wireNext(el);$('[data-help]',el).addEventListener('click',()=>{S.help=true;go('prefer')});}};
 function gface(g){return `<img src="img/intake/icon-${g[1]}.svg" alt=""><b>${g[0]}</b>`}
 function stackGoals(g){const extra=[['More energy','energy'],['Improve my health','synergy'],['Feel good every day','globe']];const out=[...g];for(const e of extra){if(out.length>=3)break;if(!out.some(x=>x[0]===e[0]))out.push(e)}return out.slice(0,3)}
 SCR.picker={prog:[1,75],blank:1,render:()=>{const sel=S.med||'wpill';return `<div class="body pk-pg"><div class="ttl"><h1>Select your treatment preference</h1><p class="lg">We’ll pass this along to your healthcare team.</p></div>
@@ -897,21 +927,20 @@ const ROUTINE={wpill:['A daily pill, taken in the mornings',[['clock','Aligns wi
   wpen:['A weekly injection',[['clock','One dose a week, on a day that suits you'],['pill','Pre-filled pen, no needles to handle']],'One dose a week, on the same day each week'],
   zep:['A weekly injection',[['clock','One dose a week, on a day that suits you'],['pill','No refrigeration needed for up to 21 days']],'One dose a week, on the same day each week']};
 const BRING_CHIP=['Feel better','Overall health','Sustainable weight','Event goal'],MOTQ_CHIP=['More energy','Moving with ease','Improve my health','Comfort in my clothes','Steady changes','Control hunger','Exploring'];
-SCR.align={prog:[1,75],blank:1,render:()=>{const {best}=bestFit(),r=ROUTINE[best];const chips=[...(S.a.motq||[]).map(i=>MOTQ_CHIP[i]),...(S.a.bring||[]).map(i=>BRING_CHIP[i])].slice(0,2);
+SCR.align={mid:1,prog:[1,75],blank:1,render:()=>{const {best}=bestFit(),r=ROUTINE[best];const chips=[...(S.a.motq||[]).map(i=>MOTQ_CHIP[i]),...(S.a.bring||[]).map(i=>BRING_CHIP[i])].slice(0,2);
   return `<div class="body al"><div class="ttl" style="gap:16px"><h1>We’ll align your treatment with your goals &amp; routine</h1>${chips.length?`<div class="chips">${chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`:''}<p class="lg">Sticking to treatment means getting results, that’s why aligning with your routine matters.</p></div>
   <div class="rm"><p class="rm-l">Best routine match</p><p class="rm-v">${r[0]}</p><ul class="gbox">${r[1].map(([i,t])=>`<li><img src="img/intake/bestfit-icon-${i}.svg" alt="">${t}</li>`).join('')}</ul></div></div>${foot('See my best fit')}`},mount:el=>wireNext(el)};
 const WHY={wpill:'Why Wegovy fits',foundayo:'Why Foundayo fits',wpen:'Why Wegovy fits',zep:'Why Zepbound fits'};
-SCR.bestfit={prog:[1,75],blank:1,render:()=>{const {best,alt}=bestFit(),m=MEDS[best],a=MEDS[alt],r=ROUTINE[best];
+SCR.bestfit={prog:[1,75],blank:1,herotop:1,render:()=>{const {best,alt}=bestFit(),m=MEDS[best],a=MEDS[alt],r=ROUTINE[best];
   const heard=[['clock',S.a.prefer===0?'You’re comfortable with a weekly routine':S.a.meals===2?'Your schedule changes often':'You have a consistent morning routine'],['pill',S.a.prefer===0?'You prefer a weekly injection':S.a.prefer===3?'You’re open to any routine':'You prefer a pill over an injectable'],['handshake-heart',`You’re here to ${(S.a.motq||[]).includes(1)?'improve your energy and mobility':'feel better and improve your health'}`]];
   return `<div class="body bf"><div class="bf-hero"><span class="chip">Best fit</span><h1>${m.full}</h1><p class="bf-p"><small>From</small><span class="v"><span class="num">$${m.price}</span><small>/mo</small></span></p>${medImg(best,'bf-img')}</div>
   <div class="bf-s"><p class="sec-l g">What we heard from you</p><ul class="heard">${heard.map(([i,t])=>`<li><img src="img/intake/bestfit-icon-${i}.svg" alt="">${t}</li>`).join('')}</ul>
    <div class="gbox big"><b>Your routine aligns with ${m.full}:</b><p>${TICK}${r[2]}</p></div></div>
-  <div class="bf-s"><p class="also">Also a good fit:</p><div class="alt-c"><b>${a.full}</b><p class="bf-p"><small>starts at</small><span class="v"><span class="num">$${a.price}</span><small>/mo</small></span></p>${medImg(alt,'alt-img')}<button type="button" class="btn-sm" data-alt="${alt}">${WHY[alt]}</button></div></div>
+  <div class="bf-s"><p class="also">Also a good fit:</p><div class="alt-c"><b>${a.full}</b><p class="bf-p"><small>starts at</small><span class="v"><span class="num">$${a.price}</span><small>/mo</small></span></p>${medImg(alt,'alt-img')}<button type="button" class="btn-sm" data-toast="Not part of this prototype">${WHY[alt]}</button></div></div>
   <div class="bf-s faq"><p class="sec-l mute">FAQs</p>${['How do refills and dose adjustments work?','What happens to the price as I titrate up?','Can I switch treatments later?','What if I want to cancel?'].map((q,i)=>`<div class="qa"><button type="button" aria-expanded="false"><span>${q}</span><span class="pm"></span></button><div class="ans"><div><p>${FAQ_A[i]}</p></div></div></div>`).join('')}</div></div>
   <div class="foot solid"><p class="fnote">Your clinician will review your profile and advise you on the right medication.</p><button type="button" class="link" data-explore>Explore other options</button><button type="button" class="btn btn-g" data-next>Continue with ${m.nm.replace(/ ?KwikPen®/,'')}</button></div>`},
   mount:el=>{const {best,alt}=bestFit();S.best=best;if(S.bfMed==null)S.bfMed=best;const cta=$('[data-next]',el);cta.textContent=`Continue with ${MEDS[S.bfMed].nm.replace(/ ?KwikPen®/,'')}`;
     $$('.qa button',el).forEach(b=>b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);b.parentElement.classList.toggle('open',o)}));
-    $('[data-alt]',el).addEventListener('click',()=>{S.bfMed=alt;cta.textContent=`Continue with ${MEDS[alt].nm.replace(/ ?KwikPen®/,'')}`;toast(`${MEDS[alt].full} is now your preference`)});
     $('[data-explore]',el).addEventListener('click',()=>{S.med=S.bfMed;changeSheet()});
     wireNext(el,()=>{S.med=S.bfMed;if(FROM==='quiz'&&!S.authed)authSheet('bestfit');else next()})}};
 const FAQ_A=['Your care team renews your prescription every month and checks in before any dose change.','Prices are shown per dose. Your clinician will walk you through any change before it happens.','Yes. Your clinician can switch you to another medication if it’s a better fit.','You can cancel any time from your account, with no fees.'];
@@ -966,7 +995,7 @@ function AFTER_AUTH(){return 'profile'}
 const stage=$('#stage'),ih=$('#ih'),hMid=$('#hMid'),hBack=$('#hBack');
 let hist=[],cur=null;
 function setHeader(sc){
-  const dark=!!sc.dark,R=document.documentElement;R.classList.toggle('dark',dark);R.classList.toggle('blank',!!sc.blank);R.classList.toggle('fit',!!sc.fit);
+  const dark=!!sc.dark,R=document.documentElement;R.classList.toggle('dark',dark);R.classList.toggle('blank',!!sc.blank);R.classList.toggle('fit',!!sc.fit);R.classList.toggle('herotop',!!sc.herotop);R.classList.toggle('mid',!!sc.mid);
   const tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=dark?'#184844':sc.blank?'#fffffb':'#f5efe5';
   ih.classList.toggle('hide',!!sc.hideHead);ih.classList.toggle('intro',!!sc.intro&&!(S.med&&!sc.logo));
   hMid.innerHTML=sc.noMid?'':(S.med&&!sc.logo&&typeof medPill==='function')?medPill():`<img class="ih-logo" src="img/intake/logo-mark.svg" alt="GoodRx">`;
@@ -993,11 +1022,25 @@ addEventListener('popstate',e=>{const k=e.state&&e.state.k;if(!k){leave();return
   if(SCR[k]&&SCR[k].auto&&e.state.n>0){history.back();return}/* loaders and the done screen move on by themselves; skip them going back */
   show(k,-1)});
 function leave(){location.href=RET}
+// a treatment is chosen by the time every path reaches 'goodnews'
+const picked=()=>cur==='goodnews'||hist.includes('goodnews');
+function saveSheet(){
+  openSheet(`<h2>Save your progress</h2><p class="sub">Enter your email to log in or create an account. We’ll save your answers for later.</p>
+   <div class="stack">${fld('email','Email',{type:'email',mode:'email',ac:'email'})}<button type="button" class="btn btn-g" data-go disabled>Continue</button><div class="or">OR</div>
+   <button type="button" class="btn btn-o" data-google>${GOOGLE}Continue with Google</button></div>
+   <button type="button" class="link sv-exit" data-exit>Exit without saving</button>`,
+  sh=>{const b=$('[data-go]',sh);wireFields(sh,['email'],b);
+    const ok=()=>String(S.a.email||'').trim().length>0;
+    $('input',sh).addEventListener('input',()=>{b.disabled=!ok()});b.disabled=!ok();
+    const saved=()=>{closeSheet();toast('Progress saved');setTimeout(leave,1100)};
+    b.addEventListener('click',saved);$('[data-google]',sh).addEventListener('click',saved);
+    $('[data-exit]',sh).addEventListener('click',leave)});
+}
 hBack.addEventListener('click',back);
 $('#prog').addEventListener('click',e=>{const b=e.target.closest('[data-step]');if(!b)return;const n=+b.dataset.step;
   if(n>1){S.med=S.med||'wpill';S.authed=true;if(S.a.ful==null)S.a.ful=0;if(S.a.pharm==null)S.a.pharm=3;if(S.a.store==null)S.a.store=0;if(S.a.zip==null)S.a.zip='90401'}
   const k='step'+n;if(cur!==k)go(k)});
-$('#hClose').addEventListener('click',leave);
+$('#hClose').addEventListener('click',()=>picked()?saveSheet():leave());
 function next(){const k=NEXT(cur);if(k)go(k)}
 
 /* ---------- toast ---------- */
