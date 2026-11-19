@@ -12,6 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 OUT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, 'src'))
+import hashlib
 import protect
 
 lq = json.load(open(os.path.join(HERE, 'lqip.json')))
@@ -66,7 +67,9 @@ def document(s, title):
 '''
 
 pw = protect.password()
-salt = os.urandom(16)
+# one fixed salt for every page and every build: the key saved after entering the password once
+# then unlocks all pages, even when only one of them was rebuilt (a fresh random salt per build broke that)
+salt = hashlib.sha256(b'goodrx-weightloss-prototype').digest()[:16]
 for name, src, title, heading in [('index.html', home, 'GoodRx Weight Loss Home', 'Weight loss homepage'),
                                   ('wegovy-pill.html', pdp_source(), 'Wegovy Pill · GoodRx', 'Wegovy pill page'),
                                   ('intake.html', open(os.path.join(HERE, 'intake.html')).read(), 'Get started · GoodRx', 'Get started')]:
