@@ -518,6 +518,17 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 
 @media (max-width:767px){.foot{padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}}
 
+/* desktop: the CTA follows the content (40px under the last input/option) instead of sticking to the bottom of a tall window.
+   Centred screens centre content + CTA together. Checkout keeps its sticky "Due now" bar. */
+@media (min-width:768px){
+  .scr>.body{flex:none}
+  .foot:not(.solid){position:relative;bottom:auto;padding-top:16px;background:none}
+  html.mid .scr{justify-content:center}
+  html.mid .scr>.body::before,html.mid .scr>.body::after{display:none}
+  .scr:has(.foot.solid)>.body{flex:1}
+  .si-line{height:140px}
+}
+
 /* medication pill + dropdown */
 .mpill{display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:8px;background:var(--n0);border:1px solid var(--n200);filter:drop-shadow(0 8px 6px rgba(0,0,0,.05));font-size:13px;color:var(--g700);white-space:nowrap}
 .mpill .mi{width:22px;height:22px;object-fit:contain;margin:-4px 0}
