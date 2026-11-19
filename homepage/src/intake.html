@@ -38,6 +38,7 @@ html.dark{--bg:var(--g800)}
 .tex{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity .6s var(--ease);overflow:hidden}
 .tex img{position:absolute;left:50%;top:10%;width:max(834px,120vw);max-width:none;transform:translateX(-45%);filter:blur(50px);mix-blend-mode:overlay;opacity:.5}
 html.dark .tex{opacity:1}
+html:not(.dark) .tex{transition:none}
 /* overlay needs the green inside the same layer to blend against (Figma 3023:171142) */
 .tex{background:var(--g800)}
 
@@ -211,8 +212,11 @@ html.dark .foot .alt b{color:var(--y100)}
 .loc-act{display:flex;gap:16px;margin-top:-16px}
 .loc-act .btn{flex:1}
 .sv-exit{display:block;margin:24px auto 0;padding:12px 0;font-weight:500;font-size:14px;color:var(--g700)}
-.sheet .alt{text-align:center;font-size:14px;color:var(--dark);margin-top:24px}
-.sheet .alt b{font-weight:500;color:var(--g700);margin-left:8px}
+.sheet .alt{display:flex;justify-content:center;align-items:center;gap:10px;font-size:14px;line-height:1.4;color:var(--dark);margin:0;padding:32px 0 20px}
+.sheet .alt b{font-weight:500;color:var(--g700);margin-left:0;letter-spacing:.01em}
+/* Continue with Google: secondary-contrast button (white, 2px soft border, dark label) */
+.sheet [data-google]{background:#fff;border:2px solid var(--n200);color:var(--dark);gap:8px}
+.sheet [data-google] svg{width:20px;height:20px}
 .open .sheet-bg{opacity:1}
 .open .sheet{transform:none}
 .sheet-x{display:none}
