@@ -24,6 +24,7 @@
 *{box-sizing:border-box}
 html{overflow-x:clip}
 html,body{margin:0;min-height:100%;background:var(--bg)}
+html{background:var(--bar-bot,var(--bg))}
 body{color:var(--dark);font:400 16px/1.4 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none}
@@ -52,15 +53,15 @@ html:not(.dark) .tex{transition:none}
   transition:background-color .5s var(--ease)}
 .ih-in{position:relative}
 /* solid strip under the status bar: iOS Safari tints the status bar from a solid element pinned to the top, so it follows each screen's colour */
-.sbar,.bbar{position:fixed;z-index:21;left:0;right:0;background-color:var(--bg);pointer-events:none}
+.sbar,.bbar{position:fixed;z-index:21;left:0;right:0;pointer-events:none}
+.sbar{background-color:var(--bar-top,var(--bg))}
+.bbar{background-color:var(--bar-bot,var(--bg))}
 .sbar{top:0;height:max(env(safe-area-inset-top,0px),6px)}
 /* solid header on every screen: iOS Safari tints the status bar from it, and keeps a stale colour if it ever goes see-through */
 .ih{background-color:var(--bg)}
 html.herotop .ih{background-color:transparent}
 html.herotop .ih::before{background:none}
-html.herotop .sbar{background-color:transparent}
-.bbar{bottom:0;height:env(safe-area-inset-bottom,0px)}
-html.blank .sbar,html.blank .bbar{background-color:var(--n0)}
+.bbar{bottom:0;height:max(env(safe-area-inset-bottom,0px),6px)}
 /* the light texture fades out at the edges so the page meets Safari's bars in a flat colour */
 .tex{-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
 /* breaker screens fit the viewport and don't scroll */
@@ -260,6 +261,7 @@ html.dark .foot .alt b{color:var(--y100)}
 .ih.hide .ih-row{visibility:hidden}
 html.blank{--bg:var(--n0)}
 html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
+html.beige{--bg:var(--n100)}html.beige body{background:var(--n100)}
 
 /* good news */
 .gn{display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -657,10 +659,32 @@ html.blank body{background:linear-gradient(var(--n0),var(--n100)) fixed}
 .bf-hero h1{margin:6px 0 12px;font-weight:400;font-size:32px;line-height:1.2;letter-spacing:-.01em;color:#111112;max-width:60%}
 .bfr{display:flex;flex-direction:column;align-items:center;gap:24px;padding:96px 20px 0}
 .bfr>h1{margin:0;font-weight:300;font-size:28px;line-height:1.2;letter-spacing:-.01em;color:var(--g700);text-align:center}
-.bfr-card{position:relative;width:100%;height:236px;overflow:hidden;border-radius:17px;background:rgba(255,255,251,.9);border:.9px solid var(--n200)}
+.bfr-card{position:relative;z-index:1;width:100%;height:236px;overflow:hidden;border-radius:17px;background:rgba(255,255,251,.9);border:.5px solid var(--n200)}
+/* idle shimmer: a faint green glow travels clockwise around the card on a 0.5px stroke */
+@property --bfr-a{syntax:'<angle>';inherits:true;initial-value:0deg}
+.bfr-box{position:relative;width:100%;animation:bfrSpin 5.5s linear infinite}
+@keyframes bfrSpin{to{--bfr-a:360deg}}
+.bfr-ring,.bfr-glow{position:absolute;border-radius:17px;pointer-events:none;transition:opacity .35s ease-out;
+  background:conic-gradient(from var(--bfr-a),transparent 0deg 250deg,var(--g700) 290deg,var(--g700) 345deg,transparent 360deg)}
+.bfr-ring{inset:0;z-index:2;padding:.5px;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.bfr-glow{inset:-18px;padding:18px;border-radius:35px;background-clip:content-box;z-index:0;filter:blur(8px);opacity:.4;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+/* inside: a sharper copy of the hero shows through drifting soft patches, so it almost comes into view */
+@property --bx1{syntax:'<percentage>';inherits:false;initial-value:25%}
+@property --by1{syntax:'<percentage>';inherits:false;initial-value:35%}
+@property --bx2{syntax:'<percentage>';inherits:false;initial-value:75%}
+@property --by2{syntax:'<percentage>';inherits:false;initial-value:65%}
+.bfr-in.bfr-peek{filter:blur(5px);opacity:.9;transition:opacity .35s ease-out;
+  -webkit-mask-image:radial-gradient(34% 48% at var(--bx1) var(--by1),#000,transparent),radial-gradient(28% 42% at var(--bx2) var(--by2),rgba(0,0,0,.8),transparent);
+  mask-image:radial-gradient(34% 48% at var(--bx1) var(--by1),#000,transparent),radial-gradient(28% 42% at var(--bx2) var(--by2),rgba(0,0,0,.8),transparent);
+  animation:bfrDrift1 7s ease-in-out infinite alternate,bfrDrift2 9.5s ease-in-out infinite alternate}
+@keyframes bfrDrift1{0%{--bx1:18%;--by1:30%}35%{--bx1:48%;--by1:62%}70%{--bx1:30%;--by1:78%}100%{--bx1:62%;--by1:28%}}
+@keyframes bfrDrift2{0%{--bx2:82%;--by2:70%}40%{--bx2:58%;--by2:30%}75%{--bx2:88%;--by2:40%}100%{--bx2:40%;--by2:58%}}
+.bfr-box.go .bfr-ring,.bfr-box.go .bfr-glow,.bfr-box.go .bfr-peek{opacity:0}
+@media (prefers-reduced-motion:reduce){.bfr-box,.bfr-peek{animation:none}}
 .bfr-in{position:absolute;left:0;top:0;transform-origin:0 0;filter:blur(12.5px);will-change:filter,transform}
 .bfr-foot{background:none;align-items:center}
-.bfr-hold{position:relative;overflow:hidden;width:213px;height:48px;border-radius:999px;background:var(--g100);color:var(--soft);font-size:16px;line-height:1.4;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@media (max-width:767px){.bfr-foot{padding-bottom:calc(14vh + env(safe-area-inset-bottom,0px))}}
+.bfr-hold{position:relative;overflow:hidden;width:213px;height:48px;border-radius:999px;background:var(--g100);color:var(--g700);font-size:16px;line-height:1.4;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .bfr-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--g200)}
 .bfr-t{position:relative}
 .bf-p{margin:0;display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--soft)}
@@ -1029,20 +1053,20 @@ SCR.align={mid:1,prog:[1,75],blank:1,render:()=>{const {best}=bestFit(),r=ROUTIN
   <div class="rm"><p class="rm-l">Best routine match</p><p class="rm-v">${r[0]}</p><ul class="gbox">${r[1].map(([i,t])=>`<li><img src="img/intake/bestfit-icon-${i}.svg" alt="">${t}</li>`).join('')}</ul></div></div>${foot('See my best fit')}`},mount:el=>wireNext(el)};
 const WHY={wpill:'Why Wegovy fits',foundayo:'Why Foundayo fits',wpen:'Why Wegovy fits',zep:'Why Zepbound fits'};
 const bfHero=best=>{const m=MEDS[best];return `<div class="bf-hero"><span class="chip">Best fit</span><h1>${m.full}</h1><p class="bf-p"><small>From</small><span class="v"><span class="num">$${m.price}</span><small>/mo</small></span></p>${medImg(best,'bf-img')}</div>`};
-SCR.bfReveal={blank:1,herotop:1,noprog:1,noMid:1,noClose:1,render:()=>{const {best}=bestFit(),m=MEDS[best];
+SCR.bfReveal={blank:1,beige:1,herotop:1,noprog:1,noMid:1,noClose:1,render:()=>{const {best}=bestFit(),m=MEDS[best];
   return `<div class="body bf bfr"><h1>Your best fit is ready</h1>
-   <div class="bfr-card"><div class="bfr-in" aria-hidden="true">${bfHero(best)}</div></div></div>
+   <div class="bfr-box"><div class="bfr-glow"></div><div class="bfr-card"><div class="bfr-in" aria-hidden="true">${bfHero(best)}</div><div class="bfr-in bfr-peek" aria-hidden="true">${bfHero(best)}</div></div><div class="bfr-ring"></div></div></div>
    <div class="foot bfr-foot"><button type="button" class="bfr-hold" data-hold aria-label="${REVEAL_CLICK()?'Click':'Tap and hold'} to reveal your best fit"><span class="bfr-fill"></span><span class="bfr-t">${REVEAL_CLICK()?'Click':'Tap and hold'} to reveal</span></button></div>`},
-  mount:el=>{const b=$('[data-hold]',el),fill=$('.bfr-fill',el),inner=$('.bfr-in',el),card=$('.bfr-card',el),HOLD=1600,CLICK=500;let t0=0,raf=0,done=false,dur=HOLD;
+  mount:el=>{const b=$('[data-hold]',el),fill=$('.bfr-fill',el),inner=$('.bfr-in',el),card=$('.bfr-card',el),box=$('.bfr-box',el),layers=$$('.bfr-in',el),HOLD=1300,CLICK=500;let t0=0,raf=0,done=false,dur=HOLD;
     // while held: content un-blurs and the white card fades away with it, so by full reveal only the content is left
     const paint=(p,idle)=>{fill.style.width=(p*100)+'%';
       inner.style.filter=idle?'':`blur(${(25*(1-p)).toFixed(1)}px)`;
       card.style.backgroundColor=idle?'':`rgba(255,255,251,${(.9*(1-p)).toFixed(3)})`;
       card.style.borderColor=idle?'':`rgba(239,231,221,${(1-p).toFixed(3)})`};
     // the card holds the exact best-fit hero, laid out at its real width and scaled down to fit
-    const place=()=>{if(done)return;const bw=$('.bfr',el).getBoundingClientRect().width;inner.style.width=bw+'px';
+    const place=()=>{if(done)return;const bw=$('.bfr',el).getBoundingClientRect().width;layers.forEach(l=>l.style.width=bw+'px');
       const k=card.clientWidth/bw,oy=(card.clientHeight-inner.offsetHeight*k)/2;
-      inner.style.transform=`translate(0px,${oy.toFixed(1)}px) scale(${k.toFixed(4)})`};
+      layers.forEach(l=>l.style.transform=`translate(0px,${oy.toFixed(1)}px) scale(${k.toFixed(4)})`)};
     place();addEventListener('resize',place);
     // hand-off: the hero grows back to full size as it floats up to where it sits on the best-fit screen
     const handoff=()=>{done=true;paint(1);card.style.overflow='visible';removeEventListener('resize',place);
@@ -1053,8 +1077,8 @@ SCR.bfReveal={blank:1,herotop:1,noprog:1,noMid:1,noClose:1,render:()=>{const {be
       inner.animate([{transform:inner.style.transform},{transform:`translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) scale(1)`}],{duration:620,easing:'cubic-bezier(.22,1,.36,1)',fill:'forwards'});
       setTimeout(()=>{S.revealIn=true;go('bestfit')},640)};
     const tick=t=>{const p=Math.min(1,(t-t0)/dur);paint(p);if(p<1)raf=requestAnimationFrame(tick);else handoff()};
-    const start=(e,d)=>{if(done)return;e&&e.preventDefault();cancelAnimationFrame(raf);dur=d||HOLD;t0=performance.now();raf=requestAnimationFrame(tick)};
-    const stop=()=>{if(done||dur!==HOLD)return;cancelAnimationFrame(raf);paint(0,1)};
+    const start=(e,d)=>{if(done)return;e&&e.preventDefault();box.classList.add('go');cancelAnimationFrame(raf);dur=d||HOLD;t0=performance.now();raf=requestAnimationFrame(tick)};
+    const stop=()=>{if(done||dur!==HOLD)return;cancelAnimationFrame(raf);paint(0,1);box.classList.remove('go')};
     if(REVEAL_CLICK()){b.addEventListener('click',e=>start(e,CLICK))}
     else{b.addEventListener('pointerdown',e=>{try{b.setPointerCapture(e.pointerId)}catch(_){}start(e)});
       ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,stop));
@@ -1135,7 +1159,7 @@ function setHeader(sc){
   $$('#prog b').forEach((b,i)=>{const n=i+1;b.style.width=(n<st?100:n===st?fill:0)+'%'});
   hBack.hidden=hist.length<1||!!sc.noBack;ih.classList.toggle('hasback',!hBack.hidden);$('#hClose').hidden=!!sc.noClose;
 }
-let lastDark;
+let lastBars;
 function show(key,dir){
   const sc=SCR[key];if(!sc){console.warn('no screen',key);return}
   closeSheet(true);
@@ -1143,7 +1167,12 @@ function show(key,dir){
   const el=document.createElement('section');el.className='scr'+(dir&&!S.revealIn?' enter':'')+(dir<0?' back':'')+(S.revealIn?' reveal-in':'');el.dataset.k=key;S.revealIn=false;
   el.innerHTML=sc.render();
   stage.replaceChildren(el);scrollTo(0,0);
-  if(sc.dark!==lastDark){lastDark=sc.dark;document.querySelectorAll('.sbar,.bbar').forEach(b=>b.replaceWith(b.cloneNode()));
+  // top: white on breaker (blank) screens, else the screen colour; bottom: white under a white footer, else where the screen's fill ends
+  const N0='#fffffb',N100='#f5efe5',G800='#184844',R=document.documentElement;
+  const HERO='#e8e0d5'/* top edge of the results hero texture */,bTop=sc.dark?G800:sc.blank&&!sc.herotop?N0:sc.herotop&&!sc.beige?HERO:N100,bBot=sc.dark?G800:el.querySelector('.foot.solid')?N0:N100;
+  R.style.setProperty('--bar-top',bTop);R.classList.toggle('beige',!!sc.beige);/* textured hero runs to the top edge */R.style.setProperty('--bar-bot',bBot);
+  const tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=bTop;
+  if(bTop+bBot!==lastBars){lastBars=bTop+bBot;document.querySelectorAll('.sbar,.bbar').forEach(b=>b.replaceWith(b.cloneNode()));
     requestAnimationFrame(()=>{if(document.documentElement.scrollHeight>innerHeight+1){scrollTo(0,1);requestAnimationFrame(()=>scrollTo(0,0))}})}
   sc.mount&&sc.mount(el);
   const f=el.querySelector('h1,h2');if(f){f.tabIndex=-1;f.focus({preventScroll:true})}
