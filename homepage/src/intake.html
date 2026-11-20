@@ -91,7 +91,10 @@ html.dark .prog b{background:var(--y400)}
 .scr.enter.back>:not(.foot){animation-name:scrBack}
 .scr.enter>.foot{animation:footIn .5s var(--ease) backwards}
 .scr.reveal-in>*{animation:none}
-.scr.reveal-in>.foot,.ih.reveal-in .ih-row>*,.ih.reveal-in .prog{animation:revealIn .6s var(--ease) .1s backwards}
+.ih.reveal-in .ih-row>*,.ih.reveal-in .prog{animation:revealIn .6s var(--ease) .1s backwards}
+/* the white footer rises in as one solid piece; fading it let the text read before the container */
+.scr.reveal-in>.foot{animation:footUp .6s var(--ease) .1s backwards}
+@keyframes footUp{from{transform:translateY(100%)}}
 @keyframes revealIn{from{opacity:0}}
 .scr.reveal-in .bf-hero~*{animation:fadeUp .6s var(--ease) .15s backwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}}
@@ -1045,7 +1048,8 @@ SCR.bfReveal={blank:1,herotop:1,noprog:1,noMid:1,noClose:1,render:()=>{const {be
     const handoff=()=>{done=true;paint(1);card.style.overflow='visible';removeEventListener('resize',place);
       const cr=card.getBoundingClientRect(),ih=$('#ih').getBoundingClientRect(),sp=parseFloat(getComputedStyle(el).paddingTop)||8;
       const tx=$('.bfr',el).getBoundingClientRect().left-(cr.left+card.clientLeft),ty=(ih.bottom+sp+1)-(cr.top+card.clientTop);
-      $$('.bfr>h1, .bfr-foot',el).forEach(x=>x.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-8px)'}],{duration:260,easing:'ease-out',fill:'forwards'}));
+      $('.bfr>h1',el).animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-8px)'}],{duration:260,easing:'ease-out',fill:'forwards'});
+      $('.bfr-foot',el).animate([{opacity:1},{opacity:0}],{duration:260,easing:'ease-out',fill:'forwards'});
       inner.animate([{transform:inner.style.transform},{transform:`translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) scale(1)`}],{duration:620,easing:'cubic-bezier(.22,1,.36,1)',fill:'forwards'});
       setTimeout(()=>{S.revealIn=true;go('bestfit')},640)};
     const tick=t=>{const p=Math.min(1,(t-t0)/dur);paint(p);if(p<1)raf=requestAnimationFrame(tick);else handoff()};
