@@ -1758,7 +1758,9 @@ function cjBuild(){
     svg.innerHTML=`<defs><mask id="${id}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="${o.iw+40}" height="${o.ih+40}"><path d="${o.d}" stroke-width="${(stack?44:30)*o.iw/o.w}"/></mask></defs><image href="img/cj-${o.k}.webp" width="${o.iw}" height="${o.ih}" preserveAspectRatio="none" mask="url(#${id})"/>`;
     cjLines.appendChild(svg);const mp=svg.querySelector('mask path'),len=mp.getTotalLength();mp.style.strokeDasharray=`${len} ${len+10}`;mp.style.strokeDashoffset=len;
     // samples in box pixels; the pen reveals a stroke as far as the page has scrolled past it
-    const samp=[],n=Math.ceil(len/(6/f));let my=-1e9;for(let k=0;k<=n;k++){const L=len*k/n,pt=mp.getPointAtLength(L);my=Math.max(my,y+pt.y*f);samp.push([L,my])}
+    // where a stroke curls back up, "deepest point so far" stays flat and that whole stretch would pop in at once,
+    // so the reveal also keeps a minimum pace along the line: at least half a pixel of scroll per pixel of stroke
+    const samp=[],n=Math.ceil(len/(6/f)),step=len/n*f*.5;let my=-1e9,pp=-1e9;for(let k=0;k<=n;k++){const L=len*k/n,pt=mp.getPointAtLength(L);my=Math.max(my,y+pt.y*f);pp=k?Math.max(my,pp+step):my;samp.push([L,pp])}
     cj.lines.push({mp,len,samp,v:-1})});
   const pts=stack?set.dots.map(([a,x,y])=>{const an=cjOff(cjPhs[a]),k=an[2]/204;return [an[0]+x*k,an[1]+y*k]}):set.dots.map(([x,y])=>[x*W/1408,y*W/1408]);
   cjDots.forEach((el,i)=>{const p=pts[i];if(!p)return;Object.assign(el.style,{left:p[0]+'px',top:p[1]+'px',width:dotSize+'px',margin:`${-dotSize/2}px 0 0 ${-dotSize/2}px`});cj.dots.push([el,p[1]])});
