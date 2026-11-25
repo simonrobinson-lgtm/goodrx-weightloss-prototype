@@ -109,9 +109,9 @@ p,h1,h2,h3,ul{margin:0}
 
 /* ---------- hero ---------- */
 .hero{position:relative;height:790px;max-height:calc(100svh + 40px);min-height:620px;overflow:hidden;background:#6a4a2d}
-.hero .bg{position:absolute;inset:-6% 0 0 0;will-change:transform}
+.hero .bg{position:absolute;inset:0;will-change:transform}/* parallax only drifts down, so no overhang is needed above */
 .hero .bg .media{position:absolute;inset:0}
-.hero .bg .media>img{object-position:50% 56%}
+.hero .bg .media>img{object-position:50% 0%}/* her hair touches the top of the photo: never crop from the top */
 /* living light: soft window light drifting across the scene */
 .d-light{position:absolute;inset:-18%;z-index:1;pointer-events:none;mix-blend-mode:soft-light;opacity:0;will-change:transform,opacity;transition:opacity 2.5s var(--ease) .8s}
 .media.loaded .d-light{opacity:1}
@@ -467,26 +467,12 @@ p,h1,h2,h3,ul{margin:0}
 .tmarq::-webkit-scrollbar{display:none}
 .tmarq.dragging{cursor:grabbing}
 .tmarq.dragging .tcard{pointer-events:none}
-.ttrack{display:flex;gap:16px;width:max-content;padding:0 max(var(--gut),calc((100vw - 1328px)/2))}
-.tcard:focus-visible{outline-offset:-3px;outline-color:var(--y100)}
-.tcard{position:relative;width:432px;height:480px;flex:none;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;color:var(--y100);transition:transform .7s var(--ease)}
+.ttrack{display:flex;gap:16px;width:max-content;will-change:transform;padding:0 max(var(--gut),calc((100vw - 1328px)/2))}
+.tcard{position:relative;width:432px;height:480px;flex:none;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:24px;color:var(--y100)}
 .tcard .media{position:absolute;inset:0}
-.tcard .media>img{transition:opacity .9s var(--ease),transform 1.8s var(--ease),filter .9s var(--ease)}
-@media (hover:hover){.tcard.hov .media.loaded>img{transform:scale(1.04)}}
-.tcard .shade{position:absolute;inset:0;z-index:2;background:linear-gradient(48.8deg,rgba(0,0,0,.5) .6%,rgba(0,0,0,0) 40.6%)}
-.tcard .chip{position:absolute;left:24px;top:24px;z-index:4}
-.tcard .stat{position:relative;z-index:3;padding:0 24px 24px;display:flex;flex-direction:column;gap:8px;background:linear-gradient(0deg,rgba(0,0,0,.2) 2%,rgba(0,0,0,0));transition:opacity .45s var(--ease),transform .6s var(--ease)}
-.tcard .stat .v{display:flex;align-items:baseline;gap:2px}
-.tcard .stat .num{font-size:56px;line-height:1}
-.tcard .quote::before,.wcard .wq::before{content:"";position:absolute;inset:0;background:url(img/quote-pat.webp) center/cover;mix-blend-mode:overlay;opacity:.64;pointer-events:none}
-.tcard .quote>*,.wcard .wq>*{position:relative;z-index:2}
-.tcard .quote{position:absolute;inset:-1px;z-index:5;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:var(--g800);--grain:.35;clip-path:inset(100% 0 0 0);transition:clip-path .75s var(--ease-io)}
-.tcard .quote q{font-size:24px;line-height:1.2;letter-spacing:-.01em;font-weight:300;quotes:"“" "”";opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease) .2s,transform .7s var(--ease) .2s}
-.tcard .quote .who{display:flex;flex-direction:column;gap:18px;opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease) .3s,transform .7s var(--ease) .3s}
-.tcard .quote .who b{font-weight:400;font-size:24px;line-height:1.2}
-@media (hover:hover) and (pointer:fine){.tcard.hov .quote{clip-path:inset(0 0 0 0)}.tcard.hov .quote q,.tcard.hov .quote .who{opacity:1;transform:none}}
-.tcard:focus-visible .quote,.tcard.peek .quote{clip-path:inset(0 0 0 0)}
-.tcard:focus-visible .quote q,.tcard:focus-visible .quote .who,.tcard.peek .quote q,.tcard.peek .quote .who{opacity:1;transform:none}
+.tcard q{position:relative;z-index:2;font-size:24px;line-height:1.2;letter-spacing:-.01em;font-weight:300;quotes:"\201C" "\201D"}
+.tcard .who{position:relative;z-index:2;display:flex;flex-direction:column;gap:18px}
+.tcard .who b{font-weight:400;font-size:24px;line-height:1.2}
 
 /* ---------- FAQ ---------- */
 .faq{padding-block:80px 56px;display:flex;justify-content:space-between;gap:48px}
@@ -811,7 +797,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 @media (max-width:860px){
   .links{display:none}
 }
-.m-only,.quiz-slot,.fxcard,.tcard .flip,.gh svg{display:none}
+.m-only,.quiz-slot,.fxcard,.gh svg{display:none}
 .gh{display:block;font:inherit;color:var(--soft);text-align:left;cursor:default;pointer-events:none}
 .pcard .sub .nb{white-space:nowrap}
 
@@ -852,7 +838,8 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   .sbar{display:none}
   /* hero */
   .hero{height:555px;min-height:0;max-height:none}
-  .hero .bg .media>img{top:auto;bottom:0;height:118%;object-position:51.5% 100%}
+  /* new hero photo: anchor to the top so her face stays in frame on phones */
+  .hero .bg .media>img{top:0;bottom:auto;height:118%;object-position:58% 0%}
   .hero .shade{background:linear-gradient(0deg,rgba(0,0,0,.4) 26.9%,rgba(0,0,0,0) 46.4%)}
   .hero-in{justify-content:flex-end;padding:0 20px 20px}
   .hero-in::before{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;z-index:-1;background:linear-gradient(0deg,rgba(0,0,0,.2) 27.9%,rgba(0,0,0,0));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask:linear-gradient(0deg,#000 60%,transparent);mask:linear-gradient(0deg,#000 60%,transparent)}
@@ -990,17 +977,11 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   .testi .sec-head p{font-size:14px}
   .tmarq{scroll-snap-type:x mandatory}
   .ttrack{padding:0 calc(50vw - 140px)}
-  .tcard{width:280px;height:274px;scroll-snap-align:center}
-  .tcard .chip{left:16px;top:16px}
-  .tcard .stat{padding:0 56px 16px 16px;gap:4px;font-size:13px}
-  .tcard .stat .num{font-size:40px}
-  .tcard .quote{padding:16px 16px 56px}
-  .tcard .quote q{font-size:19px}
-  .tcard .quote .who{gap:8px}
-  .tcard .quote .who b{font-size:18px}
-  .tcard .flip{position:absolute;z-index:6;right:8px;bottom:8px;width:32px;height:32px;border-radius:8px;background:var(--y100);color:var(--g800);display:grid;place-items:center;transition:transform .5s var(--spring)}
-  .tcard .flip svg{width:16px;height:16px;transition:transform .6s var(--ease)}
-  .tcard.peek .flip svg{transform:rotate(180deg)}
+  .tcard{width:280px;height:274px;scroll-snap-align:center;padding:16px;gap:12px}
+  .tcard.dup{display:none}
+  .tcard q{font-size:19px}
+  .tcard .who{gap:8px}
+  .tcard .who b{font-size:18px}
   .btn-g,.btn-y{height:40px;font-size:12px;padding:0 16px}
   /* FAQ */
   .faq{padding:40px 20px 56px;gap:48px}
@@ -1114,7 +1095,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-  <div class="bg" data-par="0.18"><div class="media grain eager" style="--lq:url({{lq:hero4}})"><img data-src="img/hero4.webp" alt="A smiling woman kneeling on a rug in her living room, playing with her shaggy dog" fetchpriority="high"></div></div>
+  <div class="bg" data-par="0.18"><div class="media grain eager" style="--lq:url({{lq:hero4}})"><img data-src="img/hero4.webp" alt="A smiling woman crouching in her kitchen, petting her dog" fetchpriority="high"></div></div>
   <div class="shade"></div>
   <div class="wrap hero-in">
     <div class="hero-copy">
@@ -1194,12 +1175,12 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
         <p class="cj-p">Your plan evolves with you, and includes 7-day-a-week access to licensed healthcare providers who help you manage your care.</p>
         <a href="#" class="btn btn-y cj-mbtn" data-toast="Membership details aren’t part of this prototype">See membership details</a>
       </div>
-      <figure class="cj-ph cj-ph1 cj-r" data-cjp><div class="media grain" style="--lq:url({{lq:cj-couple}})"><img data-src="img/cj-couple.webp" alt="A smiling man leaning back as his partner rests her arms on his shoulders, in warm window light"></div></figure>
+      <figure class="cj-ph cj-ph1 cj-r" data-cjp><div class="media grain" style="--lq:url({{lq:cj-couple}})"><img data-src="img/cj-couple.webp" alt="A father kissing his baby on the cheek as he holds them up"></div></figure>
       <div class="cj-t cj-t1 cj-r">
         <h3 class="display">Care that adjusts<br><span class="em-wrap"><em>as you do</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
         <p class="cj-p">From your first dose to maintaining your goal weight, your treatment plan adapts to your current needs.</p>
       </div>
-      <figure class="cj-ph cj-ph2 cj-r" data-cjp><div class="media" style="--lq:url({{lq:cj-phone2}})"><img data-src="img/cj-phone2.webp" alt="A hand holding a phone open to the GoodRx Care Center, with an active chat with Dr. Brooke"></div></figure>
+      <figure class="cj-ph cj-ph2 cj-r" data-cjp><div class="media" style="--lq:url({{lq:cj-phone2}})"><img data-src="img/cj-phone2.webp" alt="A person in a mustard top holding a phone in a yellow case"></div></figure>
       <div class="cj-t cj-t2 cj-r">
         <h3 class="display">Someone in your corner, <span class="em-wrap"><em>at every step</em><svg class="scrib" viewBox="0 0 110 10" preserveAspectRatio="none"><path d="M1 7.5C22 4.6 46 3.4 70 3.9C86 4.3 98 5.4 109 4.2"/></svg></span></h3>
         <p class="cj-p">A question about your dose, a tough week, a plateau—your healthcare team is just a message away, 7 days a week.</p>
@@ -1295,17 +1276,17 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
   </div>
   <div class="cards3">
     <a href="#" class="acard" data-r style="--i:0" data-toast="Articles aren’t part of this prototype">
-      <div class="media grain" style="--lq:url({{lq:a3}})"><img data-src="img/a3.webp" alt="A hand picking up a pink pill among white and pink GLP-1 pills"></div><div class="shade"></div>
+      <div class="media grain" style="--lq:url({{lq:a3}})"><img data-src="img/a3.webp" alt="A woman sipping a drink while checking her phone at the kitchen counter"></div><div class="shade"></div>
       <span class="chip sm">7 min</span>
       <div class="tt"><h3>Considering <span style="white-space:nowrap">GLP-1</span> Pills for Weight Loss?</h3><div><span>8 Things to Know Before You Start</span></div></div>
     </a>
     <a href="#" class="acard" data-r style="--i:1" data-toast="Articles aren’t part of this prototype">
-      <div class="media grain" style="--lq:url({{lq:a1}})"><img data-src="img/a1.webp" alt="Close-up of a face in dappled sunlight"></div><div class="shade"></div>
+      <div class="media grain" style="--lq:url({{lq:a1}})"><img data-src="img/a1.webp" alt="A hand holding an injection pen and a printed medication leaflet"></div><div class="shade"></div>
       <span class="chip sm">7 min</span>
       <div class="tt"><h3>How to Start a <span style="white-space:nowrap">GLP-1</span>: What to Expect in the First Weeks</h3><div><span>From dosing to side effects</span></div></div>
     </a>
     <a href="#" class="acard" data-r style="--i:2" data-toast="Articles aren’t part of this prototype">
-      <div class="media grain" style="--lq:url({{lq:a2}})"><img data-src="img/a2.webp" alt="Wegovy, Wegovy HD and Zepbound injection pens"></div><div class="shade"></div>
+      <div class="media grain" style="--lq:url({{lq:a2}})"><img data-src="img/a2.webp" alt="A white novo pill on a warm beige surface"></div><div class="shade"></div>
       <span class="chip sm">9 min</span>
       <div class="tt"><h3><span style="white-space:nowrap">GLP-1</span> Injections: What to Consider Before Using GLP-1s</h3><div><span>The key things to know before your first injection</span></div></div>
     </a>
@@ -1315,7 +1296,7 @@ html.cmp-lock,html.cmp-lock body{overflow:hidden}
 <!-- CTA -->
 <section class="wrap-16 cta">
   <div class="cta-card">
-    <div class="bgwrap" data-par="0.05"><div class="media grain" style="--lq:url({{lq:cta}})"><img data-src="img/cta.webp" data-src-m="img/cta-m.webp" alt="A person on a sofa smiling at a laptop"></div></div>
+    <div class="bgwrap" data-par="0.05"><div class="media grain" style="--lq:url({{lq:cta}})"><img data-src="img/cta.webp" data-src-m="img/cta-m.webp" alt="A woman on a sofa looking at a laptop, beside a leafy plant"></div></div>
     <div class="t"><h2 class="h-xl split">Find a GLP-1 treatment that fits your life</h2>
     <p data-r>Pill or injection, weekly or daily, pickup or delivery. Tell us how you live and we'll show you options that work with it.</p></div>
     <a href="intake.html?from=quiz" class="btn btn-g" data-r>Find my best fit</a>
@@ -1604,13 +1585,11 @@ PHASES.forEach((p,i)=>{
 
 /* ---------- build testimonials ---------- */
 const ttrack=$('#ttrack');
-PEOPLE.forEach((p,i)=>{
-  ttrack.insertAdjacentHTML('beforeend',`<article class="tcard" tabindex="0" aria-label="${p.nm}, lost ${p.lbs} pounds in 3 months">
-   <div class="media grain" style="--lq:url(${LQ[p.id]})"><img data-src="img/${p.id}.webp" alt=""></div><div class="shade"></div>
-   <span class="chip">${p.nm}</span>
-   <div class="stat"><div class="v"><span class="num" data-count="${p.lbs}">${p.lbs}</span><span>&nbsp;lbs</span></div><span>lost in 3 months</span></div>
-   <button class="flip" type="button" aria-label="Flip to read ${p.nm}’s story"><svg><use href="#i-flip"/></svg></button><div class="quote grain"><q>${p.q}</q><div class="who"><b>${p.nm} ${p.age}</b><span class="label">Real customer</span></div></div></article>`);
-});
+[0,1].forEach(d=>PEOPLE.forEach((p,i)=>{
+  ttrack.insertAdjacentHTML('beforeend',`<article class="tcard${d?' dup':''}"${d?' aria-hidden="true"':''}>
+   <div class="media grain" style="--lq:url(${LQ[p.id]})"><img data-src="img/${p.id}.webp" alt=""></div>
+   <q>${p.q}</q><div class="who"><b>${p.nm}, ${p.age}</b><span class="label">Real customer</span></div></article>`);
+}));
 
 /* ---------- build FAQ ---------- */
 const acc=$('#acc'), ddMenu=$('#ddMenu');
@@ -1815,15 +1794,18 @@ mq.addEventListener('pointermove',e=>{if(!down)return;const d=e.clientX-px,t=per
 const rel=()=>{if(!down)return;down=false;mq.classList.remove('dragging');let v=vx*16;const f=()=>{if(Math.abs(v)<.3)return;mq.scrollLeft-=v;v*=.94;raf2=requestAnimationFrame(f)};if(!RM)f()};
 mq.addEventListener('pointerup',rel);mq.addEventListener('pointercancel',rel);
 mq.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation()}},true);
-// Peek the first quote once so people learn cards flip on hover
-const peekIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!RM){const c=ttrack.children[1];setTimeout(()=>{c.classList.add('peek');setTimeout(()=>c.classList.remove('peek'),2200)},900);peekIO.disconnect()}}),{threshold:.5});peekIO.observe(mq);
-
-// testimonial reveal: only for real mouse movement, never when scrolling or the marquee slides a card under a resting cursor
-{let hc=null;const set=c=>{if(c===hc)return;hc&&hc.classList.remove('hov');hc=c;c&&c.classList.add('hov')};
- ttrack.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||(!e.movementX&&!e.movementY))return;set(e.target.closest('.tcard'))});
- ttrack.addEventListener('pointerleave',()=>set(null));
- addEventListener('scroll',()=>set(null),{passive:true});addEventListener('wheel',()=>set(null),{passive:true})}
-ttrack.addEventListener('click',e=>{const b=e.target.closest('.flip');if(!b)return;e.stopPropagation();const c=b.closest('.tcard');if(!c.classList.toggle('peek'))b.blur()});
+// desktop: the cards drift slowly sideways and loop; pauses while hovered or dragged, static on phones and with reduced motion
+{const SPEED=22;let pos=-1,last=0,hover=false,vis=false,on=0;
+ const span=()=>{const a=ttrack.children[0],b=ttrack.children[PEOPLE.length];return a&&b?b.offsetLeft-a.offsetLeft:0};
+ const tick=t=>{on=requestAnimationFrame(tick);const dt=Math.min(64,t-(last||t));last=t;
+  if(isM()||RM||!vis||document.hidden){if(ttrack.style.transform)ttrack.style.transform='';pos=-1;return}
+  if(pos<0||down||hover||Math.abs(mq.scrollLeft-Math.floor(pos))>1)pos=mq.scrollLeft;
+  if(!down&&!hover)pos+=SPEED*dt/1000;
+  const W=span(),b0=ttrack.children[1].offsetLeft-ttrack.children[0].offsetLeft;if(W>0){while(pos>=b0+W)pos-=W;while(pos<b0)pos+=W}
+  const i=Math.floor(pos);mq.scrollLeft=i;ttrack.style.transform=`translateX(${-(pos-i).toFixed(2)}px)`};
+ mq.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hover=true});
+ mq.addEventListener('pointerleave',()=>{hover=false});
+ new IntersectionObserver(es=>es.forEach(e=>{vis=e.isIntersecting;if(vis&&!on)on=requestAnimationFrame(tick);if(!vis&&on){cancelAnimationFrame(on);on=0;last=0}})).observe(mq)}
 $$('.gh').forEach(b=>b.addEventListener('click',()=>{if(!isM())return;const g=b.parentElement,o=g.classList.toggle('open');b.setAttribute('aria-expanded',o)}));
 
 /* ---------- newsletter ---------- */
